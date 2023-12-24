@@ -1,5 +1,7 @@
 # [ oolong ] ☕️ / 🍵
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f62f3bf3-8450-41d1-be2d-a56d86b2623b/deploy-status)](https://app.netlify.com/sites/ooolong/deploys)
+
 starting from scratch.
 
 ## what is oolong?
