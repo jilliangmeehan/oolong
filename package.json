@@ -1,0 +1,23 @@
+{
+  "name": "oolong",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eleventy.js",
+  "scripts": {
+    "start": "npx eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jilliangmeehan/oolong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jilliangmeehan/oolong/issues"
+  },
+  "homepage": "https://github.com/jilliangmeehan/oolong#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
