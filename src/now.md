@@ -19,13 +19,13 @@ my six-year anniversary of moving to new york & joining [lickability](https://li
 
 ### [emily wilson's translation of the iliad](https://bookshop.org/p/books/the-iliad-homer/17147944?ean=9781324001805)
 
-i've been looking forward to the release of this, and my parents got me a copy for christmas so i can finally read it. (i got her translation of the odyssey, too, but i'm going to save that one for later.) so far, i'm still making my way through her introduction, which is very good. excited to spend a lot of time with this.
+i've been looking forward to the release of this, and my parents got me a copy for christmas so i can finally read it. (i got her translation of the odyssey, too, but i'm going to save that one for later.) so far, i'm still making my way through her introduction & i'm excited to spend a lot of time with this.
 
 ### [all that you've seen here is god](https://bookshop.org/p/books/all-that-you-ve-seen-here-is-god-new-versions-of-four-greek-tragedies-sophocles-ajax-philoctetes-women-of-trachis-aeschylus-prometheus-bound-sophocles/9802252?ean=9780307949738)
 
 i've been very into sophocles' _ajax_ lately since i first read it earlier this year. i've just been rereading the same pdf i found online after a quick google, so having a different & very well-considered version to read is nice. i spent christmas morning reading this _ajax_ and crying, lol.
 
-i haven't read the other plays included here, but i'm excited to. i'm very interested in what bryan doerries does with his translations & the [theater of war](https://theaterofwar.com/) project, which i didn't know existed until recently.
+i haven't read the other plays included here, but i'm excited to. i'm very interested in what bryan doerries does with his translations & the [theater of war](https://theaterofwar.com/) project.
 
 ## playing
 
