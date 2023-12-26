@@ -20,3 +20,4 @@ i'm building this site with the help of the [learn eleventy from scratch](https:
 - 📁 [my existing site](https://jillian.cloud)
 - 🖋️ [my blog](https://jillian.garden)
 - 💭 [my mastodon account](https://sleepy.cool/@jillian)
+- 🫖 [github project](https://github.com/users/jilliangmeehan/projects/1/views/1)
