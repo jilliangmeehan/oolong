@@ -3,6 +3,8 @@ title: "[ oolong ] ☕️ / 🍵"
 layout: "layouts/page.html"
 ---
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f62f3bf3-8450-41d1-be2d-a56d86b2623b/deploy-status)](https://app.netlify.com/sites/ooolong/deploys)
+
 ## what is oolong?
 
 this is a personal project to re-do [my website](https://jillian.cloud) from scratch with [eleventy](https://www.11ty.dev/), learning as i go. my primary goal is to end up with a website i'm happy with. my secondary goal is to fall back in love with _the process_.
