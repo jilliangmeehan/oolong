@@ -1,11 +1,7 @@
 ---
-title: "oolong"
+title: "[ oolong ] ☕️ / 🍵"
 layout: "layouts/home.html"
 ---
-
-# [ oolong ] ☕️ / 🍵
-
-starting from scratch.
 
 ## what is oolong?
 
