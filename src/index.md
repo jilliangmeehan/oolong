@@ -1,6 +1,6 @@
 ---
 title: "[ oolong ] ☕️ / 🍵"
-layout: "layouts/home.html"
+layout: "layouts/page.html"
 ---
 
 ## what is oolong?
