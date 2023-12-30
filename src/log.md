@@ -3,6 +3,10 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+### **dec 29, 2023**
+
+- added the favicon n stuff
+
 ### **dec 26, 2023**
 
 - added this page!
