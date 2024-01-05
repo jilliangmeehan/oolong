@@ -3,6 +3,10 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+### **jan 5, 2024**
+
+- updated the [/now](/now) page to include an explanation of this project, plus links to mastodon + my blog
+
 ### **dec 29, 2023**
 
 - added the favicon n stuff

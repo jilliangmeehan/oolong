@@ -11,6 +11,10 @@ this is a [**/now**](https://nownownow.com/about) page, with updates about what 
 
 ---
 
+## building this!
+
+i'm working on slowly rebuilding [my website](https://jillian.cloud) from scratch with [eleventy](https://www.11ty.dev/), and keeping track of my progress on the [log](/log) page.
+
 ## celebrating six years
 
 my six-year anniversary of moving to new york & joining [lickability](https://lickability.com) is coming up soon. i'm still in new york (living in brooklyn with my cat, juniper) and i'm still at lickability (as a project manager) and i'm still having a great time.
@@ -44,3 +48,9 @@ picked this up from the steam winter sale and then played it for four hours stra
 ## listening to
 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/29RDjCCjNh0yTNSZNowkcT?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+## posting
+
+it's been months since i last looked at twitter, but i'm still posting on [mastodon](https://sleepy.cool/@jillian) & enjoying it. i've got my own personal little server, and a fork of [tangerine ui](https://github.com/nileane/TangerineUI-for-Mastodon) (which is great, by the way) that i like.
+
+i'm also [blogging](https://jillian.garden), semi-infrequently. eventually, those posts will move here!
