@@ -3,6 +3,12 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+### **jan 28, 2024**
+
+- started adding some collections for books i'm reading & game i'm playing
+- updated the [/now](/now) page to pull things i'm currently reading & playing from those collections
+- added the [/blog](/blog) page with a link to a sample blog post
+
 ### **jan 5, 2024**
 
 - updated the [/now](/now) page to include an explanation of this project, plus links to mastodon + my blog
