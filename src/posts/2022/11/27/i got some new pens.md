@@ -8,7 +8,7 @@ date: 2022-11-27
 publish: true
 summary: happy sunday. i got some new toys :)
 ---
-![_27-matcha.jpg](_27-matcha.jpg)
+![](_27-matcha.jpg)
 
 happy sunday. i got some new toys :)
 
