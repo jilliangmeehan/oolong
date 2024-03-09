@@ -4,5 +4,6 @@
 
 img {
   display: block;
-  width: 500px;
+  max-width: 70vw;
+  max-height: 500px;
 }
