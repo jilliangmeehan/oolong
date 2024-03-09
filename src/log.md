@@ -3,6 +3,13 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+### **mar 9, 2024**
+
+- figured out how to set up the [github publisher plugin](https://github.com/ObsidianPublisher/obsidian-github-publisher) to use obsidian as a cms
+- imported all my existing [blog posts](/blog)
+- made the tiniest, babiest, simplest css file so the images in my blog posts wouldn't be gigantic
+- added summaries & tags to my list of blog posts (and sorted them in reverse-chron order)
+
 ### **jan 28, 2024**
 
 - started adding some collections for books i'm reading & game i'm playing
