@@ -3,6 +3,7 @@ module.exports = (config) => {
   config.addPassthroughCopy("./src/images/");
   config.addPassthroughCopy("./src/favicon/");
   config.addPassthroughCopy("**/photos/*.jpg");
+  config.addPassthroughCopy("**/photos/*.png");
   return {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
