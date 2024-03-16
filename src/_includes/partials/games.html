@@ -1,6 +1,11 @@
 <h2>playing</h2>
 <ul role="list">
-  {%- for game in collections.game -%} {% if game.data.status == "playing" %}
+  {%- for game in collections.game -%} {% if game.data.status == "playing" %} {%
+  if game.data.url %}
+  <h3><a href="{{ game.data.url }}">{{ game.data.title }}</a></h3>
+  {% else %}
   <h3>{{ game.data.title }}</h3>
-  {{ game.content | safe }} {% endif %} {%- endfor -%}
+  {% endif %} {% if game.data.uid %}
+  <p class="small"><b>UID:</b> {{ game.data.uid }}</p>
+  {% endif %} {{ game.content | safe }} {% endif %} {%- endfor -%}
 </ul>

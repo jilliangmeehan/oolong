@@ -1,0 +1,5 @@
+<ul role="list">
+  {%- for item in collections.now -%}
+  <h2>{{ item.data.title }}</h2>
+  {{ item.content | safe }} {%- endfor -%}
+</ul>
