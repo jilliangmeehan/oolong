@@ -3,6 +3,13 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+## mar 16, 2024
+
+- added some fonts ([argent pixel](https://connary.com/argentpixel.html) & [addington](https://connary.com/addington.html) from connary fagen)
+- wrote some very scuffed css that i can't wait to clean up later
+- set up more collections in obsidian & replaced all the content on the [/now](/now) page with that stuff
+- added a "last updated" timestamp on a bunch of pages
+
 ## mar 9, 2024
 
 - figured out how to set up the [github publisher plugin](https://github.com/ObsidianPublisher/obsidian-github-publisher) to use obsidian as a cms
