@@ -11,8 +11,8 @@ module.exports = (config) => {
   config.addPassthroughCopy("base.css");
   config.addPassthroughCopy("./src/favicon/");
   config.addPassthroughCopy("./src/fonts/");
-  //config.addPassthroughCopy("**/photos/*.jpg");
-  //config.addPassthroughCopy("**/photos/*.png");
+  config.addPassthroughCopy("**/photos/*.jpg");
+  config.addPassthroughCopy("**/photos/*.png");
   return {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
