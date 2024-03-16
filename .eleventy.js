@@ -8,7 +8,7 @@ module.exports = (config) => {
   config.addFilter("w3DateFilter", w3DateFilter);
 
   // set directories to pass through to the dist folder
-  config.addPassthroughCopy("base.css");
+  config.addPassthroughCopy("./src/base.css");
   config.addPassthroughCopy("./src/favicon/");
   config.addPassthroughCopy("./src/fonts/");
   config.addPassthroughCopy("**/photos/*.jpg");
