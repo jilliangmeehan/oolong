@@ -1,8 +1,7 @@
 <h2>reading</h2>
-you can see my full bookshelf on [literal](https://literal.club/jilliangmeehan).
-<ul>
+<ul role="list">
   {%- for book in collections.book -%} {% if book.data.status == "reading" %}
   <h3><a href="{{ book.data.url }}">{{ book.data.title }}</a></h3>
-  <p>by {{ book.data.author }}</p>
+  <p class="small">by {{ book.data.author }}</p>
   {{ book.content | safe }} {% endif %} {%- endfor -%}
 </ul>

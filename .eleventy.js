@@ -10,8 +10,9 @@ module.exports = (config) => {
   // set directories to pass through to the dist folder
   config.addPassthroughCopy("base.css");
   config.addPassthroughCopy("./src/favicon/");
-  config.addPassthroughCopy("**/photos/*.jpg");
-  config.addPassthroughCopy("**/photos/*.png");
+  config.addPassthroughCopy("./src/fonts/");
+  //config.addPassthroughCopy("**/photos/*.jpg");
+  //config.addPassthroughCopy("**/photos/*.png");
   return {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",

@@ -1,5 +1,5 @@
 <h2>playing</h2>
-<ul>
+<ul role="list">
   {%- for game in collections.game -%} {% if game.data.status == "playing" %}
   <h3>{{ game.data.title }}</h3>
   {{ game.content | safe }} {% endif %} {%- endfor -%}

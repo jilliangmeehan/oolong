@@ -3,28 +3,28 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
-### **mar 9, 2024**
+## mar 9, 2024
 
 - figured out how to set up the [github publisher plugin](https://github.com/ObsidianPublisher/obsidian-github-publisher) to use obsidian as a cms
 - imported all my existing [blog posts](/blog)
 - made the tiniest, babiest, simplest css file so the images in my blog posts wouldn't be gigantic
 - added summaries & tags to my list of blog posts (and sorted them in reverse-chron order)
 
-### **jan 28, 2024**
+## jan 28, 2024
 
 - started adding some collections for books i'm reading & game i'm playing
 - updated the [/now](/now) page to pull things i'm currently reading & playing from those collections
 - added the [/blog](/blog) page with a link to a sample blog post
 
-### **jan 5, 2024**
+## jan 5, 2024
 
 - updated the [/now](/now) page to include an explanation of this project, plus links to mastodon + my blog
 
-### **dec 29, 2023**
+## dec 29, 2023
 
 - added the favicon n stuff
 
-### **dec 26, 2023**
+## dec 26, 2023
 
 - added this page!
 - added actual content to the [home](/) page

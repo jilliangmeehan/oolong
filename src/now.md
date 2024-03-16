@@ -4,11 +4,11 @@ layout: "layouts/page.html"
 date: Last Modified
 ---
 
-_last updated **jan 28, 2024** from dylan's couch._
+{% include "partials/timestamp.html" %}
 
 ## what is this?
 
-this is a [**/now**](https://nownownow.com/about) page, with updates about what i'm focused on right _now_.
+this is a [/now](https://nownownow.com/about) page, with updates about what i'm focused on right _now_.
 
 ---
 
