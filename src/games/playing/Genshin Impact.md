@@ -8,6 +8,4 @@ tags:
 url: https://enka.network/u/jillian/
 publish: true
 ---
-lumine has been eating good lately: i finished crowning *all* of her skills for *all* of her elements, and i finally got her the aquila favonia she deserves. i also just recently got 36 stars in spiral abyss for the first time — i'm a real gamer now.
-
-very much looking forward to arlecchino and everything to come in the next version. for now, i'm working on trying to get all the commission-based achievements i'm still missing & finding the last few seelies in each region that somehow managed to hide from me.
+something nobody tells you about being a completionist is that eventually you're going to really need primogems for something, and there will be none for you to get because your map is already at 100% and you've done all the achievement hunting you can do. right now, i'm doing my absolute best to scrape up whatever i can in the hopes of getting arlecchino's scythe before her banner ends. wish me luck pls.
