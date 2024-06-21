@@ -1,7 +1,7 @@
 ---
 title: Pokemon LeafGreen
 layout: layouts/page.html
-status: playing
+status: paused
 tags:
   - game
 publish: true
