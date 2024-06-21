@@ -18,6 +18,8 @@ i like the idea of _oolong_ representing an in-between state — a website t
 
 i'm building this site with the help of the [learn eleventy from scratch](https://learneleventyfromscratch.com/) course.
 
+i'm using [argent pixel](https://connary.com/argentpixel.html) and [addington](https://connary.com/addington.html) from [connary fagen](https://connary.com/index.html).
+
 ## links
 
 - 📁 [my existing site](https://jillian.cloud)
