@@ -13,14 +13,3 @@ this is a personal project to re-do [my website](https://jillian.cloud) from scr
 i named this project oolong, after my favorite type of tea. _oolong_ is a partially-oxidized tea, falling between a black & a green tea. there's a legend that it was discovered by accident, by a man who forgot about his tea because he got distracted by a deer.
 
 i like the idea of _oolong_ representing an in-between state — a website that’s not too light, but not too serious. i also like the idea of "brewing" a website to your taste: having different themes, things to play around with, and places to leave notes. i want it to feel comfortable & lived-in, as well as intimate & welcoming, like someone's living room. or a small teashop.
-
-## credits
-
-i'm building this site with the help of the [learn eleventy from scratch](https://learneleventyfromscratch.com/) course.i'm using [argent pixel](https://connary.com/argentpixel.html) and [addington](https://connary.com/addington.html) from [connary fagen](https://connary.com/index.html).
-
-## links
-
-- 📁 [my existing site](https://jillian.cloud)
-- 🖋️ [my blog](https://jillian.garden)
-- 💭 [my mastodon account](https://sleepy.cool/@jillian)
-- 🫖 [github project](https://github.com/users/jilliangmeehan/projects/1/views/1)
