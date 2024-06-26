@@ -89,7 +89,8 @@ select {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: "Argent Pixel CF";
   font-weight: normal;
 }
