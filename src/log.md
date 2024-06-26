@@ -3,6 +3,10 @@ title: "changelog"
 layout: "layouts/page.html"
 ---
 
+## jun 25, 2024
+
+- moved the navigation + some extra links into a couple of lists in the footer (not sure if i like this, plus i was _very_ sloppy about it, so i'm sure i'll be revisiting it soon)
+
 ## mar 16, 2024
 
 - added some fonts ([argent pixel](https://connary.com/argentpixel.html) & [addington](https://connary.com/addington.html) from connary fagen)
