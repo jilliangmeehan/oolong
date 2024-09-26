@@ -7,5 +7,6 @@ tags:
 url: https://enka.network/u/jillian/
 UID: "601324529"
 publish: true
+cover: "![hsr.png](hsr.png)"
 ---
-i miss penacony! i've admittedly been a little bored with the game since that part of the story ended, but feixiao is really fun to play with. i think i'm going to pull for lingsha, too — she'll essentially be a second gallagher for me, which sounds great.
+I miss Penacony! I've admittedly been a little bored with the game since that part of the story ended — but Feixiao is really fun to play with, and I think I'm going to pull for Lingsha, too. She'll essentially be a second Gallagher for me, which sounds great.
