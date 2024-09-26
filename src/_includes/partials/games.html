@@ -1,11 +1,15 @@
-<h2>playing</h2>
-<ul role="list">
+<h2 class="now font-sans">playing</h2>
+<ul class="now" role="list">
   {%- for game in collections.game -%} {% if game.data.status == "playing" %} {%
   if game.data.url -%}
-  <h3><a href="{{ game.data.url }}">{{ game.data.title }}</a></h3>
+  <h3 class="font-serif">
+    <a href="{{ game.data.url }}">{{ game.data.title }}</a>
+  </h3>
   {% else %}
-  <h3>{{ game.data.title }}</h3>
+  <h3 class="font-serif">{{ game.data.title }}</h3>
   {% endif %} {% if game.data.UID %}
   <p class="small"><b>UID:</b> {{ game.data.UID }}</p>
-  {% endif %} {{ game.content | safe }} {% endif %} {%- endfor -%}
+  {% endif %}
+  <div>{{ game.content | safe }}</div>
+  {% endif %} {%- endfor -%}
 </ul>

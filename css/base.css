@@ -1,31 +1,8 @@
-@font-face {
-  font-family: "Argent Pixel CF";
-  src: url("/fonts/argentpixelcf-italic-webfont.woff2") format("woff2"),
-    url("/fonts/argentpixelcf-italic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Addington CF";
-  src: url("/fonts/addingtoncf-thin-webfont.woff2") format("woff2"),
-    url("/fonts/addingtoncf-thin-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Addington CF";
-  src: url("/fonts/addingtoncf-thinitalic-webfont.woff2") format("woff2"),
-    url("/fonts/addingtoncf-thinitalic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-}
-
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: Inter, -apple-system, "system-ui", noto, arial, sans-serif;
+  font-family: var(--sans-serif);
+  background-color: var(--cloud);
 }
 
 *,
@@ -45,6 +22,7 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  color: var(--tea);
 }
 
 html:focus-within {
@@ -58,6 +36,16 @@ body {
 
 a:not([class]) {
   text-decoration-skip-ink: auto;
+  color: var(--joycon);
+}
+
+a:not([class]):hover {
+  color: var(--matcha);
+}
+
+a:hover {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
 }
 
 img,
@@ -99,9 +87,13 @@ h2 {
   margin-top: 1.5em;
 }
 
+h2.font-sans {
+  font-weight: 500;
+}
+
 article,
 .font-serif {
-  font-family: "Addington CF";
+  font-family: var(--serif);
 }
 
 ul[role="list"],
@@ -115,7 +107,7 @@ h4,
 h5,
 h6,
 .small {
-  font-family: Inter, -apple-system, "system-ui", noto, arial, sans-serif;
+  font-family: var(--sans-serif);
 }
 
 .small {
@@ -123,16 +115,61 @@ h6,
   color: gray;
 }
 
-body {
-  margin: 2%;
-  max-width: 600px;
-}
-
 p {
   margin-bottom: 1em;
 }
 
+html,
+body {
+  height: 100%;
+}
+header {
+  padding: 20px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+  padding: 20px;
+  max-width: 600px;
+}
 footer {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex-shrink: 0;
+  padding: 20px;
+  background-color: var(--oat);
+}
+
+/* now */
+h2.now {
+  margin-left: 5%;
+  font-family: var(--pixel);
+}
+
+ul.now {
+  margin: 0 10%;
+}
+
+.now > h3 {
+  font-size: small;
+  margin-top: 24px;
+  font-family: "Departure Mono";
+}
+
+.now > p {
+  font-family: "Departure Mono";
+  margin-bottom: 0;
+}
+
+.now > div {
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+.now > div > p {
+  font-family: var(--serif);
+  padding: 18px;
 }

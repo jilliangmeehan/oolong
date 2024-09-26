@@ -1,0 +1,14 @@
+[
+  {
+    "title": "home",
+    "url": "/"
+  },
+  {
+    "title": "blog",
+    "url": "/blog"
+  },
+  {
+    "title": "changelog",
+    "url": "/log"
+  }
+]

@@ -1,0 +1,18 @@
+:root {
+  /* Colors */
+  --cloud: #f9f5f3;
+  --oat: #e5d9d4;
+  --chai: #c8b8b2;
+  --tea: #382a26;
+  --puff: #f09292;
+  --beam: #ec937c;
+  --starlight: #edd495;
+  --matcha: #82b78b;
+  --comfy: #89c4bf;
+  --joycon: #8b8fc3;
+
+  /* Fonts */
+  --serif: "Addington CF", serif;
+  --sans-serif: Inter, -apple-system, "system-ui", noto, arial, sans-serif;
+  --pixel: "Argent Pixel CF";
+}

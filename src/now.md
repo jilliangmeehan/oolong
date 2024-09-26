@@ -4,8 +4,6 @@ layout: "layouts/page.html"
 date: Last Modified
 ---
 
-{% include "partials/timestamp.html" %}
-
 {% include "partials/now.html" %}
 {% include "partials/books.html" %}
 {% include "partials/games.html" %}

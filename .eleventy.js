@@ -2,17 +2,26 @@
 const dateFilter = require("./src/filters/date-filter.js");
 const w3DateFilter = require("./src/filters/w3-date-filter.js");
 
-module.exports = (config) => {
+module.exports = (eleventyConfig) => {
+  // filters
+  const dateFilter = require("./src/filters/date-filter.js");
+  const w3DateFilter = require("./src/filters/w3-date-filter.js");
+
   // add filters
-  config.addFilter("dateFilter", dateFilter);
-  config.addFilter("w3DateFilter", w3DateFilter);
+  eleventyConfig.addFilter("dateFilter", dateFilter);
+  eleventyConfig.addFilter("w3DateFilter", w3DateFilter);
+  eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
   // set directories to pass through to the dist folder
-  config.addPassthroughCopy("./src/favicon/");
-  config.addPassthroughCopy("css");
-  config.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
-  config.addPassthroughCopy("**/photos/*.jpg");
-  config.addPassthroughCopy("**/photos/*.png");
+  eleventyConfig.addPassthroughCopy("./src/favicon/");
+  eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
+  eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/photos/*.png");
+  eleventyConfig.addPassthroughCopy("./src/icons/*.png");
+
+  console.log("Eleventy configuration loaded");
+
   return {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
@@ -20,6 +29,7 @@ module.exports = (config) => {
     dir: {
       input: "src",
       output: "dist",
+      data: "_data", // Explicitly set the data directory
     },
   };
 };

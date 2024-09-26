@@ -1,6 +1,7 @@
 ---
 title: "changelog"
 layout: "layouts/page.html"
+description: "🚧🪛💾🖍️"
 ---
 
 ## jun 25, 2024

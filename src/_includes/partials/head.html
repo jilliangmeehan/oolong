@@ -1,3 +1,29 @@
 <header role="banner" class="head">
-  <h1>{{ title }}</h1>
+  <div class="header_icon">
+    <img src="/icons/tea.png" />
+  </div>
+  <div class="header_text">
+    <h1>{{ title }}</h1>
+    {% if description %}
+    <p class="page_description small">{{ description }}</p>
+    {% else %} {% include "partials/timestamp.html" %} {% endif %}
+  </div>
 </header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .header_icon img {
+    width: 48px;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+</style>
