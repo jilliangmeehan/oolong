@@ -6,4 +6,4 @@ tags:
   - game
 publish: true
 ---
-i was ignoring this game for so long, and then i ended up checking it out at launch on a whim, and i've been enjoying it a lot. there are a ton of bugs and translation errors, and the launch was really rocky, but it's very fun nonetheless. i ended up getting jiyan, because he really grew on me in the main quest, and now i'm waiting for changli. 
+i've been falling behind in this game, but i'm trying to catch back up. i love using changli and xiangli yao lately. i'm excited for the new area coming soon, the black shores. and i want to pull for shorekeeper, too. 
