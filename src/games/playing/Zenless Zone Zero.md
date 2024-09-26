@@ -6,5 +6,6 @@ tags:
   - game
 url: 
 publish: true
+cover: "![zzz.png](zzz.png)"
 ---
-i wasn't planning on playing this game, but then it came out and i decided to give it a try — and i'm glad i did, because i love it. right now, i'm trying to get caesar.
+I wasn't planning on playing this game, but then it came out and I decided to give it a try — and I'm glad I did, because I love it. Right now, I *really* want Caesar.

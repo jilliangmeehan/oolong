@@ -5,5 +5,6 @@ status: playing
 tags:
   - game
 publish: true
+cover: "![wuwa.png](wuwa.png)"
 ---
-i've been falling behind in this game, but i'm trying to catch back up. i love using changli and xiangli yao lately. i'm excited for the new area coming soon, the black shores. and i want to pull for shorekeeper, too. 
+I fell behind in this game, but I'm trying to catch back up before the next update. I love using Changli and Xiangli Yoa lately, and I'm excited to pull for Shorekeeper soon. 

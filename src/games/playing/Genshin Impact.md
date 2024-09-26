@@ -7,5 +7,6 @@ tags:
   - game
 url: https://enka.network/u/jillian/
 publish: true
+cover: "![genshinimpact.png](genshinimpact.png)"
 ---
-i just finished getting the natlan map to 100% exploration, and i managed to get all 36 stars in the current spiral abyss. i really want to start putting my abyss runs somewhere on here.
+I just finished getting the Natlan map to 100% exploration, and I managed to get all 36 stars in the current Spiral Abyss (I really want to start putting my Abyss runs somewhere on here). Now, I'm just waiting for Xilonen and the next part of the Archon Quest.
