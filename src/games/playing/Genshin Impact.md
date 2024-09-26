@@ -8,6 +8,4 @@ tags:
 url: https://enka.network/u/jillian/
 publish: true
 ---
-something nobody tells you about being a completionist is that eventually you're going to really need primogems for something, and there will be none for you to get because your map is already at 100% and you've done all the achievement hunting you can do. right now, i'm doing my absolute best to scrape up whatever i can in the hopes of getting at least one copy of sigewinne and her signature weapon. 
-
-i'm really impatient for imaginarium theater to start, because i know i'm going to have a fun time with it. i've also been slowly working on leveling my entire roster of characters — everybody is at least level 70 now, and i just have a few more characters left to ascend to 80 (not that i have the exp books to actually level them).
+i just finished getting the natlan map to 100% exploration, and i managed to get all 36 stars in the current spiral abyss. i really want to start putting my abyss runs somewhere on here.
