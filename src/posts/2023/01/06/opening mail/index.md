@@ -6,6 +6,7 @@ tags:
 summary: i really like saving up a bunch of mail for a bit to open all at once — not like, bills or other time-sensitive things, but fun mail.
 layout: layouts/page.html
 publish: true
+permalink: opening-mail
 ---
 ![my desk today](./photos/_06-desk.jpg)
 
