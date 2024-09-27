@@ -34,12 +34,14 @@ body {
   line-height: 1.5;
 }
 
-a:not([class]) {
+a:not([class]),
+.special_link {
   text-decoration-skip-ink: auto;
   color: var(--joycon);
 }
 
-a:not([class]):hover {
+a:not([class]):hover,
+.special_link:hover {
   color: var(--matcha);
 }
 
@@ -162,16 +164,22 @@ ul.now {
 .now > p {
   font-family: "Departure Mono", sans-serif;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .now > div {
   background-color: white;
   border-radius: 20px;
   margin-top: 4px;
-  margin-bottom: 24px;
 }
 
 .now > div > p {
   font-family: var(--serif);
   padding: 18px;
+  margin-bottom: 0;
+}
+
+.now > p.special_link {
+  margin-top: 4px;
+  text-align: right;
 }

@@ -14,5 +14,45 @@
   /* Fonts */
   --serif: "Addington CF", serif;
   --sans-serif: Inter, -apple-system, "system-ui", noto, arial, sans-serif;
-  --pixel: "Argent Pixel CF";
+  --pixel: "Argent Pixel CF", Inter, sans-serif;
+}
+
+.color-cloud {
+  color: var(--cloud);
+}
+
+.color-oat {
+  color: var(--oat);
+}
+
+.color-chai {
+  color: var(--chai);
+}
+
+.color-tea {
+  color: var(--tea);
+}
+
+.color-puff {
+  color: var(--puff);
+}
+
+.color-beam {
+  color: var(--beam);
+}
+
+.color-starlight {
+  color: var(--starlight);
+}
+
+.color-matcha {
+  color: var(--matcha);
+}
+
+.color-comfy {
+  color: var(--comfy);
+}
+
+.color-joycon {
+  color: var(--joycon);
 }
