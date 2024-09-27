@@ -1,10 +1,12 @@
 <h2 class="now font-sans">reading</h2>
 <ul class="now" role="list">
   {%- for book in collections.book -%} {% if book.data.status == "reading" %}
-  <h3 class="font-serif">
-    <a href="{{ book.data.url }}">{{ book.data.title }}</a>
-  </h3>
-  <p class="small">by {{ book.data.author }}</p>
-  <div>{{ book.content | safe }}</div>
+  <div class="item">
+    <h3 class="font-serif">
+      <a href="{{ book.data.url }}">{{ book.data.title }}</a>
+    </h3>
+    <p class="small">by {{ book.data.author }}</p>
+    <div>{{ book.content | safe }}</div>
+  </div>
   {% endif %} {%- endfor -%}
 </ul>
