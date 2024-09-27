@@ -2,9 +2,7 @@
   <h2>index</h2>
   <ul role="list">
     {% for link in links %}
-    <li>
-      <a href="{{ link.url }}">{{ link.title }}</a>
-    </li>
+    <li>↪ <a href="{{ link.url }}">{{ link.title }}</a></li>
     {% endfor %}
   </ul>
 </nav>
@@ -16,8 +14,13 @@
     margin: 0;
   }
 
+  nav ul li {
+    font-family: "Departure Mono";
+    font-size: medium;
+  }
+
   nav ul li a {
-    text-decoration: none;
+    text-decoration: underline;
     color: var(--tea) !important;
   }
 </style>

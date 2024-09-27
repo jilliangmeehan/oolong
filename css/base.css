@@ -123,6 +123,15 @@ li {
   font-size: 1.2em;
 }
 
+code {
+  font-family: "Departure Mono", monospace;
+  font-size: small;
+  background-color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--puff);
+}
+
 html,
 body {
   height: 100%;
