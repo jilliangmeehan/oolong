@@ -19,6 +19,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
   eleventyConfig.addPassthroughCopy("**/photos/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
+  eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
 
   console.log("Eleventy configuration loaded");
 

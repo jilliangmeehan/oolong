@@ -13,7 +13,7 @@
 
   /* Fonts */
   --serif: "Addington CF", serif;
-  --sans-serif: Inter, -apple-system, "system-ui", noto, arial, sans-serif;
+  --sans-serif: -apple-system, "system-ui", noto, arial, sans-serif;
   --pixel: "Argent Pixel CF", Inter, sans-serif;
 }
 

@@ -8,7 +8,11 @@
     "url": "/blog"
   },
   {
-    "title": "changelog",
-    "url": "/log"
+    "title": "now",
+    "url": "/now"
+  },
+  {
+    "title": "mastodon",
+    "url": "https://sleepy.cool/@jillian"
   }
 ]
