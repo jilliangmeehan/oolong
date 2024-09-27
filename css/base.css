@@ -191,4 +191,5 @@ ul.now {
 .now > p.special_link {
   margin-top: 4px;
   text-align: right;
+  color: var(--comfy);
 }
