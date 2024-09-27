@@ -8,7 +8,7 @@ date: 2024-09-27
 publish: true
 summary: 
 ---
-## Overview
+## overview
 ![Abyss Overview](./photos/09-24_abyss.png)
 
 I really wanted to get through Floor 11 with a physical Lumine team, but that turned out to be tricker than I expected — so I brought out Nilou to finish the job, since I haven't used her in Abyss since I got her in 4.8. 
