@@ -7,7 +7,6 @@ tags:
 date: 2022-11-27
 publish: true
 summary: happy sunday. i got some new toys :)
-permalink: new-pens
 ---
 ![_27-matcha.jpg](./photos/_27-matcha.jpg)
 
