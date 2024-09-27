@@ -7,5 +7,6 @@ tags:
 date: 2024-09-27
 publish: true
 summary: 
+permalink: abyss/0924
 ---
 ![Abyss Overview](./photos/Abyss%20Overview.png)
