@@ -6,6 +6,7 @@ tags:
 date: 2022-11-18
 publish: true
 summary: hi i guess. it's been a while since i did any kind of blogging—i don't really know how to begin.
+permalink: good-morning
 ---
 hi i guess. it's been a while since i did any kind of blogging—i don't really know how to begin. 
 

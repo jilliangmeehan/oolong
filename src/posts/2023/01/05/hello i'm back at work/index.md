@@ -6,6 +6,7 @@ date: 2023-01-05
 summary: it's a thursday, but it feels like a monday. i've got a full slack inbox & and an empty new hobonichi, ready to scribble in with my also-new pens.
 layout: layouts/page.html
 publish: true
+permalink: back-at-work
 ---
 ![my desk this morning](./photos/_05-desk.jpg)
 
