@@ -7,7 +7,6 @@ tags:
 date: 2023-11-10
 publish: true
 summary: i'm going to copy anh — i've been thinking about weeknotes lately, and about why i don't write here very often, and about how i could change that.
-permalink: "1"
 ---
 i'm going to copy [anh](https://anhvn.com/posts/2023/weeknotes-revival/) — i've been thinking about [weeknotes](https://interconnected.org/home/2018/07/24/weeknotes) lately, and about why i don't write here very often, and about how i could change that. it's easier not to write than to write, and writing in public is a little humiliating in a way that private journaling escapes. but i've managed to build up the habit of journaling, so maybe i can do this, too.
 

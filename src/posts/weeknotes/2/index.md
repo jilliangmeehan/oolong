@@ -7,7 +7,6 @@ tags:
 date: 2023-12-29
 publish: true
 summary: happy dead week.
-permalink: "2"
 ---
 happy [dead week](https://www.theatlantic.com/family/archive/2021/12/christmas-new-years-dead-week-romjul/621098/). 
 ## what i'm up to
