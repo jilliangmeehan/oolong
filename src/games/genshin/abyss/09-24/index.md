@@ -8,4 +8,4 @@ date: 2024-09-27
 publish: true
 summary: 
 ---
-![Abyss Overview](./photos/Abyss%20Overview.png)
+![Abyss Overview](./photos/09-24_abyss.png)
