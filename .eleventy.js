@@ -17,6 +17,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
   eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/photos/*.jpeg");
   eleventyConfig.addPassthroughCopy("**/photos/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
