@@ -9,4 +9,4 @@ publish: true
 cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
 ---
-I finally got Caesar, but she didn't make it easy for me — I ended up with a Soldier 11 on my account, too. Which is nice, because I did want her! Now I'm working on building them both — and hoping I'll be able to get Caesar's w-engine before the banner ends.
+I did manage to get Caesar her w-engine before the banner ended, and now she's the MVP of my account. She's the first character I've gotten to level 60, too. I also ended up getting a Soldier 11 somewhere along the way, and I'm having fun pairing them together.
