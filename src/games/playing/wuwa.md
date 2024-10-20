@@ -8,4 +8,4 @@ publish: true
 cover: "![wuwa.png](wuwa.png)"
 UID: "500118502"
 ---
-I played through the Black Shores quest the night it came out, and spent a lot of that weekend exploring the new area. I haven't gotten Shorekeeper yet, but I hope she'll turn up on my account soon.
+I got Shorekeeper! I feel like I'm finally back into a groove with this game, and I'm happy. Now I just have a bunch of quests to catch up on.
