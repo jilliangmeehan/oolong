@@ -4,7 +4,7 @@
     <div class="speech_bubble" id="speechBubble">enjoy your tea!</div>
   </div>
   <div class="header_text">
-    <h1><a href="/">{{ title }}</a></h1>
+    <h1>{{ title }}</h1>
     {% if description %}
     <p class="page_description small">{{ description }}</p>
     {% else %} {% include "partials/timestamp.html" %} {% endif %}
@@ -22,15 +22,6 @@
 
   .head > div > h1 {
     margin-bottom: -6px;
-  }
-
-  .head > div > h1 > a {
-    text-decoration: none;
-    color: var(--tea);
-  }
-
-  .head > div > h1 > a:hover {
-    color: var(--joycon);
   }
 
   .tea_container {
