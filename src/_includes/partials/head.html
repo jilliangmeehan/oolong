@@ -1,12 +1,10 @@
 <header role="banner" class="head">
   <div class="header_icon tea_container">
-    <a href="/"
-      ><img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup"
-    /></a>
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
     <div class="speech_bubble" id="speechBubble">enjoy your tea!</div>
   </div>
   <div class="header_text">
-    <h1>{{ title }}</h1>
+    <h1><a href="/">{{ title }}</a></h1>
     {% if description %}
     <p class="page_description small">{{ description }}</p>
     {% else %} {% include "partials/timestamp.html" %} {% endif %}
@@ -22,10 +20,6 @@
     justify-items: start;
   }
 
-  .header_icon img {
-    width: 48px;
-  }
-
   .head > div > h1 {
     margin-bottom: -6px;
   }
@@ -35,8 +29,7 @@
     display: inline-block;
   }
   .tea_cup {
-    width: 64px;
-    height: 64px;
+    width: 48px;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
