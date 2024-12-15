@@ -10,4 +10,3 @@ cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
 currently: true
 ---
-I love Lighter. What a guy. Nothing else to say, really.
