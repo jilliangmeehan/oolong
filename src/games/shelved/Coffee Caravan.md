@@ -1,7 +1,7 @@
 ---
 title: Coffee Caravan
 layout: layouts/page.html
-status: playing
+status: finished
 tags:
   - game
 url: https://store.steampowered.com/app/2649080/Coffee_Caravan/

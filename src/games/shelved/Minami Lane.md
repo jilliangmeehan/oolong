@@ -1,7 +1,7 @@
 ---
 title: Minami Lane
 layout: layouts/page.html
-status: playing
+status: finished
 tags:
   - game
 url: https://store.steampowered.com/app/2678990/Minami_Lane/

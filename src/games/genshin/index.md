@@ -8,7 +8,7 @@ tags:
 url: https://enka.network/u/jillian/
 publish: true
 cover: "![genshinimpact.png](genshinimpact.png)"
-special_link: https://jillian.garden/games/genshin/abyss/10-24/
+special_link: https://jillian.garden/games/genshin/abyss/11-24/
 special_link_label: latest spiral abyss data
 ---
-I ended up getting Xilonen and her sword pretty easily, and I'm super happy with her. Act IV of the Natlan Archon Quest made me sob. Now I guess I'm just waiting for Mavuika!
+Right now, I'm just really excited to finally get Pyro Lumine in a few weeks. I've already prefarmed all of the talent books that I'll need to triple crown her, and I'm working on getting her an Obsidian Codex set that doesn't suck. 
