@@ -22,6 +22,18 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
 
+  // fix markdown links
+  eleventyConfig.addTransform(
+    "fixMarkdownLinks",
+    function (content, outputPath) {
+      if (outputPath && outputPath.endsWith(".html")) {
+        // Replace any remaining .md links with .html
+        return content.replace(/href="([^"]+)\.md"/g, 'href="$1.html"');
+      }
+      return content;
+    }
+  );
+
   console.log("Eleventy configuration loaded");
 
   return {
