@@ -1,8 +1,7 @@
 ---
 title: now
 layout: layouts/page.html
-tags:
-  - post
+tags: []
 date: 2024-12-15
 publish: true
 summary: 
