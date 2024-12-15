@@ -19,8 +19,8 @@ I have had no interest in this game — I do have a lot of nostalgia for the
 ### [FFXIV](../games/playing/FFXIV.md)
 I finally finished A Realm Reborn (for real this time!) and started Heavensward. I've been having a good time as a Paladin, but I'm taking this opportunity to pause for a bit and try out some other jobs — Dark Knight is another favorite of mine, so far, but I'm trying to dip my toes into some healer & DPS jobs too. 
 
-[hsr](../games/playing/hsr.md)
+### [hsr](../games/playing/hsr.md)
 I'm super, super, super excited for Amphoreus. I think 3.0 is going to be really up my alley, and all the characters that have been teased so far look really cool to me. I just pulled Sunday, but he doesn't have a lot to do on my account until we get some of those Remembrance characters, so right now I'm mostly working on my backlog — finally building Herta and Dr. Ratio and the new Clara I just got.
 
-[zzz](../games/playing/zzz.md)
+### [zzz](../games/playing/zzz.md)
 I love Lighter. What a guy. Nothing else to say, really.
