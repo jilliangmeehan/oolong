@@ -1,28 +1,3 @@
-<!--{% set bookCount = 0 %} {%- for book in collections.book -%} {% if
-book.data.currently %} {% set bookCount = bookCount + 1 %} {% endif %} {%-
-endfor -%} {% set gameCount = 0 %} {%- for game in collections.game -%} {% if
-game.data.currently %} {% set gameCount = gameCount + 1 %} {% endif %} {%-
-endfor -%}
-<section class="shelf">
-  <div class="shelf_now">
-    <a href="/now">currently</a>
-    <ul>
-      {%- for item in collections.now -%}
-      <li>{{ item.data.title }}{{ ' + ' if not loop.last }}</li>
-      {%- endfor -%} {% if bookCount > 0 %}
-      <li>
-        + reading {{ bookCount }} {% if bookCount == 1 %}book{% else %}books{%
-        endif %}
-      </li>
-      {% endif %} {% if gameCount > 0 %}
-      <li>
-        + playing {{ gameCount }} {% if gameCount == 1 %}game{% else %}games{%
-        endif %}
-      </li>
-      {% endif %}
-    </ul>
-  </div>
-</section>-->
 <section class="overview">
   <div class="illustration">
     <img src="/icons/jill.gif" />
