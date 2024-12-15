@@ -30,6 +30,22 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: "Artifex";
+  src: url("/fonts/artifex-regular.woff2") format("woff2"),
+    url("/fonts/artifex-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Artifex";
+  src: url("/fonts/artifex-regularitalic.woff2") format("woff2"),
+    url("/fonts/artifex-regularitalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
 .font-sans {
   font-family: var(--sans-serif);
 }

@@ -105,23 +105,15 @@ ol[role="list"] {
   padding: 0;
 }
 
-h3,
-h4,
-h5,
-h6,
 .small {
-  font-family: var(--sans-serif);
-}
-
-.small {
+  font-family: var(--serif);
   font-size: small;
   color: gray;
 }
 
-p,
-li {
+p {
   margin-bottom: 1em;
-  font-size: 1.2em;
+  font-size: 1.1rem;
 }
 
 code {
@@ -188,10 +180,11 @@ ul.now > .item {
 
 .now > .item > div {
   background-color: white;
-  border-radius: 20px;
+  border-radius: 16px;
   margin-top: 4px;
   font-family: var(--serif);
-  padding: 18px;
+  font-size: 0.8rem;
+  padding: 16px 18px;
   margin-bottom: 0;
 }
 
@@ -208,7 +201,6 @@ ul.now > .item {
 
 article > p {
   font-family: var(--serif);
-  font-size: 1.2rem;
 }
 
 /* shelf */
@@ -252,13 +244,18 @@ article > p {
 }
 
 .latest_posts > ul > li {
-  font-family: var(--sans-serif);
   margin: 0;
   padding: 0;
 }
 
+.latest_posts > ul > li:before {
+  content: "→ ";
+  font-family: var(--sans-serif);
+}
+
 .latest_posts > ul > li > a {
   color: var(--tea);
+  text-decoration: none;
 }
 
 .latest_posts > ul > p {
