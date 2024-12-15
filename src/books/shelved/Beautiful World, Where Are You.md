@@ -8,6 +8,6 @@ tags:
   - book
 publish: true
 cover: "![beautifulworld.jpg](beautifulworld.jpg)"
-now: false
+currently: false
 ---
 I finally finished it! It wasn't my favorite Sally Rooney book, but I enjoyed reading it. The last few chapters made me cry.
