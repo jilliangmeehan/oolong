@@ -9,6 +9,6 @@ tags:
 date finished: 2024-07-12
 publish: true
 cover: "![allthatyouveseen.jpg](allthatyouveseen.jpg)"
-now: false
+currently: false
 ---
 i finished reading this while on vacation in barcelona. one of my favorite things i've read in a while — i love all these plays so much, and i love the specific way bryan doerries approaches them. not the most lighthearted beach read, but i can already tell i'm going to return to this book again and again.
