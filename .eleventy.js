@@ -34,6 +34,17 @@ module.exports = (eleventyConfig) => {
     }
   );
 
+  // fix smartquotes
+  const markdownIt = require("markdown-it");
+
+  let options = {
+    html: true,
+    typographer: true,
+  };
+
+  let markdownLibrary = markdownIt(options);
+  eleventyConfig.setLibrary("md", markdownLibrary);
+
   console.log("Eleventy configuration loaded");
 
   return {
