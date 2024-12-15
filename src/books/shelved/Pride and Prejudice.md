@@ -9,5 +9,6 @@ tags:
 publish: true
 date finished: 2024-04-12
 cover: "![prideandprejudice.jpg](prideandprejudice.jpg)"
+reading: false
 ---
 just finished reading this — i love how funny jane austen's writing is.
