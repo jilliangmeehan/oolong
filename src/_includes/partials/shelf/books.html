@@ -1,6 +1,9 @@
+{% set hasCurrent = false %} {%- for book in collections.book -%} {% if
+book.data.currently %} {% set hasCurrent = true %}{% endif %} {%- endfor -%} {%
+if hasCurrent %}
 <h2 class="now font-sans">reading</h2>
 <ul class="now" role="list">
-  {%- for book in collections.book -%} {% if book.data.status == "reading" %}
+  {%- for book in collections.book -%} {% if book.data.currently %}
   <div class="item">
     <h3 class="font-serif">
       <a href="{{ book.data.url }}">{{ book.data.title }}</a>
@@ -10,3 +13,4 @@
   </div>
   {% endif %} {%- endfor -%}
 </ul>
+{% endif %}

@@ -1,10 +1,13 @@
+{% set hasCurrent = false %} {%- for game in collections.game -%} {% if
+game.data.currently %} {% set hasCurrent = true %}{% endif %} {%- endfor -%} {%
+if hasCurrent %}
 <h2 class="now font-sans">playing</h2>
 <ul class="now" role="list">
-  {%- for game in collections.game -%} {% if game.data.status == "playing" %}
+  {%- for game in collections.game -%} {% if game.data.currently %}
   <div class="item">
-    {% if game.data.url -%}
+    {% if game.data.url %}
     <h3>
-      <a href="{{ game.data.url }}">{{ game.data.title }} </a>
+      <a href="{{ game.data.url }}">{{ game.data.title }}</a>
     </h3>
     {% else %}
     <h3>{{ game.data.title }}</h3>
@@ -15,10 +18,11 @@
     {% if game.data.special_link %}
     <p class="small special_link">
       <a href="{{ game.data.special_link }}"
-        >{{ game.data.special_link_label }} →
-      </a>
+        >{{ game.data.special_link_label }} →</a
+      >
     </p>
-    {% endif %} {% endif %}
+    {% endif %}
   </div>
-  {%- endfor -%}
+  {% endif %} {%- endfor -%}
 </ul>
+{% endif %}
