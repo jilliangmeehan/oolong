@@ -7,6 +7,14 @@
 }
 
 @font-face {
+  font-family: "Departure Mono";
+  src: url("/fonts/Departure-Mono-Regular.woff2") format("woff2"),
+    url("/fonts/Departure-Mono-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Addington CF";
   src: url("/fonts/addingtoncf-thin-webfont.woff2") format("woff2"),
     url("/fonts/addingtoncf-thin-webfont.woff") format("woff");

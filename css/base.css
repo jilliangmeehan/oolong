@@ -208,7 +208,19 @@ ul.now > .item {
 
 article > p {
   font-family: var(--serif);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* shelf */
+.shelf_now * {
+  display: inline;
+  padding: 0;
+  font-family: "Departure Mono";
+  font-size: 0.9rem;
+}
+
+.shelf_now > ul {
+  padding-left: 4px;
 }
 
 /* latest posts */
@@ -223,6 +235,7 @@ article > p {
 .overview > .illustration {
   margin: 0 -30px;
   max-width: 300px;
+  z-index: -100;
 }
 
 .overview > .illustration > img {
