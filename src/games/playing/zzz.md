@@ -8,6 +8,6 @@ url:
 publish: true
 cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
-now: true
+currently: true
 ---
 I love Lighter. What a guy. Nothing else to say, really.
