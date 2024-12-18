@@ -27,4 +27,5 @@ I like the idea of oolong representing an in-between state — a website tha
 ## related pages
 
 - [Changelog](/log)
+- [Style Guide](/docs)
 - [Using Obsidian as a CMS](https://jillian.garden/posts/2024/03/using-obsidian-as-a-cms/)
