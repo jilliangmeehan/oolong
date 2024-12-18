@@ -57,3 +57,7 @@
 .font-pixel {
   font-family: var(--pixel);
 }
+
+.font-mono {
+  font-family: var(--mono);
+}

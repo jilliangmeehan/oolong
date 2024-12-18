@@ -1,6 +1,7 @@
 ---
 title: "meta"
 layout: "layouts/page.html"
+date: Last Modified
 ---
 
 Inspired by [Anh's meta page](https://anhvn.com/meta/).

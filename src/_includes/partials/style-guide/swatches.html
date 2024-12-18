@@ -1,0 +1,17 @@
+<section>
+  <table class="swatch-list">
+    <tr>
+      <th>Color</th>
+      <th>Hex code</th>
+    </tr>
+    {% for swatch in swatches %}
+    <tr>
+      <td>
+        <div class="swatch" style="background-color: {{swatch.hex}}"></div>
+        {{ swatch.name }}
+      </td>
+      <td class="hex-code">{{ swatch.hex }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>

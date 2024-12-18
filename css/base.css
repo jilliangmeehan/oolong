@@ -119,10 +119,6 @@ ul {
   list-style-position: outside;
 }
 
-li {
-  font-size: 1.1em;
-}
-
 strong {
   font-weight: 400;
   font-style: italic;
@@ -148,7 +144,7 @@ body {
   height: 100%;
 }
 header {
-  padding: 20px;
+  padding: 24px;
 }
 body {
   display: flex;
@@ -163,8 +159,8 @@ main {
 
 footer {
   flex-shrink: 0;
-  padding: 20px;
-  margin-top: 60px;
+  padding: 24px;
+  margin-top: 64px;
   background-color: var(--oat);
 }
 
@@ -220,7 +216,7 @@ article > h2 {
 }
 
 .overview > .illustration > img {
-  margin: -50px auto;
+  margin: -48px auto;
 }
 
 .latest_posts > h2 {
@@ -250,7 +246,7 @@ article > h2 {
   font-family: "Departure Mono", sans-serif;
   text-transform: uppercase;
   font-size: small;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .see_more > a {
@@ -264,4 +260,51 @@ article > h2 {
 .see_more > a:hover {
   background-color: var(--chai);
   color: var(--tea);
+}
+
+.swatch {
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin: 0 8px 0 0px;
+  border-radius: 100%;
+  border: 1px solid var(--oat);
+}
+
+table.swatch-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 8px;
+  text-align: left;
+}
+
+td {
+  padding: 8px;
+  border-top: 1px solid var(--oat);
+  line-height: 16px;
+}
+
+.hex-code {
+  font-family: "Departure Mono";
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.font-guide > h3 {
+  font-size: 1.4rem;
+}
+
+.font-guide > p {
+  font-size: 1rem;
+}
+
+.font-guide > h3.font-mono {
+  font-size: 1rem;
+}
+
+.font-guide > p.font-mono {
+  font-size: 0.9rem;
 }

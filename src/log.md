@@ -8,6 +8,7 @@ description: "a lazy captain's log"
 
 - added links to the [shelf](/shelf) and [changelog](/log) to the footer
 - added a [meta](/meta) page
+- added a [style guide](/docs) page
 
 ## dec 15, 2024
 
