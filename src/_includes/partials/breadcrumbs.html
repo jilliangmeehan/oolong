@@ -1,0 +1,35 @@
+{% if eleventyNavigation.key == "Home" %}
+  <h1 class="font-pixel">jillian g. meehan</h1>
+{% else %}
+
+{% if eleventyNavigation and eleventyNavigation.key != "Home" %}
+<nav aria-label="breadcrumb" class="font-pixel">
+  <a href="/">Home</a>
+  <span class="separator">/</span>
+  
+  {% if eleventyNavigation.parent == "Blog" %}
+	<a href="/blog">Blog</a>
+	<span class="separator">/</span>
+  {% endif %}
+  
+  <span aria-current="page">{{ title }}</span>
+</nav>
+{% endif %}
+{% endif %}
+
+<style>
+  nav[aria-label="breadcrumb"] {
+	text-transform: lowercase;
+	display: flex;         
+	gap: 0.5rem;             
+	white-space: nowrap; 
+	font-size: 1.2rem;
+	margin-top: 8px;
+	margin-bottom: -4px;
+  }
+
+  nav[aria-label="breadcrumb"] span.separator {
+	color: #666; 
+  }
+  
+</style>

@@ -1,0 +1,8 @@
+{
+  "layout": "layouts/page.html",
+  "tags": ["post"],
+  "eleventyNavigation": {
+	"parent": "Blog",
+	"parentKey": "Blog"
+  }
+}

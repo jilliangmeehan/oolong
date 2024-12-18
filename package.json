@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jilliangmeehan/oolong#readme",
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-navigation": "^0.3.5",
     "markdown-it": "^14.1.0",
     "moment": "^2.30.1"
   }

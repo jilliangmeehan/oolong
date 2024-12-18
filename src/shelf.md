@@ -1,5 +1,5 @@
 ---
-title: "what i'm doing now"
+title: "shelf"
 layout: "layouts/page.html"
 date: Last Modified
 ---

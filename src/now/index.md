@@ -1,10 +1,13 @@
 ---
-title: now
+title: Now
 layout: layouts/page.html
 tags: 
 date: 2024-12-18
 publish: true
 summary: 
+eleventyNavigation:
+  key: Now
+  parent: Home
 ---
 ## learning greek
 I'm keeping up my longest-ever [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) streak with the Greek course. Learning new alphabets is fun!

@@ -1,9 +1,0 @@
-<h2 class="now font-sans">doing</h2>
-<ul class="now" role="list">
-  {%- for item in collections.now -%}
-  <div class="item">
-    <h3 class="font-serif">{{ item.data.title }}</h3>
-    <div>{{ item.content | safe }}</div>
-  </div>
-  {%- endfor -%}
-</ul>

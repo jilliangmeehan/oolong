@@ -1,11 +1,18 @@
 // filters
 const dateFilter = require("./src/filters/date-filter.js");
 const w3DateFilter = require("./src/filters/w3-date-filter.js");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = (eleventyConfig) => {
-  // filters
-  const dateFilter = require("./src/filters/date-filter.js");
-  const w3DateFilter = require("./src/filters/w3-date-filter.js");
+  // Add a callback to log navigation data during build
+  eleventyConfig.on('eleventy.after', () => {
+    console.log('Building navigation structure...');
+  });
+  
+  // Add the navigation plugin with explicit config
+  eleventyConfig.addPlugin(eleventyNavigationPlugin, {
+    enableLiveReload: true
+  });
 
   // add filters
   eleventyConfig.addFilter("dateFilter", dateFilter);
@@ -27,7 +34,6 @@ module.exports = (eleventyConfig) => {
     "fixMarkdownLinks",
     function (content, outputPath) {
       if (outputPath && outputPath.endsWith(".html")) {
-        // Replace any remaining .md links with .html
         return content.replace(/href="([^"]+)\.md"/g, 'href="$1.html"');
       }
       return content;
@@ -36,7 +42,6 @@ module.exports = (eleventyConfig) => {
 
   // fix smartquotes
   const markdownIt = require("markdown-it");
-
   let options = {
     html: true,
     typographer: true,
@@ -44,6 +49,11 @@ module.exports = (eleventyConfig) => {
 
   let markdownLibrary = markdownIt(options);
   eleventyConfig.setLibrary("md", markdownLibrary);
+  
+  eleventyConfig.addCollection("navigationData", collection => {
+    console.log("Navigation collection being built");
+    return collection.getAll();
+  });
 
   console.log("Eleventy configuration loaded");
 
@@ -54,7 +64,7 @@ module.exports = (eleventyConfig) => {
     dir: {
       input: "src",
       output: "dist",
-      data: "_data", // Explicitly set the data directory
+      data: "_data",
     },
   };
 };

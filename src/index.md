@@ -1,7 +1,9 @@
 ---
-title: "jillian g. meehan"
+title: Home
 description: "mostly drinking tea & playing video games."
 layout: "layouts/page.html"
+eleventyNavigation:
+  key: Home
 ---
 
 {% include "partials/illustration.html" %}
