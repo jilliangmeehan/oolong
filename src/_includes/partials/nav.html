@@ -2,7 +2,9 @@
   <h2>index</h2>
   <ul role="list">
     {% for link in links %}
-    <li>↪ <a href="{{ link.url }}">{{ link.title }}</a></li>
+    <li>
+      <a href="{{ link.url }}">{{ link.title }}</a>{{ '•' if not loop.last }}
+    </li>
     {% endfor %}
   </ul>
 </nav>
@@ -11,13 +13,16 @@
   nav ul {
     display: flex;
     flex-flow: wrap;
-    gap: 12px;
+    gap: 8px;
     margin: 0;
   }
 
+  nav ul li a {
+    margin-right: 8px;
+  }
+
   nav ul li {
-    font-family: "Departure Mono";
-    font-size: medium;
+    font-family: var(--serif);
   }
 
   nav ul li a {
