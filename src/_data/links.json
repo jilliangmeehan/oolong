@@ -12,6 +12,14 @@
     "url": "/now"
   },
   {
+    "title": "shelf",
+    "url": "/shelf"
+  },
+  {
+    "title": "changelog",
+    "url": "/log"
+  },
+  {
     "title": "mastodon",
     "url": "https://sleepy.cool/@jillian"
   }
