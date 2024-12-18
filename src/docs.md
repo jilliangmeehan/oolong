@@ -32,3 +32,4 @@ I would like to make & document some more thorough rules to follow here, but thi
 - I'm not super happy with how `h3` and below look
 - Code needs a more readable font & actual syntax highlighting
 - I do _not_ have a good system for font sizes at all
+- I want to actually write down rules for which colors are used for what (some of them aren't even used for anything at all right now!)
