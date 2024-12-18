@@ -19,7 +19,9 @@ I would like to make & document some more thorough rules to follow here, but thi
 - I use a `6px` border radius for everything
 - Headers and nav links are lowercase; body copy is sentence-case
 - Links are underlined!!!
-- **Unofficial rule:** I don't really like to put Argent Pixel & Departure Mono too close to each other if I can avoid it
+- I don't really like to put Argent Pixel & Departure Mono too close to each other if I can avoid it
+- No periods in bullet-pointed items unless they _all_ have periods (other punctuation for emphasis is okay)
+- I wish I could explain my stance on when to use ampersands but it's kinda just a vibe
 
 ### header rules
 
