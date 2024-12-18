@@ -1,8 +1,23 @@
 ---
 title: "changelog"
 layout: "layouts/page.html"
-description: "🚧🪛💾🖍️"
+description: "a lazy captain's log"
 ---
+
+## dec 15, 2024
+
+- swapped in some new fonts: [artifex](https://connary.com/fonts/artifex/) & [departure mono](https://departuremono.com/)
+- changed the way the [now](/now) page works: it used to be updated dynamically based on items in my collections that had an "in-progress" status (or something similar) — now it's just a single markdown file that i edit myself, which will be easier to manage & will let me save previous versions in another spot
+- moved that dynamically updated stuff to a new page: the [shelf](/shelf) (this is still super in-progress)
+- added markdown-it to automatically turn all my quotes & apostrophes into the curly versions, inspired by [anh](https://anhvn.com/posts/2022/markdown-optimizations/) (my computer has refused to type curly quotes for years. i do not know why. i have tried to fix it.)
+
+## oct 25, 2024
+
+- added a teacup easter egg (click it!)
+
+## sept 27, 2024
+
+- kinda just played around with the css
 
 ## jun 25, 2024
 
