@@ -4,6 +4,11 @@ layout: "layouts/page.html"
 description: "a lazy captain's log"
 ---
 
+## dec 18, 2024
+
+- added links to the [shelf](/shelf) and [changelog](/log) to the footer
+- added a [meta](/meta) page
+
 ## dec 15, 2024
 
 - swapped in some new fonts: [artifex](https://connary.com/fonts/artifex/) & [departure mono](https://departuremono.com/)

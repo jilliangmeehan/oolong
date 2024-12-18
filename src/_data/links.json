@@ -20,6 +20,10 @@
     "url": "/log"
   },
   {
+    "title": "meta",
+    "url": "/meta"
+  },
+  {
     "title": "mastodon",
     "url": "https://sleepy.cool/@jillian"
   }
