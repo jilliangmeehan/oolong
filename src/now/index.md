@@ -1,35 +1,30 @@
 ---
-title: Now
+title: now
 layout: layouts/page.html
 tags: 
-date: 2024-12-18
+date: 2024-12-21
 publish: true
 summary: 
-eleventyNavigation:
-  key: Now
-  parent: Home
 ---
+## enjoying the holiday break
+I wrapped up work for the year, and have since spent most of my time off catching up on chores around my apartment, tinkering with this website, and playing video games. I finished my holiday shopping, and I'm looking forward to going home and seeing my family soon. 
+
 ## learning greek
-I'm keeping up my longest-ever [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) streak with the Greek course. Learning new alphabets is fun!
+I'm keeping up my longest-ever [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) streak with the Greek course. I just finished Section 1: Unit 8, where I learned greetings & stuff like: *Χάρικα! Είσαι καλά;*
+
+(I'm also trying to learn how to use the Greek keyboard — I just found out that Greek uses a semicolon instead of question marks, but you have to use the `q` key to type it instead of the regular `;` or `?` keys.)
 
 ## playing
 ### [Genshin Impact](../games/Genshin%20Impact/index.md)
-Right now, I'm just really excited to finally get Pyro Lumine in a few weeks. I've already prefarmed all of the talent books that I'll need to triple crown her, and I'm working on getting her an Obsidian Codex set that doesn't suck. 
+Very excited for everything in the upcoming 5.3 update — especially the permanent rhythm game mode. Going to go for Mavuika and her weapon, and then I'll throw everything I have at the new Chronicled Wish banner to try to get some Childe constellations. After that, I guess I'm saving for Skirk! Huge surprise!
+
+In the meantime, since I'm already pretty much done prepping for Pyro Lumine and Mavuika, I decided to work on doing Ningguang and Keqing's final ascensions so I can get their echoes at some point. Also catching up on crafting Sumeru teapot sets for some extra primos.
 
 ### [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)
-Miyabi and Harumasa are both so fun to play. She doesn't need it to be good, but I'm really hoping I can get Miyabi's w-engine soon (and then I'll be good and save for Astra Yao). I also really like the new Hollow Zero mode — although as I was doing some old HDD commissions recently, I was thinking about how much I actually *do* like TV mode and don't want them to abandon it. 
-
-In preparation for 1.4 coming out, I've spent some time this week catching up on quests and video tapes and finding all the HIA commemorative coins and stuff. I still have plenty left to do (I haven't finished Koleda or Burnice's video tapes yet, and I've got a small pile of HDD commissions waiting for me), but I'm proud of my progress. And it feels good to be "caught up" on a game.
+I got Miyabi her w-engine and now I'm a happy girl. I played *a lot* of ZZZ this week because I was really excited about the new update — now I can kinda chill out for a bit and do my dailies until Astra Yao comes.
 
 ### [Infinity Nikki](../games/playing/Infinity%20Nikki/index.md)
-I have had no interest in this game — I do have a lot of nostalgia for the dress-up games I used to play online as a kid, but not much interest in playing games like that as an adult. And I kept telling myself that I *really* do not need another open world gacha game in my life. 
+I gave Infinity Nikki a try on my Steam Deck, and it's a cute game! I had fun! I don't think I'm going to really keep up with it, though. I might pick it back up here and there when I'm specifically in the mood, but I have too many other games to play right now to really give it my full attention.
 
-And yet my curiosity won, and I started playing it on my Steam Deck. It runs surprisingly well, and I'm having more fun with it than I expected to. I realized that it's basically a game about my favorite part of most open world RPGs: gearing & leveling armor.
-
-### [FFXIV](../games/playing/FFXIV/index.md)
-I finally finished A Realm Reborn (for real this time!) and started Heavensward. I've been having a good time as a Paladin, but I'm taking this opportunity to pause for a bit and try out some other jobs — Dark Knight is another favorite of mine, so far, but I'm trying to dip my toes into some healer & DPS jobs too. 
-
-### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md)
-I'm super, super, super excited for Amphoreus. I think 3.0 is going to be really up my alley, and all the characters that have been teased so far look really cool to me. I just pulled Sunday, but he doesn't have a lot to do on my account until we get some of those Remembrance characters, so right now I'm mostly working on my backlog — finally building Herta and Dr. Ratio and the new Clara I just got.
-
-I'm also trying to catch up on the story before 3.0 comes out, because I've been lagging behind a bit. I still need to finish the Wardance story, and I just started the whole Slumbernana Monkey thing. I'm honestly having kind of a hard time getting through some of it, but I'm excited to get to the newer Sunday quest.
+### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md) & [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md)
+In both of these games, I'm just trying to catch up a little bit before their next major updates — but I'm being very lazy about it. We'll see what I manage to get done in time.
