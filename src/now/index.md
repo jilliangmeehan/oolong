@@ -14,7 +14,7 @@ I've admittedly used a bunch of streak freezes on [Duolingo](https://www.duoling
 
 ## reading
 ### [The Norse Myths](../books/reading/The%20Norse%20Myths.md)
-I've been reading through Kevin Crossley-Holland's retelling of a bunch of classic Norse myths, most of which are brand new to me. The stories themselves are interesting, but I mostly enjoy flipping to the notes about each story in the back to learn more about the context surrounding them and how much we know (or don't know) about where they came from.
+I've been reading through [Kevin Crossley-Holland's retelling](https://50wattsbooks.com/products/the-norse-myths-the-pantheon-fairy-tale-and-folklore-library) of a bunch of classic Norse myths, most of which are brand new to me. The stories themselves are interesting, but I mostly enjoy flipping to the notes about each story in the back to learn more about the context surrounding them and how much we know (or don't know) about where they came from.
 
 ## playing
 ### [Genshin Impact](../games/Genshin%20Impact/index.md)
@@ -23,7 +23,7 @@ I pulled for Mavuika on New Year's Eve and her weapon the next day — and e
 ### [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md)
 Rinascita is here, and it's really pretty. I was feeling a little spicy and pulled for Carlotta despite not really having any plans to, but she's fun and I'm happy. I'm working my way through the main story now, and I *love* Brant and Zani. And I switched back to Spectro Rover after exclusively using Havoc Rover for a while!
 
-## Kingdom: Two Crowns
+### Kingdom: Two Crowns
 I've spent a lot of time playing this lately — I finished the Call of Olympus DLC, so now I'm trying out Norse Lands and playing through the base game with a slightly higher difficulty. 
 
 ### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md) & [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)
