@@ -2,29 +2,29 @@
 title: now
 layout: layouts/page.html
 tags: 
-date: 2024-12-21
+date: 2025-01-04
 publish: true
 summary: 
 ---
-## enjoying the holiday break
-I wrapped up work for the year, and have since spent most of my time off catching up on chores around my apartment, tinkering with this website, and playing video games. I finished my holiday shopping, and I'm looking forward to going home and seeing my family soon. 
+## back to work soon
+Work starts up again in two days, so I've been trying to ease myself out of vacation mode this week after the holidays. It's time to make a dent in a new Hobonichi, clear out inboxes, and relearn how to get out of bed before 10 am.
 
 ## learning greek
-I'm keeping up my longest-ever [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) streak with the Greek course. I just finished Section 1: Unit 8, where I learned greetings & stuff like: *Χάρικα! Είσαι καλά;*
+I've admittedly used a bunch of streak freezes on [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) recently, but I'm doing the bare minimum and hanging on. I'm at the very beginning of Section 1: Unit 9, but I'm just sort of not in the mood to learn new words right now, so my daily practice has mostly been reviewing what I already know and learning more of the alphabet.
 
-(I'm also trying to learn how to use the Greek keyboard — I just found out that Greek uses a semicolon instead of question marks, but you have to use the `q` key to type it instead of the regular `;` or `?` keys.)
+## reading
+### [The Norse Myths](../books/reading/The%20Norse%20Myths.md)
+I've been reading through Kevin Crossley-Holland's retelling of a bunch of classic Norse myths, most of which are brand new to me. The stories themselves are interesting, but I mostly enjoy flipping to the notes about each story in the back to learn more about the context surrounding them and how much we know (or don't know) about where they came from.
 
 ## playing
 ### [Genshin Impact](../games/Genshin%20Impact/index.md)
-Very excited for everything in the upcoming 5.3 update — especially the permanent rhythm game mode. Going to go for Mavuika and her weapon, and then I'll throw everything I have at the new Chronicled Wish banner to try to get some Childe constellations. After that, I guess I'm saving for Skirk! Huge surprise!
+I pulled for Mavuika on New Year's Eve and her weapon the next day — and ended up with C6 Keqing and Citlali's weapon in the process. But it all worked out, and I'm having fun with my new toys. I'm *especially* having fun with Pyro Lumine, although I wish I could unlock her C6.
 
-In the meantime, since I'm already pretty much done prepping for Pyro Lumine and Mavuika, I decided to work on doing Ningguang and Keqing's final ascensions so I can get their echoes at some point. Also catching up on crafting Sumeru teapot sets for some extra primos.
+### [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md)
+Rinascita is here, and it's really pretty. I was feeling a little spicy and pulled for Carlotta despite not really having any plans to, but she's fun and I'm happy. I'm working my way through the main story now, and I *love* Brant and Zani. And I switched back to Spectro Rover after exclusively using Havoc Rover for a while!
 
-### [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)
-I got Miyabi her w-engine and now I'm a happy girl. I played *a lot* of ZZZ this week because I was really excited about the new update — now I can kinda chill out for a bit and do my dailies until Astra Yao comes.
+## Kingdom: Two Crowns
+I've spent a lot of time playing this lately — I finished the Call of Olympus DLC, so now I'm trying out Norse Lands and playing through the base game with a slightly higher difficulty. 
 
-### [Infinity Nikki](../games/playing/Infinity%20Nikki/index.md)
-I gave Infinity Nikki a try on my Steam Deck, and it's a cute game! I had fun! I don't think I'm going to really keep up with it, though. I might pick it back up here and there when I'm specifically in the mood, but I have too many other games to play right now to really give it my full attention.
-
-### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md) & [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md)
-In both of these games, I'm just trying to catch up a little bit before their next major updates — but I'm being very lazy about it. We'll see what I manage to get done in time.
+### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md) & [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)
+In HSR, I'm catching up on quests I haven't done yet before 3.0 comes out. A bit of a slog, since I really didn't enjoy the whole Slumbernana Monkey thing, but I got through it. And in ZZZ, I'm still really enjoying Miyabi and Harumasa! Just waiting for the next update now.

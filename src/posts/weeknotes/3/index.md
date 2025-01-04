@@ -5,7 +5,7 @@ tags:
   - post
 date: 2024-12-21
 publish: true
-summary: 
+summary: It's been a while. Excuse me while I clear away the digital cobwebs.
 ---
 It's been a while. Excuse me while I clear away the digital cobwebs.
 
