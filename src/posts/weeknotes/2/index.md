@@ -9,7 +9,7 @@ publish: true
 summary: Happy dead week.
 ---
 Happy [dead week](https://www.theatlantic.com/family/archive/2021/12/christmas-new-years-dead-week-romjul/621098/). 
-## what i'm up to
+## what i've been up to
 I started the Greek [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) course this week. While I'm not particularly good at keeping my Duolingo streak, I *do* like to pick up new courses every once in a while to see what's up — I mainly focus on learning Mandarin, but I've started at least five others just for fun. 
 
 I just find it really interesting to check out the beginning of different courses, especially when there's another alphabet involved — regardless of how much Greek or Korean I ever end up learning in my life, I think there's something to be said for having a basic understanding of how their alphabets work & how to pronounce things. 
