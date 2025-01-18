@@ -2,29 +2,24 @@
 title: now
 layout: layouts/page.html
 tags: 
-date: 2025-01-04
+date: 2025-01-18
 publish: true
 summary: 
 ---
-## back to work soon
-Work starts up again in two days, so I've been trying to ease myself out of vacation mode this week after the holidays. It's time to make a dent in a new Hobonichi, clear out inboxes, and relearn how to get out of bed before 10 am.
+## two-week sleepover
+One of my best friends is coming to visit & stay with me for a couple of weeks, and it's gonna be a great time. We have lots of plans to play video games together and rewatch our favorite k-dramas. 
 
 ## learning greek
-I've admittedly used a bunch of streak freezes on [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) recently, but I'm doing the bare minimum and hanging on. I'm at the very beginning of Section 1: Unit 9, but I'm just sort of not in the mood to learn new words right now, so my daily practice has mostly been reviewing what I already know and learning more of the alphabet.
-
-## reading
-### [The Norse Myths](../books/reading/The%20Norse%20Myths.md)
-I've been reading through [Kevin Crossley-Holland's retelling](https://50wattsbooks.com/products/the-norse-myths-the-pantheon-fairy-tale-and-folklore-library) of a bunch of classic Norse myths, most of which are brand new to me. The stories themselves are interesting, but I mostly enjoy flipping to the notes about each story in the back to learn more about the context surrounding them and how much we know (or don't know) about where they came from.
+I just finished Section 1: Unit 9 of the [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) Greek course this morning! Onto the next. I've also been practicing my Greek handwriting this week on pages in the back of my Hobonichi journal — it's like educational doodling. 
 
 ## playing
-### [Genshin Impact](../games/Genshin%20Impact/index.md)
-I pulled for Mavuika on New Year's Eve and her weapon the next day — and ended up with C6 Keqing and Citlali's weapon in the process. But it all worked out, and I'm having fun with my new toys. I'm *especially* having fun with Pyro Lumine, although I wish I could unlock her C6.
+### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md)
+*Very* into the 3.0 update. The Herta is great & very fun to play, Amphoreus is lovely, and I'm really excited about this chapter of the story so far. Penacony was great, but I can already tell this will be better.
 
-### [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md)
-Rinascita is here, and it's really pretty. I was feeling a little spicy and pulled for Carlotta despite not really having any plans to, but she's fun and I'm happy. I'm working my way through the main story now, and I *love* Brant and Zani. And I switched back to Spectro Rover after exclusively using Havoc Rover for a while!
+I've also been spending a lot of time grinding through the past Simulated Universe expansions, since I never really finished them. I unlocked all the secrets in Swarm Disaster and Unknowable Domain, and now I'm working on Gold & Gears.
 
-### Kingdom: Two Crowns
-I've spent a lot of time playing this lately — I finished the Call of Olympus DLC, so now I'm trying out Norse Lands and playing through the base game with a slightly higher difficulty. 
+## Balatro
+Have been getting back into Balatro a bit this week, since it's a really good Steam Deck game. I am *not* very good at it, but it's such a fun way to lose a few hours on the couch.
 
-### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md) & [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)
-In HSR, I'm catching up on quests I haven't done yet before 3.0 comes out. A bit of a slog, since I really didn't enjoy the whole Slumbernana Monkey thing, but I got through it. And in ZZZ, I'm still really enjoying Miyabi and Harumasa! Just waiting for the next update now.
+### The other gachas
+I've really just been playing a *lot* of HSR this week, so my other games — [Genshin Impact](../games/Genshin%20Impact/index.md), [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md), and [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md) — have taken a bit of a backseat. But there's a new ZZZ update coming up soon that I'm excited about, and it's almost time for Lantern Rite in Genshin!
