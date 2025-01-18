@@ -21,5 +21,5 @@ I've also been spending a lot of time grinding through the past Simulated Univer
 ## Balatro
 Have been getting back into Balatro a bit this week, since it's a really good Steam Deck game. I am *not* very good at it, but it's such a fun way to lose a few hours on the couch.
 
-### The other gachas
+## The other gachas
 I've really just been playing a *lot* of HSR this week, so my other games — [Genshin Impact](../games/Genshin%20Impact/index.md), [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md), and [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md) — have taken a bit of a backseat. But there's a new ZZZ update coming up soon that I'm excited about, and it's almost time for Lantern Rite in Genshin!
