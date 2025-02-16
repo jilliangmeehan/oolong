@@ -2,24 +2,36 @@
 title: now
 layout: layouts/page.html
 tags: 
-date: 2025-01-18
+date: 2025-02-16
 publish: true
 summary: 
 ---
-## two-week sleepover
-One of my best friends is coming to visit & stay with me for a couple of weeks, and it's gonna be a great time. We have lots of plans to play video games together and rewatch our favorite k-dramas. 
+## hibernating
+The weather is gloomy this week — rainy and snowy and dark, but at least the sun is setting a little bit later every day. I haven't felt much like posting, and I've had a very lazy week. I'm having a hard time keeping up with my routines and chores lately, but I'm trying not to make myself feel too bad about it. 
 
-## learning greek
-I just finished Section 1: Unit 9 of the [Duolingo](https://www.duolingo.com/profile/jilliangmeehan) Greek course this morning! Onto the next. I've also been practicing my Greek handwriting this week on pages in the back of my Hobonichi journal — it's like educational doodling. 
+I wish I had updated this sooner, because there have been plenty of things for me to write about in the past couple of weeks. I'll try my best to remember it all, but no promises.
+
+## journaling
+I still try to do some form of daily journaling in Obsidian, because it's a nice part of my routine and I like having a record of my days to look back on. But I've also been supplementing that with a very cute and charming mood-tracking app, [Unhinged](https://unhinged.life/). 
+
+## watching
+### Severance 
+I *finally* started watching the first season of Severance. I think everyone probably already knows this already, but it's insanely good. There's not a single thing about it that I don't love.
+
+## listening
+### [Never Post](https://www.neverpo.st/)
+This is one of my favorite podcasts these days. I'm not bringing it up now because it's new, but because they somewhat-recently did [an episode](https://share.transistor.fm/s/d0afce88) looking back over their first year of the show and it got me all emotional about the people who make stuff like this & the people who care enough about it to support them with real dollars. 
 
 ## playing
-### [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md)
-*Very* into the 3.0 update. The Herta is great & very fun to play, Amphoreus is lovely, and I'm really excited about this chapter of the story so far. Penacony was great, but I can already tell this will be better.
+### [Isle of Arrows](https://apps.apple.com/us/app/isle-of-arrows-tower-defense/id1607942817)
+I downloaded this on my phone and then apparently played 15 hours of it in one week. It's a nice little tower defense game with a handful of different modes to play through and unique daily challenges — it's hard enough that I feel very accomplished when I manage to win, but not hard enough that I want to stop trying.
 
-I've also been spending a lot of time grinding through the past Simulated Universe expansions, since I never really finished them. I unlocked all the secrets in Swarm Disaster and Unknowable Domain, and now I'm working on Gold & Gears.
+### [New Star GP](https://store.steampowered.com/app/2217580/New_Star_GP/)
+Dylan told me about this one, and I love it. It's a racing game for people who like F1 but aren't actually into sim racing, which is exactly me. The vibes are just incredibly sick. I've spent several nights sinking into my couch and playing this on my Steam Deck for hours.
 
-## Balatro
-Have been getting back into Balatro a bit this week, since it's a really good Steam Deck game. I am *not* very good at it, but it's such a fun way to lose a few hours on the couch.
+### The gachas
+I'm having the usual amount of fun keeping up with [Genshin Impact](../games/Genshin%20Impact/index.md), [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md), and [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)! I always love Lantern Rite this time of year, and I like that ZZZ had a similar event. 
 
-## The other gachas
-I've really just been playing a *lot* of HSR this week, so my other games — [Genshin Impact](../games/Genshin%20Impact/index.md), [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md), and [Wuthering Waves](../games/playing/Wuthering%20Waves/index.md) — have taken a bit of a backseat. But there's a new ZZZ update coming up soon that I'm excited about, and it's almost time for Lantern Rite in Genshin!
+In Genshin, I pulled for C4 Childe on the Chronicled Wish banner and ended up with a C1 Ganyu and C1 Xiao along the way, which I can't complain about. I also got Mizuki, and now I'm going for her weapon since I assume I won't have many other chances to get it in the future. If there's anything left over, I might try for a Sigewinne constellation before the banner ends — but after that, I think I'm just saving for Skirk.
+
+In HSR, Mydei has quickly become one of my favorite characters, so I'm just waiting for him to come along in the next update. And in ZZZ, I got Astra Yao (very fun, wow) *and* finally got Qingyi's teapot, which was a huge upgrade. I'm pretty interested in going for Trigger in the next update, because apparently I just love stun agents in this game.
