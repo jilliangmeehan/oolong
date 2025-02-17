@@ -2,7 +2,8 @@
 title: "Spiral Abyss: Feb 2025"
 layout: layouts/page.html
 tags:
-  - post
+  - abyss
+  - games/genshin
 date: 2025-02-17
 publish: true
 summary: 
