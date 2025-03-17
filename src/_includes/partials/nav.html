@@ -2,12 +2,10 @@
   <h2>index</h2>
   <ul role="list">
     {% for link in links %}
-    <li>
-      <a href="{{ link.url }}">{{ link.title }}</a>{{ '•' if not loop.last }}
-    </li>
+    <li><a href="{{ link.url }}">{{ link.title }}</a>{{ '•' }}</li>
     {% endfor %}
     <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">• mastodon</a>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
     </li>
   </ul>
 </nav>
