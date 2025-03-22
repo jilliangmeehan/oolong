@@ -170,13 +170,13 @@
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
-                            if (state.readyToHarvest) {
+                            if (state.readyToHarvest && !state.isHarvesting) {
                                 workingSprites.harvest += 1;
                                 plot.harvest();
-                                // Harvesting is instant, but add a small cooldown
+                                // Wait for harvest to complete
                                 setTimeout(() => {
                                     workingSprites.harvest -= 1;
-                                }, TIMINGS.HARVEST_COOLDOWN);
+                                }, TIMINGS.HARVEST_TIME);
                                 break;
                             }
                         }
@@ -226,7 +226,7 @@
                                 plot.plantTea();
                                 setTimeout(() => {
                                     workingSprites.garden -= 1;
-                                }, TIMINGS.GARDEN_COOLDOWN);
+                                }, TIMINGS.GROW_TIME);
                                 break;
                             }
                         }

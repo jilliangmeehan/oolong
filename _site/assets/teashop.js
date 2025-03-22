@@ -4447,6 +4447,8 @@ https://svelte.dev/e/store_invalid_shape`);
   var TIMINGS = {
     GROW_TIME: 1e4,
     // 10 seconds to grow
+    HARVEST_TIME: 5e3,
+    // 5 seconds to harvest
     BREW_TIME: 5e3,
     // 5 seconds to brew
     HARVEST_COOLDOWN: 1e3,
@@ -4470,12 +4472,16 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[104, 8]]);
-  var root = add_locations(template(`<div class="garden-plot"><button><!></button> <!> <div><button>Harvest Tea</button></div></div>`), GardenPlot[FILENAME], [
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[137, 8]]);
+  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[149, 12]]);
+  var root = add_locations(template(`<div class="garden-plot"><button><!></button> <!> <div><button><!></button> <!></div></div>`), GardenPlot[FILENAME], [
     [
-      87,
+      120,
       0,
-      [[88, 4], [107, 4, [[108, 8]]]]
+      [
+        [121, 4],
+        [140, 4, [[141, 8]]]
+      ]
     ]
   ]);
   function GardenPlot($$anchor, $$props) {
@@ -4483,21 +4489,28 @@ https://svelte.dev/e/store_invalid_shape`);
     push($$props, false, GardenPlot);
     const dispatch = createEventDispatcher();
     let progress = mutable_source(0);
+    let harvestProgress = mutable_source(0);
     let isGrowing = prop($$props, "isGrowing", 12, false);
     let readyToHarvest = prop($$props, "readyToHarvest", 12, false);
+    let isHarvesting = prop($$props, "isHarvesting", 12, false);
+    let harvestInterval;
     let isDay;
     isDaytime.subscribe((value) => isDay = value);
     function getState() {
       return {
         isGrowing: isGrowing(),
         readyToHarvest: readyToHarvest(),
-        progress: get(progress)
+        progress: get(progress),
+        isHarvesting: isHarvesting(),
+        harvestProgress: get(harvestProgress)
       };
     }
     function setState(state2) {
       isGrowing(state2.isGrowing);
       readyToHarvest(state2.readyToHarvest);
+      isHarvesting(state2.isHarvesting);
       set(progress, state2.progress);
+      set(harvestProgress, state2.harvestProgress);
       if (isGrowing() && !readyToHarvest()) {
         if (growthInterval) clearInterval(growthInterval);
         growthInterval = setInterval(
@@ -4514,11 +4527,17 @@ https://svelte.dev/e/store_invalid_shape`);
           100
         );
       }
+      if (isHarvesting()) {
+        startHarvesting();
+      }
     }
     let growthInterval;
     function calculateGrowthIncrement(isDay2) {
       const baseIncrement = 100 * 100 / TIMINGS.GROW_TIME;
       return isDay2 ? baseIncrement : baseIncrement * 0.5;
+    }
+    function calculateHarvestIncrement() {
+      return 100 * 100 / TIMINGS.HARVEST_TIME;
     }
     function plantTea() {
       if (isGrowing() || readyToHarvest()) return;
@@ -4540,18 +4559,35 @@ https://svelte.dev/e/store_invalid_shape`);
         100
       );
     }
-    onDestroy(() => {
-      if (growthInterval) {
-        clearInterval(growthInterval);
-      }
-    });
-    function harvest() {
-      if (!readyToHarvest()) return;
-      readyToHarvest(false);
-      isGrowing(false);
-      set(progress, 0);
-      dispatch("plantComplete");
+    function startHarvesting() {
+      if (harvestInterval) clearInterval(harvestInterval);
+      harvestInterval = setInterval(
+        () => {
+          set(harvestProgress, get(harvestProgress) + calculateHarvestIncrement());
+          if (get(harvestProgress) >= 100) {
+            clearInterval(harvestInterval);
+            harvestInterval = null;
+            isHarvesting(false);
+            set(harvestProgress, 0);
+            readyToHarvest(false);
+            isGrowing(false);
+            set(progress, 0);
+            dispatch("plantComplete");
+          }
+        },
+        100
+      );
     }
+    function harvest() {
+      if (!readyToHarvest() || isHarvesting()) return;
+      isHarvesting(true);
+      set(harvestProgress, 0);
+      startHarvesting();
+    }
+    onDestroy(() => {
+      if (growthInterval) clearInterval(growthInterval);
+      if (harvestInterval) clearInterval(harvestInterval);
+    });
     init();
     var div = root();
     var button = child(div);
@@ -4601,13 +4637,47 @@ https://svelte.dev/e/store_invalid_shape`);
     }
     var div_1 = sibling(node_1, 2);
     var button_1 = child(div_1);
+    var node_2 = child(button_1);
+    {
+      var consequent_3 = ($$anchor2) => {
+        var text_3 = text();
+        template_effect(
+          ($0) => set_text(text_3, `Harvesting... (${$0 ?? ""}%)`),
+          [
+            () => Math.floor(get(harvestProgress))
+          ],
+          derived_safe_equal
+        );
+        append($$anchor2, text_3);
+      };
+      var alternate_2 = ($$anchor2) => {
+        var text_4 = text("Harvest Tea");
+        append($$anchor2, text_4);
+      };
+      if_block(node_2, ($$render) => {
+        if (isHarvesting()) $$render(consequent_3);
+        else $$render(alternate_2, false);
+      });
+    }
+    reset(button_1);
+    var node_3 = sibling(button_1, 2);
+    {
+      var consequent_4 = ($$anchor2) => {
+        var progress_2 = root_8();
+        template_effect(() => set_value(progress_2, get(harvestProgress)));
+        append($$anchor2, progress_2);
+      };
+      if_block(node_3, ($$render) => {
+        if (isHarvesting()) $$render(consequent_4);
+      });
+    }
     reset(div_1);
     reset(div);
     template_effect(() => {
-      button.disabled = isGrowing() || readyToHarvest();
+      button.disabled = isGrowing() || readyToHarvest() || isHarvesting();
       set_attribute(button, "data-growing", isGrowing());
       set_attribute(button, "data-harvestable", readyToHarvest());
-      button_1.disabled = !readyToHarvest();
+      button_1.disabled = !readyToHarvest() || isHarvesting();
     });
     event("click", button, plantTea);
     event("click", button_1, harvest);
@@ -4801,9 +4871,9 @@ https://svelte.dev/e/store_invalid_shape`);
     const GARDEN_PLOT_COST = 10;
     const TEAPOT_COST = 75;
     const SPRITE_COSTS = {
-      garden: 100,
-      harvest: 150,
-      brewmaster: 250,
+      garden: 25,
+      harvest: 50,
+      brewmaster: 100,
       cafe: 500
     };
     const dispatch = createEventDispatcher();
@@ -5059,14 +5129,14 @@ https://svelte.dev/e/store_invalid_shape`);
                 const plot = get(plotRefs)[i];
                 if (plot) {
                   const state2 = plot.getState();
-                  if (state2.readyToHarvest) {
+                  if (state2.readyToHarvest && !state2.isHarvesting) {
                     workingSprites.harvest += 1;
                     plot.harvest();
                     setTimeout(
                       () => {
                         workingSprites.harvest -= 1;
                       },
-                      TIMINGS.HARVEST_COOLDOWN
+                      TIMINGS.HARVEST_TIME
                     );
                     break;
                   }
@@ -5120,7 +5190,7 @@ https://svelte.dev/e/store_invalid_shape`);
                       () => {
                         workingSprites.garden -= 1;
                       },
-                      TIMINGS.GARDEN_COOLDOWN
+                      TIMINGS.GROW_TIME
                     );
                     break;
                   }

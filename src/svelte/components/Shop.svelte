@@ -4,9 +4,9 @@
     const GARDEN_PLOT_COST = 10;
     const TEAPOT_COST = 75;
     const SPRITE_COSTS = {
-        garden: 100,
-        harvest: 150,
-        brewmaster: 250,
+        garden: 25,
+        harvest: 50,
+        brewmaster: 100,
         cafe: 500,
     };
 

@@ -1,5 +1,6 @@
 export const TIMINGS = {
   GROW_TIME: 10000, // 10 seconds to grow
+  HARVEST_TIME: 5000, // 5 seconds to harvest
   BREW_TIME: 5000, // 5 seconds to brew
   HARVEST_COOLDOWN: 1000, // 1 second cooldown for harvesting
   GARDEN_COOLDOWN: 1000, // 1 second cooldown for planting
