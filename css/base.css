@@ -1,14 +1,14 @@
 :root {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--sans-serif);
-  background-color: var(--cloud);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--sans-serif);
+    background-color: var(--cloud);
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body,
@@ -22,247 +22,334 @@ figure,
 blockquote,
 dl,
 dd {
-  margin: 0;
-  color: var(--tea);
+    margin: 0;
+    color: var(--tea);
 }
 
 html:focus-within {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100vh;
-  line-height: 1.5;
+    min-height: 100vh;
+    line-height: 1.5;
 }
 
 a:not([class]),
 .special_link {
-  text-decoration-skip-ink: auto;
-  color: var(--joycon);
+    text-decoration-skip-ink: auto;
+    color: var(--joycon);
 }
 
 a:not([class]):hover,
 .special_link:hover {
-  color: var(--matcha);
+    color: var(--matcha);
 }
 
 a:hover {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
 }
 
 img,
 picture {
-  max-width: 100%;
-  display: block;
-  margin: 8px 0;
+    max-width: 100%;
+    display: block;
+    margin: 8px 0;
 }
 
 input,
 button,
 textarea,
 select {
-  font: inherit;
+    font: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 h1,
 h2 {
-  font-family: "Argent Pixel CF";
-  font-weight: normal;
+    font-family: "Argent Pixel CF";
+    font-weight: normal;
 }
 
 h2 {
-  margin-top: 1.5em;
+    margin-top: 1.5em;
 }
 
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Departure Mono";
-  font-size: small;
-  font-weight: 400;
+    font-family: "Departure Mono";
+    font-size: small;
+    font-weight: 400;
 }
 
 p {
-  margin-bottom: 1em;
-  font-size: 1.1em;
+    margin-bottom: 1em;
+    font-size: 1.1em;
 }
 
 article,
 .font-serif {
-  font-family: var(--serif);
+    font-family: var(--serif);
 }
 
 ul[role="list"],
 ol[role="list"] {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 ul {
-  list-style-type: " • ";
-  list-style-position: outside;
+    list-style-type: " • ";
+    list-style-position: outside;
 }
 
 strong {
-  font-weight: 400;
-  font-style: italic;
-  color: var(--comfy);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--comfy);
 }
 
 code {
-  font-family: "Departure Mono", monospace;
-  font-size: small;
-  background-color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: var(--puff);
+    font-family: "Departure Mono", monospace;
+    font-size: small;
+    background-color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: var(--puff);
 }
 
 blockquote {
-  font-style: italic;
-  margin-left: 40px;
+    font-style: italic;
+    margin-left: 40px;
 }
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 header {
-  padding: 24px;
+    padding: 24px;
 }
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 main {
-  flex: 1 0 auto;
-  margin: 10% auto;
-  width: 600px;
-  max-width: 90%;
+    flex: 1 0 auto;
+    margin: 10% auto;
+    width: 600px;
+    max-width: 90%;
 }
 
 footer {
-  flex-shrink: 0;
-  padding: 24px;
-  margin-top: 64px;
-  background-color: var(--oat);
+    flex-shrink: 0;
+    padding: 24px;
+    margin-top: 64px;
+    background-color: var(--oat);
 }
 
 article > p {
-  font-family: var(--serif);
+    font-family: var(--serif);
 }
 
 article > h2 {
-  font-family: "Departure Mono";
-  font-size: small;
-  font-weight: 400;
-  background-color: var(--oat);
-  color: var(--tea);
-  margin: 32px 0 8px -4px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  width: max-content;
+    font-family: "Departure Mono";
+    font-size: small;
+    font-weight: 400;
+    background-color: var(--oat);
+    color: var(--tea);
+    margin: 32px 0 8px -4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: max-content;
 }
 
 .small {
-  font-family: var(--serif);
-  font-size: small;
-  color: gray;
+    font-family: var(--serif);
+    font-size: small;
+    color: gray;
 }
 
 /* blog */
 .blog_post {
-  width: 50%;
-  margin: 0 auto;
+    width: 50%;
+    margin: 0 auto;
 }
 
 /* shelf */
 .shelf_now * {
-  display: inline;
-  padding: 0;
-  font-family: "Departure Mono";
-  font-size: 0.9em;
+    display: inline;
+    padding: 0;
+    font-family: "Departure Mono";
+    font-size: 0.9em;
 }
 
 .shelf_now > ul {
-  padding-left: 4px;
+    padding-left: 4px;
 }
 
 /* home page */
 .overview {
-  display: flex;
-  flex-flow: wrap-reverse;
+    display: flex;
+    flex-flow: wrap-reverse;
 }
 
 .overview > .illustration {
-  margin: 0 -30px;
-  max-width: 300px;
-  z-index: -100;
+    margin: 0 -30px;
+    max-width: 300px;
+    z-index: -100;
 }
 
 .overview > .illustration > img {
-  margin: -48px auto;
+    margin: -48px auto;
 }
 
 /* latest posts */
 
 .latest_posts > h2 {
-  color: var(--joycon);
+    color: var(--joycon);
 }
 
 .latest_posts > ul {
-  margin: 0;
+    margin: 0;
 }
 
 .latest_posts > ul > li:before {
-  content: "→ ";
-  font-family: var(--sans-serif);
+    content: "→ ";
+    font-family: var(--sans-serif);
 }
 
 .latest_posts > ul > li > a {
-  color: var(--tea);
-  text-decoration: none;
+    color: var(--tea);
+    text-decoration: none;
 }
 
 .latest_posts > ul > p {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
-/* see more button */
+/* buttons */
+
+button {
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+    background-color: var(--oat);
+    color: var(--tea);
+    padding: 4px 8px;
+    margin: 6px;
+    border: none;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: var(--chai);
+    color: var(--tea);
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.7;
+}
+
+button:disabled:hover {
+    background-color: var(--oat);
+}
 
 .see_more {
-  font-family: "Departure Mono", sans-serif;
-  text-transform: uppercase;
-  font-size: small;
-  margin-top: 16px;
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+    margin-top: 16px;
 }
 
 .see_more > a {
-  background-color: var(--oat);
-  color: var(--tea);
-  padding: 4px 8px;
-  border-radius: 6px;
-  text-decoration: none;
+    background-color: var(--oat);
+    color: var(--tea);
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-decoration: none;
 }
 
 .see_more > a:hover {
-  background-color: var(--chai);
-  color: var(--tea);
+    background-color: var(--chai);
+    color: var(--tea);
+}
+
+/* teashop */
+
+.garden-plot,
+.teapot {
+    background-color: white;
+    border: 2px dashed var(--oat);
+    border-radius: 6px;
+    margin: 8px;
+    padding: 8px;
+}
+
+.label {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+}
+
+.stats,
+.sprites {
+    display: inline-block;
+    margin-right: 120px;
+    margin-bottom: 24px;
+}
+
+.shop-title {
+    list-style: none;
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+}
+
+.shop-title:hover {
+    cursor: pointer;
+}
+
+.shop {
+    background-color: var(--oat);
+    padding: 16px;
+    border-radius: 6px;
+}
+
+.shop > .label {
+    margin: 8px 0;
+}
+
+.shop > button {
+    background-color: var(--tea);
+    color: var(--oat);
+    margin-left: 0;
+}
+
+.shop > button:hover {
+    opacity: 0.8;
+}
+
+.shop > button.hire-sprite {
+    display: block;
 }

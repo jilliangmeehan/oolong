@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#e5d9d4" />
+    <meta name="theme-color" content="#e5d9d4" />
+    <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+    <title>December 21, 2024</title>
+  </head>
+  <body>
+    <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+
+
+<nav aria-label="breadcrumb" class="font-pixel">
+  <a href="/">Home</a>
+  <span class="separator">/</span>
+  
+  
+  
+  <span aria-current="page">December 21, 2024</span>
+</nav>
+
+
+
+<style>
+  nav[aria-label="breadcrumb"] {
+	text-transform: lowercase;
+	display: flex;         
+	gap: 0.5rem;             
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	margin-top: 8px;
+	line-height: 24px;
+  }
+
+  nav[aria-label="breadcrumb"] span.separator {
+	color: #666; 
+  }
+  
+</style> 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2024-12-21T00:00:00.000Z"
+    >20th of December 2024</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+    <main tabindex="-1" id="main-content">
+      
+<article><h2>enjoying the holiday break</h2>
+<p>I wrapped up work for the year, and have since spent most of my time off catching up on chores around my apartment, tinkering with this website, and playing video games. I finished my holiday shopping, and I’m looking forward to going home and seeing my family soon.</p>
+<h2>learning greek</h2>
+<p>I’m keeping up my longest-ever <a href="https://www.duolingo.com/profile/jilliangmeehan">Duolingo</a> streak with the Greek course. I just finished Section 1: Unit 8, where I learned greetings &amp; stuff like: <em>Χάρικα! Είσαι καλά;</em></p>
+<p>(I’m also trying to learn how to use the Greek keyboard — I just found out that Greek uses a semicolon instead of question marks, but you have to use the <code>q</code> key to type it instead of the regular <code>;</code> or <code>?</code> keys.)</p>
+<h2>playing</h2>
+<h3><a href="../../games/Genshin%20Impact/index.html">Genshin Impact</a></h3>
+<p>Very excited for everything in the upcoming 5.3 update — especially the permanent rhythm game mode. Going to go for Mavuika and her weapon, and then I’ll throw everything I have at the new Chronicled Wish banner to try to get some Childe constellations. After that, I guess I’m saving for Skirk! Huge surprise!</p>
+<p>In the meantime, since I’m already pretty much done prepping for Pyro Lumine and Mavuika, I decided to work on doing Ningguang and Keqing’s final ascensions so I can get their echoes at some point. Also catching up on crafting Sumeru teapot sets for some extra primos.</p>
+<h3><a href="../../games/playing/Zenless%20Zone%20Zero/index.html">Zenless Zone Zero</a></h3>
+<p>I got Miyabi her w-engine and now I’m a happy girl. I played <em>a lot</em> of ZZZ this week because I was really excited about the new update — now I can kinda chill out for a bit and do my dailies until Astra Yao comes.</p>
+<h3><a href="../../games/playing/Infinity%20Nikki/index.html">Infinity Nikki</a></h3>
+<p>I gave Infinity Nikki a try on my Steam Deck, and it’s a cute game! I had fun! I don’t think I’m going to really keep up with it, though. I might pick it back up here and there when I’m specifically in the mood, but I have too many other games to play right now to really give it my full attention.</p>
+<h3><a href="../../games/playing/Honkai%20Star%20Rail/index.html">Honkai Star Rail</a> &amp; <a href="../../games/playing/Wuthering%20Waves/index.html">Wuthering Waves</a></h3>
+<p>In both of these games, I’m just trying to catch up a little bit before their next major updates — but I’m being very lazy about it. We’ll see what I manage to get done in time.</p>
+</article>
+
+    </main>
+  </body>
+  <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/now">now</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>

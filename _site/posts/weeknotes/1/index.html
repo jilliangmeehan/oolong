@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#e5d9d4" />
+    <meta name="theme-color" content="#e5d9d4" />
+    <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+    <title>weeknotes maybe</title>
+  </head>
+  <body>
+    <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+
+
+<nav aria-label="breadcrumb" class="font-pixel">
+  <a href="/">Home</a>
+  <span class="separator">/</span>
+  
+  
+	<a href="/blog">Blog</a>
+	<span class="separator">/</span>
+  
+  
+  <span aria-current="page">weeknotes maybe</span>
+</nav>
+
+
+
+<style>
+  nav[aria-label="breadcrumb"] {
+	text-transform: lowercase;
+	display: flex;         
+	gap: 0.5rem;             
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	margin-top: 8px;
+	line-height: 24px;
+  }
+
+  nav[aria-label="breadcrumb"] span.separator {
+	color: #666; 
+  }
+  
+</style> 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2023-11-10T00:00:00.000Z"
+    >9th of November 2023</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+    <main tabindex="-1" id="main-content">
+      
+<article><p>I’m going to copy <a href="https://anhvn.com/posts/2023/weeknotes-revival/">Anh</a> — I’ve been thinking about <a href="https://interconnected.org/home/2018/07/24/weeknotes">weeknotes</a> lately, and about why I don’t write here very often, and about how I could change that. It’s easier not to write than to write, and writing in public is a little humiliating in a way that private journaling escapes. But I’ve managed to build up the habit of journaling, so maybe I can do this, too.</p>
+<p>I go back and forth on this: I sometimes feel annoying and useless taking up space “<a href="https://sleepy.cool/@jillian/111387332195020722">on-line</a>,” like I’m whining and begging everyone to <em>look at me! I’m here!</em> — like the only way I’m allowed to post is to share something interesting I worked on, and the rest of me has to live in the shadows.</p>
+<p>But I know that’s not true. I know that I like to fill my feeds with tiny life updates and silly thoughts from people I follow, even people that I barely know at all. I love when <a href="https://sleepy.cool/@jillian/111356009288566081">I have no idea what anyone is talking about</a>. I love browsing <a href="https://ooh.directory/">ooh.directory</a> for blogs I never would have known existed, and filling my rss feed with inconsequential posts that nonetheless make me happy to read. I want more of that, so maybe I have to be part of making more of that.</p>
+<h2>what i’ve been up to</h2>
+<p>I’ve been sketching more — in an actual sketchbook, with actual pens and pencils. I like doodling in Procreate, but something about sketching on paper feels better. Even though it’s harder to correct things I’m not happy with, and even though I have far less freedom &amp; flexibility with materials, I like what I make in my sketchbook far more than anything I make on my iPad.</p>
+<p><img src="./photos/_10-sketches.jpg" alt="my sketchbook"></p>
+<p>Because of that, and because we’re nearing the end of the year, I’ve been thinking a lot about notebooks and planners. I still haven’t decided if I want a new Hobonichi for next year or if I want to try something else. I really don’t need a planner, much less a daily one, but I still <em>like</em> having them. I do have some idea of what my ideal notebook would be, and the modularity of <a href="https://travelerscompanyusa.com/travelers-notebook-story/">the Traveler’s Notebook</a> comes pretty close — so I might try that out.</p>
+<h2>watching</h2>
+<p>After years of curiosity, I started watching <a href="https://www.imdb.com/title/tt3006802/">Outlander</a> on Halloween — which was kind of perfect, because the first episode takes place on Samhain. I immediately loved the vibes. I’ve watched about half of the first season, and I’ll probably continue watching it for a bit, but I don’t know if i’ll be able to hang on for seven seasons.</p>
+<p>I also saw <a href="https://www.imdb.com/title/tt1136617/">The Killer</a>, which I didn’t think was very good. It definitely looked &amp; felt &amp; sounded like a Fincher movie, but the story was lacking compared to everything else he’s done. I would rather just rewatch The Social Network for the 300th time.</p>
+<h2>playing</h2>
+<p>Genshin’s 4.2 patch just came out, and I stayed up embarrassingly late to play the entire Archon Quest in one night after pulling for Furina and her weapon. I’ve <em>really</em> loved the whole Fontaine arc, and I think Act V wrapped it up so well — Furina is easily my favorite archon.</p>
+<p><img src="./photos/_10-furina.png" alt="furina chilling by the weeping willow"></p>
+<p>And to brag for a second: I managed to get 100% exploration on the existing Fontaine map before 4.2 was released, I got the Fontaine wings, and I also finally hit 1000 achievements this week. I have really played a stupid amount of this game.</p>
+<p>As for the other Hoyoverse games, I finished the latest Trailblaze Mission in Honkai: Star Rail last night, just a few days away from a new update. And I finally started Honkai Impact: 3rd this week — so far, I have no idea what I’m doing, but the story is really interesting to me. I wanna know the lore!!!</p>
+<h2>reading</h2>
+<p>I just reread Sophocles’ <a href="https://classics.domains.skidmore.edu/lit-campus-only/primary/translations/Sophocles%20Ajax.pdf">Ajax</a>, a play I never expected to love as much as I do. I feel like every time I read it, I get something new out of it.</p>
+<blockquote>
+<p>Skamander river <br>
+hostile to the Greeks,<br>
+there is one man your water<br>
+will not mirror<br>
+again</p>
+<p>(<a href="https://classics.domains.skidmore.edu/lit-campus-only/primary/translations/Sophocles%20Ajax.pdf">Ajax</a>, Sophocles)</p>
+</blockquote>
+<p><a href="https://spencerchang.substack.com/p/believing-in-believing-in-people">An issue of Spencer Chang’s newsletter</a> from all the way back in February made its way into my queue recently, and I really loved reading it. Makes me want to be a more curious, friendly, open person.</p>
+<blockquote>
+<p>I want to believe in people. I want to believe that I still believe in people.</p>
+<p>(<a href="https://spencerchang.substack.com/p/believing-in-believing-in-people">believing in believing in people</a>, Spencer Chang)</p>
+</blockquote>
+<p>I’ve also been thinking + reading a lot about chess lore recently:</p>
+<ul>
+<li><a href="https://bookriot.com/chess-in-literature/">chess in literature</a></li>
+<li><a href="https://daily.jstor.org/chess-unlike-war-is-a-game-of-perfect-information/">chess, unlike war, is a game of perfect information</a></li>
+<li><a href="https://victorianweb.org/authors/bronte/abronte/chess.html">the development of the chess motif in victorian fiction</a></li>
+<li><a href="http://www.studiesincomparativereligion.com/public/articles/The_Symbolism_of_Chess-by_Titus_Burckhardt.aspx">the symbolism of chess</a></li>
+<li><a href="https://www.chess.com/forum/view/chess-equipment/scash-darmor-english-translation">scash d’armor</a></li>
+</ul>
+<p>That’s all. Happy Friday. Going to go make another cup of tea and clean my apartment.</p>
+</article>
+
+    </main>
+  </body>
+  <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/now">now</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>

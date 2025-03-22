@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#e5d9d4" />
+    <meta name="theme-color" content="#e5d9d4" />
+    <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+    <title>December 18, 2024</title>
+  </head>
+  <body>
+    <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+
+
+<nav aria-label="breadcrumb" class="font-pixel">
+  <a href="/">Home</a>
+  <span class="separator">/</span>
+  
+  
+  
+  <span aria-current="page">December 18, 2024</span>
+</nav>
+
+
+
+<style>
+  nav[aria-label="breadcrumb"] {
+	text-transform: lowercase;
+	display: flex;         
+	gap: 0.5rem;             
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	margin-top: 8px;
+	line-height: 24px;
+  }
+
+  nav[aria-label="breadcrumb"] span.separator {
+	color: #666; 
+  }
+  
+</style> 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2024-12-18T00:00:00.000Z"
+    >17th of December 2024</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+    <main tabindex="-1" id="main-content">
+      
+<article><h2>learning greek</h2>
+<p>I’m keeping up my longest-ever <a href="https://www.duolingo.com/profile/jilliangmeehan">Duolingo</a> streak with the Greek course. Learning new alphabets is fun!</p>
+<h2>playing</h2>
+<h3><a href="../../games/Genshin%20Impact/index.html">Genshin Impact</a></h3>
+<p>Right now, I’m just really excited to finally get Pyro Lumine in a few weeks. I’ve already prefarmed all of the talent books that I’ll need to triple crown her, and I’m working on getting her an Obsidian Codex set that doesn’t suck.</p>
+<h3><a href="../../games/playing/Zenless%20Zone%20Zero/index.html">Zenless Zone Zero</a></h3>
+<p>Miyabi and Harumasa are both so fun to play. She doesn’t need it to be good, but I’m really hoping I can get Miyabi’s w-engine soon (and then I’ll be good and save for Astra Yao). I also really like the new Hollow Zero mode — although as I was doing some old HDD commissions recently, I was thinking about how much I actually <em>do</em> like TV mode and don’t want them to abandon it.</p>
+<p>In preparation for 1.4 coming out, I’ve spent some time this week catching up on quests and video tapes and finding all the HIA commemorative coins and stuff. I still have plenty left to do (I haven’t finished Koleda or Burnice’s video tapes yet, and I’ve got a small pile of HDD commissions waiting for me), but I’m proud of my progress. And it feels good to be “caught up” on a game.</p>
+<h3><a href="../../games/playing/Infinity%20Nikki/index.html">Infinity Nikki</a></h3>
+<p>I have had no interest in this game — I do have a lot of nostalgia for the dress-up games I used to play online as a kid, but not much interest in playing games like that as an adult. And I kept telling myself that I <em>really</em> do not need another open world gacha game in my life.</p>
+<p>And yet my curiosity won, and I started playing it on my Steam Deck. It runs surprisingly well, and I’m having more fun with it than I expected to. I realized that it’s basically a game about my favorite part of most open world RPGs: gearing &amp; leveling armor.</p>
+<h3><a href="../../games/playing/FFXIV/index.html">FFXIV</a></h3>
+<p>I finally finished A Realm Reborn (for real this time!) and started Heavensward. I’ve been having a good time as a Paladin, but I’m taking this opportunity to pause for a bit and try out some other jobs — Dark Knight is another favorite of mine, so far, but I’m trying to dip my toes into some healer &amp; DPS jobs too.</p>
+<h3><a href="../../games/playing/Honkai%20Star%20Rail/index.html">Honkai Star Rail</a></h3>
+<p>I’m super, super, super excited for Amphoreus. I think 3.0 is going to be really up my alley, and all the characters that have been teased so far look really cool to me. I just pulled Sunday, but he doesn’t have a lot to do on my account until we get some of those Remembrance characters, so right now I’m mostly working on my backlog — finally building Herta and Dr. Ratio and the new Clara I just got.</p>
+<p>I’m also trying to catch up on the story before 3.0 comes out, because I’ve been lagging behind a bit. I still need to finish the Wardance story, and I just started the whole Slumbernana Monkey thing. I’m honestly having kind of a hard time getting through some of it, but I’m excited to get to the newer Sunday quest.</p>
+</article>
+
+    </main>
+  </body>
+  <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/now">now</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>
