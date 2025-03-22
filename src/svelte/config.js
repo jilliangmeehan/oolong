@@ -10,6 +10,6 @@ export const TIMINGS = {
 // Convert milliseconds to progress increments (for progress bars)
 export const PROGRESS_INCREMENT = {
   GROW: 1,
-  BREW: 1,
+  BREW: 1.2,
   NIGHT_GROWTH: 0.5,
 };

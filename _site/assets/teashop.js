@@ -4460,7 +4460,7 @@ https://svelte.dev/e/store_invalid_shape`);
   };
   var PROGRESS_INCREMENT = {
     GROW: 1,
-    BREW: 1,
+    BREW: 1.2,
     NIGHT_GROWTH: 0.5
   };
 
