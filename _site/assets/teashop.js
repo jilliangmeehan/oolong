@@ -85,6 +85,8 @@
   var array_prototype = Array.prototype;
   var get_prototype_of = Object.getPrototypeOf;
   var is_extensible = Object.isExtensible;
+  var noop = () => {
+  };
   function run(fn) {
     return fn();
   }
@@ -853,10 +855,10 @@ https://svelte.dev/e/state_snapshot_uncloneable`, bold, normal);
     signal.equals = safe_equals;
     return signal;
   }
-  function destroy_derived_effects(derived2) {
-    var effects = derived2.effects;
+  function destroy_derived_effects(derived3) {
+    var effects = derived3.effects;
     if (effects !== null) {
-      derived2.effects = null;
+      derived3.effects = null;
       for (var i = 0; i < effects.length; i += 1) {
         destroy_effect(
           /** @type {Effect} */
@@ -866,8 +868,8 @@ https://svelte.dev/e/state_snapshot_uncloneable`, bold, normal);
     }
   }
   var stack = [];
-  function get_derived_parent_effect(derived2) {
-    var parent = derived2.parent;
+  function get_derived_parent_effect(derived3) {
+    var parent = derived3.parent;
     while (parent !== null) {
       if ((parent.f & DERIVED) === 0) {
         return (
@@ -879,20 +881,20 @@ https://svelte.dev/e/state_snapshot_uncloneable`, bold, normal);
     }
     return null;
   }
-  function execute_derived(derived2) {
+  function execute_derived(derived3) {
     var value;
     var prev_active_effect = active_effect;
-    set_active_effect(get_derived_parent_effect(derived2));
+    set_active_effect(get_derived_parent_effect(derived3));
     if (dev_fallback_default) {
       let prev_inspect_effects = inspect_effects;
       set_inspect_effects(/* @__PURE__ */ new Set());
       try {
-        if (stack.includes(derived2)) {
+        if (stack.includes(derived3)) {
           derived_references_self();
         }
-        stack.push(derived2);
-        destroy_derived_effects(derived2);
-        value = update_reaction(derived2);
+        stack.push(derived3);
+        destroy_derived_effects(derived3);
+        value = update_reaction(derived3);
       } finally {
         set_active_effect(prev_active_effect);
         set_inspect_effects(prev_inspect_effects);
@@ -900,21 +902,21 @@ https://svelte.dev/e/state_snapshot_uncloneable`, bold, normal);
       }
     } else {
       try {
-        destroy_derived_effects(derived2);
-        value = update_reaction(derived2);
+        destroy_derived_effects(derived3);
+        value = update_reaction(derived3);
       } finally {
         set_active_effect(prev_active_effect);
       }
     }
     return value;
   }
-  function update_derived(derived2) {
-    var value = execute_derived(derived2);
-    var status = (skip_reaction || (derived2.f & UNOWNED) !== 0) && derived2.deps !== null ? MAYBE_DIRTY : CLEAN;
-    set_signal_status(derived2, status);
-    if (!derived2.equals(value)) {
-      derived2.v = value;
-      derived2.wv = increment_write_version();
+  function update_derived(derived3) {
+    var value = execute_derived(derived3);
+    var status = (skip_reaction || (derived3.f & UNOWNED) !== 0) && derived3.deps !== null ? MAYBE_DIRTY : CLEAN;
+    set_signal_status(derived3, status);
+    if (!derived3.equals(value)) {
+      derived3.v = value;
+      derived3.wv = increment_write_version();
     }
   }
 
@@ -1245,22 +1247,22 @@ https://svelte.dev/e/state_proxy_equality_mismatch`, bold2, normal2);
         var is_unowned_connected = is_unowned && active_effect !== null && !skip_reaction;
         var length = dependencies.length;
         if (is_disconnected || is_unowned_connected) {
-          var derived2 = (
+          var derived3 = (
             /** @type {Derived} */
             reaction
           );
-          var parent = derived2.parent;
+          var parent = derived3.parent;
           for (i = 0; i < length; i++) {
             dependency = dependencies[i];
-            if (is_disconnected || !dependency?.reactions?.includes(derived2)) {
-              (dependency.reactions ??= []).push(derived2);
+            if (is_disconnected || !dependency?.reactions?.includes(derived3)) {
+              (dependency.reactions ??= []).push(derived3);
             }
           }
           if (is_disconnected) {
-            derived2.f ^= DISCONNECTED;
+            derived3.f ^= DISCONNECTED;
           }
           if (is_unowned_connected && parent !== null && (parent.f & UNOWNED) === 0) {
-            derived2.f ^= UNOWNED;
+            derived3.f ^= UNOWNED;
           }
         }
         for (i = 0; i < length; i++) {
@@ -1746,20 +1748,20 @@ ${indent}in ${name}`).join("")}
     } else if (is_derived && /** @type {Derived} */
     signal.deps === null && /** @type {Derived} */
     signal.effects === null) {
-      var derived2 = (
+      var derived3 = (
         /** @type {Derived} */
         signal
       );
-      var parent = derived2.parent;
+      var parent = derived3.parent;
       if (parent !== null && (parent.f & UNOWNED) === 0) {
-        derived2.f ^= UNOWNED;
+        derived3.f ^= UNOWNED;
       }
     }
     if (is_derived) {
-      derived2 = /** @type {Derived} */
+      derived3 = /** @type {Derived} */
       signal;
-      if (check_dirtiness(derived2)) {
-        update_derived(derived2);
+      if (check_dirtiness(derived3)) {
+        update_derived(derived3);
       }
     }
     if (dev_fallback_default && tracing_mode_flag && tracing_expressions !== null && active_reaction !== null && tracing_expressions.reaction === active_reaction) {
@@ -1901,11 +1903,11 @@ ${indent}in ${name}`).join("")}
         push_effect(effect2, parent);
       }
       if (active_reaction !== null && (active_reaction.f & DERIVED) !== 0) {
-        var derived2 = (
+        var derived3 = (
           /** @type {Derived} */
           active_reaction
         );
-        (derived2.effects ??= []).push(effect2);
+        (derived3.effects ??= []).push(effect2);
       }
     }
     return effect2;
@@ -2296,6 +2298,17 @@ https://svelte.dev/e/lifecycle_outside_component`);
       throw error;
     } else {
       throw new Error(`https://svelte.dev/e/lifecycle_outside_component`);
+    }
+  }
+  function store_invalid_shape(name) {
+    if (dev_fallback_default) {
+      const error = new Error(`store_invalid_shape
+\`${name}\` is not a store with a \`subscribe\` method
+https://svelte.dev/e/store_invalid_shape`);
+      error.name = "Svelte error";
+      throw error;
+    } else {
+      throw new Error(`https://svelte.dev/e/store_invalid_shape`);
     }
   }
 
@@ -3793,9 +3806,126 @@ https://svelte.dev/e/lifecycle_outside_component`);
     return l.u ??= { a: [], b: [], m: [] };
   }
 
+  // node_modules/svelte/src/store/utils.js
+  function subscribe_to_store(store, run2, invalidate) {
+    if (store == null) {
+      run2(void 0);
+      if (invalidate) invalidate(void 0);
+      return noop;
+    }
+    const unsub = untrack(
+      () => store.subscribe(
+        run2,
+        // @ts-expect-error
+        invalidate
+      )
+    );
+    return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+  }
+
+  // node_modules/svelte/src/store/shared/index.js
+  var subscriber_queue = [];
+  function writable(value, start = noop) {
+    let stop = null;
+    const subscribers = /* @__PURE__ */ new Set();
+    function set2(new_value) {
+      if (safe_not_equal(value, new_value)) {
+        value = new_value;
+        if (stop) {
+          const run_queue = !subscriber_queue.length;
+          for (const subscriber of subscribers) {
+            subscriber[1]();
+            subscriber_queue.push(subscriber, value);
+          }
+          if (run_queue) {
+            for (let i = 0; i < subscriber_queue.length; i += 2) {
+              subscriber_queue[i][0](subscriber_queue[i + 1]);
+            }
+            subscriber_queue.length = 0;
+          }
+        }
+      }
+    }
+    function update2(fn) {
+      set2(fn(
+        /** @type {T} */
+        value
+      ));
+    }
+    function subscribe(run2, invalidate = noop) {
+      const subscriber = [run2, invalidate];
+      subscribers.add(subscriber);
+      if (subscribers.size === 1) {
+        stop = start(set2, update2) || noop;
+      }
+      run2(
+        /** @type {T} */
+        value
+      );
+      return () => {
+        subscribers.delete(subscriber);
+        if (subscribers.size === 0 && stop) {
+          stop();
+          stop = null;
+        }
+      };
+    }
+    return { set: set2, update: update2, subscribe };
+  }
+  function get2(store) {
+    let value;
+    subscribe_to_store(store, (_) => value = _)();
+    return value;
+  }
+
   // node_modules/svelte/src/internal/client/reactivity/store.js
   var is_store_binding = false;
   var IS_UNMOUNTED = Symbol();
+  function store_get(store, store_name, stores) {
+    const entry = stores[store_name] ??= {
+      store: null,
+      source: mutable_source(void 0),
+      unsubscribe: noop
+    };
+    if (entry.store !== store && !(IS_UNMOUNTED in stores)) {
+      entry.unsubscribe();
+      entry.store = store ?? null;
+      if (store == null) {
+        entry.source.v = void 0;
+        entry.unsubscribe = noop;
+      } else {
+        var is_synchronous_callback = true;
+        entry.unsubscribe = subscribe_to_store(store, (v) => {
+          if (is_synchronous_callback) {
+            entry.source.v = v;
+          } else {
+            set(entry.source, v);
+          }
+        });
+        is_synchronous_callback = false;
+      }
+    }
+    if (store && IS_UNMOUNTED in stores) {
+      return get2(store);
+    }
+    return get(entry.source);
+  }
+  function setup_stores() {
+    const stores = {};
+    function cleanup() {
+      teardown(() => {
+        for (var store_name in stores) {
+          const ref = stores[store_name];
+          ref.unsubscribe();
+        }
+        define_property(stores, IS_UNMOUNTED, {
+          enumerable: false,
+          value: true
+        });
+      });
+    }
+    return [stores, cleanup];
+  }
   function capture_store_binding(fn) {
     var previous_is_store_binding = is_store_binding;
     try {
@@ -4282,6 +4412,13 @@ https://svelte.dev/e/lifecycle_outside_component`);
     return result;
   }
 
+  // node_modules/svelte/src/internal/shared/validate.js
+  function validate_store(store, name) {
+    if (store != null && typeof store.subscribe !== "function") {
+      store_invalid_shape(name);
+    }
+  }
+
   // node_modules/svelte/src/internal/client/dev/console-log.js
   function log_if_contains_state(method, ...objects) {
     untrack(() => {
@@ -4316,25 +4453,30 @@ https://svelte.dev/e/lifecycle_outside_component`);
     // 0.5 second cooldown for harvesting
     GARDEN_COOLDOWN: 500,
     // 0.5 second cooldown for planting
-    SERVE_COOLDOWN: 500
+    SERVE_COOLDOWN: 500,
     // 0.5 second cooldown for serving
+    QUARTER_DURATION: 6e4
+    // 1 minute per day quarter
   };
   var PROGRESS_INCREMENT = {
-    GROW: 100 / (TIMINGS.GROW_TIME / 100),
-    // Progress increment per 100ms
-    BREW: 100 / (TIMINGS.BREW_TIME / 100)
-    // Progress increment per 100ms
+    GROW: 1,
+    BREW: 1,
+    NIGHT_GROWTH: 0.5
   };
+
+  // src/svelte/stores.js
+  var timeOfDay = writable("sunrise");
+  var isDaytime = writable(true);
 
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[59, 8]]);
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[66, 8]]);
   var root = add_locations(template(`<div class="garden-plot"><button><!></button> <!> <div><button>Harvest Tea</button></div></div>`), GardenPlot[FILENAME], [
     [
-      42,
+      49,
       0,
-      [[43, 4], [62, 4, [[63, 8]]]]
+      [[50, 4], [69, 4, [[70, 8]]]]
     ]
   ]);
   function GardenPlot($$anchor, $$props) {
@@ -4344,6 +4486,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
     let progress = mutable_source(0);
     let isGrowing = prop($$props, "isGrowing", 12, false);
     let readyToHarvest = prop($$props, "readyToHarvest", 12, false);
+    let isDay;
+    isDaytime.subscribe((value) => isDay = value);
     function getState() {
       return {
         isGrowing: isGrowing(),
@@ -4357,7 +4501,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
       set(progress, 0);
       const interval = setInterval(
         () => {
-          set(progress, get(progress) + PROGRESS_INCREMENT.GROW);
+          const growthRate = isDay ? PROGRESS_INCREMENT.GROW : PROGRESS_INCREMENT.NIGHT_GROWTH;
+          set(progress, get(progress) + growthRate);
           if (get(progress) >= 100) {
             clearInterval(interval);
             isGrowing(false);
@@ -4381,7 +4526,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
     {
       var consequent = ($$anchor2) => {
         var text2 = text();
-        template_effect(() => set_text(text2, `Growing... (${get(progress) ?? ""}%)`));
+        template_effect(($0) => set_text(text2, `Growing... (${$0 ?? ""}%)`), [() => Math.floor(get(progress))], derived_safe_equal);
         append($$anchor2, text2);
       };
       var alternate = ($$anchor2, $$elseif) => {
@@ -4636,50 +4781,57 @@ https://svelte.dev/e/lifecycle_outside_component`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[324, 12]]);
-  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[367, 20]]);
-  var root4 = add_locations(template(`<div class="teashop-container"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <div class="toast-container"></div> <button class="secondary teashop-serve">Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[361, 16]]);
+  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[405, 20]]);
+  var root4 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <div class="toast-container"></div> <button class="secondary teashop-serve">Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
     [
-      307,
+      334,
       0,
       [
+        [335, 4, [[342, 8]]],
         [
-          308,
+          344,
           4,
           [
-            [309, 8],
-            [310, 8],
-            [311, 8],
-            [312, 8]
-          ]
-        ],
-        [
-          314,
-          4,
-          [
-            [315, 8],
-            [316, 8],
-            [317, 8],
-            [318, 8]
-          ]
-        ],
-        [
-          320,
-          4,
-          [[321, 8], [322, 8], [330, 8]]
-        ],
-        [336, 4, [[337, 8], [338, 8]]],
-        [
-          349,
-          4,
-          [
-            [350, 8],
-            [351, 8],
-            [352, 8],
             [
-              363,
+              345,
               8,
-              [[364, 12], [365, 12], [378, 12]]
+              [
+                [346, 12],
+                [347, 12],
+                [348, 12],
+                [349, 12]
+              ]
+            ],
+            [
+              351,
+              8,
+              [
+                [352, 12],
+                [353, 12],
+                [354, 12],
+                [355, 12]
+              ]
+            ],
+            [
+              357,
+              8,
+              [[358, 12], [359, 12], [367, 12]]
+            ]
+          ]
+        ],
+        [374, 4, [[375, 8], [376, 8]]],
+        [
+          387,
+          4,
+          [
+            [388, 8],
+            [389, 8],
+            [390, 8],
+            [
+              401,
+              8,
+              [[402, 12], [403, 12], [416, 12]]
             ]
           ]
         ]
@@ -4689,6 +4841,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
     push($$props, false, Teashop);
+    const [$$stores, $$cleanup] = setup_stores();
+    const $isDaytime = () => (validate_store(isDaytime, "isDaytime"), store_get(isDaytime, "$isDaytime", $$stores));
     const dispatch = createEventDispatcher();
     let lastSavedTime = mutable_source(null);
     let harvestedPlants = mutable_source(0);
@@ -4697,6 +4851,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
     let points = mutable_source(0);
     let gardenPlots = mutable_source(1);
     let teapots = mutable_source(1);
+    let currentTime = mutable_source("sunrise");
+    let timeInterval;
     let automationIntervals = [];
     let toasts = mutable_source([]);
     let toastId = 0;
@@ -4734,6 +4890,25 @@ https://svelte.dev/e/lifecycle_outside_component`);
         2e3
       );
     }
+    function startDayCycle() {
+      let quarters = ["sunrise", "day", "sunset", "night"];
+      let quarterIndex = 0;
+      function updateQuarter() {
+        set(currentTime, quarters[quarterIndex]);
+        timeOfDay.set(get(currentTime));
+        isDaytime.set(strict_equals(get(currentTime), "night", false));
+        quarterIndex = (quarterIndex + 1) % quarters.length;
+        if (strict_equals(get(currentTime), "sunrise")) {
+          createToast("The sun is rising!", null, "sunrise");
+        } else if (strict_equals(get(currentTime), "sunset")) {
+          createToast("The sun is setting!", null, "sunset");
+        } else if (strict_equals(get(currentTime), "night")) {
+          createToast("Shh...sprites are sleeping...", null, "night");
+        }
+      }
+      updateQuarter();
+      timeInterval = setInterval(updateQuarter, TIMINGS.QUARTER_DURATION);
+    }
     function serveTea() {
       if (get(brewedTea) >= 1) {
         set(brewedTea, get(brewedTea) - 1);
@@ -4769,20 +4944,12 @@ https://svelte.dev/e/lifecycle_outside_component`);
       set(brewedTea, get(brewedTea) + 1);
     }
     function startAutomation() {
-      console.log("Starting automation");
-      console.log(...log_if_contains_state("log", "Current sprites:", get(sprites)));
-      console.log(...log_if_contains_state("log", "Total plots:", get(gardenPlots)));
-      console.log(...log_if_contains_state("log", "Total teapots:", get(teapots)));
-      console.log(...log_if_contains_state("log", "plotRefs length:", get(plotRefs).length));
-      console.log(...log_if_contains_state("log", "teapotRefs length:", get(teapotRefs).length));
-      console.log(...log_if_contains_state("log", "Full plotRefs array:", get(plotRefs)));
-      console.log(...log_if_contains_state("log", "Full teapotRefs array:", get(teapotRefs)));
       automationIntervals.forEach((interval) => clearInterval(interval));
       automationIntervals = [];
       if (get(sprites).harvest > 0) {
         const interval = setInterval(
           () => {
-            if (workingSprites.harvest < get(sprites).harvest) {
+            if ($isDaytime() && workingSprites.harvest < get(sprites).harvest) {
               for (let i = 0; i < get(plotRefs).length; i++) {
                 const plot = get(plotRefs)[i];
                 if (plot) {
@@ -4809,7 +4976,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       if (get(sprites).brewmaster > 0) {
         const interval = setInterval(
           () => {
-            if (workingSprites.brewmaster < get(sprites).brewmaster) {
+            if ($isDaytime() && workingSprites.brewmaster < get(sprites).brewmaster) {
               for (let i = 0; i < get(teapotRefs).length; i++) {
                 const teapot = get(teapotRefs)[i];
                 if (teapot) {
@@ -4836,7 +5003,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       if (get(sprites).garden > 0) {
         const interval = setInterval(
           () => {
-            if (workingSprites.garden < get(sprites).garden) {
+            if ($isDaytime() && workingSprites.garden < get(sprites).garden) {
               for (let i = 0; i < get(plotRefs).length; i++) {
                 const plot = get(plotRefs)[i];
                 if (plot) {
@@ -4863,7 +5030,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       if (get(sprites).cafe > 0) {
         const interval = setInterval(
           () => {
-            if (workingSprites.cafe < get(sprites).cafe) {
+            if ($isDaytime() && workingSprites.cafe < get(sprites).cafe) {
               for (let i = 0; i < get(teapotRefs).length; i++) {
                 const teapot = get(teapotRefs)[i];
                 if (teapot) {
@@ -4890,6 +5057,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
     function saveGameState() {
       const gameState = {
         lastSaved: Date.now(),
+        currentTime: get(currentTime),
         harvestedPlants: get(harvestedPlants),
         brewedTea: get(brewedTea),
         servedTea: get(servedTea),
@@ -4921,6 +5089,9 @@ https://svelte.dev/e/lifecycle_outside_component`);
         set(gardenPlots, gameState.gardenPlots);
         set(teapots, gameState.teapots);
         set(sprites, gameState.sprites);
+        set(currentTime, gameState.currentTime || "sunrise");
+        timeOfDay.set(get(currentTime));
+        isDaytime.set(strict_equals(get(currentTime), "night", false));
         setTimeout(
           () => {
             gameState.plotStates.forEach((state2, i) => {
@@ -4948,6 +5119,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       console.log("Component mounted");
       loadGameState();
       startAutomation();
+      startDayCycle();
       const autosaveInterval = setInterval(saveGameState, 3e4);
       automationIntervals.push(autosaveInterval);
       document.addEventListener("visibilitychange", () => {
@@ -4961,6 +5133,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
     });
     onDestroy(() => {
       automationIntervals.forEach((interval) => clearInterval(interval));
+      clearInterval(timeInterval);
       document.removeEventListener("visibilitychange", saveGameState);
       window.removeEventListener("beforeunload", saveGameState);
     });
@@ -4976,10 +5149,14 @@ https://svelte.dev/e/lifecycle_outside_component`);
     init();
     var div = root4();
     var div_1 = child(div);
+    let classes;
     var p = child(div_1);
     var text2 = child(p);
     reset(p);
-    var p_1 = sibling(p, 2);
+    reset(div_1);
+    var div_2 = sibling(div_1, 2);
+    var div_3 = child(div_2);
+    var p_1 = child(div_3);
     var text_1 = child(p_1);
     reset(p_1);
     var p_2 = sibling(p_1, 2);
@@ -4988,12 +5165,12 @@ https://svelte.dev/e/lifecycle_outside_component`);
     var p_3 = sibling(p_2, 2);
     var text_3 = child(p_3);
     reset(p_3);
-    reset(div_1);
-    var div_2 = sibling(div_1, 2);
-    var p_4 = child(div_2);
+    var p_4 = sibling(p_3, 2);
     var text_4 = child(p_4);
     reset(p_4);
-    var p_5 = sibling(p_4, 2);
+    reset(div_3);
+    var div_4 = sibling(div_3, 2);
+    var p_5 = child(div_4);
     var text_5 = child(p_5);
     reset(p_5);
     var p_6 = sibling(p_5, 2);
@@ -5002,44 +5179,48 @@ https://svelte.dev/e/lifecycle_outside_component`);
     var p_7 = sibling(p_6, 2);
     var text_7 = child(p_7);
     reset(p_7);
-    reset(div_2);
-    var div_3 = sibling(div_2, 2);
-    var p_8 = child(div_3);
+    var p_8 = sibling(p_7, 2);
     var text_8 = child(p_8);
     reset(p_8);
-    var p_9 = sibling(p_8, 2);
+    reset(div_4);
+    var div_5 = sibling(div_4, 2);
+    var p_9 = child(div_5);
     var text_9 = child(p_9);
     reset(p_9);
-    var node = sibling(p_9, 2);
+    var p_10 = sibling(p_9, 2);
+    var text_10 = child(p_10);
+    reset(p_10);
+    var node = sibling(p_10, 2);
     {
       var consequent = ($$anchor2) => {
-        var p_10 = root_12();
-        var text_10 = child(p_10);
-        reset(p_10);
+        var p_11 = root_12();
+        var text_11 = child(p_11);
+        reset(p_11);
         template_effect(
-          ($0) => set_text(text_10, `Saved at ${$0 ?? ""}`),
+          ($0) => set_text(text_11, `Saved at ${$0 ?? ""}`),
           [
             () => get(lastSavedTime).toLocaleTimeString([], { timeStyle: "short" })
           ],
           derived_safe_equal
         );
-        append($$anchor2, p_10);
+        append($$anchor2, p_11);
       };
       if_block(node, ($$render) => {
         if (get(lastSavedTime)) $$render(consequent);
       });
     }
     var button = sibling(node, 2);
-    reset(div_3);
-    var node_1 = sibling(div_3, 2);
+    reset(div_5);
+    reset(div_2);
+    var node_1 = sibling(div_2, 2);
     Shop(node_1, {
       get points() {
         return get(points);
       },
       $$events: { purchase: handlePurchase }
     });
-    var div_4 = sibling(node_1, 2);
-    var div_5 = sibling(child(div_4), 2);
+    var div_6 = sibling(node_1, 2);
+    var div_7 = sibling(child(div_6), 2);
     validate_each_keys(
       () => [
         ...Array(get(gardenPlots)).keys()
@@ -5047,7 +5228,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       (i) => i
     );
     each(
-      div_5,
+      div_7,
       5,
       () => [
         ...Array(get(gardenPlots)).keys()
@@ -5066,15 +5247,15 @@ https://svelte.dev/e/lifecycle_outside_component`);
         );
       }
     );
-    reset(div_5);
-    reset(div_4);
-    var div_6 = sibling(div_4, 2);
-    var p_11 = sibling(child(div_6), 2);
-    var text_11 = child(p_11);
-    reset(p_11);
-    var div_7 = sibling(p_11, 2);
+    reset(div_7);
+    reset(div_6);
+    var div_8 = sibling(div_6, 2);
+    var p_12 = sibling(child(div_8), 2);
+    var text_12 = child(p_12);
+    reset(p_12);
+    var div_9 = sibling(p_12, 2);
     validate_each_keys(() => [...Array(get(teapots)).keys()], (i) => i);
-    each(div_7, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
+    each(div_9, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
       bind_this(
         Teapot($$anchor2, {
           get harvestedPlants() {
@@ -5092,51 +5273,66 @@ https://svelte.dev/e/lifecycle_outside_component`);
         () => [get(i)]
       );
     });
-    reset(div_7);
-    var div_8 = sibling(div_7, 2);
-    var p_12 = child(div_8);
-    var text_12 = child(p_12);
-    reset(p_12);
-    var div_9 = sibling(p_12, 2);
+    reset(div_9);
+    var div_10 = sibling(div_9, 2);
+    var p_13 = child(div_10);
+    var text_13 = child(p_13);
+    reset(p_13);
+    var div_11 = sibling(p_13, 2);
     validate_each_keys(() => get(toasts), (toast) => toast.id);
-    each(div_9, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
-      var div_10 = root_4();
-      var text_13 = child(div_10, true);
-      reset(div_10);
+    each(div_11, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
+      var div_12 = root_4();
+      var text_14 = child(div_12, true);
+      reset(div_12);
       template_effect(() => {
-        set_class(div_10, 1, `toast ${get(toast).type ?? ""}`);
-        set_style(div_10, `
+        set_class(div_12, 1, `toast ${get(toast).type ?? ""}`);
+        set_style(div_12, `
                                     --x: ${get(toast).x ?? ""}px;
                                     --opacity: ${get(toast).opacity ?? ""};
                                 `);
-        set_text(text_13, get(toast).message);
+        set_text(text_14, get(toast).message);
       });
-      append($$anchor2, div_10);
+      append($$anchor2, div_12);
     });
-    reset(div_9);
-    var button_1 = sibling(div_9, 2);
+    reset(div_11);
+    var button_1 = sibling(div_11, 2);
+    reset(div_10);
     reset(div_8);
-    reset(div_6);
     reset(div);
-    template_effect(() => {
-      set_text(text2, `Points: ${get(points) ?? ""}`);
-      set_text(text_1, `Plants Harvested: ${get(harvestedPlants) ?? ""}`);
-      set_text(text_2, `Tea Brewed: ${get(brewedTea) ?? ""}`);
-      set_text(text_3, `Total Cups Served: ${get(servedTea) ?? ""}`);
-      set_text(text_4, `Garden Sprites: ${get(sprites).garden ?? ""}`);
-      set_text(text_5, `Harvest Sprites: ${get(sprites).harvest ?? ""}`);
-      set_text(text_6, `Brewmaster Sprites: ${get(sprites).brewmaster ?? ""}`);
-      set_text(text_7, `Cafe Sprites: ${get(sprites).cafe ?? ""}`);
-      set_text(text_8, `Garden Plots: ${get(gardenPlots) ?? ""}`);
-      set_text(text_9, `Teapots: ${get(teapots) ?? ""}`);
-      set_text(text_11, `Ready to brew: ${get(harvestedPlants) ?? ""}`);
-      set_text(text_12, `Ready to serve: ${get(brewedTea) ?? ""}`);
-      button_1.disabled = get(brewedTea) < 1;
-    });
+    template_effect(
+      ($0) => {
+        classes = set_class(div_1, 1, "time-indicator", null, classes, $0);
+        set_text(text2, `Current Time: ${get(currentTime) ?? ""}`);
+        set_text(text_1, `Points: ${get(points) ?? ""}`);
+        set_text(text_2, `Plants Harvested: ${get(harvestedPlants) ?? ""}`);
+        set_text(text_3, `Tea Brewed: ${get(brewedTea) ?? ""}`);
+        set_text(text_4, `Total Cups Served: ${get(servedTea) ?? ""}`);
+        set_text(text_5, `Garden Sprites: ${get(sprites).garden ?? ""}`);
+        set_text(text_6, `Harvest Sprites: ${get(sprites).harvest ?? ""}`);
+        set_text(text_7, `Brewmaster Sprites: ${get(sprites).brewmaster ?? ""}`);
+        set_text(text_8, `Cafe Sprites: ${get(sprites).cafe ?? ""}`);
+        set_text(text_9, `Garden Plots: ${get(gardenPlots) ?? ""}`);
+        set_text(text_10, `Teapots: ${get(teapots) ?? ""}`);
+        set_text(text_12, `Ready to brew: ${get(harvestedPlants) ?? ""}`);
+        set_text(text_13, `Ready to serve: ${get(brewedTea) ?? ""}`);
+        button_1.disabled = get(brewedTea) < 1;
+      },
+      [
+        () => ({
+          sunrise: strict_equals(get(currentTime), "sunrise"),
+          day: strict_equals(get(currentTime), "day"),
+          sunset: strict_equals(get(currentTime), "sunset"),
+          night: strict_equals(get(currentTime), "night")
+        })
+      ],
+      derived_safe_equal
+    );
     event("click", button, saveGameState);
     event("click", button_1, serveTea);
     append($$anchor, div);
-    return pop({ ...legacy_api() });
+    var $$pop = pop({ ...legacy_api() });
+    $$cleanup();
+    return $$pop;
   }
   mark_module_end(Teashop);
 

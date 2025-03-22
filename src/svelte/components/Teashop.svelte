@@ -3,6 +3,7 @@
     import GardenPlot from "./GardenPlot.svelte";
     import Teapot from "./Teapot.svelte";
     import Shop from "./Shop.svelte";
+    import { timeOfDay, isDaytime } from "../stores.js";
     import { onMount, onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
@@ -14,6 +15,8 @@
     let points = 0;
     let gardenPlots = 1;
     let teapots = 1;
+    let currentTime = "sunrise";
+    let timeInterval;
     let automationIntervals = [];
 
     let toasts = [];
@@ -68,6 +71,30 @@
         }, 2000);
     }
 
+    function startDayCycle() {
+        let quarters = ["sunrise", "day", "sunset", "night"];
+        let quarterIndex = 0;
+
+        function updateQuarter() {
+            currentTime = quarters[quarterIndex];
+            timeOfDay.set(currentTime);
+            isDaytime.set(currentTime !== "night");
+            quarterIndex = (quarterIndex + 1) % quarters.length;
+
+            if (currentTime === "sunrise") {
+                createToast("The sun is rising!", null, "sunrise");
+            } else if (currentTime === "sunset") {
+                createToast("The sun is setting!", null, "sunset");
+            } else if (currentTime === "night") {
+                createToast("Shh...sprites are sleeping...", null, "night");
+            }
+        }
+
+        updateQuarter();
+
+        timeInterval = setInterval(updateQuarter, TIMINGS.QUARTER_DURATION);
+    }
+
     function serveTea() {
         if (brewedTea >= 1) {
             brewedTea -= 1;
@@ -109,15 +136,6 @@
     }
 
     function startAutomation() {
-        console.log("Starting automation");
-        console.log("Current sprites:", sprites);
-        console.log("Total plots:", gardenPlots);
-        console.log("Total teapots:", teapots);
-        console.log("plotRefs length:", plotRefs.length);
-        console.log("teapotRefs length:", teapotRefs.length);
-        console.log("Full plotRefs array:", plotRefs);
-        console.log("Full teapotRefs array:", teapotRefs);
-
         // Clear existing intervals
         automationIntervals.forEach((interval) => clearInterval(interval));
         automationIntervals = [];
@@ -125,7 +143,7 @@
         // Harvest Sprites
         if (sprites.harvest > 0) {
             const interval = setInterval(() => {
-                if (workingSprites.harvest < sprites.harvest) {
+                if ($isDaytime && workingSprites.harvest < sprites.harvest) {
                     for (let i = 0; i < plotRefs.length; i++) {
                         const plot = plotRefs[i];
                         if (plot) {
@@ -148,7 +166,10 @@
         // Brewmaster Sprites
         if (sprites.brewmaster > 0) {
             const interval = setInterval(() => {
-                if (workingSprites.brewmaster < sprites.brewmaster) {
+                if (
+                    $isDaytime &&
+                    workingSprites.brewmaster < sprites.brewmaster
+                ) {
                     for (let i = 0; i < teapotRefs.length; i++) {
                         const teapot = teapotRefs[i];
                         if (teapot) {
@@ -171,7 +192,7 @@
         // Garden Sprites
         if (sprites.garden > 0) {
             const interval = setInterval(() => {
-                if (workingSprites.garden < sprites.garden) {
+                if ($isDaytime && workingSprites.garden < sprites.garden) {
                     for (let i = 0; i < plotRefs.length; i++) {
                         const plot = plotRefs[i];
                         if (plot) {
@@ -193,7 +214,7 @@
         // Cafe Sprites
         if (sprites.cafe > 0) {
             const interval = setInterval(() => {
-                if (workingSprites.cafe < sprites.cafe) {
+                if ($isDaytime && workingSprites.cafe < sprites.cafe) {
                     for (let i = 0; i < teapotRefs.length; i++) {
                         const teapot = teapotRefs[i];
                         if (teapot) {
@@ -217,6 +238,7 @@
     function saveGameState() {
         const gameState = {
             lastSaved: Date.now(),
+            currentTime,
             harvestedPlants,
             brewedTea,
             servedTea,
@@ -251,6 +273,9 @@
             gardenPlots = gameState.gardenPlots;
             teapots = gameState.teapots;
             sprites = gameState.sprites;
+            currentTime = gameState.currentTime || "sunrise";
+            timeOfDay.set(currentTime);
+            isDaytime.set(currentTime !== "night");
 
             setTimeout(() => {
                 gameState.plotStates.forEach((state, i) => {
@@ -280,6 +305,7 @@
         console.log("Component mounted");
         loadGameState();
         startAutomation();
+        startDayCycle();
 
         const autosaveInterval = setInterval(saveGameState, 30000); // Save every 30 seconds
         automationIntervals.push(autosaveInterval);
@@ -299,37 +325,49 @@
 
     onDestroy(() => {
         automationIntervals.forEach((interval) => clearInterval(interval));
+        clearInterval(timeInterval);
         document.removeEventListener("visibilitychange", saveGameState);
         window.removeEventListener("beforeunload", saveGameState);
     });
 </script>
 
 <div class="teashop-container">
-    <div class="stats">
-        <p class="label">Points: {points}</p>
-        <p class="label">Plants Harvested: {harvestedPlants}</p>
-        <p class="label">Tea Brewed: {brewedTea}</p>
-        <p class="label">Total Cups Served: {servedTea}</p>
+    <div
+        class="time-indicator"
+        class:sunrise={currentTime === "sunrise"}
+        class:day={currentTime === "day"}
+        class:sunset={currentTime === "sunset"}
+        class:night={currentTime === "night"}
+    >
+        <p class="label">Current Time: {currentTime}</p>
     </div>
-    <div class="sprites">
-        <p class="label">Garden Sprites: {sprites.garden}</p>
-        <p class="label">Harvest Sprites: {sprites.harvest}</p>
-        <p class="label">Brewmaster Sprites: {sprites.brewmaster}</p>
-        <p class="label">Cafe Sprites: {sprites.cafe}</p>
-    </div>
-    <div class="stats">
-        <p class="label">Garden Plots: {gardenPlots}</p>
-        <p class="label">Teapots: {teapots}</p>
-        {#if lastSavedTime}
-            <p class="label save-indicator">
-                Saved at {lastSavedTime.toLocaleTimeString([], {
-                    timeStyle: "short",
-                })}
-            </p>
-        {/if}
-        <button class="secondary save-game" on:click={saveGameState}
-            >Save Game</button
-        >
+    <div class="game-data">
+        <div class="stats">
+            <p class="label">Points: {points}</p>
+            <p class="label">Plants Harvested: {harvestedPlants}</p>
+            <p class="label">Tea Brewed: {brewedTea}</p>
+            <p class="label">Total Cups Served: {servedTea}</p>
+        </div>
+        <div class="sprites">
+            <p class="label">Garden Sprites: {sprites.garden}</p>
+            <p class="label">Harvest Sprites: {sprites.harvest}</p>
+            <p class="label">Brewmaster Sprites: {sprites.brewmaster}</p>
+            <p class="label">Cafe Sprites: {sprites.cafe}</p>
+        </div>
+        <div class="stats">
+            <p class="label">Garden Plots: {gardenPlots}</p>
+            <p class="label">Teapots: {teapots}</p>
+            {#if lastSavedTime}
+                <p class="label save-indicator">
+                    Saved at {lastSavedTime.toLocaleTimeString([], {
+                        timeStyle: "short",
+                    })}
+                </p>
+            {/if}
+            <button class="secondary save-game" on:click={saveGameState}
+                >Save Game</button
+            >
+        </div>
     </div>
 
     <Shop {points} on:purchase={handlePurchase} />

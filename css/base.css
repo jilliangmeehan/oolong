@@ -413,17 +413,39 @@ button.teashop-serve:active {
     padding: 8px;
     font-size: 14px;
     font-family: "Departure Mono";
-    color: var(--joycon);
+    color: var(--chai);
     animation: float-up 2s ease-out forwards;
     white-space: nowrap;
 }
 
 .toast.success {
+    bottom: 6px;
     color: var(--matcha);
+    animation: float-up 4s ease-out forwards;
 }
 
 .toast.error {
+    bottom: 6px;
     color: var(--puff);
+    animation: float-up 4s ease-out forwards;
+}
+
+.toast.sunrise {
+    bottom: 3px;
+    color: var(--comfy);
+    animation: float-up 8s ease-out forwards;
+}
+
+.toast.sunset {
+    bottom: 3px;
+    color: var(--beam);
+    animation: float-up 8s ease-out forwards;
+}
+
+.toast.night {
+    bottom: 3px;
+    color: var(--joycon);
+    animation: float-up 8s ease-out forwards;
 }
 
 @keyframes float-up {
@@ -442,4 +464,28 @@ button.teashop-serve:active {
     float: right;
     text-align: right;
     position: relative;
+}
+
+.time-indicator {
+    margin-bottom: 1em;
+}
+
+.time-indicator.sunrise > p {
+    color: var(--beam);
+}
+
+.time-indicator.day > p {
+    color: var(--comfy);
+}
+
+.time-indicator.sunset > p {
+    color: var(--beam);
+}
+
+.time-indicator.night > p {
+    color: var(--joycon);
+}
+
+.night-warning {
+    color: var(--joycon);
 }

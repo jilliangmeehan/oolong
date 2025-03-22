@@ -1,11 +1,15 @@
 <script>
     import { TIMINGS, PROGRESS_INCREMENT } from "../config.js";
+    import { isDaytime } from "../stores.js";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
     let progress = 0;
     export let isGrowing = false;
     export let readyToHarvest = false;
+
+    let isDay;
+    isDaytime.subscribe((value) => (isDay = value));
 
     // Create a method to get the current state
     export function getState() {
@@ -20,7 +24,10 @@
         progress = 0;
 
         const interval = setInterval(() => {
-            progress += PROGRESS_INCREMENT.GROW;
+            const growthRate = isDay
+                ? PROGRESS_INCREMENT.GROW
+                : PROGRESS_INCREMENT.NIGHT_GROWTH;
+            progress += growthRate;
             if (progress >= 100) {
                 clearInterval(interval);
                 isGrowing = false;
@@ -47,7 +54,7 @@
         data-harvestable={readyToHarvest}
     >
         {#if isGrowing}
-            Growing... ({progress}%)
+            Growing... ({Math.floor(progress)}%)
         {:else if readyToHarvest}
             Ready to Harvest!
         {:else}
