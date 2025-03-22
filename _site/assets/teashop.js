@@ -1370,7 +1370,7 @@ ${indent}in ${name}`).join("")}
       throw error;
     }
   }
-  function schedule_possible_effect_self_invalidation(signal, effect2, root5 = true) {
+  function schedule_possible_effect_self_invalidation(signal, effect2, root6 = true) {
     var reactions = signal.reactions;
     if (reactions === null) return;
     for (var i = 0; i < reactions.length; i++) {
@@ -1384,7 +1384,7 @@ ${indent}in ${name}`).join("")}
           false
         );
       } else if (effect2 === reaction) {
-        if (root5) {
+        if (root6) {
           set_signal_status(reaction, DIRTY);
         } else if ((reaction.f & CLEAN) !== 0) {
           set_signal_status(reaction, MAYBE_DIRTY);
@@ -1667,9 +1667,9 @@ ${indent}in ${name}`).join("")}
     }
     queued_root_effects.push(effect2);
   }
-  function process_effects(root5) {
+  function process_effects(root6) {
     var effects = [];
-    var effect2 = root5;
+    var effect2 = root6;
     while (effect2 !== null) {
       var flags = effect2.f;
       var is_branch = (flags & (BRANCH_EFFECT | ROOT_EFFECT)) !== 0;
@@ -4937,60 +4937,102 @@ https://svelte.dev/e/store_invalid_shape`);
   }
   mark_module_end(Shop);
 
+  // src/svelte/components/AnimatedStat.svelte
+  mark_module_start();
+  AnimatedStat[FILENAME] = "src/svelte/components/AnimatedStat.svelte";
+  var root4 = add_locations(template(`<p> </p>`), AnimatedStat[FILENAME], [[38, 0]]);
+  function AnimatedStat($$anchor, $$props) {
+    check_target(new.target);
+    push($$props, false, AnimatedStat);
+    let value = prop($$props, "value", 8, 0);
+    let label = prop($$props, "label", 8, "");
+    let displayValue = mutable_source(value());
+    let valueToAdd = mutable_source(0);
+    let countInterval = mutable_source();
+    function updateValue() {
+      if (get(valueToAdd) > 0) {
+        let increment2 = Math.max(1, Math.floor(get(valueToAdd) / 10));
+        set(displayValue, get(displayValue) + increment2);
+        set(valueToAdd, get(valueToAdd) - increment2);
+      } else if (get(valueToAdd) < 0) {
+        let decrement = Math.min(-1, Math.floor(get(valueToAdd) / 10));
+        set(displayValue, get(displayValue) + decrement);
+        set(valueToAdd, get(valueToAdd) - decrement);
+      } else {
+        clearInterval(get(countInterval));
+        set(countInterval, null);
+      }
+    }
+    onDestroy(() => {
+      if (get(countInterval)) clearInterval(get(countInterval));
+    });
+    legacy_pre_effect(
+      () => (deep_read_state(value()), get(displayValue), get(valueToAdd), get(countInterval)),
+      () => {
+        if (strict_equals(value(), get(displayValue) + get(valueToAdd), false)) {
+          const difference = value() - (get(displayValue) + get(valueToAdd));
+          set(valueToAdd, get(valueToAdd) + difference);
+          if (!get(countInterval)) {
+            set(countInterval, setInterval(updateValue, 50));
+          }
+        }
+      }
+    );
+    legacy_pre_effect_reset();
+    init();
+    var p = root4();
+    let classes;
+    var text2 = child(p);
+    reset(p);
+    template_effect(
+      ($0) => {
+        classes = set_class(p, 1, "label stat-display svelte-3a3dc", null, classes, $0);
+        set_text(text2, `${label() ?? ""}: ${get(displayValue) ?? ""}`);
+      },
+      [
+        () => ({
+          animating: strict_equals(get(valueToAdd), 0, false)
+        })
+      ],
+      derived_safe_equal
+    );
+    append($$anchor, p);
+    return pop({ ...legacy_api() });
+  }
+  mark_module_end(AnimatedStat);
+
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[436, 16]]);
-  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[489, 12]]);
-  var root4 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <button class="secondary teashop-serve">Serve Tea</button></div></div> <div class="toast-container"></div></div>`), Teashop[FILENAME], [
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[438, 16]]);
+  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[491, 12]]);
+  var root5 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><!> <!> <!> <!></div> <div class="sprites"><!> <!> <!> <!></div> <div class="stats"><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <button class="secondary teashop-serve">Serve Tea</button></div></div> <div class="toast-container"></div></div>`), Teashop[FILENAME], [
     [
-      409,
+      407,
       0,
       [
-        [410, 4, [[417, 8]]],
+        [408, 4, [[415, 8]]],
         [
-          419,
+          417,
           4,
           [
-            [
-              420,
-              8,
-              [
-                [421, 12],
-                [422, 12],
-                [423, 12],
-                [424, 12]
-              ]
-            ],
-            [
-              426,
-              8,
-              [
-                [427, 12],
-                [428, 12],
-                [429, 12],
-                [430, 12]
-              ]
-            ],
-            [
-              432,
-              8,
-              [[433, 12], [434, 12], [442, 12]]
-            ]
+            [418, 8],
+            [424, 8],
+            [433, 8, [[444, 12]]]
           ]
         ],
-        [449, 4, [[450, 8], [451, 8]]],
+        [451, 4, [[452, 8], [453, 8]]],
         [
-          462,
+          464,
           4,
           [
-            [463, 8],
-            [464, 8],
             [465, 8],
-            [476, 8, [[477, 12], [478, 12]]]
+            [466, 8],
+            [467, 8],
+            [478, 8, [[479, 12], [480, 12]]]
           ]
         ],
-        [487, 4]
+        [489, 4]
       ]
     ]
   ]);
@@ -5102,9 +5144,6 @@ https://svelte.dev/e/store_invalid_shape`);
         console.log(...log_if_contains_state("log", "Updated sprites:", get(sprites)));
         startAutomation();
       }
-    }
-    function handleGrowingComplete() {
-      grownPlants += 1;
     }
     function handlePlantComplete() {
       set(harvestedPlants, get(harvestedPlants) + 2);
@@ -5283,6 +5322,7 @@ https://svelte.dev/e/store_invalid_shape`);
       set(brewedTea, 0);
       set(servedTea, 0);
       set(points, 0);
+      displayPoints = 0;
       set(gardenPlots, 1);
       set(teapots, 1);
       set(sprites, {
@@ -5351,7 +5391,7 @@ https://svelte.dev/e/store_invalid_shape`);
     });
     legacy_pre_effect_reset();
     init();
-    var div = root4();
+    var div = root5();
     var div_1 = child(div);
     let classes;
     var p = child(div_1);
@@ -5360,70 +5400,110 @@ https://svelte.dev/e/store_invalid_shape`);
     reset(div_1);
     var div_2 = sibling(div_1, 2);
     var div_3 = child(div_2);
-    var p_1 = child(div_3);
-    var text_1 = child(p_1);
-    reset(p_1);
-    var p_2 = sibling(p_1, 2);
-    var text_2 = child(p_2);
-    reset(p_2);
-    var p_3 = sibling(p_2, 2);
-    var text_3 = child(p_3);
-    reset(p_3);
-    var p_4 = sibling(p_3, 2);
-    var text_4 = child(p_4);
-    reset(p_4);
+    var node = child(div_3);
+    AnimatedStat(node, {
+      label: "Points",
+      get value() {
+        return get(points);
+      }
+    });
+    var node_1 = sibling(node, 2);
+    AnimatedStat(node_1, {
+      label: "Plants Harvested",
+      get value() {
+        return get(harvestedPlants);
+      }
+    });
+    var node_2 = sibling(node_1, 2);
+    AnimatedStat(node_2, {
+      label: "Tea Brewed",
+      get value() {
+        return get(brewedTea);
+      }
+    });
+    var node_3 = sibling(node_2, 2);
+    AnimatedStat(node_3, {
+      label: "Total Cups Served",
+      get value() {
+        return get(servedTea);
+      }
+    });
     reset(div_3);
     var div_4 = sibling(div_3, 2);
-    var p_5 = child(div_4);
-    var text_5 = child(p_5);
-    reset(p_5);
-    var p_6 = sibling(p_5, 2);
-    var text_6 = child(p_6);
-    reset(p_6);
-    var p_7 = sibling(p_6, 2);
-    var text_7 = child(p_7);
-    reset(p_7);
-    var p_8 = sibling(p_7, 2);
-    var text_8 = child(p_8);
-    reset(p_8);
+    var node_4 = child(div_4);
+    AnimatedStat(node_4, {
+      label: "Garden Sprites",
+      get value() {
+        return get(sprites).garden;
+      }
+    });
+    var node_5 = sibling(node_4, 2);
+    AnimatedStat(node_5, {
+      label: "Harvest Sprites",
+      get value() {
+        return get(sprites).harvest;
+      }
+    });
+    var node_6 = sibling(node_5, 2);
+    AnimatedStat(node_6, {
+      label: "Brewmaster Sprites",
+      get value() {
+        return get(sprites).brewmaster;
+      }
+    });
+    var node_7 = sibling(node_6, 2);
+    AnimatedStat(node_7, {
+      label: "Cafe Sprites",
+      get value() {
+        return get(sprites).cafe;
+      }
+    });
     reset(div_4);
     var div_5 = sibling(div_4, 2);
-    var p_9 = child(div_5);
-    var text_9 = child(p_9);
-    reset(p_9);
-    var p_10 = sibling(p_9, 2);
-    var text_10 = child(p_10);
-    reset(p_10);
-    var node = sibling(p_10, 2);
+    var node_8 = child(div_5);
+    AnimatedStat(node_8, {
+      label: "Garden Plots",
+      get value() {
+        return get(gardenPlots);
+      }
+    });
+    var node_9 = sibling(node_8, 2);
+    AnimatedStat(node_9, {
+      label: "Teapots",
+      get value() {
+        return get(teapots);
+      }
+    });
+    var node_10 = sibling(node_9, 2);
     {
       var consequent = ($$anchor2) => {
-        var p_11 = root_12();
-        var text_11 = child(p_11);
-        reset(p_11);
+        var p_1 = root_12();
+        var text_1 = child(p_1);
+        reset(p_1);
         template_effect(
-          ($0) => set_text(text_11, `Saved at ${$0 ?? ""}`),
+          ($0) => set_text(text_1, `Saved at ${$0 ?? ""}`),
           [
             () => get(lastSavedTime).toLocaleTimeString([], { timeStyle: "short" })
           ],
           derived_safe_equal
         );
-        append($$anchor2, p_11);
+        append($$anchor2, p_1);
       };
-      if_block(node, ($$render) => {
+      if_block(node_10, ($$render) => {
         if (get(lastSavedTime)) $$render(consequent);
       });
     }
-    var button = sibling(node, 2);
+    var button = sibling(node_10, 2);
     reset(div_5);
     reset(div_2);
-    var node_1 = sibling(div_2, 2);
-    Shop(node_1, {
+    var node_11 = sibling(div_2, 2);
+    Shop(node_11, {
       get points() {
         return get(points);
       },
       $$events: { purchase: handlePurchase, reset: resetGame }
     });
-    var div_6 = sibling(node_1, 2);
+    var div_6 = sibling(node_11, 2);
     var div_7 = sibling(child(div_6), 2);
     validate_each_keys(
       () => [
@@ -5454,10 +5534,10 @@ https://svelte.dev/e/store_invalid_shape`);
     reset(div_7);
     reset(div_6);
     var div_8 = sibling(div_6, 2);
-    var p_12 = sibling(child(div_8), 2);
-    var text_12 = child(p_12);
-    reset(p_12);
-    var div_9 = sibling(p_12, 2);
+    var p_2 = sibling(child(div_8), 2);
+    var text_2 = child(p_2);
+    reset(p_2);
+    var div_9 = sibling(p_2, 2);
     validate_each_keys(() => [...Array(get(teapots)).keys()], (i) => i);
     each(div_9, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
       bind_this(
@@ -5479,17 +5559,17 @@ https://svelte.dev/e/store_invalid_shape`);
     });
     reset(div_9);
     var div_10 = sibling(div_9, 2);
-    var p_13 = child(div_10);
-    var text_13 = child(p_13);
-    reset(p_13);
-    var button_1 = sibling(p_13, 2);
+    var p_3 = child(div_10);
+    var text_3 = child(p_3);
+    reset(p_3);
+    var button_1 = sibling(p_3, 2);
     reset(div_10);
     reset(div_8);
     var div_11 = sibling(div_8, 2);
     validate_each_keys(() => get(toasts), (toast) => toast.id);
     each(div_11, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
       var div_12 = root_4();
-      var text_14 = child(div_12, true);
+      var text_4 = child(div_12, true);
       reset(div_12);
       template_effect(() => {
         set_class(div_12, 1, `toast ${get(toast).type ?? ""}`);
@@ -5497,7 +5577,7 @@ https://svelte.dev/e/store_invalid_shape`);
                             --x: ${get(toast).x ?? ""}px;
                             --opacity: ${get(toast).opacity ?? ""};
                         `);
-        set_text(text_14, get(toast).message);
+        set_text(text_4, get(toast).message);
       });
       append($$anchor2, div_12);
     });
@@ -5507,18 +5587,8 @@ https://svelte.dev/e/store_invalid_shape`);
       ($0) => {
         classes = set_class(div_1, 1, "time-indicator", null, classes, $0);
         set_text(text2, `Current Time: ${get(currentTime) ?? ""}`);
-        set_text(text_1, `Points: ${get(points) ?? ""}`);
-        set_text(text_2, `Plants Harvested: ${get(harvestedPlants) ?? ""}`);
-        set_text(text_3, `Tea Brewed: ${get(brewedTea) ?? ""}`);
-        set_text(text_4, `Total Cups Served: ${get(servedTea) ?? ""}`);
-        set_text(text_5, `Garden Sprites: ${get(sprites).garden ?? ""}`);
-        set_text(text_6, `Harvest Sprites: ${get(sprites).harvest ?? ""}`);
-        set_text(text_7, `Brewmaster Sprites: ${get(sprites).brewmaster ?? ""}`);
-        set_text(text_8, `Cafe Sprites: ${get(sprites).cafe ?? ""}`);
-        set_text(text_9, `Garden Plots: ${get(gardenPlots) ?? ""}`);
-        set_text(text_10, `Teapots: ${get(teapots) ?? ""}`);
-        set_text(text_12, `Ready to brew: ${get(harvestedPlants) ?? ""}`);
-        set_text(text_13, `Ready to serve: ${get(brewedTea) ?? ""}`);
+        set_text(text_2, `Ready to brew: ${get(harvestedPlants) ?? ""}`);
+        set_text(text_3, `Ready to serve: ${get(brewedTea) ?? ""}`);
         button_1.disabled = get(brewedTea) < 1;
       },
       [

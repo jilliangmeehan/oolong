@@ -3,6 +3,7 @@
     import GardenPlot from "./GardenPlot.svelte";
     import Teapot from "./Teapot.svelte";
     import Shop from "./Shop.svelte";
+    import AnimatedStat from "./AnimatedStat.svelte";
     import { timeOfDay, isDaytime } from "../stores.js";
     import { onMount, onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
@@ -139,10 +140,6 @@
             console.log("Updated sprites:", sprites);
             startAutomation();
         }
-    }
-
-    function handleGrowingComplete() {
-        grownPlants += 1;
     }
 
     function handlePlantComplete() {
@@ -326,6 +323,7 @@
         brewedTea = 0;
         servedTea = 0;
         points = 0;
+        displayPoints = 0;
         gardenPlots = 1;
         teapots = 1;
         sprites = {
@@ -418,20 +416,24 @@
     </div>
     <div class="game-data">
         <div class="stats">
-            <p class="label">Points: {points}</p>
-            <p class="label">Plants Harvested: {harvestedPlants}</p>
-            <p class="label">Tea Brewed: {brewedTea}</p>
-            <p class="label">Total Cups Served: {servedTea}</p>
+            <AnimatedStat label="Points" value={points} />
+            <AnimatedStat label="Plants Harvested" value={harvestedPlants} />
+            <AnimatedStat label="Tea Brewed" value={brewedTea} />
+            <AnimatedStat label="Total Cups Served" value={servedTea} />
         </div>
         <div class="sprites">
-            <p class="label">Garden Sprites: {sprites.garden}</p>
-            <p class="label">Harvest Sprites: {sprites.harvest}</p>
-            <p class="label">Brewmaster Sprites: {sprites.brewmaster}</p>
-            <p class="label">Cafe Sprites: {sprites.cafe}</p>
+            <AnimatedStat label="Garden Sprites" value={sprites.garden} />
+            <AnimatedStat label="Harvest Sprites" value={sprites.harvest} />
+            <AnimatedStat
+                label="Brewmaster Sprites"
+                value={sprites.brewmaster}
+            />
+            <AnimatedStat label="Cafe Sprites" value={sprites.cafe} />
         </div>
         <div class="stats">
-            <p class="label">Garden Plots: {gardenPlots}</p>
-            <p class="label">Teapots: {teapots}</p>
+            <AnimatedStat label="Garden Plots" value={gardenPlots} />
+            <AnimatedStat label="Teapots" value={teapots} />
+            <!-- Keep the save indicator as is -->
             {#if lastSavedTime}
                 <p class="label save-indicator">
                     Saved at {lastSavedTime.toLocaleTimeString([], {
@@ -439,9 +441,9 @@
                     })}
                 </p>
             {/if}
-            <button class="secondary save-game" on:click={saveGameState}
-                >Save Game</button
-            >
+            <button class="secondary save-game" on:click={saveGameState}>
+                Save Game
+            </button>
         </div>
     </div>
 
