@@ -7,6 +7,7 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
+    let lastSavedTime = null;
     let harvestedPlants = 0;
     let brewedTea = 0;
     let servedTea = 0;
@@ -47,7 +48,7 @@
         console.log("Updated teapotRefs:", teapotRefs);
     }
 
-    function createToast() {
+    function createToast(message = "hiya!", points = null, type = "default") {
         const id = toastId++;
         const x = Math.random() * 40 - 20; // Random x position offset
         const toast = {
@@ -55,7 +56,9 @@
             x,
             y: 0,
             opacity: 1,
-            points: 5,
+            points,
+            message,
+            type,
         };
         toasts = [...toasts, toast];
 
@@ -71,7 +74,7 @@
             servedTea += 1;
             points += 5;
             dispatch("teaServed");
-            createToast();
+            createToast("+5 points!", 5);
         }
     }
 
@@ -211,13 +214,93 @@
         }
     }
 
+    function saveGameState() {
+        const gameState = {
+            lastSaved: Date.now(),
+            harvestedPlants,
+            brewedTea,
+            servedTea,
+            points,
+            gardenPlots,
+            teapots,
+            sprites,
+            plotStates: plotRefs.map((plot) => (plot ? plot.getState() : null)),
+            teapotStates: teapotRefs.map((teapot) =>
+                teapot ? teapot.getState() : null,
+            ),
+        };
+        try {
+            localStorage.setItem("teashopGameState", JSON.stringify(gameState));
+            lastSavedTime = new Date();
+            createToast("Game saved! 💾", null, "success"); // New save notification
+            console.log("Game state saved");
+        } catch (e) {
+            console.error("Failed to save game state:", e);
+            createToast("Error saving!", null, "error"); // Error notification
+        }
+    }
+
+    function loadGameState() {
+        const savedState = localStorage.getItem("teashopGameState");
+        if (savedState) {
+            const gameState = JSON.parse(savedState);
+            harvestedPlants = gameState.harvestedPlants;
+            brewedTea = gameState.brewedTea;
+            servedTea = gameState.servedTea;
+            points = gameState.points;
+            gardenPlots = gameState.gardenPlots;
+            teapots = gameState.teapots;
+            sprites = gameState.sprites;
+
+            setTimeout(() => {
+                gameState.plotStates.forEach((state, i) => {
+                    if (state && plotRefs[i]) {
+                        if (state.isGrowing) plotRefs[i].plantTea();
+                        if (state.readyToHarvest) {
+                            plotRefs[i].readyToHarvest = true;
+                            plotRefs[i].progress = 100;
+                        }
+                    }
+                });
+
+                gameState.teapotStates.forEach((state, i) => {
+                    if (state && teapotRefs[i]) {
+                        if (state.isBrewing) teapotRefs[i].brewTea();
+                        if (state.brewedTea > 0)
+                            teapotRefs[i].brewedTea = state.brewedTea;
+                    }
+                });
+            }, 100);
+
+            console.log("Games loaded");
+        }
+    }
+
     onMount(() => {
         console.log("Component mounted");
+        loadGameState();
         startAutomation();
+
+        const autosaveInterval = setInterval(saveGameState, 30000); // Save every 30 seconds
+        automationIntervals.push(autosaveInterval);
+
+        // Save game state when the page is hidden (user switches tabs)
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                saveGameState();
+            }
+        });
+
+        // Save game state before the page is unloaded
+        window.addEventListener("beforeunload", () => {
+            saveGameState();
+        });
     });
 
     onDestroy(() => {
         automationIntervals.forEach((interval) => clearInterval(interval));
+        document.removeEventListener("visibilitychange", saveGameState);
+        window.removeEventListener("beforeunload", saveGameState);
     });
 </script>
 
@@ -229,10 +312,24 @@
         <p class="label">Total Cups Served: {servedTea}</p>
     </div>
     <div class="sprites">
+        <p class="label">Garden Sprites: {sprites.garden}</p>
         <p class="label">Harvest Sprites: {sprites.harvest}</p>
         <p class="label">Brewmaster Sprites: {sprites.brewmaster}</p>
-        <p class="label">Garden Sprites: {sprites.garden}</p>
         <p class="label">Cafe Sprites: {sprites.cafe}</p>
+    </div>
+    <div class="stats">
+        <p class="label">Garden Plots: {gardenPlots}</p>
+        <p class="label">Teapots: {teapots}</p>
+        {#if lastSavedTime}
+            <p class="label save-indicator">
+                Saved at {lastSavedTime.toLocaleTimeString([], {
+                    timeStyle: "short",
+                })}
+            </p>
+        {/if}
+        <button class="secondary save-game" on:click={saveGameState}
+            >Save Game</button
+        >
     </div>
 
     <Shop {points} on:purchase={handlePurchase} />
@@ -268,18 +365,18 @@
             <div class="toast-container">
                 {#each toasts as toast (toast.id)}
                     <div
-                        class="toast"
+                        class="toast {toast.type}"
                         style="
                                     --x: {toast.x}px;
                                     --opacity: {toast.opacity};
                                 "
                     >
-                        +{toast.points} points!
+                        {toast.message}
                     </div>
                 {/each}
             </div>
             <button
-                class="teashop-serve"
+                class="secondary teashop-serve"
                 on:click={serveTea}
                 disabled={brewedTea < 1}
             >

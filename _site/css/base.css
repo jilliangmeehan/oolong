@@ -340,16 +340,103 @@ button:disabled:hover {
     margin: 8px 0;
 }
 
-.shop > button {
+button.buy-upgrade,
+button.hire-sprite {
     background-color: var(--tea);
     color: var(--oat);
     margin-left: 0;
 }
 
-.shop > button:hover {
+button.buy-upgrade:hover,
+button.hire-sprite:hover {
+    background-color: var(--tea);
     opacity: 0.8;
+}
+
+button.buy-upgrade:disabled,
+button.hire-sprite:disabled {
+    background-color: var(--tea);
+    opacity: 0.7;
+}
+
+button.buy-upgrade:disabled:hover,
+button.hire-sprite:disabled:hover {
+    background-color: var(--tea);
+    opacity: 0.7;
 }
 
 .shop > button.hire-sprite {
     display: block;
+}
+
+button.teashop-serve {
+    background-color: var(--tea);
+    color: var(--oat);
+    border: 3px solid var(--oat);
+}
+
+button.teashop-serve:hover {
+    background-color: var(--tea);
+    opacity: 0.8;
+}
+
+button.teashop-serve:disabled {
+    opacity: 0.7;
+}
+
+button.teashop-serve:disabled:hover {
+    background-color: var(--tea);
+    opacity: 0.7;
+}
+
+button.teashop-serve:active {
+    border: 3px solid var(--matcha);
+    opacity: 1;
+}
+
+button.teashop-serve:disabled:active {
+    border: 3px solid var(--oat);
+    opacity: 0.7;
+}
+
+.teashop-serve-container {
+    margin-top: 36px;
+    float: right;
+    text-align: right;
+}
+
+.toast-container {
+    position: absolute;
+    right: -120px;
+    bottom: 100%;
+    pointer-events: none;
+}
+
+.toast {
+    position: absolute;
+    right: var(--x);
+    padding: 8px;
+    font-size: 14px;
+    font-family: "Departure Mono";
+    color: var(--matcha);
+    animation: float-up 2s ease-out forwards;
+    white-space: nowrap;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+.teashop-serve-container {
+    margin-top: 36px;
+    float: right;
+    text-align: right;
+    position: relative;
 }

@@ -3325,6 +3325,135 @@ https://svelte.dev/e/lifecycle_outside_component`);
 
   // node_modules/svelte/src/internal/shared/attributes.js
   var whitespace = [..." 	\n\r\f\xA0\v\uFEFF"];
+  function append_styles(styles, important = false) {
+    var separator = important ? " !important;" : ";";
+    var css = "";
+    for (var key in styles) {
+      var value = styles[key];
+      if (value != null && value !== "") {
+        css += " " + key + ": " + value + separator;
+      }
+    }
+    return css;
+  }
+  function to_css_name(name) {
+    if (name[0] !== "-" || name[1] !== "-") {
+      return name.toLowerCase();
+    }
+    return name;
+  }
+  function to_style(value, styles) {
+    if (styles) {
+      var new_style = "";
+      var normal_styles;
+      var important_styles;
+      if (Array.isArray(styles)) {
+        normal_styles = styles[0];
+        important_styles = styles[1];
+      } else {
+        normal_styles = styles;
+      }
+      if (value) {
+        value = String(value).replaceAll(/\s*\/\*.*?\*\/\s*/g, "").trim();
+        var in_str = false;
+        var in_apo = 0;
+        var in_comment = false;
+        var reserved_names = [];
+        if (normal_styles) {
+          reserved_names.push(...Object.keys(normal_styles).map(to_css_name));
+        }
+        if (important_styles) {
+          reserved_names.push(...Object.keys(important_styles).map(to_css_name));
+        }
+        var start_index = 0;
+        var name_index = -1;
+        const len = value.length;
+        for (var i = 0; i < len; i++) {
+          var c = value[i];
+          if (in_comment) {
+            if (c === "/" && value[i - 1] === "*") {
+              in_comment = false;
+            }
+          } else if (in_str) {
+            if (in_str === c) {
+              in_str = false;
+            }
+          } else if (c === "/" && value[i + 1] === "*") {
+            in_comment = true;
+          } else if (c === '"' || c === "'") {
+            in_str = c;
+          } else if (c === "(") {
+            in_apo++;
+          } else if (c === ")") {
+            in_apo--;
+          }
+          if (!in_comment && in_str === false && in_apo === 0) {
+            if (c === ":" && name_index === -1) {
+              name_index = i;
+            } else if (c === ";" || i === len - 1) {
+              if (name_index !== -1) {
+                var name = to_css_name(value.substring(start_index, name_index).trim());
+                if (!reserved_names.includes(name)) {
+                  if (c !== ";") {
+                    i++;
+                  }
+                  var property = value.substring(start_index, i).trim();
+                  new_style += " " + property + ";";
+                }
+              }
+              start_index = i + 1;
+              name_index = -1;
+            }
+          }
+        }
+      }
+      if (normal_styles) {
+        new_style += append_styles(normal_styles);
+      }
+      if (important_styles) {
+        new_style += append_styles(important_styles, true);
+      }
+      new_style = new_style.trim();
+      return new_style === "" ? null : new_style;
+    }
+    return value == null ? null : String(value);
+  }
+
+  // node_modules/svelte/src/internal/client/dom/elements/style.js
+  function update_styles(dom, prev = {}, next2, priority) {
+    for (var key in next2) {
+      var value = next2[key];
+      if (prev[key] !== value) {
+        if (next2[key] == null) {
+          dom.style.removeProperty(key);
+        } else {
+          dom.style.setProperty(key, value, priority);
+        }
+      }
+    }
+  }
+  function set_style(dom, value, prev_styles, next_styles) {
+    var prev = dom.__style;
+    if (hydrating || prev !== value) {
+      var next_style_attr = to_style(value, next_styles);
+      if (!hydrating || next_style_attr !== dom.getAttribute("style")) {
+        if (next_style_attr == null) {
+          dom.removeAttribute("style");
+        } else {
+          dom.style.cssText = next_style_attr;
+        }
+      }
+      dom.__style = value;
+    } else if (next_styles) {
+      if (Array.isArray(next_styles)) {
+        update_styles(dom, prev_styles?.[0], next_styles[0]);
+        update_styles(dom, prev_styles?.[1], next_styles[1], "important");
+      } else {
+        update_styles(dom, prev_styles, next_styles);
+      }
+    }
+    return next_styles;
+  }
 
   // node_modules/svelte/src/internal/client/dom/elements/attributes.js
   var CLASS = Symbol("class");
@@ -4374,16 +4503,16 @@ https://svelte.dev/e/lifecycle_outside_component`);
   // src/svelte/components/Shop.svelte
   mark_module_start();
   Shop[FILENAME] = "src/svelte/components/Shop.svelte";
-  var root_1 = add_locations(template(`<button class="hire-sprite"> </button>`), Shop[FILENAME], [[58, 8]]);
-  var root3 = add_locations(template(`<details class="shop"><summary class="shop-title"><h2 class="label">Shop</h2></summary> <button></button> <button></button> <h3 class="label">Hire Sprites</h3> <!></details>`), Shop[FILENAME], [
+  var root_1 = add_locations(template(`<button class="hire-sprite"> </button>`), Shop[FILENAME], [[66, 8]]);
+  var root3 = add_locations(template(`<details class="shop"><summary class="shop-title"><h2 class="label">Shop</h2></summary> <button class="buy-upgrade"></button> <button class="buy-upgrade"></button> <h3 class="label">Hire Sprites</h3> <!></details>`), Shop[FILENAME], [
     [
       45,
       0,
       [
         [46, 4, [[46, 32]]],
         [48, 4],
-        [52, 4],
-        [56, 4]
+        [56, 4],
+        [64, 4]
       ]
     ]
   ]);
@@ -4391,13 +4520,13 @@ https://svelte.dev/e/lifecycle_outside_component`);
     check_target(new.target);
     push($$props, false, Shop);
     let points = prop($$props, "points", 8, 0);
-    const GARDEN_PLOT_COST = 5;
-    const TEAPOT_COST = 10;
+    const GARDEN_PLOT_COST = 10;
+    const TEAPOT_COST = 75;
     const SPRITE_COSTS = {
-      harvest: 5,
-      brewmaster: 5,
-      garden: 5,
-      cafe: 5
+      garden: 100,
+      harvest: 150,
+      brewmaster: 250,
+      cafe: 500
     };
     const dispatch = createEventDispatcher();
     function buyGardenPlot() {
@@ -4456,38 +4585,46 @@ https://svelte.dev/e/lifecycle_outside_component`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root4 = add_locations(template(`<div class="teashop-container"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <!> <div class="teashop-garden"><h2>Garden</h2> <!></div> <div class="teashop-teapots"><h2>Teapots</h2> <!> <div><button>Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
+  var root_3 = add_locations(template(`<div class="toast"> </div>`), Teashop[FILENAME], [[343, 20]]);
+  var root4 = add_locations(template(`<div class="teashop-container"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <button>Save Game</button> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <div class="toast-container"></div> <button class="teashop-serve">Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
     [
-      202,
+      296,
       0,
       [
         [
-          203,
+          297,
           4,
           [
-            [204, 8],
-            [205, 8],
-            [206, 8],
-            [207, 8]
+            [298, 8],
+            [299, 8],
+            [300, 8],
+            [301, 8]
           ]
         ],
         [
-          209,
+          303,
           4,
           [
-            [210, 8],
-            [211, 8],
-            [212, 8],
-            [213, 8]
+            [304, 8],
+            [305, 8],
+            [306, 8],
+            [307, 8]
           ]
         ],
-        [217, 4, [[218, 8]]],
+        [309, 4],
+        [312, 4, [[313, 8], [314, 8]]],
         [
-          227,
+          325,
           4,
           [
-            [228, 8],
-            [237, 8, [[238, 12]]]
+            [326, 8],
+            [327, 8],
+            [328, 8],
+            [
+              339,
+              8,
+              [[340, 12], [341, 12], [354, 12]]
+            ]
           ]
         ]
       ]
@@ -4500,14 +4637,16 @@ https://svelte.dev/e/lifecycle_outside_component`);
     let harvestedPlants = mutable_source(0);
     let brewedTea = mutable_source(0);
     let servedTea = mutable_source(0);
-    let points = mutable_source(50);
+    let points = mutable_source(0);
     let gardenPlots = mutable_source(1);
     let teapots = mutable_source(1);
     let automationIntervals = [];
+    let toasts = mutable_source([]);
+    let toastId = 0;
     let sprites = mutable_source({
+      garden: 0,
       harvest: 0,
       brewmaster: 0,
-      garden: 0,
       cafe: 0
     });
     let workingSprites = {
@@ -4518,12 +4657,25 @@ https://svelte.dev/e/lifecycle_outside_component`);
     };
     let plotRefs = mutable_source([]);
     let teapotRefs = mutable_source([]);
+    function createToast() {
+      const id = toastId++;
+      const x = Math.random() * 40 - 20;
+      const toast = { id, x, y: 0, opacity: 1, points: 5 };
+      set(toasts, [...get(toasts), toast]);
+      setTimeout(
+        () => {
+          set(toasts, get(toasts).filter((t) => strict_equals(t.id, id, false)));
+        },
+        2e3
+      );
+    }
     function serveTea() {
       if (get(brewedTea) >= 1) {
         set(brewedTea, get(brewedTea) - 1);
         set(servedTea, get(servedTea) + 1);
         set(points, get(points) + 5);
         dispatch("teaServed");
+        createToast();
       }
     }
     function handlePurchase(event2) {
@@ -4670,12 +4822,74 @@ https://svelte.dev/e/lifecycle_outside_component`);
         automationIntervals.push(interval);
       }
     }
+    function saveGameState() {
+      const gameState = {
+        harvestedPlants: get(harvestedPlants),
+        brewedTea: get(brewedTea),
+        servedTea: get(servedTea),
+        points: get(points),
+        gardenPlots: get(gardenPlots),
+        teapots: get(teapots),
+        sprites: get(sprites),
+        plotStates: get(plotRefs).map((plot) => plot ? plot.getState() : null),
+        teapotStates: get(teapotRefs).map((teapot) => teapot ? teapot.getStat() : null)
+      };
+      localStorage.setItem("teashopGameState", JSON.stringify(gameState));
+      console.log("Game saved");
+    }
+    function loadGameState() {
+      const savedState = localStorage.getItem("teashopGameState");
+      if (savedState) {
+        const gameState = JSON.parse(savedState);
+        set(harvestedPlants, gameState.harvestedPlants);
+        set(brewedTea, gameState.brewedTea);
+        set(servedTea, gameState.servedTea);
+        set(points, gameState.points);
+        set(gardenPlots, gameState.gardenPlots);
+        set(teapots, gameState.teapots);
+        set(sprites, gameState.sprites);
+        setTimeout(
+          () => {
+            gameState.plotStates.forEach((state2, i) => {
+              if (state2 && get(plotRefs)[i]) {
+                if (state2.isGrowing) get(plotRefs)[i].plantTea();
+                if (state2.readyToHarvest) {
+                  mutate(plotRefs, get(plotRefs)[i].readyToHarvest = true);
+                  mutate(plotRefs, get(plotRefs)[i].progress = 100);
+                }
+              }
+            });
+            gameState.teapotStates.forEach((state2, i) => {
+              if (state2 && get(teapotRefs)[i]) {
+                if (state2.isBrewing) get(teapotRefs)[i].brewTea();
+                if (state2.brewedTea > 0) mutate(teapotRefs, get(teapotRefs)[i].brewedTea = state2.brewedTea);
+              }
+            });
+          },
+          100
+        );
+        console.log("Games loaded");
+      }
+    }
     onMount(() => {
       console.log("Component mounted");
+      loadGameState();
       startAutomation();
+      const autosaveInterval = setInterval(saveGameState, 3e4);
+      automationIntervals.push(autosaveInterval);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          saveGameState();
+        }
+      });
+      window.addEventListener("beforeunload", () => {
+        saveGameState();
+      });
     });
     onDestroy(() => {
       automationIntervals.forEach((interval) => clearInterval(interval));
+      document.removeEventListener("visibilitychange", saveGameState);
+      window.removeEventListener("beforeunload", saveGameState);
     });
     legacy_pre_effect(() => (get(plotRefs), get(gardenPlots)), () => {
       set(plotRefs, [...Array(get(gardenPlots))].map((_, i) => get(plotRefs)[i] || null));
@@ -4716,7 +4930,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
     var text_7 = child(p_7);
     reset(p_7);
     reset(div_2);
-    var node = sibling(div_2, 2);
+    var button = sibling(div_2, 2);
+    var node = sibling(button, 2);
     Shop(node, {
       get points() {
         return get(points);
@@ -4724,7 +4939,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       $$events: { purchase: handlePurchase }
     });
     var div_3 = sibling(node, 2);
-    var node_1 = sibling(child(div_3), 2);
+    var div_4 = sibling(child(div_3), 2);
     validate_each_keys(
       () => [
         ...Array(get(gardenPlots)).keys()
@@ -4732,8 +4947,8 @@ https://svelte.dev/e/lifecycle_outside_component`);
       (i) => i
     );
     each(
-      node_1,
-      1,
+      div_4,
+      5,
       () => [
         ...Array(get(gardenPlots)).keys()
       ],
@@ -4741,6 +4956,7 @@ https://svelte.dev/e/lifecycle_outside_component`);
       ($$anchor2, i) => {
         bind_this(
           GardenPlot($$anchor2, {
+            class: "garden-plot",
             $$events: { plantComplete: handlePlantComplete },
             $$legacy: true
           }),
@@ -4750,16 +4966,21 @@ https://svelte.dev/e/lifecycle_outside_component`);
         );
       }
     );
+    reset(div_4);
     reset(div_3);
-    var div_4 = sibling(div_3, 2);
-    var node_2 = sibling(child(div_4), 2);
+    var div_5 = sibling(div_3, 2);
+    var p_8 = sibling(child(div_5), 2);
+    var text_8 = child(p_8);
+    reset(p_8);
+    var div_6 = sibling(p_8, 2);
     validate_each_keys(() => [...Array(get(teapots)).keys()], (i) => i);
-    each(node_2, 1, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
+    each(div_6, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
       bind_this(
         Teapot($$anchor2, {
           get harvestedPlants() {
             return get(harvestedPlants);
           },
+          class: "teapot",
           $$events: {
             useTea: handleHarvestedTea,
             teaBrewed: handleBrewedTea
@@ -4771,10 +4992,30 @@ https://svelte.dev/e/lifecycle_outside_component`);
         () => [get(i)]
       );
     });
-    var div_5 = sibling(node_2, 2);
-    var button = child(div_5);
+    reset(div_6);
+    var div_7 = sibling(div_6, 2);
+    var p_9 = child(div_7);
+    var text_9 = child(p_9);
+    reset(p_9);
+    var div_8 = sibling(p_9, 2);
+    validate_each_keys(() => get(toasts), (toast) => toast.id);
+    each(div_8, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
+      var div_9 = root_3();
+      var text_10 = child(div_9);
+      reset(div_9);
+      template_effect(() => {
+        set_style(div_9, `
+                                    --x: ${get(toast).x ?? ""}px;
+                                    --opacity: ${get(toast).opacity ?? ""};
+                                `);
+        set_text(text_10, `+${get(toast).points ?? ""} points!`);
+      });
+      append($$anchor2, div_9);
+    });
+    reset(div_8);
+    var button_1 = sibling(div_8, 2);
+    reset(div_7);
     reset(div_5);
-    reset(div_4);
     reset(div);
     template_effect(() => {
       set_text(text2, `Points: ${get(points) ?? ""}`);
@@ -4785,9 +5026,12 @@ https://svelte.dev/e/lifecycle_outside_component`);
       set_text(text_5, `Brewmaster Sprites: ${get(sprites).brewmaster ?? ""}`);
       set_text(text_6, `Garden Sprites: ${get(sprites).garden ?? ""}`);
       set_text(text_7, `Cafe Sprites: ${get(sprites).cafe ?? ""}`);
-      button.disabled = get(brewedTea) < 1;
+      set_text(text_8, `Ready to brew: ${get(harvestedPlants) ?? ""}`);
+      set_text(text_9, `Ready to serve: ${get(brewedTea) ?? ""}`);
+      button_1.disabled = get(brewedTea) < 1;
     });
-    event("click", button, serveTea);
+    event("click", button, saveGameState);
+    event("click", button_1, serveTea);
     append($$anchor, div);
     return pop({ ...legacy_api() });
   }

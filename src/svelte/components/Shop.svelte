@@ -46,7 +46,7 @@
     <summary class="shop-title"><h2 class="label">Shop</h2></summary>
 
     <button
-        class="buy-upgrade"
+        class="secondary buy-upgrade"
         on:click={buyGardenPlot}
         disabled={points < GARDEN_PLOT_COST}
     >
@@ -54,7 +54,7 @@
     </button>
 
     <button
-        class="buy-upgrade"
+        class="secondary buy-upgrade"
         on:click={buyTeapot}
         disabled={points < TEAPOT_COST}
     >
@@ -64,7 +64,7 @@
     <h3 class="label">Hire Sprites</h3>
     {#each Object.entries(SPRITE_COSTS) as [type, cost]}
         <button
-            class="hire-sprite"
+            class="secondary hire-sprite"
             on:click={() => hireSprite(type)}
             disabled={points < cost}
         >
