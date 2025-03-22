@@ -41,7 +41,7 @@
         {#if !isBrewing && harvestedPlants < 1}
             Need tea leaves to brew
         {:else if isBrewing}
-            Brewing... ({progress}%)
+            Brewing... ({Math.floor(progress)}%)
         {:else}
             Brew Tea
         {/if}

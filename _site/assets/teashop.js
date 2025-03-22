@@ -4644,7 +4644,7 @@ https://svelte.dev/e/store_invalid_shape`);
         {
           var consequent_1 = ($$anchor3) => {
             var text_1 = text();
-            template_effect(() => set_text(text_1, `Brewing... (${get(progress) ?? ""}%)`));
+            template_effect(($0) => set_text(text_1, `Brewing... (${$0 ?? ""}%)`), [() => Math.floor(get(progress))], derived_safe_equal);
             append($$anchor3, text_1);
           };
           var alternate_1 = ($$anchor3) => {
