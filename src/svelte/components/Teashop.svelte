@@ -15,6 +15,9 @@
     let teapots = 1;
     let automationIntervals = [];
 
+    let toasts = [];
+    let toastId = 0;
+
     let sprites = {
         harvest: 0,
         brewmaster: 0,
@@ -44,12 +47,31 @@
         console.log("Updated teapotRefs:", teapotRefs);
     }
 
+    function createToast() {
+        const id = toastId++;
+        const x = Math.random() * 40 - 20; // Random x position offset
+        const toast = {
+            id,
+            x,
+            y: 0,
+            opacity: 1,
+            points: 5,
+        };
+        toasts = [...toasts, toast];
+
+        // Remove the toast after animation
+        setTimeout(() => {
+            toasts = toasts.filter((t) => t.id !== id);
+        }, 2000);
+    }
+
     function serveTea() {
         if (brewedTea >= 1) {
             brewedTea -= 1;
             servedTea += 1;
             points += 5;
             dispatch("teaServed");
+            createToast();
         }
     }
 
@@ -216,26 +238,51 @@
     <Shop {points} on:purchase={handlePurchase} />
     <div class="teashop-garden">
         <h2>Garden</h2>
-        {#each [...Array(gardenPlots).keys()] as i (i)}
-            <GardenPlot
-                on:plantComplete={handlePlantComplete}
-                bind:this={plotRefs[i]}
-            />
-        {/each}
+        <div>
+            {#each [...Array(gardenPlots).keys()] as i (i)}
+                <GardenPlot
+                    on:plantComplete={handlePlantComplete}
+                    bind:this={plotRefs[i]}
+                    class="garden-plot"
+                />
+            {/each}
+        </div>
     </div>
 
     <div class="teashop-teapots">
         <h2>Teapots</h2>
-        {#each [...Array(teapots).keys()] as i (i)}
-            <Teapot
-                {harvestedPlants}
-                bind:this={teapotRefs[i]}
-                on:useTea={handleHarvestedTea}
-                on:teaBrewed={handleBrewedTea}
-            />
-        {/each}
+        <p class="label">Ready to brew: {harvestedPlants}</p>
         <div>
-            <button on:click={serveTea} disabled={brewedTea < 1}>
+            {#each [...Array(teapots).keys()] as i (i)}
+                <Teapot
+                    {harvestedPlants}
+                    bind:this={teapotRefs[i]}
+                    on:useTea={handleHarvestedTea}
+                    on:teaBrewed={handleBrewedTea}
+                    class="teapot"
+                />
+            {/each}
+        </div>
+        <div class="teashop-serve-container">
+            <p class="label">Ready to serve: {brewedTea}</p>
+            <div class="toast-container">
+                {#each toasts as toast (toast.id)}
+                    <div
+                        class="toast"
+                        style="
+                                    --x: {toast.x}px;
+                                    --opacity: {toast.opacity};
+                                "
+                    >
+                        +{toast.points} points!
+                    </div>
+                {/each}
+            </div>
+            <button
+                class="teashop-serve"
+                on:click={serveTea}
+                disabled={brewedTea < 1}
+            >
                 Serve Tea</button
             >
         </div>
