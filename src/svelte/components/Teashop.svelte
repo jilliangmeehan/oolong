@@ -475,19 +475,6 @@
         </div>
         <div class="teashop-serve-container">
             <p class="label">Ready to serve: {brewedTea}</p>
-            <div class="toast-container">
-                {#each toasts as toast (toast.id)}
-                    <div
-                        class="toast {toast.type}"
-                        style="
-                                    --x: {toast.x}px;
-                                    --opacity: {toast.opacity};
-                                "
-                    >
-                        {toast.message}
-                    </div>
-                {/each}
-            </div>
             <button
                 class="secondary teashop-serve"
                 on:click={serveTea}
@@ -496,5 +483,18 @@
                 Serve Tea</button
             >
         </div>
+    </div>
+    <div class="toast-container">
+        {#each toasts as toast (toast.id)}
+            <div
+                class="toast {toast.type}"
+                style="
+                            --x: {toast.x}px;
+                            --opacity: {toast.opacity};
+                        "
+            >
+                {toast.message}
+            </div>
+        {/each}
     </div>
 </div>

@@ -4941,8 +4941,8 @@ https://svelte.dev/e/store_invalid_shape`);
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
   var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[436, 16]]);
-  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[480, 20]]);
-  var root4 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <div class="toast-container"></div> <button class="secondary teashop-serve">Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
+  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[489, 12]]);
+  var root4 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <button class="secondary teashop-serve">Serve Tea</button></div></div> <div class="toast-container"></div></div>`), Teashop[FILENAME], [
     [
       409,
       0,
@@ -4987,13 +4987,10 @@ https://svelte.dev/e/store_invalid_shape`);
             [463, 8],
             [464, 8],
             [465, 8],
-            [
-              476,
-              8,
-              [[477, 12], [478, 12], [491, 12]]
-            ]
+            [476, 8, [[477, 12], [478, 12]]]
           ]
-        ]
+        ],
+        [487, 4]
       ]
     ]
   ]);
@@ -5485,7 +5482,10 @@ https://svelte.dev/e/store_invalid_shape`);
     var p_13 = child(div_10);
     var text_13 = child(p_13);
     reset(p_13);
-    var div_11 = sibling(p_13, 2);
+    var button_1 = sibling(p_13, 2);
+    reset(div_10);
+    reset(div_8);
+    var div_11 = sibling(div_8, 2);
     validate_each_keys(() => get(toasts), (toast) => toast.id);
     each(div_11, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
       var div_12 = root_4();
@@ -5494,17 +5494,14 @@ https://svelte.dev/e/store_invalid_shape`);
       template_effect(() => {
         set_class(div_12, 1, `toast ${get(toast).type ?? ""}`);
         set_style(div_12, `
-                                    --x: ${get(toast).x ?? ""}px;
-                                    --opacity: ${get(toast).opacity ?? ""};
-                                `);
+                            --x: ${get(toast).x ?? ""}px;
+                            --opacity: ${get(toast).opacity ?? ""};
+                        `);
         set_text(text_14, get(toast).message);
       });
       append($$anchor2, div_12);
     });
     reset(div_11);
-    var button_1 = sibling(div_11, 2);
-    reset(div_10);
-    reset(div_8);
     reset(div);
     template_effect(
       ($0) => {
