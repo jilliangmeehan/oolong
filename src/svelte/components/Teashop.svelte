@@ -9,6 +9,7 @@
     const dispatch = createEventDispatcher();
 
     let lastSavedTime = null;
+    let grownPlants = 0;
     let harvestedPlants = 0;
     let brewedTea = 0;
     let servedTea = 0;
@@ -121,6 +122,10 @@
             console.log("Updated sprites:", sprites);
             startAutomation();
         }
+    }
+
+    function handleGrowingComplete() {
+        grownPlants += 1;
     }
 
     function handlePlantComplete() {
@@ -239,6 +244,7 @@
         const gameState = {
             lastSaved: Date.now(),
             currentTime,
+            grownPlants,
             harvestedPlants,
             brewedTea,
             servedTea,
@@ -266,6 +272,7 @@
         const savedState = localStorage.getItem("teashopGameState");
         if (savedState) {
             const gameState = JSON.parse(savedState);
+            grownPlants = gameState.grownPlants;
             harvestedPlants = gameState.harvestedPlants;
             brewedTea = gameState.brewedTea;
             servedTea = gameState.servedTea;
@@ -280,11 +287,7 @@
             setTimeout(() => {
                 gameState.plotStates.forEach((state, i) => {
                     if (state && plotRefs[i]) {
-                        if (state.isGrowing) plotRefs[i].plantTea();
-                        if (state.readyToHarvest) {
-                            plotRefs[i].readyToHarvest = true;
-                            plotRefs[i].progress = 100;
-                        }
+                        plotRefs[i].setState(state);
                     }
                 });
 
@@ -297,7 +300,7 @@
                 });
             }, 100);
 
-            console.log("Games loaded");
+            console.log("Game loaded");
         }
     }
 

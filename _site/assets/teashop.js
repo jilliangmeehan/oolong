@@ -4471,12 +4471,12 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[66, 8]]);
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[72, 8]]);
   var root = add_locations(template(`<div class="garden-plot"><button><!></button> <!> <div><button>Harvest Tea</button></div></div>`), GardenPlot[FILENAME], [
     [
-      49,
+      55,
       0,
-      [[50, 4], [69, 4, [[70, 8]]]]
+      [[56, 4], [75, 4, [[76, 8]]]]
     ]
   ]);
   function GardenPlot($$anchor, $$props) {
@@ -4491,8 +4491,14 @@ https://svelte.dev/e/store_invalid_shape`);
     function getState() {
       return {
         isGrowing: isGrowing(),
-        readyToHarvest: readyToHarvest()
+        readyToHarvest: readyToHarvest(),
+        progress: get(progress)
       };
+    }
+    function setState(state2) {
+      isGrowing(state2.isGrowing);
+      readyToHarvest(state2.readyToHarvest);
+      set(progress, state2.progress);
     }
     function plantTea() {
       if (isGrowing() || readyToHarvest()) return;
@@ -4580,11 +4586,15 @@ https://svelte.dev/e/store_invalid_shape`);
     event("click", button_1, harvest);
     append($$anchor, div);
     bind_prop($$props, "getState", getState);
+    bind_prop($$props, "setState", setState);
     bind_prop($$props, "plantTea", plantTea);
     bind_prop($$props, "harvest", harvest);
     return pop({
       get getState() {
         return getState;
+      },
+      get setState() {
+        return setState;
       },
       get plantTea() {
         return plantTea;
@@ -4781,57 +4791,57 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[361, 16]]);
-  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[405, 20]]);
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[364, 16]]);
+  var root_4 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[408, 20]]);
   var root4 = add_locations(template(`<div class="teashop-container"><div><p class="label"> </p></div> <div class="game-data"><div class="stats"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="sprites"><p class="label"> </p> <p class="label"> </p> <p class="label"> </p> <p class="label"> </p></div> <div class="stats"><p class="label"> </p> <p class="label"> </p> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="teashop-garden"><h2>Garden</h2> <div></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <p class="label"> </p> <div></div> <div class="teashop-serve-container"><p class="label"> </p> <div class="toast-container"></div> <button class="secondary teashop-serve">Serve Tea</button></div></div></div>`), Teashop[FILENAME], [
     [
-      334,
+      337,
       0,
       [
-        [335, 4, [[342, 8]]],
+        [338, 4, [[345, 8]]],
         [
-          344,
+          347,
           4,
           [
             [
-              345,
+              348,
               8,
               [
-                [346, 12],
-                [347, 12],
-                [348, 12],
-                [349, 12]
+                [349, 12],
+                [350, 12],
+                [351, 12],
+                [352, 12]
               ]
             ],
             [
-              351,
+              354,
               8,
               [
-                [352, 12],
-                [353, 12],
-                [354, 12],
-                [355, 12]
+                [355, 12],
+                [356, 12],
+                [357, 12],
+                [358, 12]
               ]
             ],
             [
-              357,
+              360,
               8,
-              [[358, 12], [359, 12], [367, 12]]
+              [[361, 12], [362, 12], [370, 12]]
             ]
           ]
         ],
-        [374, 4, [[375, 8], [376, 8]]],
+        [377, 4, [[378, 8], [379, 8]]],
         [
-          387,
+          390,
           4,
           [
-            [388, 8],
-            [389, 8],
-            [390, 8],
+            [391, 8],
+            [392, 8],
+            [393, 8],
             [
-              401,
+              404,
               8,
-              [[402, 12], [403, 12], [416, 12]]
+              [[405, 12], [406, 12], [419, 12]]
             ]
           ]
         ]
@@ -4845,6 +4855,7 @@ https://svelte.dev/e/store_invalid_shape`);
     const $isDaytime = () => (validate_store(isDaytime, "isDaytime"), store_get(isDaytime, "$isDaytime", $$stores));
     const dispatch = createEventDispatcher();
     let lastSavedTime = mutable_source(null);
+    let grownPlants = 0;
     let harvestedPlants = mutable_source(0);
     let brewedTea = mutable_source(0);
     let servedTea = mutable_source(0);
@@ -4933,6 +4944,9 @@ https://svelte.dev/e/store_invalid_shape`);
         console.log(...log_if_contains_state("log", "Updated sprites:", get(sprites)));
         startAutomation();
       }
+    }
+    function handleGrowingComplete() {
+      grownPlants += 1;
     }
     function handlePlantComplete() {
       set(harvestedPlants, get(harvestedPlants) + 2);
@@ -5058,6 +5072,7 @@ https://svelte.dev/e/store_invalid_shape`);
       const gameState = {
         lastSaved: Date.now(),
         currentTime: get(currentTime),
+        grownPlants,
         harvestedPlants: get(harvestedPlants),
         brewedTea: get(brewedTea),
         servedTea: get(servedTea),
@@ -5082,6 +5097,7 @@ https://svelte.dev/e/store_invalid_shape`);
       const savedState = localStorage.getItem("teashopGameState");
       if (savedState) {
         const gameState = JSON.parse(savedState);
+        grownPlants = gameState.grownPlants;
         set(harvestedPlants, gameState.harvestedPlants);
         set(brewedTea, gameState.brewedTea);
         set(servedTea, gameState.servedTea);
@@ -5096,11 +5112,7 @@ https://svelte.dev/e/store_invalid_shape`);
           () => {
             gameState.plotStates.forEach((state2, i) => {
               if (state2 && get(plotRefs)[i]) {
-                if (state2.isGrowing) get(plotRefs)[i].plantTea();
-                if (state2.readyToHarvest) {
-                  mutate(plotRefs, get(plotRefs)[i].readyToHarvest = true);
-                  mutate(plotRefs, get(plotRefs)[i].progress = 100);
-                }
+                get(plotRefs)[i].setState(state2);
               }
             });
             gameState.teapotStates.forEach((state2, i) => {
@@ -5112,7 +5124,7 @@ https://svelte.dev/e/store_invalid_shape`);
           },
           100
         );
-        console.log("Games loaded");
+        console.log("Game loaded");
       }
     }
     onMount(() => {

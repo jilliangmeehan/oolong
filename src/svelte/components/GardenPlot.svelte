@@ -13,7 +13,13 @@
 
     // Create a method to get the current state
     export function getState() {
-        return { isGrowing, readyToHarvest };
+        return { isGrowing, readyToHarvest, progress };
+    }
+
+    export function setState(state) {
+        isGrowing = state.isGrowing;
+        readyToHarvest = state.readyToHarvest;
+        progress = state.progress;
     }
 
     export function plantTea() {
