@@ -1,12 +1,12 @@
 <script>
     export let points = 0;
 
-    const GARDEN_PLOT_COST = 5;
-    const TEAPOT_COST = 10;
+    const GARDEN_PLOT_COST = 10;
+    const TEAPOT_COST = 75;
     const SPRITE_COSTS = {
-        harvest: 100,
-        brewmaster: 150,
-        garden: 250,
+        garden: 100,
+        harvest: 150,
+        brewmaster: 250,
         cafe: 500,
     };
 

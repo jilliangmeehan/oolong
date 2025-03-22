@@ -4520,12 +4520,12 @@ https://svelte.dev/e/lifecycle_outside_component`);
     check_target(new.target);
     push($$props, false, Shop);
     let points = prop($$props, "points", 8, 0);
-    const GARDEN_PLOT_COST = 5;
-    const TEAPOT_COST = 10;
+    const GARDEN_PLOT_COST = 10;
+    const TEAPOT_COST = 75;
     const SPRITE_COSTS = {
-      harvest: 100,
-      brewmaster: 150,
-      garden: 250,
+      garden: 100,
+      harvest: 150,
+      brewmaster: 250,
       cafe: 500
     };
     const dispatch = createEventDispatcher();
@@ -4643,9 +4643,9 @@ https://svelte.dev/e/lifecycle_outside_component`);
     let toasts = mutable_source([]);
     let toastId = 0;
     let sprites = mutable_source({
+      garden: 0,
       harvest: 0,
       brewmaster: 0,
-      garden: 0,
       cafe: 0
     });
     let workingSprites = {

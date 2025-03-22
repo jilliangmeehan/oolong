@@ -19,9 +19,9 @@
     let toastId = 0;
 
     let sprites = {
+        garden: 0,
         harvest: 0,
         brewmaster: 0,
-        garden: 0,
         cafe: 0,
     };
 
