@@ -10,7 +10,7 @@
     let harvestedPlants = 0;
     let brewedTea = 0;
     let servedTea = 0;
-    let points = 50;
+    let points = 0;
     let gardenPlots = 1;
     let teapots = 1;
     let automationIntervals = [];

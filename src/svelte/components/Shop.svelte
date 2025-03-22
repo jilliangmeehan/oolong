@@ -4,10 +4,10 @@
     const GARDEN_PLOT_COST = 5;
     const TEAPOT_COST = 10;
     const SPRITE_COSTS = {
-        harvest: 5,
-        brewmaster: 5,
-        garden: 5,
-        cafe: 5,
+        harvest: 100,
+        brewmaster: 150,
+        garden: 250,
+        cafe: 500,
     };
 
     import { createEventDispatcher } from "svelte";
