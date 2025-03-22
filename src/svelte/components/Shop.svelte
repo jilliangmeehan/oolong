@@ -45,11 +45,19 @@
 <details class="shop">
     <summary class="shop-title"><h2 class="label">Shop</h2></summary>
 
-    <button on:click={buyGardenPlot} disabled={points < GARDEN_PLOT_COST}>
+    <button
+        class="buy-upgrade"
+        on:click={buyGardenPlot}
+        disabled={points < GARDEN_PLOT_COST}
+    >
         +1 Garden Plot ({GARDEN_PLOT_COST} points)
     </button>
 
-    <button on:click={buyTeapot} disabled={points < TEAPOT_COST}>
+    <button
+        class="buy-upgrade"
+        on:click={buyTeapot}
+        disabled={points < TEAPOT_COST}
+    >
         +1 Teapot ({TEAPOT_COST} points)
     </button>
 

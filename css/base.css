@@ -340,13 +340,15 @@ button:disabled:hover {
     margin: 8px 0;
 }
 
-.shop > button {
+button.buy-upgrade,
+button.hire-sprite {
     background-color: var(--tea);
     color: var(--oat);
     margin-left: 0;
 }
 
-.shop > button:hover {
+button.buy-upgrade:hover,
+button.hire-sprite:hover {
     opacity: 0.8;
 }
 
