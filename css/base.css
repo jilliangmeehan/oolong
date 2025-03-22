@@ -352,6 +352,16 @@ button.hire-sprite:hover {
     opacity: 0.8;
 }
 
+button.buy-upgrade:disabled,
+button.hire-sprite:disabled {
+    opacity: 0.7;
+}
+
+button.buy-upgrade:disabled:hover,
+button.hire-sprite:disabled:hover {
+    opacity: 0.7;
+}
+
 .shop > button.hire-sprite {
     display: block;
 }
