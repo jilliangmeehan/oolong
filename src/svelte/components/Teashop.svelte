@@ -75,25 +75,34 @@
     function startDayCycle() {
         let quarters = ["sunrise", "day", "sunset", "night"];
         let quarterIndex = 0;
+        const now = Date.now();
+        const cycleLength = TIMINGS.QUARTER_DURATION * 4;
+        const savedCycleStart = localStorage.getItem("cycleStartTime");
 
-        function updateQuarter() {
-            currentTime = quarters[quarterIndex];
-            timeOfDay.set(currentTime);
-            isDaytime.set(currentTime !== "night");
-            quarterIndex = (quarterIndex + 1) % quarters.length;
+        if (savedCycleStart) {
+            const elapsedTime = now - parseInt(savedCycleStart);
+            const currentCycleTime = elapsedTime % cycleLength;
+            const currentQuarterIndex = Math.floor(
+                currentCycleTime / TIMINGS.QUARTER_DURATION,
+            );
 
-            if (currentTime === "sunrise") {
-                createToast("The sun is rising!", null, "sunrise");
-            } else if (currentTime === "sunset") {
-                createToast("The sun is setting!", null, "sunset");
-            } else if (currentTime === "night") {
-                createToast("Shh...sprites are sleeping...", null, "night");
-            }
+            currentTime = quarters[currentQuarterIndex];
+        } else {
+            localStorage.setItem("cycleStartTime", Date.now().toString());
+            currentTime = quarters[0];
         }
 
-        updateQuarter();
+        timeOfDay.set(currentTime);
+        isDaytime.set(currentTime !== "night");
 
-        timeInterval = setInterval(updateQuarter, TIMINGS.QUARTER_DURATION);
+        cycleInterval = setInterval(() => {
+            const currentIndex = quarters.indexOf(currentTime);
+            const nextIndex = (currentIndex + 1) % quarters.length;
+            currentTime = quarters[nextIndex];
+
+            timeOfDay.set(currentTime);
+            isDaytime.set(currentTime !== "night");
+        }, TIMINGS.QUARTER_DURATION);
     }
 
     function serveTea() {
@@ -260,6 +269,7 @@
         try {
             localStorage.setItem("teashopGameState", JSON.stringify(gameState));
             lastSavedTime = new Date();
+            localStorage.setItem("cycleStartTime", Date.now().toString());
             createToast("Game saved! 💾", null, "success"); // New save notification
             console.log("Game state saved");
         } catch (e) {
@@ -284,6 +294,12 @@
             timeOfDay.set(currentTime);
             isDaytime.set(currentTime !== "night");
 
+            if (gameState.currentTime) {
+                currentPhase = gameState.currentTime;
+                timeOfDay.set(currentTime);
+                isDaytime.set(currentTime !== "night");
+            }
+
             setTimeout(() => {
                 gameState.plotStates.forEach((state, i) => {
                     if (state && plotRefs[i]) {
@@ -293,9 +309,7 @@
 
                 gameState.teapotStates.forEach((state, i) => {
                     if (state && teapotRefs[i]) {
-                        if (state.isBrewing) teapotRefs[i].brewTea();
-                        if (state.brewedTea > 0)
-                            teapotRefs[i].brewedTea = state.brewedTea;
+                        teapotRefs[i].setState(state);
                     }
                 });
             }, 100);
@@ -304,11 +318,63 @@
         }
     }
 
+    function resetGame() {
+        localStorage.removeItem("teashopGameState");
+        localStorage.removeItem("cycleStartTime");
+
+        harvestedPlants = 0;
+        brewedTea = 0;
+        servedTea = 0;
+        points = 0;
+        gardenPlots = 1;
+        teapots = 1;
+        sprites = {
+            garden: 0,
+            harvest: 0,
+            brewmaster: 0,
+            cafe: 0,
+        };
+        workingSprites = {
+            garden: 0,
+            harvest: 0,
+            brewmaster: 0,
+            cafe: 0,
+        };
+
+        // Reset all garden plots
+        plotRefs.forEach((plot) => {
+            if (plot) {
+                plot.setState({
+                    isGrowing: false,
+                    readyToHarvest: false,
+                    progress: 0,
+                });
+            }
+        });
+
+        // Reset all teapots
+        teapotRefs.forEach((teapot) => {
+            if (teapot) {
+                teapot.setState({
+                    isBrewing: false,
+                    brewedTea: 0,
+                    progress: 0,
+                });
+            }
+        });
+
+        automationIntervals.forEach((interval) => clearInterval(interval));
+        automationIntervals = [];
+        startAutomation();
+
+        createToast("A fresh start!");
+    }
+
     onMount(() => {
         console.log("Component mounted");
         loadGameState();
-        startAutomation();
         startDayCycle();
+        startAutomation();
 
         const autosaveInterval = setInterval(saveGameState, 30000); // Save every 30 seconds
         automationIntervals.push(autosaveInterval);
@@ -328,9 +394,7 @@
 
     onDestroy(() => {
         automationIntervals.forEach((interval) => clearInterval(interval));
-        clearInterval(timeInterval);
-        document.removeEventListener("visibilitychange", saveGameState);
-        window.removeEventListener("beforeunload", saveGameState);
+        if (cycleInterval) clearInterval(cycleInterval);
     });
 </script>
 
@@ -373,7 +437,7 @@
         </div>
     </div>
 
-    <Shop {points} on:purchase={handlePurchase} />
+    <Shop {points} on:purchase={handlePurchase} on:reset={resetGame} />
     <div class="teashop-garden">
         <h2>Garden</h2>
         <div>

@@ -1,6 +1,7 @@
 <script>
     import { TIMINGS, PROGRESS_INCREMENT } from "../config.js";
     import { isDaytime } from "../stores.js";
+    import { onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
@@ -20,7 +21,25 @@
         isGrowing = state.isGrowing;
         readyToHarvest = state.readyToHarvest;
         progress = state.progress;
+
+        // If the plant was in the middle of growing, restart the growing process
+        if (isGrowing && !readyToHarvest) {
+            const interval = setInterval(() => {
+                const growthRate = isDay
+                    ? PROGRESS_INCREMENT.GROW
+                    : PROGRESS_INCREMENT.NIGHT_GROWTH;
+                progress += growthRate;
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    isGrowing = false;
+                    readyToHarvest = true;
+                }
+            }, 100);
+        }
     }
+
+    // It's also good practice to clean up intervals when the component is destroyed
+    let growthInterval;
 
     export function plantTea() {
         if (isGrowing || readyToHarvest) return;
@@ -29,18 +48,28 @@
         readyToHarvest = false;
         progress = 0;
 
-        const interval = setInterval(() => {
+        // Store the interval reference so we can clear it if needed
+        if (growthInterval) clearInterval(growthInterval);
+
+        growthInterval = setInterval(() => {
             const growthRate = isDay
                 ? PROGRESS_INCREMENT.GROW
                 : PROGRESS_INCREMENT.NIGHT_GROWTH;
             progress += growthRate;
             if (progress >= 100) {
-                clearInterval(interval);
+                clearInterval(growthInterval);
+                growthInterval = null;
                 isGrowing = false;
                 readyToHarvest = true;
             }
         }, 100);
     }
+
+    onDestroy(() => {
+        if (growthInterval) {
+            clearInterval(growthInterval);
+        }
+    });
 
     export function harvest() {
         if (!readyToHarvest) return;

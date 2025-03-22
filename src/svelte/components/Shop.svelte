@@ -40,11 +40,20 @@
             });
         }
     }
+
+    function resetGame() {
+        if (confirm("Are you sure you want to start over?")) {
+            dispatch("reset");
+        }
+    }
 </script>
 
 <details class="shop">
-    <summary class="shop-title"><h2 class="label">Shop</h2></summary>
+    <summary class="shop-title"
+        ><h2 class="label">click here to do stuff</h2></summary
+    >
 
+    <h3 class="label">buy upgrades</h3>
     <button
         class="secondary buy-upgrade"
         on:click={buyGardenPlot}
@@ -71,4 +80,8 @@
             {type} Sprite ({cost} points)
         </button>
     {/each}
+
+    <h3 class="label">Other stuff</h3>
+    <button class="secondary reset-game" on:click={resetGame}>Reset game</button
+    >
 </details>

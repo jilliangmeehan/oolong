@@ -365,12 +365,15 @@ button.secondary:disabled:hover {
 }
 
 .shop > .label {
-    margin: 8px 0;
+    margin-top: 16px;
+    margin-bottom: 0;
 }
 
 button.buy-upgrade,
-button.hire-sprite {
+button.hire-sprite,
+button.reset-game {
     margin-left: 0;
+    margin-top: 0;
 }
 
 button.save-game {
