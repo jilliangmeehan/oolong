@@ -343,8 +343,8 @@ button.secondary:disabled:hover {
 .stats,
 .sprites {
     display: inline-block;
-    margin-right: 18px;
-    margin-bottom: 24px;
+    margin-right: 24px;
+    margin-bottom: 36px;
 }
 
 .shop-title {

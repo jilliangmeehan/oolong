@@ -1,5 +1,5 @@
 <script>
-    import { TIMINGS } from "../config.js";
+    import { TIMINGS, POINTS } from "../config.js";
     import GardenPlot from "./GardenPlot.svelte";
     import Teapot from "./Teapot.svelte";
     import Shop from "./Shop.svelte";
@@ -17,8 +17,9 @@
     let gardenPlots = 1;
     let teapots = 1;
     let currentTime = "sunrise";
-    let timeInterval;
+    let cycleInterval;
     let automationIntervals = [];
+    const QUARTERS = ["sunrise", "day", "sunset", "night"];
 
     let toasts = [];
     let toastId = 0;
@@ -73,45 +74,52 @@
     }
 
     function startDayCycle() {
-        let quarters = ["sunrise", "day", "sunset", "night"];
-        let quarterIndex = 0;
-        const now = Date.now();
-        const cycleLength = TIMINGS.QUARTER_DURATION * 4;
-        const savedCycleStart = localStorage.getItem("cycleStartTime");
-
-        if (savedCycleStart) {
-            const elapsedTime = now - parseInt(savedCycleStart);
-            const currentCycleTime = elapsedTime % cycleLength;
-            const currentQuarterIndex = Math.floor(
-                currentCycleTime / TIMINGS.QUARTER_DURATION,
-            );
-
-            currentTime = quarters[currentQuarterIndex];
-        } else {
-            localStorage.setItem("cycleStartTime", Date.now().toString());
-            currentTime = quarters[0];
+        // First, try to load saved time
+        const savedState = localStorage.getItem("teashopGameState");
+        if (savedState) {
+            const gameState = JSON.parse(savedState);
+            currentTime = gameState.currentTime || "sunrise";
         }
 
+        // Update stores with current time
         timeOfDay.set(currentTime);
         isDaytime.set(currentTime !== "night");
 
+        // Clear any existing interval
+        if (cycleInterval) clearInterval(cycleInterval);
+
+        // Start the cycle from current time
         cycleInterval = setInterval(() => {
-            const currentIndex = quarters.indexOf(currentTime);
-            const nextIndex = (currentIndex + 1) % quarters.length;
-            currentTime = quarters[nextIndex];
+            const currentIndex = QUARTERS.indexOf(currentTime);
+            const nextIndex = (currentIndex + 1) % QUARTERS.length;
+            currentTime = QUARTERS[nextIndex];
 
             timeOfDay.set(currentTime);
             isDaytime.set(currentTime !== "night");
+
+            if (currentTime === "sunrise") {
+                createToast("The sun is rising!", null, "sunrise");
+            } else if (currentTime === "sunset") {
+                createToast("The sun is setting!", null, "sunset");
+            } else if (currentTime === "night") {
+                createToast("Shh...sprites are sleeping...", null, "night");
+            }
+
+            // Save state whenever time changes
+            saveGameState();
         }, TIMINGS.QUARTER_DURATION);
     }
 
     function serveTea() {
         if (brewedTea >= 1) {
+            let spriteBonus = sprites.cafe * POINTS.CAFE_SPRITE_BONUS;
+            let pointsEarned = POINTS.BASE + spriteBonus;
+
             brewedTea -= 1;
             servedTea += 1;
-            points += 5;
+            points += pointsEarned;
             dispatch("teaServed");
-            createToast("+5 points!", 5);
+            createToast(`+${pointsEarned} points!`, pointsEarned);
         }
     }
 
@@ -182,20 +190,22 @@
             const interval = setInterval(() => {
                 if (
                     $isDaytime &&
-                    workingSprites.brewmaster < sprites.brewmaster
+                    workingSprites.brewmaster < sprites.brewmaster &&
+                    harvestedPlants > 0
                 ) {
                     for (let i = 0; i < teapotRefs.length; i++) {
                         const teapot = teapotRefs[i];
                         if (teapot) {
                             const state = teapot.getState();
-                            if (!state.isBrewing && harvestedPlants > 0) {
+                            if (!state.isBrewing) {
+                                // Only check if the teapot isn't already brewing
                                 workingSprites.brewmaster += 1;
                                 teapot.brewTea();
-                                // After brewing is done (10 seconds)
+                                // After brewing is done
                                 setTimeout(() => {
                                     workingSprites.brewmaster -= 1;
                                 }, TIMINGS.BREW_TIME);
-                                break;
+                                break; // Exit the loop after starting one pot
                             }
                         }
                     }
@@ -228,21 +238,18 @@
         // Cafe Sprites
         if (sprites.cafe > 0) {
             const interval = setInterval(() => {
-                if ($isDaytime && workingSprites.cafe < sprites.cafe) {
-                    for (let i = 0; i < teapotRefs.length; i++) {
-                        const teapot = teapotRefs[i];
-                        if (teapot) {
-                            const state = teapot.getState();
-                            if (state.brewedTea > 0) {
-                                workingSprites.cafe += 1;
-                                serveTea();
-                                // Serving is instant, but add a small cooldown
-                                setTimeout(() => {
-                                    workingSprites.cafe -= 1;
-                                }, TIMINGS.SERVE_COOLDOWN);
-                            }
-                        }
-                    }
+                if (
+                    $isDaytime &&
+                    workingSprites.cafe < sprites.cafe &&
+                    brewedTea > 0
+                ) {
+                    // Check brewedTea > 0
+                    workingSprites.cafe += 1;
+                    serveTea(); // This will handle one cup
+                    // Serving is instant, but add a small cooldown
+                    setTimeout(() => {
+                        workingSprites.cafe -= 1;
+                    }, TIMINGS.SERVE_COOLDOWN);
                 }
             }, 1000);
             automationIntervals.push(interval);
@@ -294,12 +301,6 @@
             timeOfDay.set(currentTime);
             isDaytime.set(currentTime !== "night");
 
-            if (gameState.currentTime) {
-                currentPhase = gameState.currentTime;
-                timeOfDay.set(currentTime);
-                isDaytime.set(currentTime !== "night");
-            }
-
             setTimeout(() => {
                 gameState.plotStates.forEach((state, i) => {
                     if (state && plotRefs[i]) {
@@ -320,7 +321,6 @@
 
     function resetGame() {
         localStorage.removeItem("teashopGameState");
-        localStorage.removeItem("cycleStartTime");
 
         harvestedPlants = 0;
         brewedTea = 0;
@@ -366,6 +366,14 @@
         automationIntervals.forEach((interval) => clearInterval(interval));
         automationIntervals = [];
         startAutomation();
+
+        currentTime = "sunrise";
+        timeOfDay.set(currentTime);
+        isDaytime.set(true);
+
+        // Clear and restart time cycle
+        if (cycleInterval) clearInterval(cycleInterval);
+        startDayCycle();
 
         createToast("A fresh start!");
     }

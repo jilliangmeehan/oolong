@@ -1,5 +1,5 @@
 <script>
-    import { TIMINGS, PROGRESS_INCREMENT } from "../config.js";
+    import { TIMINGS } from "../config.js";
     import { onDestroy } from "svelte";
     export let harvestedPlants = 0;
     let progress = 0;
@@ -20,12 +20,12 @@
         brewedTea = state.brewedTea;
         progress = state.progress;
 
-        // If it was in the middle of brewing, restart the brewing process
         if (isBrewing) {
             if (brewingInterval) clearInterval(brewingInterval);
 
+            const increment = calculateBrewIncrement();
             brewingInterval = setInterval(() => {
-                progress += PROGRESS_INCREMENT.BREW;
+                progress += increment;
                 if (progress >= 100) {
                     clearInterval(brewingInterval);
                     brewingInterval = null;
@@ -35,6 +35,11 @@
                 }
             }, 100);
         }
+    }
+
+    function calculateBrewIncrement() {
+        // Calculate how much progress to add each tick to complete in BREW_TIME
+        return (100 * 100) / TIMINGS.BREW_TIME; // 100 is the interval time in ms
     }
 
     export function brewTea() {
@@ -47,9 +52,9 @@
 
         // Clear any existing interval just in case
         if (brewingInterval) clearInterval(brewingInterval);
-
+        const increment = calculateBrewIncrement();
         brewingInterval = setInterval(() => {
-            progress += PROGRESS_INCREMENT.BREW;
+            progress += increment;
             if (progress >= 100) {
                 clearInterval(brewingInterval);
                 brewingInterval = null;

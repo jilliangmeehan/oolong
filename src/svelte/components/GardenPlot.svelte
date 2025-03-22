@@ -1,5 +1,5 @@
 <script>
-    import { TIMINGS, PROGRESS_INCREMENT } from "../config.js";
+    import { TIMINGS } from "../config.js";
     import { isDaytime } from "../stores.js";
     import { onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
@@ -22,15 +22,15 @@
         readyToHarvest = state.readyToHarvest;
         progress = state.progress;
 
-        // If the plant was in the middle of growing, restart the growing process
         if (isGrowing && !readyToHarvest) {
-            const interval = setInterval(() => {
-                const growthRate = isDay
-                    ? PROGRESS_INCREMENT.GROW
-                    : PROGRESS_INCREMENT.NIGHT_GROWTH;
-                progress += growthRate;
+            if (growthInterval) clearInterval(growthInterval);
+
+            growthInterval = setInterval(() => {
+                const increment = calculateGrowthIncrement(isDay);
+                progress += increment;
                 if (progress >= 100) {
-                    clearInterval(interval);
+                    clearInterval(growthInterval);
+                    growthInterval = null;
                     isGrowing = false;
                     readyToHarvest = true;
                 }
@@ -41,6 +41,12 @@
     // It's also good practice to clean up intervals when the component is destroyed
     let growthInterval;
 
+    function calculateGrowthIncrement(isDay) {
+        // Calculate base increment to complete in GROW_TIME
+        const baseIncrement = (100 * 100) / TIMINGS.GROW_TIME; // 100 is the interval time in ms
+        return isDay ? baseIncrement : baseIncrement * 0.5; // Half speed at night
+    }
+
     export function plantTea() {
         if (isGrowing || readyToHarvest) return;
 
@@ -48,21 +54,18 @@
         readyToHarvest = false;
         progress = 0;
 
-        // Store the interval reference so we can clear it if needed
         if (growthInterval) clearInterval(growthInterval);
 
         growthInterval = setInterval(() => {
-            const growthRate = isDay
-                ? PROGRESS_INCREMENT.GROW
-                : PROGRESS_INCREMENT.NIGHT_GROWTH;
-            progress += growthRate;
+            const increment = calculateGrowthIncrement(isDay);
+            progress += increment;
             if (progress >= 100) {
                 clearInterval(growthInterval);
                 growthInterval = null;
                 isGrowing = false;
                 readyToHarvest = true;
             }
-        }, 100);
+        }, 100); // Update every 100ms
     }
 
     onDestroy(() => {
