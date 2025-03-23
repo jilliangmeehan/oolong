@@ -265,12 +265,40 @@ button:hover {
     cursor: pointer;
 }
 
+button:active,
+button:active:hover {
+    background-color: var(--oat);
+}
+
 button:disabled {
     opacity: 0.7;
 }
 
 button:disabled:hover {
     background-color: var(--oat);
+}
+
+button.secondary {
+    background-color: var(--tea);
+    color: var(--oat);
+}
+
+button.secondary:hover {
+    background-color: var(--tea);
+    color: var(--oat);
+    opacity: 0.8;
+}
+
+button.secondary:active,
+button.secondary:active:hover {
+    opacity: 1;
+}
+
+button.secondary:disabled,
+button.secondary:disabled:hover {
+    background-color: var(--tea);
+    color: var(--oat);
+    opacity: 0.7;
 }
 
 .see_more {
@@ -294,14 +322,34 @@ button:disabled:hover {
 }
 
 /* teashop */
-
 .garden-plot,
 .teapot {
     background-color: white;
     border: 2px dashed var(--oat);
     border-radius: 6px;
-    margin: 8px;
+    margin: 0;
     padding: 8px;
+    width: 100%;
+}
+
+.garden-plot button,
+.teapot button {
+    margin: 4px;
+    width: auto;
+}
+
+.garden-box,
+.harvest-box,
+.teapot {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: start;
+}
+
+progress[value] {
+    width: 90%;
 }
 
 .label {
@@ -312,81 +360,28 @@ button:disabled:hover {
     padding: 0;
 }
 
-.stats,
-.sprites {
-    display: inline-block;
-    margin-right: 120px;
-    margin-bottom: 24px;
-}
-
-.shop-title {
-    list-style: none;
-    font-family: "Departure Mono", sans-serif;
-    text-transform: uppercase;
-    font-size: small;
-}
-
-.shop-title:hover {
-    cursor: pointer;
-}
-
-.shop {
-    background-color: var(--oat);
-    padding: 16px;
-    border-radius: 6px;
-}
-
-.shop > .label {
-    margin: 8px 0;
-}
-
 button.buy-upgrade,
-button.hire-sprite {
-    background-color: var(--tea);
-    color: var(--oat);
+button.hire-sprite,
+button.reset-game,
+button.unlock-tea {
     margin-left: 0;
+    margin-top: 0;
 }
 
-button.buy-upgrade:hover,
-button.hire-sprite:hover {
-    background-color: var(--tea);
-    opacity: 0.8;
+button.save-game {
+    margin: 0;
+    padding: 3px 6px;
 }
 
-button.buy-upgrade:disabled,
-button.hire-sprite:disabled {
-    background-color: var(--tea);
-    opacity: 0.7;
-}
-
-button.buy-upgrade:disabled:hover,
-button.hire-sprite:disabled:hover {
-    background-color: var(--tea);
-    opacity: 0.7;
-}
-
-.shop > button.hire-sprite {
+.shop > button.hire-sprite,
+.shop > button.unlock-tea {
     display: block;
 }
 
-button.teashop-serve {
-    background-color: var(--tea);
-    color: var(--oat);
+button.teashop-serve,
+button.teashop-serve:active,
+button.teashop-serve:disabled:active {
     border: 3px solid var(--oat);
-}
-
-button.teashop-serve:hover {
-    background-color: var(--tea);
-    opacity: 0.8;
-}
-
-button.teashop-serve:disabled {
-    opacity: 0.7;
-}
-
-button.teashop-serve:disabled:hover {
-    background-color: var(--tea);
-    opacity: 0.7;
 }
 
 button.teashop-serve:active {
@@ -394,49 +389,13 @@ button.teashop-serve:active {
     opacity: 1;
 }
 
-button.teashop-serve:disabled:active {
-    border: 3px solid var(--oat);
-    opacity: 0.7;
-}
-
-.teashop-serve-container {
-    margin-top: 36px;
+select {
+    font-family: var(--mono);
+    font-size: small;
+    text-transform: uppercase;
+    margin: 4px;
     float: right;
-    text-align: right;
-}
-
-.toast-container {
-    position: absolute;
-    right: -120px;
-    bottom: 100%;
-    pointer-events: none;
-}
-
-.toast {
-    position: absolute;
-    right: var(--x);
-    padding: 8px;
-    font-size: 14px;
-    font-family: "Departure Mono";
-    color: var(--matcha);
-    animation: float-up 2s ease-out forwards;
-    white-space: nowrap;
-}
-
-@keyframes float-up {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-}
-
-.teashop-serve-container {
-    margin-top: 36px;
-    float: right;
-    text-align: right;
-    position: relative;
+    background-color: var(--cloud);
+    border-color: var(--oat);
+    border-radius: 3px;
 }

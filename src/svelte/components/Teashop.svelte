@@ -1,5 +1,5 @@
 <script>
-    import { TIMINGS, POINTS } from "../config.js";
+    import { TIMINGS, POINTS, TEA } from "../config.js";
     import GardenPlot from "./GardenPlot.svelte";
     import Teapot from "./Teapot.svelte";
     import Shop from "./Shop.svelte";
@@ -11,8 +11,11 @@
 
     let lastSavedTime = null;
     let grownPlants = 0;
-    let harvestedPlants = 0;
+    let readyToHarvest = 0;
+    let harvestedTeas = { green: 0 };
     let brewedTea = 0;
+    let brewedTeas = { green: 0 };
+    let nextServed = null;
     let servedTea = 0;
     let points = 0;
     let gardenPlots = 1;
@@ -20,6 +23,24 @@
     let currentTime = "sunrise";
     let cycleInterval;
     let automationIntervals = [];
+    let unlockedTeaTypes = {
+        green: true,
+    };
+
+    let teaStats = {
+        current: {
+            ready: { total: 0, byType: {} },
+            harvested: { total: 0, byType: {} },
+            brewed: { total: 0, byType: {} },
+        },
+        lifetime: {
+            grown: { total: 0, byType: {} },
+            harvested: { total: 0, byType: {} },
+            brewed: { total: 0, byType: {} },
+            served: { total: 0, byType: {} },
+        },
+    };
+
     const QUARTERS = ["sunrise", "day", "sunset", "night"];
 
     let toasts = [];
@@ -39,11 +60,9 @@
         cafe: 0,
     };
 
-    // References to components that need automation
     let plotRefs = [];
     let teapotRefs = [];
 
-    // Make arrays reactive to component count changes
     $: {
         plotRefs = [...Array(gardenPlots)].map((_, i) => plotRefs[i] || null);
         console.log("Updated plotRefs:", plotRefs);
@@ -54,9 +73,64 @@
         console.log("Updated teapotRefs:", teapotRefs);
     }
 
+    $: {
+        teaStats = {
+            current: {
+                ready: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.current?.ready || {}),
+                },
+                harvested: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.current?.harvested || {}),
+                },
+                brewed: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.current?.brewed || {}),
+                },
+            },
+            lifetime: {
+                grown: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.lifetime?.grown || {}),
+                },
+                harvested: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.lifetime?.harvested || {}),
+                },
+                brewed: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.lifetime?.brewed || {}),
+                },
+                served: {
+                    total: 0,
+                    byType: {},
+                    ...(teaStats?.lifetime?.served || {}),
+                },
+            },
+        };
+    }
+
+    $: {
+        nextAvailable = { type: null, amount: 0 };
+
+        for (const [type, amount] of Object.entries(brewedTeas)) {
+            if (amount > 0) {
+                nextAvailable = { type, amount };
+                break;
+            }
+        }
+    }
+
     function createToast(message = "hiya!", points = null, type = "default") {
         const id = toastId++;
-        const x = Math.random() * 40 - 20; // Random x position offset
+        const x = Math.random() * 40 - 20;
         const toast = {
             id,
             x,
@@ -68,28 +142,22 @@
         };
         toasts = [...toasts, toast];
 
-        // Remove the toast after animation
         setTimeout(() => {
             toasts = toasts.filter((t) => t.id !== id);
         }, 2000);
     }
 
     function startDayCycle() {
-        // First, try to load saved time
         const savedState = localStorage.getItem("teashopGameState");
         if (savedState) {
             const gameState = JSON.parse(savedState);
             currentTime = gameState.currentTime || "sunrise";
         }
 
-        // Update stores with current time
         timeOfDay.set(currentTime);
         isDaytime.set(currentTime !== "night");
 
-        // Clear any existing interval
         if (cycleInterval) clearInterval(cycleInterval);
-
-        // Start the cycle from current time
         cycleInterval = setInterval(() => {
             const currentIndex = QUARTERS.indexOf(currentTime);
             const nextIndex = (currentIndex + 1) % QUARTERS.length;
@@ -111,28 +179,17 @@
         }, TIMINGS.QUARTER_DURATION);
     }
 
-    function serveTea() {
-        if (brewedTea >= 1) {
-            let spriteBonus = sprites.cafe * POINTS.CAFE_SPRITE_BONUS;
-            let pointsEarned = POINTS.BASE + spriteBonus;
-
-            brewedTea -= 1;
-            servedTea += 1;
-            points += pointsEarned;
-            dispatch("teaServed");
-            createToast(`+${pointsEarned} points!`, pointsEarned);
-        }
-    }
-
     function handlePurchase(event) {
-        const { item, cost, spriteType } = event.detail;
-        console.log("Purchase:", { item, cost, spriteType });
+        const { item, cost, spriteType, teaType } = event.detail;
 
         if (item === "gardenPlot") {
             gardenPlots += 1;
             points -= cost;
         } else if (item === "teapot") {
             teapots += 1;
+            points -= cost;
+        } else if (item === "teaType") {
+            unlockedTeaTypes[teaType] = true;
             points -= cost;
         } else if (item === "sprite") {
             sprites[spriteType] += 1;
@@ -142,16 +199,109 @@
         }
     }
 
-    function handlePlantComplete() {
-        harvestedPlants += 2;
+    function handlePlantReady(event) {
+        const { teaType } = event.detail;
+        readyToHarvest++;
+
+        teaStats.current.ready.byType[teaType] = Math.max(
+            (teaStats.current.ready.byType[teaType] || 0) + 1,
+            0,
+        );
+        teaStats.current.ready.total = Math.max(readyToHarvest, 0);
     }
 
-    function handleHarvestedTea() {
-        harvestedPlants -= 1;
+    function handlePlantComplete(event) {
+        const { teaType } = event.detail;
+        harvestedTeas[teaType] = (harvestedTeas[teaType] || 0) + 2;
+
+        teaStats.current.harvested.byType[teaType] = harvestedTeas[teaType];
+        teaStats.current.harvested.total = Object.values(harvestedTeas).reduce(
+            (sum, val) => sum + val,
+            0,
+        );
+
+        teaStats.lifetime.grown.byType[teaType] =
+            (teaStats.lifetime.grown.byType[teaType] || 0) + 2;
+        teaStats.lifetime.grown.total += 2;
+        teaStats.lifetime.harvested.byType[teaType] =
+            (teaStats.lifetime.harvested.byType[teaType] || 0) + 2;
+        teaStats.lifetime.harvested.total += 2;
     }
 
-    function handleBrewedTea() {
+    function handleHarvestStart(event) {
+        const { teaType } = event.detail;
+        readyToHarvest = Math.max(readyToHarvest - 1, 0); // Add safeguard
+        console.log(
+            `Harvest started: ${teaType}, total ready: ${readyToHarvest}`,
+        );
+
+        // Update ready stats with safeguard
+        teaStats.current.ready.byType[teaType] = Math.max(
+            (teaStats.current.ready.byType[teaType] || 0) - 1,
+            0,
+        );
+        teaStats.current.ready.total = readyToHarvest;
+    }
+
+    function handleHarvestedTea(event) {
+        const { teaType } = event.detail;
+        if (harvestedTeas[teaType] > 0) {
+            harvestedTeas[teaType]--;
+            harvestedTeas = { ...harvestedTeas };
+
+            // Update current harvested stats
+            teaStats.current.harvested.byType[teaType] = harvestedTeas[teaType];
+            teaStats.current.harvested.total = Object.values(
+                harvestedTeas,
+            ).reduce((sum, val) => sum + val, 0);
+        }
+    }
+
+    function handleBrewedTea(event) {
+        const { teaType } = event.detail;
+        brewedTeas[teaType] = (brewedTeas[teaType] || 0) + 1;
+        brewedTeas = { ...brewedTeas };
         brewedTea += 1;
+
+        // Update current stats
+        teaStats.current.brewed.byType = { ...brewedTeas };
+        teaStats.current.brewed.total = brewedTea;
+
+        // Update lifetime stats
+        teaStats.lifetime.brewed.byType[teaType] =
+            (teaStats.lifetime.brewed.byType[teaType] || 0) + 1;
+        teaStats.lifetime.brewed.total += 1;
+    }
+
+    function serveTea() {
+        for (const [type, amount] of Object.entries(brewedTeas)) {
+            if (amount > 0) {
+                const pointsEarned =
+                    TEA[type].pointValue +
+                    sprites.cafe * POINTS.CAFE_SPRITE_BONUS;
+
+                brewedTeas[type]--;
+                brewedTea--;
+                servedTea++;
+                points += pointsEarned;
+
+                // Update current brewed stats
+                teaStats.current.brewed.byType[type] = brewedTeas[type];
+                teaStats.current.brewed.total = Object.values(
+                    brewedTeas,
+                ).reduce((sum, val) => sum + val, 0);
+
+                // Update lifetime stats
+                teaStats.lifetime.served.byType[type] =
+                    (teaStats.lifetime.served.byType[type] || 0) + 1;
+                teaStats.lifetime.served.total += 1;
+
+                dispatch("teaServed");
+                createToast(`+${pointsEarned} points!`, pointsEarned);
+                console.log(`Tea served: ${type}, points: ${pointsEarned}`);
+                return;
+            }
+        }
     }
 
     function startAutomation() {
@@ -170,10 +320,9 @@
                             if (state.readyToHarvest && !state.isHarvesting) {
                                 workingSprites.harvest += 1;
                                 plot.harvest();
-                                // Wait for harvest to complete
                                 setTimeout(() => {
                                     workingSprites.harvest -= 1;
-                                }, TIMINGS.HARVEST_TIME);
+                                }, TIMINGS.HARVEST_TIME); // Harvest time is constant
                                 break;
                             }
                         }
@@ -188,21 +337,26 @@
                 if (
                     $isDaytime &&
                     workingSprites.brewmaster < sprites.brewmaster &&
-                    harvestedPlants > 0
+                    Object.values(harvestedTeas).some((amount) => amount > 0)
                 ) {
                     for (let i = 0; i < teapotRefs.length; i++) {
                         const teapot = teapotRefs[i];
                         if (teapot) {
                             const state = teapot.getState();
                             if (!state.isBrewing) {
-                                // Only check if the teapot isn't already brewing
                                 workingSprites.brewmaster += 1;
                                 teapot.brewTea();
-                                // After brewing is done
-                                setTimeout(() => {
-                                    workingSprites.brewmaster -= 1;
-                                }, TIMINGS.BREW_TIME);
-                                break; // Exit the loop after starting one pot
+                                // Wait for the type of tea being brewed
+                                const checkAndRelease = setInterval(() => {
+                                    const currentState = teapot.getState();
+                                    if (currentState.currentTeaType) {
+                                        clearInterval(checkAndRelease);
+                                        setTimeout(() => {
+                                            workingSprites.brewmaster -= 1;
+                                        }, TEA[currentState.currentTeaType].brewTime);
+                                    }
+                                }, 100);
+                                break;
                             }
                         }
                     }
@@ -218,12 +372,19 @@
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
-                            if (!state.isGrowing && !state.readyToHarvest) {
+                            // Add isHarvesting check to prevent planting while harvesting
+                            if (
+                                !state.isGrowing &&
+                                !state.readyToHarvest &&
+                                !state.isHarvesting
+                            ) {
                                 workingSprites.garden += 1;
+                                const selectedTeaType =
+                                    state.selectedTeaType || "green";
                                 plot.plantTea();
                                 setTimeout(() => {
                                     workingSprites.garden -= 1;
-                                }, TIMINGS.GROW_TIME);
+                                }, TEA[selectedTeaType].growTime);
                                 break;
                             }
                         }
@@ -258,9 +419,14 @@
             lastSaved: Date.now(),
             currentTime,
             grownPlants,
-            harvestedPlants,
+            readyToHarvest,
+            harvestedTeas,
+            unlockedTeaTypes,
             brewedTea,
+            brewedTeas,
+            nextServed,
             servedTea,
+            teaStats,
             points,
             gardenPlots,
             teapots,
@@ -287,8 +453,12 @@
         if (savedState) {
             const gameState = JSON.parse(savedState);
             grownPlants = gameState.grownPlants;
-            harvestedPlants = gameState.harvestedPlants;
+            readyToHarvest = gameState.readyToHarvest || 0;
+            harvestedTeas = gameState.harvestedTeas || { green: 0 };
+            unlockedTeaTypes = gameState.unlockedTeaTypes || { green: true };
             brewedTea = gameState.brewedTea;
+            brewedTeas = gameState.brewedTeas || { green: 0 };
+            nextServed = gameState.nextServed || "green";
             servedTea = gameState.servedTea;
             points = gameState.points;
             gardenPlots = gameState.gardenPlots;
@@ -297,6 +467,19 @@
             currentTime = gameState.currentTime || "sunrise";
             timeOfDay.set(currentTime);
             isDaytime.set(currentTime !== "night");
+            teaStats = gameState.teaStats || {
+                current: {
+                    ready: { total: 0, byType: {} },
+                    harvested: { total: 0, byType: {} },
+                    brewed: { total: 0, byType: {} },
+                },
+                lifetime: {
+                    grown: { total: 0, byType: {} },
+                    harvested: { total: 0, byType: {} },
+                    brewed: { total: 0, byType: {} },
+                    served: { total: 0, byType: {} },
+                },
+            };
 
             setTimeout(() => {
                 gameState.plotStates.forEach((state, i) => {
@@ -318,12 +501,14 @@
 
     function resetGame() {
         localStorage.removeItem("teashopGameState");
-
-        harvestedPlants = 0;
+        readyToHarvest = 0;
+        harvestedTeas = { green: 0 };
+        brewedTeas = { green: 0 };
+        unlockedTeaTypes = { green: true };
         brewedTea = 0;
+        nextServed = null;
         servedTea = 0;
         points = 0;
-        displayPoints = 0;
         gardenPlots = 1;
         teapots = 1;
         sprites = {
@@ -337,6 +522,19 @@
             harvest: 0,
             brewmaster: 0,
             cafe: 0,
+        };
+        teaStats = {
+            current: {
+                ready: { total: 0, byType: {} },
+                harvested: { total: 0, byType: {} },
+                brewed: { total: 0, byType: {} },
+            },
+            lifetime: {
+                grown: { total: 0, byType: {} },
+                harvested: { total: 0, byType: {} },
+                brewed: { total: 0, byType: {} },
+                served: { total: 0, byType: {} },
+            },
         };
 
         // Reset all garden plots
@@ -355,8 +553,8 @@
             if (teapot) {
                 teapot.setState({
                     isBrewing: false,
-                    brewedTea: 0,
                     progress: 0,
+                    currentTeaType: null,
                 });
             }
         });
@@ -404,7 +602,7 @@
     });
 </script>
 
-<div class="teashop-container">
+<div class="teashop">
     <div
         class="time-indicator"
         class:sunrise={currentTime === "sunrise"}
@@ -415,13 +613,19 @@
         <p class="label">Current Time: {currentTime}</p>
     </div>
     <div class="game-data">
-        <div class="stats">
+        <div>
             <AnimatedStat label="Points" value={points} />
-            <AnimatedStat label="Plants Harvested" value={harvestedPlants} />
-            <AnimatedStat label="Tea Brewed" value={brewedTea} />
-            <AnimatedStat label="Total Cups Served" value={servedTea} />
+            <AnimatedStat
+                label="Ready to harvest"
+                value={teaStats.current.ready.total}
+            />
+            <AnimatedStat
+                label="Ready to brew"
+                value={teaStats.current.harvested.total}
+            />
+            <AnimatedStat label="Ready to serve" value={brewedTea} />
         </div>
-        <div class="sprites">
+        <div>
             <AnimatedStat label="Garden Sprites" value={sprites.garden} />
             <AnimatedStat label="Harvest Sprites" value={sprites.harvest} />
             <AnimatedStat
@@ -430,7 +634,7 @@
             />
             <AnimatedStat label="Cafe Sprites" value={sprites.cafe} />
         </div>
-        <div class="stats">
+        <div>
             <AnimatedStat label="Garden Plots" value={gardenPlots} />
             <AnimatedStat label="Teapots" value={teapots} />
             <!-- Keep the save indicator as is -->
@@ -447,12 +651,71 @@
         </div>
     </div>
 
-    <Shop {points} on:purchase={handlePurchase} on:reset={resetGame} />
+    <Shop
+        {points}
+        {unlockedTeaTypes}
+        on:purchase={handlePurchase}
+        on:reset={resetGame}
+    />
+
+    <div class="dropdown">
+        <details>
+            <summary>Detailed stats</summary>
+            <div>
+                {#each Object.entries(TEA) as [type, config]}
+                    {#if unlockedTeaTypes[type]}
+                        <div class="tea-type-inventory">
+                            <h2>{config.name}</h2>
+                            <AnimatedStat
+                                class="stat"
+                                label="Ready to harvest"
+                                value={teaStats.current.ready.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Ready to brew"
+                                value={teaStats.current.harvested.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Ready to serve"
+                                value={teaStats.current.brewed.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Grown"
+                                value={teaStats.lifetime.grown.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Harvested"
+                                value={teaStats.lifetime.harvested.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Brewed"
+                                value={teaStats.lifetime.brewed.byType[type]}
+                            />
+                            <AnimatedStat
+                                class="stat"
+                                label="Served"
+                                value={teaStats.lifetime.served.byType[type]}
+                            />
+                        </div>
+                    {/if}
+                {/each}
+            </div>
+        </details>
+    </div>
+
     <div class="teashop-garden">
         <h2>Garden</h2>
-        <div>
+        <div class="teashop-grid">
             {#each [...Array(gardenPlots).keys()] as i (i)}
                 <GardenPlot
+                    {unlockedTeaTypes}
+                    on:plantReady={handlePlantReady}
+                    on:harvestStart={handleHarvestStart}
                     on:plantComplete={handlePlantComplete}
                     bind:this={plotRefs[i]}
                     class="garden-plot"
@@ -463,11 +726,18 @@
 
     <div class="teashop-teapots">
         <h2>Teapots</h2>
-        <p class="label">Ready to brew: {harvestedPlants}</p>
-        <div>
+        <div class="tea-inventory">
+            <p class="label">
+                <AnimatedStat
+                    label="Ready to brew"
+                    value={teaStats.current.harvested.total}
+                />
+            </p>
+        </div>
+        <div class="teashop-grid">
             {#each [...Array(teapots).keys()] as i (i)}
                 <Teapot
-                    {harvestedPlants}
+                    {harvestedTeas}
                     bind:this={teapotRefs[i]}
                     on:useTea={handleHarvestedTea}
                     on:teaBrewed={handleBrewedTea}
@@ -475,28 +745,34 @@
                 />
             {/each}
         </div>
-        <div class="teashop-serve-container">
-            <p class="label">Ready to serve: {brewedTea}</p>
-            <button
-                class="secondary teashop-serve"
-                on:click={serveTea}
-                disabled={brewedTea < 1}
-            >
-                Serve Tea</button
-            >
-        </div>
     </div>
-    <div class="toast-container">
-        {#each toasts as toast (toast.id)}
-            <div
-                class="toast {toast.type}"
-                style="
+
+    <div class="teashop-serve">
+        <p class="label">
+            <AnimatedStat label="Ready to serve" value={brewedTea} />
+        </p>
+        <button class="secondary" on:click={serveTea} disabled={brewedTea < 1}>
+            {#if brewedTea >= 1}
+                Serve Tea
+            {:else if brewedTea < 1}
+                No Tea Available
+            {:else}
+                Serve Tea
+            {/if}
+        </button>
+    </div>
+</div>
+
+<div class="toast-container">
+    {#each toasts as toast (toast.id)}
+        <div
+            class="toast {toast.type}"
+            style="
                             --x: {toast.x}px;
                             --opacity: {toast.opacity};
                         "
-            >
-                {toast.message}
-            </div>
-        {/each}
-    </div>
+        >
+            {toast.message}
+        </div>
+    {/each}
 </div>

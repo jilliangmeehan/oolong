@@ -1,5 +1,5 @@
 <script>
-    import { TIMINGS } from "../config.js";
+    import { TIMINGS, TEA } from "../config.js";
     import { isDaytime } from "../stores.js";
     import { onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
@@ -11,18 +11,20 @@
     export let readyToHarvest = false;
     export let isHarvesting = false;
     let harvestInterval;
+    export let unlockedTeaTypes = { green: true };
+    export let selectedTeaType = "green";
 
     let isDay;
     isDaytime.subscribe((value) => (isDay = value));
 
-    // Create a method to get the current state
     export function getState() {
         return {
             isGrowing,
             readyToHarvest,
-            progress,
             isHarvesting,
+            progress,
             harvestProgress,
+            selectedTeaType,
         };
     }
 
@@ -32,8 +34,9 @@
         isHarvesting = state.isHarvesting;
         progress = state.progress;
         harvestProgress = state.harvestProgress;
+        selectedTeaType = state.selectedTeaType || "green";
 
-        if (isGrowing && !readyToHarvest) {
+        if (isGrowing) {
             if (growthInterval) clearInterval(growthInterval);
 
             growthInterval = setInterval(() => {
@@ -44,10 +47,11 @@
                     growthInterval = null;
                     isGrowing = false;
                     readyToHarvest = true;
+                    progress = 100;
+                    dispatch("plantReady", { teaType: selectedTeaType });
                 }
             }, 100);
-        }
-        if (isHarvesting) {
+        } else if (isHarvesting) {
             startHarvesting();
         }
     }
@@ -56,7 +60,8 @@
 
     function calculateGrowthIncrement(isDay) {
         // Calculate base increment to complete in GROW_TIME
-        const baseIncrement = (100 * 100) / TIMINGS.GROW_TIME; // 100 is the interval time in ms
+        const baseTime = TEA[selectedTeaType].growTime;
+        const baseIncrement = (100 * 100) / baseTime; // 100 is the interval time in ms
         return isDay ? baseIncrement : baseIncrement * 0.5; // Half speed at night
     }
 
@@ -81,6 +86,8 @@
                 growthInterval = null;
                 isGrowing = false;
                 readyToHarvest = true;
+                progress = 100;
+                dispatch("plantReady", { teaType: selectedTeaType });
             }
         }, 100); // Update every 100ms
     }
@@ -95,10 +102,8 @@
                 harvestInterval = null;
                 isHarvesting = false;
                 harvestProgress = 0;
-                readyToHarvest = false;
-                isGrowing = false;
                 progress = 0;
-                dispatch("plantComplete");
+                dispatch("plantComplete", { teaType: selectedTeaType });
             }
         }, 100);
     }
@@ -108,6 +113,9 @@
 
         isHarvesting = true;
         harvestProgress = 0;
+        // Make sure readyToHarvest is set to false before dispatching harvestStart
+        readyToHarvest = false;
+        dispatch("harvestStart", { teaType: selectedTeaType });
         startHarvesting();
     }
 
@@ -118,26 +126,27 @@
 </script>
 
 <div class="garden-plot">
-    <button
-        on:click={plantTea}
-        disabled={isGrowing || readyToHarvest || isHarvesting}
-        data-growing={isGrowing}
-        data-harvestable={readyToHarvest}
-    >
-        {#if isGrowing}
-            Growing... ({Math.floor(progress)}%)
-        {:else if readyToHarvest}
-            Ready to Harvest!
-        {:else}
-            Plant Tea
+    <div class="garden-box">
+        <button
+            on:click={plantTea}
+            disabled={isGrowing || readyToHarvest || isHarvesting}
+            data-growing={isGrowing}
+            data-harvestable={readyToHarvest}
+        >
+            {#if isGrowing}
+                Growing Tea... ({Math.floor(progress)}%)
+            {:else if readyToHarvest}
+                Ready to Harvest!
+            {:else}
+                Plant {TEA[selectedTeaType].name}
+            {/if}
+        </button>
+        {#if isGrowing || readyToHarvest}
+            <progress value={progress} max="100"></progress>
         {/if}
-    </button>
+    </div>
 
-    {#if isGrowing || readyToHarvest}
-        <progress value={progress} max="100"></progress>
-    {/if}
-
-    <div>
+    <div class="harvest-box">
         <button on:click={harvest} disabled={!readyToHarvest || isHarvesting}>
             {#if isHarvesting}
                 Harvesting... ({Math.floor(harvestProgress)}%)
@@ -149,4 +158,14 @@
             <progress value={harvestProgress} max="100"></progress>
         {/if}
     </div>
+    <select
+        bind:value={selectedTeaType}
+        disabled={isGrowing || readyToHarvest || isHarvesting}
+    >
+        {#each Object.entries(TEA) as [type, config]}
+            {#if unlockedTeaTypes[type]}
+                <option value={type}>{config.name}</option>
+            {/if}
+        {/each}
+    </select>
 </div>

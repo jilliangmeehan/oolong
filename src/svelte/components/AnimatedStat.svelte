@@ -38,13 +38,3 @@
 <p class="label stat-display" class:animating={valueToAdd !== 0}>
     {label}: {displayValue}
 </p>
-
-<style>
-    .stat-display {
-        transition: color 0.1s;
-    }
-
-    .stat-display.animating {
-        color: #4caf50;
-    }
-</style>

@@ -1,5 +1,10 @@
 <script>
+    import { TEA } from "../config.js";
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+
     export let points = 0;
+    export let unlockedTeaTypes = { green: true };
 
     const GARDEN_PLOT_COST = 10;
     const TEAPOT_COST = 75;
@@ -9,9 +14,6 @@
         brewmaster: 100,
         cafe: 500,
     };
-
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
 
     function buyGardenPlot() {
         if (points >= GARDEN_PLOT_COST) {
@@ -41,6 +43,16 @@
         }
     }
 
+    function unlockTeaType(type) {
+        if (points >= TEA[type].cost) {
+            dispatch("purchase", {
+                item: "teaType",
+                teaType: type,
+                cost: TEA[type].cost,
+            });
+        }
+    }
+
     function resetGame() {
         if (confirm("Are you sure you want to start over?")) {
             dispatch("reset");
@@ -48,40 +60,55 @@
     }
 </script>
 
-<details class="shop">
-    <summary class="shop-title"
-        ><h2 class="label">click here to do stuff</h2></summary
-    >
-
-    <h3 class="label">buy upgrades</h3>
-    <button
-        class="secondary buy-upgrade"
-        on:click={buyGardenPlot}
-        disabled={points < GARDEN_PLOT_COST}
-    >
-        +1 Garden Plot ({GARDEN_PLOT_COST} points)
-    </button>
-
-    <button
-        class="secondary buy-upgrade"
-        on:click={buyTeapot}
-        disabled={points < TEAPOT_COST}
-    >
-        +1 Teapot ({TEAPOT_COST} points)
-    </button>
-
-    <h3 class="label">Hire Sprites</h3>
-    {#each Object.entries(SPRITE_COSTS) as [type, cost]}
+<div class="dropdown">
+    <details>
+        <summary>click here to do stuff</summary>
+        <h3 class="label">buy upgrades</h3>
         <button
-            class="secondary hire-sprite"
-            on:click={() => hireSprite(type)}
-            disabled={points < cost}
+            class="secondary"
+            on:click={buyGardenPlot}
+            disabled={points < GARDEN_PLOT_COST}
         >
-            {type} Sprite ({cost} points)
+            +1 Garden Plot ({GARDEN_PLOT_COST} points)
         </button>
-    {/each}
 
-    <h3 class="label">Other stuff</h3>
-    <button class="secondary reset-game" on:click={resetGame}>Reset game</button
-    >
-</details>
+        <button
+            class="secondary"
+            on:click={buyTeapot}
+            disabled={points < TEAPOT_COST}
+        >
+            +1 Teapot ({TEAPOT_COST} points)
+        </button>
+
+        <h3 class="label">Hire Sprites</h3>
+        {#each Object.entries(SPRITE_COSTS) as [type, cost]}
+            <button
+                class="secondary hire-sprite"
+                on:click={() => hireSprite(type)}
+                disabled={points < cost}
+            >
+                {type} Sprite ({cost} points)
+            </button>
+        {/each}
+
+        <h3 class="label">Unlock New Tea</h3>
+        {#if unlockedTeaTypes}
+            {#each Object.entries(TEA) as [type, config]}
+                {#if !unlockedTeaTypes[type]}
+                    <button
+                        class="secondary unlock-tea"
+                        on:click={() => unlockTeaType(type)}
+                        disabled={points < config.cost}
+                    >
+                        {config.name} ({config.cost} points)
+                    </button>
+                {/if}
+            {/each}
+        {/if}
+
+        <h3 class="label">Other stuff</h3>
+        <button class="secondary reset-game" on:click={resetGame}
+            >Reset game</button
+        >
+    </details>
+</div>
