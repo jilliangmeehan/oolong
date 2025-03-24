@@ -4648,16 +4648,11 @@ https://svelte.dev/e/store_invalid_shape`);
     // Growing
     GARDEN_COOLDOWN: 1e3,
     // 1 second cooldown for planting
-    GROW_TIME: 1e4,
-    // Base grow time: 10 seconds to grow
     // Harvest
     HARVEST_TIME: 5e3,
     // 5 seconds to harvest
     HARVEST_COOLDOWN: 1e3,
     // 1 second cooldown for harvesting
-    // Brewing
-    BREW_TIME: 5e3,
-    // 5 seconds to brew
     // Serving
     SERVE_COOLDOWN: 3e3,
     // 3 second cooldown for serving
@@ -4672,29 +4667,29 @@ https://svelte.dev/e/store_invalid_shape`);
   var TEA = {
     green: {
       name: "Green Tea",
-      growTime: 1e4,
-      brewTime: 5e3,
+      growTime: 12e3,
+      brewTime: 7e3,
       pointValue: 5,
       cost: 0
     },
     black: {
       name: "Black Tea",
-      growTime: 12e3,
-      brewTime: 5e3,
+      growTime: 17e3,
+      brewTime: 7e3,
       pointValue: 8,
       cost: 120
     },
     oolong: {
       name: "Oolong Tea",
       growTime: 17e3,
-      brewTime: 2e3,
+      brewTime: 5e3,
       pointValue: 10,
       cost: 250
     },
     sakura: {
       name: "Sakura Tea",
       growTime: 2e4,
-      brewTime: 2e3,
+      brewTime: 7e3,
       pointValue: 15,
       cost: 750
     }
