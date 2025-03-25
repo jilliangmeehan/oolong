@@ -10,6 +10,7 @@
     let currentTeaType = null;
     let brewingInterval;
     export let isPaused = false;
+    export let teapotId;
 
     function hasTeaAvailable() {
         return Object.values(harvestedTeas).some((amount) => amount > 0);
@@ -74,6 +75,15 @@
         dispatch("pauseStateChanged", { isPaused, teapotId: null });
     }
 
+    function deleteTeapot() {
+        if (confirm("Are you sure you want to delete this teapot?")) {
+            // Clean up interval before deletion
+            if (brewingInterval) clearInterval(brewingInterval);
+
+            dispatch("deleteTeapot", { teapotId });
+        }
+    }
+
     onDestroy(() => {
         if (brewingInterval) clearInterval(brewingInterval);
     });
@@ -113,12 +123,23 @@
         <progress value={progress} max="100" />
     {/if}
 
-    <!-- Pause button -->
-    <button
-        class="pause-button"
-        on:click={togglePause}
-        title={isPaused ? "Enable automation" : "Pause automation"}
-    >
-        {isPaused ? "⏵" : "⏸"}
-    </button>
+    <div class="control-buttons">
+        <!-- Pause button -->
+        <button
+            class="pause-button"
+            on:click={togglePause}
+            title={isPaused ? "Enable automation" : "Pause automation"}
+        >
+            {isPaused ? "⏵" : "⏸"}
+        </button>
+
+        <!-- Delete button -->
+        <button
+            class="delete-button"
+            on:click={deleteTeapot}
+            title="Delete teapot"
+        >
+            ✕
+        </button>
+    </div>
 </div>

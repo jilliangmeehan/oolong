@@ -315,6 +315,44 @@
         saveGameState();
     }
 
+    function handleDeletePlot(event) {
+        const { plotId } = event.detail;
+        // Make sure we have more than 1 plot before deleting
+        if (gardenPlots <= 1) {
+            createToast("You need at least one garden plot!", null, "error");
+            return;
+        }
+
+        // Remove the plot from plotRefs and decrease the count
+        plotRefs = plotRefs.filter((_, i) => i !== plotId);
+        gardenPlots -= 1;
+
+        // Create new references array with correct indices
+        plotRefs = [...Array(gardenPlots)].map((_, i) => plotRefs[i] || null);
+
+        createToast("Garden plot removed", null, "success");
+        saveGameState();
+    }
+
+    function handleDeleteTeapot(event) {
+        const { teapotId } = event.detail;
+        // Make sure we have more than 1 teapot before deleting
+        if (teapots <= 1) {
+            createToast("You need at least one teapot!", null, "error");
+            return;
+        }
+
+        // Remove the teapot from teapotRefs and decrease the count
+        teapotRefs = teapotRefs.filter((_, i) => i !== teapotId);
+        teapots -= 1;
+
+        // Create new references array with correct indices
+        teapotRefs = [...Array(teapots)].map((_, i) => teapotRefs[i] || null);
+
+        createToast("Teapot removed", null, "success");
+        saveGameState();
+    }
+
     function startAutomation() {
         // Clear existing intervals
         automationIntervals.forEach((interval) => clearInterval(interval));
@@ -1261,6 +1299,7 @@
                     on:harvestStart={handleHarvestStart}
                     on:plantComplete={handlePlantComplete}
                     on:pauseStateChanged={handleGardenPlotPauseChanged}
+                    on:deletePlot={handleDeletePlot}
                     bind:this={plotRefs[i]}
                     class="garden-plot"
                 />
@@ -1286,6 +1325,7 @@
                     on:useTea={handleHarvestedTea}
                     on:teaBrewed={handleBrewedTea}
                     on:pauseStateChanged={handleTeapotPauseChanged}
+                    on:deleteTeapot={handleDeleteTeapot}
                     class="teapot"
                 />
             {/each}

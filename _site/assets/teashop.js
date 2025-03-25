@@ -4740,18 +4740,18 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[153, 12]]);
-  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[166, 12]]);
-  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[175, 16]]);
-  var root = add_locations(template(`<div><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <select></select> <button class="pause-button"> </button></div>`), GardenPlot[FILENAME], [
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[164, 12]]);
+  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[177, 12]]);
+  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[186, 16]]);
+  var root = add_locations(template(`<div><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <select></select> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete garden plot">\u2715</button></div></div>`), GardenPlot[FILENAME], [
     [
-      136,
+      147,
       0,
       [
-        [137, 4, [[138, 8]]],
-        [157, 4, [[158, 8]]],
-        [169, 4],
-        [181, 4]
+        [148, 4, [[149, 8]]],
+        [168, 4, [[169, 8]]],
+        [180, 4],
+        [191, 4, [[193, 8], [202, 8]]]
       ]
     ]
   ]);
@@ -4768,6 +4768,7 @@ https://svelte.dev/e/store_invalid_shape`);
     let unlockedTeaTypes = prop($$props, "unlockedTeaTypes", 24, () => ({ green: true }));
     let selectedTeaType = prop($$props, "selectedTeaType", 12, "green");
     let isPaused = prop($$props, "isPaused", 12, false);
+    let plotId = prop($$props, "plotId", 8);
     let isDay;
     isDaytime.subscribe((value) => isDay = value);
     function getState() {
@@ -4869,6 +4870,13 @@ https://svelte.dev/e/store_invalid_shape`);
     function togglePause() {
       isPaused(!isPaused());
       dispatch("pauseStateChanged", { isPaused: isPaused(), plotId: null });
+    }
+    function deletePlot() {
+      if (confirm("Are you sure you want to delete this garden plot?")) {
+        if (growthInterval) clearInterval(growthInterval);
+        if (harvestInterval) clearInterval(harvestInterval);
+        dispatch("deletePlot", { plotId: plotId() });
+      }
     }
     onDestroy(() => {
       if (growthInterval) clearInterval(growthInterval);
@@ -5002,9 +5010,12 @@ https://svelte.dev/e/store_invalid_shape`);
       append($$anchor2, fragment_3);
     });
     reset(select);
-    var button_2 = sibling(select, 2);
+    var div_3 = sibling(select, 2);
+    var button_2 = child(div_3);
     var text_6 = child(button_2, true);
     reset(button_2);
+    var button_3 = sibling(button_2, 2);
+    reset(div_3);
     reset(div);
     template_effect(
       ($0) => {
@@ -5024,6 +5035,7 @@ https://svelte.dev/e/store_invalid_shape`);
     event("click", button_1, harvest);
     bind_select_value(select, selectedTeaType);
     event("click", button_2, togglePause);
+    event("click", button_3, deletePlot);
     append($$anchor, div);
     bind_prop($$props, "getState", getState);
     bind_prop($$props, "setState", setState);
@@ -5050,8 +5062,17 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teapot.svelte
   mark_module_start();
   Teapot[FILENAME] = "src/svelte/components/Teapot.svelte";
-  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[113, 8]]);
-  var root2 = add_locations(template(`<div><button><!></button> <!> <button class="pause-button"> </button></div>`), Teapot[FILENAME], [[97, 0, [[98, 4], [117, 4]]]]);
+  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[123, 8]]);
+  var root2 = add_locations(template(`<div><button><!></button> <!> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete teapot">\u2715</button></div></div>`), Teapot[FILENAME], [
+    [
+      107,
+      0,
+      [
+        [108, 4],
+        [126, 4, [[128, 8], [137, 8]]]
+      ]
+    ]
+  ]);
   function Teapot($$anchor, $$props) {
     check_target(new.target);
     push($$props, false, Teapot);
@@ -5062,6 +5083,7 @@ https://svelte.dev/e/store_invalid_shape`);
     let currentTeaType = mutable_source(null);
     let brewingInterval;
     let isPaused = prop($$props, "isPaused", 12, false);
+    let teapotId = prop($$props, "teapotId", 8);
     function hasTeaAvailable() {
       return Object.values(harvestedTeas()).some((amount) => amount > 0);
     }
@@ -5109,6 +5131,12 @@ https://svelte.dev/e/store_invalid_shape`);
     function togglePause() {
       isPaused(!isPaused());
       dispatch("pauseStateChanged", { isPaused: isPaused(), teapotId: null });
+    }
+    function deleteTeapot() {
+      if (confirm("Are you sure you want to delete this teapot?")) {
+        if (brewingInterval) clearInterval(brewingInterval);
+        dispatch("deleteTeapot", { teapotId: teapotId() });
+      }
     }
     onDestroy(() => {
       if (brewingInterval) clearInterval(brewingInterval);
@@ -5179,9 +5207,12 @@ https://svelte.dev/e/store_invalid_shape`);
         if (get(isBrewing)) $$render(consequent_2);
       });
     }
-    var button_1 = sibling(node_1, 2);
+    var div_1 = sibling(node_1, 2);
+    var button_1 = child(div_1);
     var text_3 = child(button_1, true);
     reset(button_1);
+    var button_2 = sibling(button_1, 2);
+    reset(div_1);
     reset(div);
     template_effect(
       ($0, $1, $2) => {
@@ -5203,6 +5234,7 @@ https://svelte.dev/e/store_invalid_shape`);
     );
     event("click", button, brewTea);
     event("click", button_1, togglePause);
+    event("click", button_2, deleteTeapot);
     append($$anchor, div);
     bind_prop($$props, "brewTea", brewTea);
     bind_prop($$props, "getState", getState);
@@ -5437,49 +5469,49 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1185, 16]]);
-  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1210, 24, [[1211, 28]]]]);
-  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1313, 8]]);
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1223, 16]]);
+  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1248, 24, [[1249, 28]]]]);
+  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1353, 8]]);
   var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
     [
-      1148,
+      1186,
       0,
       [
-        [1149, 4, [[1156, 8]]],
+        [1187, 4, [[1194, 8]]],
         [
-          1158,
+          1196,
           4,
           [
-            [1159, 8],
-            [1171, 8],
-            [1180, 8, [[1191, 12]]]
+            [1197, 8],
+            [1209, 8],
+            [1218, 8, [[1229, 12]]]
           ]
         ],
         [
-          1204,
+          1242,
           4,
           [
             [
-              1205,
+              1243,
               8,
-              [[1206, 12], [1207, 12]]
+              [[1244, 12], [1245, 12]]
             ]
           ]
         ],
-        [1254, 4, [[1255, 8], [1256, 8]]],
+        [1292, 4, [[1293, 8], [1294, 8]]],
         [
-          1271,
+          1310,
           4,
           [
-            [1272, 8],
-            [1273, 8, [[1274, 12]]],
-            [1281, 8]
+            [1311, 8],
+            [1312, 8, [[1313, 12]]],
+            [1320, 8]
           ]
         ],
-        [1295, 4, [[1296, 8], [1299, 8]]]
+        [1335, 4, [[1336, 8], [1339, 8]]]
       ]
     ],
-    [1311, 0]
+    [1351, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -5666,6 +5698,30 @@ https://svelte.dev/e/store_invalid_shape`);
     }
     function handleTeapotPauseChanged(event2) {
       const { isPaused, teapotId } = event2.detail;
+      saveGameState();
+    }
+    function handleDeletePlot(event2) {
+      const { plotId } = event2.detail;
+      if (get(gardenPlots) <= 1) {
+        createToast("You need at least one garden plot!", null, "error");
+        return;
+      }
+      set(plotRefs, get(plotRefs).filter((_, i) => strict_equals(i, plotId, false)));
+      set(gardenPlots, get(gardenPlots) - 1);
+      set(plotRefs, [...Array(get(gardenPlots))].map((_, i) => get(plotRefs)[i] || null));
+      createToast("Garden plot removed", null, "success");
+      saveGameState();
+    }
+    function handleDeleteTeapot(event2) {
+      const { teapotId } = event2.detail;
+      if (get(teapots) <= 1) {
+        createToast("You need at least one teapot!", null, "error");
+        return;
+      }
+      set(teapotRefs, get(teapotRefs).filter((_, i) => strict_equals(i, teapotId, false)));
+      set(teapots, get(teapots) - 1);
+      set(teapotRefs, [...Array(get(teapots))].map((_, i) => get(teapotRefs)[i] || null));
+      createToast("Teapot removed", null, "success");
       saveGameState();
     }
     function startAutomation() {
@@ -6507,7 +6563,8 @@ https://svelte.dev/e/store_invalid_shape`);
               plantReady: handlePlantReady,
               harvestStart: handleHarvestStart,
               plantComplete: handlePlantComplete,
-              pauseStateChanged: handleGardenPlotPauseChanged
+              pauseStateChanged: handleGardenPlotPauseChanged,
+              deletePlot: handleDeletePlot
             },
             $$legacy: true
           }),
@@ -6543,7 +6600,8 @@ https://svelte.dev/e/store_invalid_shape`);
           $$events: {
             useTea: handleHarvestedTea,
             teaBrewed: handleBrewedTea,
-            pauseStateChanged: handleTeapotPauseChanged
+            pauseStateChanged: handleTeapotPauseChanged,
+            deleteTeapot: handleDeleteTeapot
           },
           $$legacy: true
         }),

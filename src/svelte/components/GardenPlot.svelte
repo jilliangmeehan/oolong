@@ -14,6 +14,7 @@
     export let unlockedTeaTypes = { green: true };
     export let selectedTeaType = "green";
     export let isPaused = false;
+    export let plotId;
 
     let isDay;
     isDaytime.subscribe((value) => (isDay = value));
@@ -127,6 +128,16 @@
         dispatch("pauseStateChanged", { isPaused, plotId: null });
     }
 
+    function deletePlot() {
+        if (confirm("Are you sure you want to delete this garden plot?")) {
+            // Clean up intervals before deletion
+            if (growthInterval) clearInterval(growthInterval);
+            if (harvestInterval) clearInterval(harvestInterval);
+
+            dispatch("deletePlot", { plotId });
+        }
+    }
+
     onDestroy(() => {
         if (growthInterval) clearInterval(growthInterval);
         if (harvestInterval) clearInterval(harvestInterval);
@@ -177,12 +188,23 @@
         {/each}
     </select>
 
-    <!-- Pause button -->
-    <button
-        class="pause-button"
-        on:click={togglePause}
-        title={isPaused ? "Enable automation" : "Pause automation"}
-    >
-        {isPaused ? "⏵" : "⏸"}
-    </button>
+    <div class="control-buttons">
+        <!-- Pause button -->
+        <button
+            class="pause-button"
+            on:click={togglePause}
+            title={isPaused ? "Enable automation" : "Pause automation"}
+        >
+            {isPaused ? "⏵" : "⏸"}
+        </button>
+
+        <!-- Delete button -->
+        <button
+            class="delete-button"
+            on:click={deletePlot}
+            title="Delete garden plot"
+        >
+            ✕
+        </button>
+    </div>
 </div>
