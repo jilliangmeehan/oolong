@@ -1,10 +1,13 @@
 export const TIMINGS = {
   // Growing
-  GARDEN_COOLDOWN: 1000, // 1 second cooldown for planting
+  GARDEN_COOLDOWN: 3000, // 3 second cooldown for planting
 
   // Harvest
   HARVEST_TIME: 5000, // 5 seconds to harvest
-  HARVEST_COOLDOWN: 1000, // 1 second cooldown for harvesting
+  HARVEST_COOLDOWN: 3000, // 3 second cooldown for harvesting
+
+  // Brewing
+  BREWMASTER_COOLDOWN: 3000, // 3 second cooldown for brewmasters
 
   // Serving
   SERVE_COOLDOWN: 3000, // 3 second cooldown for serving
