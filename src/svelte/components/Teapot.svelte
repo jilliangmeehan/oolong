@@ -9,6 +9,7 @@
     let isBrewing = false;
     let currentTeaType = null;
     let brewingInterval;
+    export let isPaused = false;
 
     function hasTeaAvailable() {
         return Object.values(harvestedTeas).some((amount) => amount > 0);
@@ -68,18 +69,24 @@
         startBrewing();
     }
 
+    function togglePause() {
+        isPaused = !isPaused;
+        dispatch("pauseStateChanged", { isPaused, teapotId: null });
+    }
+
     onDestroy(() => {
         if (brewingInterval) clearInterval(brewingInterval);
     });
 
     export function getState() {
-        return { isBrewing, progress, currentTeaType };
+        return { isBrewing, progress, currentTeaType, isPaused };
     }
 
     export function setState(state) {
         isBrewing = state.isBrewing;
         progress = state.progress;
         currentTeaType = state.currentTeaType;
+        isPaused = state.isPaused || false;
 
         if (isBrewing && currentTeaType) {
             startBrewing();
@@ -87,7 +94,7 @@
     }
 </script>
 
-<div class="teapot" class:brewing={isBrewing}>
+<div class="teapot" class:brewing={isBrewing} class:paused={isPaused}>
     <button
         on:click={brewTea}
         disabled={isBrewing || !hasTeaAvailable()}
@@ -105,4 +112,13 @@
     {#if isBrewing}
         <progress value={progress} max="100" />
     {/if}
+
+    <!-- Pause button -->
+    <button
+        class="pause-button"
+        on:click={togglePause}
+        title={isPaused ? "Enable automation" : "Pause automation"}
+    >
+        {isPaused ? "⏵" : "⏸"}
+    </button>
 </div>

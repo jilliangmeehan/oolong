@@ -13,6 +13,7 @@
     let harvestInterval;
     export let unlockedTeaTypes = { green: true };
     export let selectedTeaType = "green";
+    export let isPaused = false;
 
     let isDay;
     isDaytime.subscribe((value) => (isDay = value));
@@ -25,6 +26,7 @@
             progress,
             harvestProgress,
             selectedTeaType,
+            isPaused,
         };
     }
 
@@ -35,6 +37,7 @@
         progress = state.progress;
         harvestProgress = state.harvestProgress;
         selectedTeaType = state.selectedTeaType || "green";
+        isPaused = state.isPaused || false;
 
         if (isGrowing) {
             if (growthInterval) clearInterval(growthInterval);
@@ -119,13 +122,18 @@
         startHarvesting();
     }
 
+    function togglePause() {
+        isPaused = !isPaused;
+        dispatch("pauseStateChanged", { isPaused, plotId: null });
+    }
+
     onDestroy(() => {
         if (growthInterval) clearInterval(growthInterval);
         if (harvestInterval) clearInterval(harvestInterval);
     });
 </script>
 
-<div class="garden-plot">
+<div class="garden-plot" class:paused={isPaused}>
     <div class="garden-box">
         <button
             on:click={plantTea}
@@ -168,4 +176,13 @@
             {/if}
         {/each}
     </select>
+
+    <!-- Pause button -->
+    <button
+        class="pause-button"
+        on:click={togglePause}
+        title={isPaused ? "Enable automation" : "Pause automation"}
+    >
+        {isPaused ? "⏵" : "⏸"}
+    </button>
 </div>

@@ -4740,17 +4740,18 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[145, 12]]);
-  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[158, 12]]);
-  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[167, 16]]);
-  var root = add_locations(template(`<div class="garden-plot"><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <select></select></div>`), GardenPlot[FILENAME], [
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[153, 12]]);
+  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[166, 12]]);
+  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[175, 16]]);
+  var root = add_locations(template(`<div><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <select></select> <button class="pause-button"> </button></div>`), GardenPlot[FILENAME], [
     [
-      128,
+      136,
       0,
       [
-        [129, 4, [[130, 8]]],
-        [149, 4, [[150, 8]]],
-        [161, 4]
+        [137, 4, [[138, 8]]],
+        [157, 4, [[158, 8]]],
+        [169, 4],
+        [181, 4]
       ]
     ]
   ]);
@@ -4766,6 +4767,7 @@ https://svelte.dev/e/store_invalid_shape`);
     let harvestInterval;
     let unlockedTeaTypes = prop($$props, "unlockedTeaTypes", 24, () => ({ green: true }));
     let selectedTeaType = prop($$props, "selectedTeaType", 12, "green");
+    let isPaused = prop($$props, "isPaused", 12, false);
     let isDay;
     isDaytime.subscribe((value) => isDay = value);
     function getState() {
@@ -4775,7 +4777,8 @@ https://svelte.dev/e/store_invalid_shape`);
         isHarvesting: isHarvesting(),
         progress: get(progress),
         harvestProgress: get(harvestProgress),
-        selectedTeaType: selectedTeaType()
+        selectedTeaType: selectedTeaType(),
+        isPaused: isPaused()
       };
     }
     function setState(state2) {
@@ -4785,6 +4788,7 @@ https://svelte.dev/e/store_invalid_shape`);
       set(progress, state2.progress);
       set(harvestProgress, state2.harvestProgress);
       selectedTeaType(state2.selectedTeaType || "green");
+      isPaused(state2.isPaused || false);
       if (isGrowing()) {
         if (growthInterval) clearInterval(growthInterval);
         growthInterval = setInterval(
@@ -4862,12 +4866,17 @@ https://svelte.dev/e/store_invalid_shape`);
       dispatch("harvestStart", { teaType: selectedTeaType() });
       startHarvesting();
     }
+    function togglePause() {
+      isPaused(!isPaused());
+      dispatch("pauseStateChanged", { isPaused: isPaused(), plotId: null });
+    }
     onDestroy(() => {
       if (growthInterval) clearInterval(growthInterval);
       if (harvestInterval) clearInterval(harvestInterval);
     });
     init();
     var div = root();
+    let classes;
     var div_1 = child(div);
     var button = child(div_1);
     var node = child(button);
@@ -4993,17 +5002,28 @@ https://svelte.dev/e/store_invalid_shape`);
       append($$anchor2, fragment_3);
     });
     reset(select);
+    var button_2 = sibling(select, 2);
+    var text_6 = child(button_2, true);
+    reset(button_2);
     reset(div);
-    template_effect(() => {
-      button.disabled = isGrowing() || readyToHarvest() || isHarvesting();
-      set_attribute(button, "data-growing", isGrowing());
-      set_attribute(button, "data-harvestable", readyToHarvest());
-      button_1.disabled = !readyToHarvest() || isHarvesting();
-      select.disabled = isGrowing() || readyToHarvest() || isHarvesting();
-    });
+    template_effect(
+      ($0) => {
+        classes = set_class(div, 1, "garden-plot", null, classes, $0);
+        button.disabled = isGrowing() || readyToHarvest() || isHarvesting();
+        set_attribute(button, "data-growing", isGrowing());
+        set_attribute(button, "data-harvestable", readyToHarvest());
+        button_1.disabled = !readyToHarvest() || isHarvesting();
+        select.disabled = isGrowing() || readyToHarvest() || isHarvesting();
+        set_attribute(button_2, "title", isPaused() ? "Enable automation" : "Pause automation");
+        set_text(text_6, isPaused() ? "\u23F5" : "\u23F8");
+      },
+      [() => ({ paused: isPaused() })],
+      derived_safe_equal
+    );
     event("click", button, plantTea);
     event("click", button_1, harvest);
     bind_select_value(select, selectedTeaType);
+    event("click", button_2, togglePause);
     append($$anchor, div);
     bind_prop($$props, "getState", getState);
     bind_prop($$props, "setState", setState);
@@ -5030,8 +5050,8 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teapot.svelte
   mark_module_start();
   Teapot[FILENAME] = "src/svelte/components/Teapot.svelte";
-  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[106, 8]]);
-  var root2 = add_locations(template(`<div><button><!></button> <!></div>`), Teapot[FILENAME], [[90, 0, [[91, 4]]]]);
+  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[113, 8]]);
+  var root2 = add_locations(template(`<div><button><!></button> <!> <button class="pause-button"> </button></div>`), Teapot[FILENAME], [[97, 0, [[98, 4], [117, 4]]]]);
   function Teapot($$anchor, $$props) {
     check_target(new.target);
     push($$props, false, Teapot);
@@ -5041,6 +5061,7 @@ https://svelte.dev/e/store_invalid_shape`);
     let isBrewing = mutable_source(false);
     let currentTeaType = mutable_source(null);
     let brewingInterval;
+    let isPaused = prop($$props, "isPaused", 12, false);
     function hasTeaAvailable() {
       return Object.values(harvestedTeas()).some((amount) => amount > 0);
     }
@@ -5085,6 +5106,10 @@ https://svelte.dev/e/store_invalid_shape`);
       set(isBrewing, true);
       startBrewing();
     }
+    function togglePause() {
+      isPaused(!isPaused());
+      dispatch("pauseStateChanged", { isPaused: isPaused(), teapotId: null });
+    }
     onDestroy(() => {
       if (brewingInterval) clearInterval(brewingInterval);
     });
@@ -5092,13 +5117,15 @@ https://svelte.dev/e/store_invalid_shape`);
       return {
         isBrewing: get(isBrewing),
         progress: get(progress),
-        currentTeaType: get(currentTeaType)
+        currentTeaType: get(currentTeaType),
+        isPaused: isPaused()
       };
     }
     function setState(state2) {
       set(isBrewing, state2.isBrewing);
       set(progress, state2.progress);
       set(currentTeaType, state2.currentTeaType);
+      isPaused(state2.isPaused || false);
       if (get(isBrewing) && get(currentTeaType)) {
         startBrewing();
       }
@@ -5152,21 +5179,30 @@ https://svelte.dev/e/store_invalid_shape`);
         if (get(isBrewing)) $$render(consequent_2);
       });
     }
+    var button_1 = sibling(node_1, 2);
+    var text_3 = child(button_1, true);
+    reset(button_1);
     reset(div);
     template_effect(
       ($0, $1, $2) => {
         classes = set_class(div, 1, "teapot", null, classes, $0);
         button.disabled = $1;
         classes_1 = set_class(button, 1, "", null, classes_1, $2);
+        set_attribute(button_1, "title", isPaused() ? "Enable automation" : "Pause automation");
+        set_text(text_3, isPaused() ? "\u23F5" : "\u23F8");
       },
       [
-        () => ({ brewing: get(isBrewing) }),
+        () => ({
+          brewing: get(isBrewing),
+          paused: isPaused()
+        }),
         () => get(isBrewing) || !hasTeaAvailable(),
         () => ({ brewing: get(isBrewing) })
       ],
       derived_safe_equal
     );
     event("click", button, brewTea);
+    event("click", button_1, togglePause);
     append($$anchor, div);
     bind_prop($$props, "brewTea", brewTea);
     bind_prop($$props, "getState", getState);
@@ -5401,49 +5437,49 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1163, 16]]);
-  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1188, 24, [[1189, 28]]]]);
-  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1289, 8]]);
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1185, 16]]);
+  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1210, 24, [[1211, 28]]]]);
+  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1313, 8]]);
   var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
     [
-      1126,
+      1148,
       0,
       [
-        [1127, 4, [[1134, 8]]],
+        [1149, 4, [[1156, 8]]],
         [
-          1136,
+          1158,
           4,
           [
-            [1137, 8],
-            [1149, 8],
-            [1158, 8, [[1169, 12]]]
+            [1159, 8],
+            [1171, 8],
+            [1180, 8, [[1191, 12]]]
           ]
         ],
         [
-          1182,
+          1204,
           4,
           [
             [
-              1183,
+              1205,
               8,
-              [[1184, 12], [1185, 12]]
+              [[1206, 12], [1207, 12]]
             ]
           ]
         ],
-        [1232, 4, [[1233, 8], [1234, 8]]],
+        [1254, 4, [[1255, 8], [1256, 8]]],
         [
-          1248,
+          1271,
           4,
           [
-            [1249, 8],
-            [1250, 8, [[1251, 12]]],
-            [1258, 8]
+            [1272, 8],
+            [1273, 8, [[1274, 12]]],
+            [1281, 8]
           ]
         ],
-        [1271, 4, [[1272, 8], [1275, 8]]]
+        [1295, 4, [[1296, 8], [1299, 8]]]
       ]
     ],
-    [1287, 0]
+    [1311, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -5624,6 +5660,14 @@ https://svelte.dev/e/store_invalid_shape`);
         }
       }
     }
+    function handleGardenPlotPauseChanged(event2) {
+      const { isPaused, plotId } = event2.detail;
+      saveGameState();
+    }
+    function handleTeapotPauseChanged(event2) {
+      const { isPaused, teapotId } = event2.detail;
+      saveGameState();
+    }
     function startAutomation() {
       automationIntervals.forEach((interval) => clearInterval(interval));
       automationIntervals = [];
@@ -5641,6 +5685,9 @@ https://svelte.dev/e/store_invalid_shape`);
                 const plot = get(plotRefs)[i];
                 if (plot) {
                   const state2 = plot.getState();
+                  if (state2.isPaused && !state2.isGrowing) {
+                    continue;
+                  }
                   if (!state2.isGrowing && !state2.readyToHarvest && !state2.isHarvesting) {
                     workingSprites2.garden++;
                     const selectedTeaType = state2.selectedTeaType || "green";
@@ -5669,6 +5716,9 @@ https://svelte.dev/e/store_invalid_shape`);
                 const plot = get(plotRefs)[i];
                 if (plot) {
                   const state2 = plot.getState();
+                  if (state2.isPaused) {
+                    continue;
+                  }
                   if (state2.readyToHarvest && !state2.isHarvesting) {
                     workingSprites2.harvest++;
                     plot.harvest();
@@ -5703,6 +5753,9 @@ https://svelte.dev/e/store_invalid_shape`);
                 const teapot = get(teapotRefs)[i];
                 if (teapot) {
                   const state2 = teapot.getState();
+                  if (state2.isPaused && !state2.isBrewing) {
+                    continue;
+                  }
                   if (!state2.isBrewing) {
                     workingSprites2.brewmaster++;
                     teapot.brewTea();
@@ -6453,7 +6506,8 @@ https://svelte.dev/e/store_invalid_shape`);
             $$events: {
               plantReady: handlePlantReady,
               harvestStart: handleHarvestStart,
-              plantComplete: handlePlantComplete
+              plantComplete: handlePlantComplete,
+              pauseStateChanged: handleGardenPlotPauseChanged
             },
             $$legacy: true
           }),
@@ -6488,7 +6542,8 @@ https://svelte.dev/e/store_invalid_shape`);
           class: "teapot",
           $$events: {
             useTea: handleHarvestedTea,
-            teaBrewed: handleBrewedTea
+            teaBrewed: handleBrewedTea,
+            pauseStateChanged: handleTeapotPauseChanged
           },
           $$legacy: true
         }),

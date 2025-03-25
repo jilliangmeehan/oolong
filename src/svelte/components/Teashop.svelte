@@ -305,6 +305,16 @@
         }
     }
 
+    function handleGardenPlotPauseChanged(event) {
+        const { isPaused, plotId } = event.detail;
+        saveGameState();
+    }
+
+    function handleTeapotPauseChanged(event) {
+        const { isPaused, teapotId } = event.detail;
+        saveGameState();
+    }
+
     function startAutomation() {
         // Clear existing intervals
         automationIntervals.forEach((interval) => clearInterval(interval));
@@ -326,6 +336,10 @@
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
+                            // Skip paused plots unless they're currently growing
+                            if (state.isPaused && !state.isGrowing) {
+                                continue;
+                            }
                             if (
                                 !state.isGrowing &&
                                 !state.readyToHarvest &&
@@ -359,6 +373,9 @@
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
+                            if (state.isPaused) {
+                                continue;
+                            }
                             if (state.readyToHarvest && !state.isHarvesting) {
                                 workingSprites.harvest++;
                                 plot.harvest();
@@ -401,6 +418,9 @@
                         const teapot = teapotRefs[i];
                         if (teapot) {
                             const state = teapot.getState();
+                            if (state.isPaused && !state.isBrewing) {
+                                continue;
+                            }
                             if (!state.isBrewing) {
                                 workingSprites.brewmaster++;
                                 teapot.brewTea();
@@ -491,11 +511,11 @@
             localStorage.setItem("teashopGameState", JSON.stringify(gameState));
             lastSavedTime = new Date();
             localStorage.setItem("cycleStartTime", Date.now().toString());
-            createToast("Game saved! 💾", null, "success"); // New save notification
+            createToast("Game saved! 💾", null, "success");
             console.log("Game state saved");
         } catch (e) {
             console.error("Failed to save game state:", e);
-            createToast("Error saving!", null, "error"); // Error notification
+            createToast("Error saving!", null, "error");
         }
     }
 
@@ -542,12 +562,14 @@
             };
 
             setTimeout(() => {
+                // Apply plot states (including pause state)
                 gameState.plotStates.forEach((state, i) => {
                     if (state && plotRefs[i]) {
                         plotRefs[i].setState(state);
                     }
                 });
 
+                // Apply teapot states (including pause state)
                 gameState.teapotStates.forEach((state, i) => {
                     if (state && teapotRefs[i]) {
                         teapotRefs[i].setState(state);
@@ -1238,6 +1260,7 @@
                     on:plantReady={handlePlantReady}
                     on:harvestStart={handleHarvestStart}
                     on:plantComplete={handlePlantComplete}
+                    on:pauseStateChanged={handleGardenPlotPauseChanged}
                     bind:this={plotRefs[i]}
                     class="garden-plot"
                 />
@@ -1262,6 +1285,7 @@
                     bind:this={teapotRefs[i]}
                     on:useTea={handleHarvestedTea}
                     on:teaBrewed={handleBrewedTea}
+                    on:pauseStateChanged={handleTeapotPauseChanged}
                     class="teapot"
                 />
             {/each}
