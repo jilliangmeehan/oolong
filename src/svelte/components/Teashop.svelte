@@ -309,34 +309,45 @@
         automationIntervals.forEach((interval) => clearInterval(interval));
         automationIntervals = [];
 
+        // Track last action time for each sprite type
+        const lastActionTime = {
+            harvest: 0,
+            brewmaster: 0,
+            garden: 0,
+            cafe: 0,
+        };
+
+        // Cooldown in milliseconds
+        const COOLDOWN = 500;
+
         // Harvest Sprites
         if (sprites.harvest > 0) {
             const interval = setInterval(() => {
-                if ($isDaytime && workingSprites.harvest < sprites.harvest) {
+                const now = Date.now();
+                if ($isDaytime && now - lastActionTime.harvest >= COOLDOWN) {
                     for (let i = 0; i < plotRefs.length; i++) {
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
                             if (state.readyToHarvest && !state.isHarvesting) {
-                                workingSprites.harvest += 1;
                                 plot.harvest();
-                                setTimeout(() => {
-                                    workingSprites.harvest -= 1;
-                                }, TIMINGS.HARVEST_TIME); // Harvest time is constant
+                                lastActionTime.harvest = now;
                                 break;
                             }
                         }
                     }
                 }
-            }, 1000);
+            }, 100); // Check more frequently
             automationIntervals.push(interval);
         }
+
         // Brewmaster Sprites
         if (sprites.brewmaster > 0) {
             const interval = setInterval(() => {
+                const now = Date.now();
                 if (
                     $isDaytime &&
-                    workingSprites.brewmaster < sprites.brewmaster &&
+                    now - lastActionTime.brewmaster >= COOLDOWN &&
                     Object.values(harvestedTeas).some((amount) => amount > 0)
                 ) {
                     for (let i = 0; i < teapotRefs.length; i++) {
@@ -344,72 +355,57 @@
                         if (teapot) {
                             const state = teapot.getState();
                             if (!state.isBrewing) {
-                                workingSprites.brewmaster += 1;
                                 teapot.brewTea();
-                                // Wait for the type of tea being brewed
-                                const checkAndRelease = setInterval(() => {
-                                    const currentState = teapot.getState();
-                                    if (currentState.currentTeaType) {
-                                        clearInterval(checkAndRelease);
-                                        setTimeout(() => {
-                                            workingSprites.brewmaster -= 1;
-                                        }, TEA[currentState.currentTeaType].brewTime);
-                                    }
-                                }, 100);
+                                lastActionTime.brewmaster = now;
                                 break;
                             }
                         }
                     }
                 }
-            }, 1000);
+            }, 100); // Check more frequently
             automationIntervals.push(interval);
         }
+
         // Garden Sprites
         if (sprites.garden > 0) {
             const interval = setInterval(() => {
-                if ($isDaytime && workingSprites.garden < sprites.garden) {
+                const now = Date.now();
+                if ($isDaytime && now - lastActionTime.garden >= COOLDOWN) {
                     for (let i = 0; i < plotRefs.length; i++) {
                         const plot = plotRefs[i];
                         if (plot) {
                             const state = plot.getState();
-                            // Add isHarvesting check to prevent planting while harvesting
                             if (
                                 !state.isGrowing &&
                                 !state.readyToHarvest &&
                                 !state.isHarvesting
                             ) {
-                                workingSprites.garden += 1;
                                 const selectedTeaType =
                                     state.selectedTeaType || "green";
                                 plot.plantTea();
-                                setTimeout(() => {
-                                    workingSprites.garden -= 1;
-                                }, TEA[selectedTeaType].growTime);
+                                lastActionTime.garden = now;
                                 break;
                             }
                         }
                     }
                 }
-            }, 1000);
+            }, 100); // Check more frequently
             automationIntervals.push(interval);
         }
+
         // Cafe Sprites
         if (sprites.cafe > 0) {
             const interval = setInterval(() => {
+                const now = Date.now();
                 if (
                     $isDaytime &&
-                    workingSprites.cafe < sprites.cafe &&
+                    now - lastActionTime.cafe >= COOLDOWN &&
                     brewedTea > 0
                 ) {
-                    // Check brewedTea > 0
-                    workingSprites.cafe += 1;
                     serveTea(); // This will handle one cup
-                    // Serving is instant, but add a small cooldown
-                    setTimeout(() => {
-                        workingSprites.cafe -= 1;
-                    }, TIMINGS.SERVE_COOLDOWN);
+                    lastActionTime.cafe = now;
                 }
-            }, 1000);
+            }, 100); // Check more frequently
             automationIntervals.push(interval);
         }
     }
