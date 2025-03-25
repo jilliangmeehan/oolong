@@ -4646,13 +4646,16 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/config.js
   var TIMINGS = {
     // Growing
-    GARDEN_COOLDOWN: 1e3,
-    // 1 second cooldown for planting
+    GARDEN_COOLDOWN: 3e3,
+    // 3 second cooldown for planting
     // Harvest
     HARVEST_TIME: 5e3,
     // 5 seconds to harvest
-    HARVEST_COOLDOWN: 1e3,
-    // 1 second cooldown for harvesting
+    HARVEST_COOLDOWN: 3e3,
+    // 3 second cooldown for harvesting
+    // Brewing
+    BREWMASTER_COOLDOWN: 3e3,
+    // 3 second cooldown for brewmasters
     // Serving
     SERVE_COOLDOWN: 3e3,
     // 3 second cooldown for serving
@@ -5370,45 +5373,49 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[638, 16]]);
-  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[663, 24, [[664, 28]]]]);
-  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[764, 8]]);
+  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1163, 16]]);
+  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1188, 24, [[1189, 28]]]]);
+  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1289, 8]]);
   var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
     [
-      601,
+      1126,
       0,
       [
-        [602, 4, [[609, 8]]],
+        [1127, 4, [[1134, 8]]],
         [
-          611,
+          1136,
           4,
           [
-            [612, 8],
-            [624, 8],
-            [633, 8, [[644, 12]]]
+            [1137, 8],
+            [1149, 8],
+            [1158, 8, [[1169, 12]]]
           ]
         ],
         [
-          657,
+          1182,
           4,
           [
-            [658, 8, [[659, 12], [660, 12]]]
+            [
+              1183,
+              8,
+              [[1184, 12], [1185, 12]]
+            ]
           ]
         ],
-        [707, 4, [[708, 8], [709, 8]]],
+        [1232, 4, [[1233, 8], [1234, 8]]],
         [
-          723,
+          1248,
           4,
           [
-            [724, 8],
-            [725, 8, [[726, 12]]],
-            [733, 8]
+            [1249, 8],
+            [1250, 8, [[1251, 12]]],
+            [1258, 8]
           ]
         ],
-        [746, 4, [[747, 8], [750, 8]]]
+        [1271, 4, [[1272, 8], [1275, 8]]]
       ]
     ],
-    [762, 0]
+    [1287, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -5417,6 +5424,7 @@ https://svelte.dev/e/store_invalid_shape`);
     const $isDaytime = () => (validate_store(isDaytime, "isDaytime"), store_get(isDaytime, "$isDaytime", $$stores));
     const dispatch = createEventDispatcher();
     let lastSavedTime = mutable_source(null);
+    let lastActiveTime = Date.now();
     let grownPlants = 0;
     let readyToHarvest = 0;
     let harvestedTeas = mutable_source({ green: 0 });
@@ -5591,90 +5599,129 @@ https://svelte.dev/e/store_invalid_shape`);
     function startAutomation() {
       automationIntervals.forEach((interval) => clearInterval(interval));
       automationIntervals = [];
-      const lastActionTime = {
+      const workingSprites2 = {
+        garden: 0,
         harvest: 0,
         brewmaster: 0,
-        garden: 0,
         cafe: 0
       };
-      const COOLDOWN = 500;
-      if (get(sprites).harvest > 0) {
+      if (get(sprites).garden > 0) {
         const interval = setInterval(
           () => {
-            const now = Date.now();
-            if ($isDaytime() && now - lastActionTime.harvest >= COOLDOWN) {
+            if ($isDaytime() && workingSprites2.garden < get(sprites).garden) {
               for (let i = 0; i < get(plotRefs).length; i++) {
                 const plot = get(plotRefs)[i];
                 if (plot) {
                   const state2 = plot.getState();
-                  if (state2.readyToHarvest && !state2.isHarvesting) {
-                    plot.harvest();
-                    lastActionTime.harvest = now;
+                  if (!state2.isGrowing && !state2.readyToHarvest && !state2.isHarvesting) {
+                    workingSprites2.garden++;
+                    const selectedTeaType = state2.selectedTeaType || "green";
+                    plot.plantTea();
+                    setTimeout(
+                      () => {
+                        workingSprites2.garden--;
+                      },
+                      TEA[selectedTeaType].growTime
+                    );
                     break;
                   }
                 }
               }
             }
           },
-          100
+          500
+        );
+        automationIntervals.push(interval);
+      }
+      if (get(sprites).harvest > 0) {
+        const interval = setInterval(
+          () => {
+            if ($isDaytime() && workingSprites2.harvest < get(sprites).harvest) {
+              for (let i = 0; i < get(plotRefs).length; i++) {
+                const plot = get(plotRefs)[i];
+                if (plot) {
+                  const state2 = plot.getState();
+                  if (state2.readyToHarvest && !state2.isHarvesting) {
+                    workingSprites2.harvest++;
+                    plot.harvest();
+                    setTimeout(
+                      () => {
+                        workingSprites2.harvest--;
+                      },
+                      TIMINGS.HARVEST_TIME
+                    );
+                    break;
+                  }
+                }
+              }
+            }
+          },
+          500
         );
         automationIntervals.push(interval);
       }
       if (get(sprites).brewmaster > 0) {
         const interval = setInterval(
           () => {
-            const now = Date.now();
-            if ($isDaytime() && now - lastActionTime.brewmaster >= COOLDOWN && Object.values(get(harvestedTeas)).some((amount) => amount > 0)) {
+            let actuallyBrewing = 0;
+            get(teapotRefs).forEach((teapot) => {
+              if (teapot && teapot.getState().isBrewing) {
+                actuallyBrewing++;
+              }
+            });
+            workingSprites2.brewmaster = actuallyBrewing;
+            if ($isDaytime() && workingSprites2.brewmaster < get(sprites).brewmaster && Object.values(get(harvestedTeas)).some((amount) => amount > 0)) {
               for (let i = 0; i < get(teapotRefs).length; i++) {
                 const teapot = get(teapotRefs)[i];
                 if (teapot) {
                   const state2 = teapot.getState();
                   if (!state2.isBrewing) {
+                    workingSprites2.brewmaster++;
                     teapot.brewTea();
-                    lastActionTime.brewmaster = now;
+                    const teapotId = i;
+                    const monitorBrewing = setInterval(
+                      () => {
+                        const currentTeapot = get(teapotRefs)[teapotId];
+                        if (currentTeapot) {
+                          const currentState = currentTeapot.getState();
+                          if (!currentState.isBrewing) {
+                            clearInterval(monitorBrewing);
+                            workingSprites2.brewmaster--;
+                            console.log(...log_if_contains_state("log", `Teapot ${teapotId} finished brewing, ${workingSprites2.brewmaster} brewmasters now working`));
+                          }
+                        } else {
+                          clearInterval(monitorBrewing);
+                          workingSprites2.brewmaster--;
+                          console.log(...log_if_contains_state("log", `Teapot ${teapotId} no longer exists, cleaning up`));
+                        }
+                      },
+                      500
+                    );
                     break;
                   }
                 }
               }
             }
           },
-          100
-        );
-        automationIntervals.push(interval);
-      }
-      if (get(sprites).garden > 0) {
-        const interval = setInterval(
-          () => {
-            const now = Date.now();
-            if ($isDaytime() && now - lastActionTime.garden >= COOLDOWN) {
-              for (let i = 0; i < get(plotRefs).length; i++) {
-                const plot = get(plotRefs)[i];
-                if (plot) {
-                  const state2 = plot.getState();
-                  if (!state2.isGrowing && !state2.readyToHarvest && !state2.isHarvesting) {
-                    const selectedTeaType = state2.selectedTeaType || "green";
-                    plot.plantTea();
-                    lastActionTime.garden = now;
-                    break;
-                  }
-                }
-              }
-            }
-          },
-          100
+          500
         );
         automationIntervals.push(interval);
       }
       if (get(sprites).cafe > 0) {
         const interval = setInterval(
           () => {
-            const now = Date.now();
-            if ($isDaytime() && now - lastActionTime.cafe >= COOLDOWN && get(brewedTea) > 0) {
+            if ($isDaytime() && workingSprites2.cafe < get(sprites).cafe && get(brewedTea) > 0) {
+              workingSprites2.cafe++;
               serveTea();
-              lastActionTime.cafe = now;
+              setTimeout(
+                () => {
+                  workingSprites2.cafe--;
+                },
+                TIMINGS.SERVE_COOLDOWN
+              );
             }
           },
-          100
+          500
         );
         automationIntervals.push(interval);
       }
@@ -5682,6 +5729,7 @@ https://svelte.dev/e/store_invalid_shape`);
     function saveGameState() {
       const gameState = {
         lastSaved: Date.now(),
+        lastActiveTime,
         currentTime: get(currentTime),
         grownPlants,
         readyToHarvest,
@@ -5714,6 +5762,7 @@ https://svelte.dev/e/store_invalid_shape`);
       const savedState = localStorage.getItem("teashopGameState");
       if (savedState) {
         const gameState = JSON.parse(savedState);
+        lastActiveTime = gameState.lastActiveTime;
         grownPlants = gameState.grownPlants;
         readyToHarvest = gameState.readyToHarvest || 0;
         set(harvestedTeas, gameState.harvestedTeas || { green: 0 });
@@ -5742,6 +5791,12 @@ https://svelte.dev/e/store_invalid_shape`);
             served: { total: 0, byType: {} }
           }
         });
+        workingSprites = {
+          garden: 0,
+          harvest: 0,
+          brewmaster: 0,
+          cafe: 0
+        };
         setTimeout(
           () => {
             gameState.plotStates.forEach((state2, i) => {
@@ -5754,6 +5809,25 @@ https://svelte.dev/e/store_invalid_shape`);
                 get(teapotRefs)[i].setState(state2);
               }
             });
+            get(teapotRefs).forEach((teapot) => {
+              if (teapot && teapot.getState().isBrewing) {
+                workingSprites.brewmaster++;
+              }
+            });
+            get(plotRefs).forEach((plot) => {
+              if (plot) {
+                const state2 = plot.getState();
+                if (state2.isGrowing) {
+                  workingSprites.garden++;
+                }
+                if (state2.isHarvesting) {
+                  workingSprites.harvest++;
+                }
+              }
+            });
+            automationIntervals.forEach((interval) => clearInterval(interval));
+            automationIntervals = [];
+            startAutomation();
           },
           100
         );
@@ -5825,6 +5899,224 @@ https://svelte.dev/e/store_invalid_shape`);
       startDayCycle();
       createToast("A fresh start!");
     }
+    function simulateTimeAdvancement(elapsedMs) {
+      if (elapsedMs < 5e3) return;
+      let summary = {
+        grown: 0,
+        harvested: 0,
+        brewed: 0,
+        served: 0,
+        pointsEarned: 0,
+        byTeaType: {}
+      };
+      const quarterDuration = TIMINGS.QUARTER_DURATION;
+      const quartersPassed = Math.floor(elapsedMs / quarterDuration);
+      if (quartersPassed > 0) {
+        const currentIndex = QUARTERS.indexOf(get(currentTime));
+        const newIndex = (currentIndex + quartersPassed) % QUARTERS.length;
+        set(currentTime, QUARTERS[newIndex]);
+        timeOfDay.set(get(currentTime));
+        isDaytime.set(strict_equals(get(currentTime), "night", false));
+      }
+      const availableSprites = { ...get(sprites) };
+      if (availableSprites.garden > 0) {
+        const availablePlots = get(plotRefs).filter((plot) => {
+          if (!plot) return false;
+          const state2 = plot.getState();
+          return !state2.isGrowing && !state2.readyToHarvest && !state2.isHarvesting;
+        });
+        const gardenCyclesPerSprite = Math.floor(elapsedMs / TIMINGS.GARDEN_COOLDOWN);
+        const totalPlantingOperations = Math.min(availableSprites.garden * gardenCyclesPerSprite, availablePlots.length);
+        for (let i = 0; i < totalPlantingOperations; i++) {
+          if (i < availablePlots.length) {
+            const plot = availablePlots[i];
+            const state2 = plot.getState();
+            const teaType = state2.selectedTeaType || "green";
+            const growTime = TEA[teaType].growTime;
+            const growCycles = Math.floor((elapsedMs - i * TIMINGS.GARDEN_COOLDOWN) / growTime);
+            if (growCycles > 0) {
+              plot.setState({
+                ...state2,
+                isGrowing: false,
+                readyToHarvest: true,
+                progress: 100
+              });
+              summary.grown++;
+              summary.byTeaType[teaType] = summary.byTeaType[teaType] || {
+                grown: 0,
+                harvested: 0,
+                brewed: 0,
+                served: 0
+              };
+              summary.byTeaType[teaType].grown++;
+              mutate(teaStats, get(teaStats).current.ready.byType[teaType] = (get(teaStats).current.ready.byType[teaType] || 0) + 1);
+              mutate(teaStats, get(teaStats).current.ready.total++);
+              readyToHarvest++;
+            } else {
+              const progress = Math.min(100, (elapsedMs - i * TIMINGS.GARDEN_COOLDOWN) / growTime * 100);
+              plot.setState({
+                ...state2,
+                isGrowing: true,
+                readyToHarvest: false,
+                progress
+              });
+            }
+          }
+        }
+      }
+      if (availableSprites.harvest > 0) {
+        const readyPlots = get(plotRefs).filter((plot) => {
+          if (!plot) return false;
+          const state2 = plot.getState();
+          return state2.readyToHarvest && !state2.isHarvesting;
+        });
+        const harvestCyclesPerSprite = Math.floor(elapsedMs / TIMINGS.HARVEST_COOLDOWN);
+        const totalHarvestOperations = Math.min(availableSprites.harvest * harvestCyclesPerSprite, readyPlots.length);
+        for (let i = 0; i < totalHarvestOperations; i++) {
+          if (i < readyPlots.length) {
+            const plot = readyPlots[i];
+            const state2 = plot.getState();
+            const teaType = state2.selectedTeaType || "green";
+            plot.setState({
+              ...state2,
+              isGrowing: false,
+              readyToHarvest: false,
+              isHarvesting: false,
+              progress: 0,
+              harvestProgress: 0
+            });
+            mutate(harvestedTeas, get(harvestedTeas)[teaType] = (get(harvestedTeas)[teaType] || 0) + 2);
+            summary.harvested += 2;
+            summary.byTeaType[teaType] = summary.byTeaType[teaType] || {
+              grown: 0,
+              harvested: 0,
+              brewed: 0,
+              served: 0
+            };
+            summary.byTeaType[teaType].harvested += 2;
+            mutate(teaStats, get(teaStats).current.ready.byType[teaType] = Math.max((get(teaStats).current.ready.byType[teaType] || 0) - 1, 0));
+            mutate(teaStats, get(teaStats).current.ready.total = Math.max(get(teaStats).current.ready.total - 1, 0));
+            readyToHarvest = Math.max(readyToHarvest - 1, 0);
+            mutate(teaStats, get(teaStats).current.harvested.byType[teaType] = get(harvestedTeas)[teaType]);
+            mutate(teaStats, get(teaStats).current.harvested.total = Object.values(get(harvestedTeas)).reduce((sum, val) => sum + val, 0));
+            mutate(teaStats, get(teaStats).lifetime.harvested.byType[teaType] = (get(teaStats).lifetime.harvested.byType[teaType] || 0) + 2);
+            mutate(teaStats, get(teaStats).lifetime.harvested.total += 2);
+          }
+        }
+      }
+      if (availableSprites.brewmaster > 0) {
+        const availableTeapots = get(teapotRefs).filter((teapot) => {
+          if (!teapot) return false;
+          return !teapot.getState().isBrewing;
+        }).length;
+        const totalHarvestedTea = Object.values(get(harvestedTeas)).reduce((sum, val) => sum + val, 0);
+        const availableTeaTypes = Object.keys(get(harvestedTeas)).filter((type) => get(harvestedTeas)[type] > 0);
+        const avgBrewTime = availableTeaTypes.length ? availableTeaTypes.reduce((sum, type) => sum + TEA[type].brewTime, 0) / availableTeaTypes.length : 7e3;
+        const brewCyclesPerSprite = Math.floor(elapsedMs / avgBrewTime);
+        const totalBrewOperations = Math.min(availableSprites.brewmaster * brewCyclesPerSprite, availableTeapots, totalHarvestedTea);
+        let remainingOperations = totalBrewOperations;
+        for (const teaType of availableTeaTypes) {
+          const typeOperations = Math.min(remainingOperations, get(harvestedTeas)[teaType]);
+          if (typeOperations > 0) {
+            mutate(harvestedTeas, get(harvestedTeas)[teaType] -= typeOperations);
+            mutate(brewedTeas, get(brewedTeas)[teaType] = (get(brewedTeas)[teaType] || 0) + typeOperations);
+            set(brewedTea, get(brewedTea) + typeOperations);
+            summary.brewed += typeOperations;
+            summary.byTeaType[teaType] = summary.byTeaType[teaType] || {
+              grown: 0,
+              harvested: 0,
+              brewed: 0,
+              served: 0
+            };
+            summary.byTeaType[teaType].brewed += typeOperations;
+            mutate(teaStats, get(teaStats).current.harvested.byType[teaType] = get(harvestedTeas)[teaType]);
+            mutate(teaStats, get(teaStats).current.brewed.byType[teaType] = get(brewedTeas)[teaType]);
+            mutate(teaStats, get(teaStats).current.brewed.total = get(brewedTea));
+            mutate(teaStats, get(teaStats).lifetime.brewed.byType[teaType] = (get(teaStats).lifetime.brewed.byType[teaType] || 0) + typeOperations);
+            mutate(teaStats, get(teaStats).lifetime.brewed.total += typeOperations);
+            remainingOperations -= typeOperations;
+            if (remainingOperations <= 0) break;
+          }
+        }
+      }
+      if (availableSprites.cafe > 0) {
+        const serveCyclesPerSprite = Math.floor(elapsedMs / TIMINGS.SERVE_COOLDOWN);
+        const totalBrewedTea = Object.values(get(brewedTeas)).reduce((sum, val) => sum + val, 0);
+        const totalServeOperations = Math.min(availableSprites.cafe * serveCyclesPerSprite, totalBrewedTea);
+        const availableBrewedTypes = Object.keys(get(brewedTeas)).filter((type) => get(brewedTeas)[type] > 0);
+        let remainingOperations = totalServeOperations;
+        for (const teaType of availableBrewedTypes) {
+          const typeOperations = Math.min(remainingOperations, get(brewedTeas)[teaType]);
+          if (typeOperations > 0) {
+            const pointsPerServe = TEA[teaType].pointValue + get(sprites).cafe * POINTS.CAFE_SPRITE_BONUS;
+            const typePoints = pointsPerServe * typeOperations;
+            mutate(brewedTeas, get(brewedTeas)[teaType] -= typeOperations);
+            set(brewedTea, get(brewedTea) - typeOperations);
+            servedTea += typeOperations;
+            set(points, get(points) + typePoints);
+            summary.served += typeOperations;
+            summary.pointsEarned += typePoints;
+            summary.byTeaType[teaType] = summary.byTeaType[teaType] || {
+              grown: 0,
+              harvested: 0,
+              brewed: 0,
+              served: 0
+            };
+            summary.byTeaType[teaType].served += typeOperations;
+            mutate(teaStats, get(teaStats).current.brewed.byType[teaType] = get(brewedTeas)[teaType]);
+            mutate(teaStats, get(teaStats).current.brewed.total = get(brewedTea));
+            mutate(teaStats, get(teaStats).lifetime.served.byType[teaType] = (get(teaStats).lifetime.served.byType[teaType] || 0) + typeOperations);
+            mutate(teaStats, get(teaStats).lifetime.served.total += typeOperations);
+            remainingOperations -= typeOperations;
+            if (remainingOperations <= 0) break;
+          }
+        }
+      }
+    }
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        lastActiveTime = Date.now();
+        saveGameState();
+      } else {
+        console.log("Tab visible again, resetting automation");
+        automationIntervals.forEach((interval) => clearInterval(interval));
+        automationIntervals = [];
+        const now = Date.now();
+        const elapsedMs = now - lastActiveTime;
+        simulateTimeAdvancement(elapsedMs);
+        workingSprites = {
+          garden: 0,
+          harvest: 0,
+          brewmaster: 0,
+          cafe: 0
+        };
+        get(teapotRefs).forEach((teapot) => {
+          if (teapot && teapot.getState().isBrewing) {
+            workingSprites.brewmaster++;
+          }
+        });
+        let actualBrewingCount = 0;
+        get(teapotRefs).forEach((teapot) => {
+          if (teapot && teapot.getState().isBrewing) {
+            actualBrewingCount++;
+          }
+        });
+        workingSprites.brewmaster = actualBrewingCount;
+        console.log(...log_if_contains_state("log", `Reset brewmaster count to ${actualBrewingCount} based on actual brewing teapots`));
+        get(plotRefs).forEach((plot) => {
+          if (plot) {
+            const state2 = plot.getState();
+            if (state2.isGrowing) {
+              workingSprites.garden++;
+            }
+            if (state2.isHarvesting) {
+              workingSprites.harvest++;
+            }
+          }
+        });
+        startAutomation();
+      }
+    });
     onMount(() => {
       console.log("Component mounted");
       loadGameState();
