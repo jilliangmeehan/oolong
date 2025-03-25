@@ -4689,12 +4689,40 @@ https://svelte.dev/e/store_invalid_shape`);
       pointValue: 10,
       cost: 250
     },
+    jasmine: {
+      name: "Jasmine Tea",
+      growTime: 8e3,
+      brewTime: 4e3,
+      pointValue: 4,
+      cost: 500
+    },
     sakura: {
       name: "Sakura Tea",
       growTime: 2e4,
       brewTime: 7e3,
       pointValue: 15,
       cost: 750
+    },
+    herbal: {
+      name: "Herbal Tea",
+      growTime: 1e4,
+      brewTime: 12e3,
+      pointValue: 14,
+      cost: 900
+    },
+    matcha: {
+      name: "Matcha Tea",
+      growTime: 25e3,
+      brewTime: 3e3,
+      pointValue: 18,
+      cost: 1200
+    },
+    mystical: {
+      name: "Mystical Tea",
+      growTime: 3e4,
+      brewTime: 15e3,
+      pointValue: 50,
+      cost: 3e3
     }
     // celestial: {
     //   name: "Celestial Tea",
