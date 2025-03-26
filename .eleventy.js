@@ -21,7 +21,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addFilter("w3DateFilter", w3DateFilter);
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
-  // set directories to pass through to the dist folder
+  // set directories to pass through to the _site folder
   eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
@@ -29,6 +29,7 @@ module.exports = (eleventyConfig) => {
   //eleventyConfig.addPassthroughCopy("**/photos/*.jpeg");
   //eleventyConfig.addPassthroughCopy("**/photos/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
+  eleventyConfig.addPassthroughCopy("./src/icons/teacups/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("_site/assets");
