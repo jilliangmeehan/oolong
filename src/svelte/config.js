@@ -91,13 +91,13 @@ export const TEA = {
     pointValue: 15,
     cost: 750,
   },
-  herbal: {
-    name: "Herbal Tea",
-    growTime: 10000,
-    brewTime: 12000,
-    pointValue: 14,
-    cost: 900,
-  },
+  // herbal: {
+  //   name: "Herbal Tea",
+  //   growTime: 10000,
+  //   brewTime: 12000,
+  //   pointValue: 14,
+  //   cost: 900,
+  // },
   matcha: {
     name: "Matcha Tea",
     growTime: 25000,
@@ -112,11 +112,11 @@ export const TEA = {
     pointValue: 50,
     cost: 3000,
   },
-  celestial: {
-    name: "Celestial Tea",
-    growTime: 10000,
-    brewTime: 5000,
-    pointValue: 10,
-    cost: 2000,
-  },
+  // celestial: {
+  //   name: "Celestial Tea",
+  //   growTime: 10000,
+  //   brewTime: 5000,
+  //   pointValue: 10,
+  //   cost: 2000,
+  // },
 };

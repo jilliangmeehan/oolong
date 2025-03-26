@@ -4809,13 +4809,13 @@ https://svelte.dev/e/store_invalid_shape`);
       pointValue: 15,
       cost: 750
     },
-    herbal: {
-      name: "Herbal Tea",
-      growTime: 1e4,
-      brewTime: 12e3,
-      pointValue: 14,
-      cost: 900
-    },
+    // herbal: {
+    //   name: "Herbal Tea",
+    //   growTime: 10000,
+    //   brewTime: 12000,
+    //   pointValue: 14,
+    //   cost: 900,
+    // },
     matcha: {
       name: "Matcha Tea",
       growTime: 25e3,
@@ -4829,14 +4829,14 @@ https://svelte.dev/e/store_invalid_shape`);
       brewTime: 15e3,
       pointValue: 50,
       cost: 3e3
-    },
-    celestial: {
-      name: "Celestial Tea",
-      growTime: 1e4,
-      brewTime: 5e3,
-      pointValue: 10,
-      cost: 2e3
     }
+    // celestial: {
+    //   name: "Celestial Tea",
+    //   growTime: 10000,
+    //   brewTime: 5000,
+    //   pointValue: 10,
+    //   cost: 2000,
+    // },
   };
 
   // src/svelte/stores.js
