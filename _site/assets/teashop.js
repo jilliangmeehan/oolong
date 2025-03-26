@@ -6497,7 +6497,6 @@ https://svelte.dev/e/store_invalid_shape`);
         isDaytime.set(strict_equals(get(currentTime), "night", false));
       }
       if (!$isDaytime()) {
-        createToast("The sprites were sleeping while you were away!");
         return;
       }
       const availableSprites = { ...get(sprites) };

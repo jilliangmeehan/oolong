@@ -883,7 +883,7 @@
 
         // Skip simulation if it's night time - sprites don't work at night
         if (!$isDaytime) {
-            createToast("The sprites were sleeping while you were away!");
+            //    createToast("The sprites were sleeping while you were away!");
             return;
         }
 
