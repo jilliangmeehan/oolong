@@ -50,6 +50,10 @@
         },
     };
 
+    const getTeacupIconPath = (teaType) => {
+        return `../../icons/teacups/${teaType}.png`;
+    };
+
     const QUARTERS = ["sunrise", "day", "sunset", "night"];
 
     let toasts = [];
@@ -137,7 +141,12 @@
         }
     }
 
-    function createToast(message = "hiya!", points = null, type = "default") {
+    function createToast(
+        message = "hiya!",
+        points = null,
+        type = "default",
+        teaType = null,
+    ) {
         const id = toastId++;
         const x = Math.random() * 40 - 20;
         const toast = {
@@ -148,6 +157,7 @@
             points,
             message,
             type,
+            teaType,
         };
         toasts = [...toasts, toast];
 
@@ -312,7 +322,12 @@
                 teaStats.lifetime.served.total += 1;
 
                 dispatch("teaServed");
-                createToast(`+${pointsEarned} points!`, pointsEarned);
+                createToast(
+                    `+${pointsEarned} points!`,
+                    pointsEarned,
+                    "default",
+                    type,
+                );
                 console.log(`Tea served: ${type}, points: ${pointsEarned}`);
                 return;
             }
@@ -1180,40 +1195,40 @@
         }
 
         //  Create toast messages to summarize what happened
-        if (
-            summary.grown > 0 ||
-            summary.harvested > 0 ||
-            summary.brewed > 0 ||
-            summary.served > 0
-        ) {
-            createToast(
-                `While you were away, sprites were busy!`,
-                null,
-                "info",
-            );
+        // if (
+        //     summary.grown > 0 ||
+        //     summary.harvested > 0 ||
+        //     summary.brewed > 0 ||
+        //     summary.served > 0
+        // ) {
+        //     createToast(
+        //         `While you were away, sprites were busy!`,
+        //         null,
+        //         "info",
+        //     );
 
-            if (summary.served > 0) {
-                createToast(
-                    `Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`,
-                );
-            }
+        //     if (summary.served > 0) {
+        //         createToast(
+        //             `Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`,
+        //         );
+        //     }
 
-            if (summary.brewed > 0) {
-                createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
-            }
+        //     if (summary.brewed > 0) {
+        //         createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
+        //     }
 
-            if (summary.harvested > 0) {
-                createToast(
-                    `Sprites harvested ${summary.harvested} units of tea.`,
-                );
-            }
+        //     if (summary.harvested > 0) {
+        //         createToast(
+        //             `Sprites harvested ${summary.harvested} units of tea.`,
+        //         );
+        //     }
 
-            if (summary.grown > 0) {
-                createToast(
-                    `Sprites planted and grew ${summary.grown} plots of tea.`,
-                );
-            }
-        }
+        //     if (summary.grown > 0) {
+        //         createToast(
+        //             `Sprites planted and grew ${summary.grown} plots of tea.`,
+        //         );
+        //     }
+        // }
     }
 
     document.addEventListener("visibilitychange", () => {
@@ -1550,6 +1565,13 @@
                             --opacity: {toast.opacity};
                         "
         >
+            {#if toast.teaType && toast.teaType in TEA}
+                <img
+                    src="../../icons/teacups/{toast.teaType}.png"
+                    alt={TEA[toast.teaType].name}
+                    class="toast-teacup-icon"
+                />
+            {/if}
             {toast.message}
         </div>
     {/each}

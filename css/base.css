@@ -409,6 +409,10 @@ button.secondary:disabled:hover {
     color: var(--tea);
     animation: float-up 4s ease-out forwards;
     white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .toast.success {
@@ -491,7 +495,7 @@ button.secondary:disabled:hover {
 .harvest-box {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto 1fr;
     align-items: center;
     justify-items: start;
 }
@@ -515,7 +519,14 @@ progress[value] {
     grid-area: progress;
 }
 
-.garden-plot > select {
+.tea-selection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.garden-plot select {
     font-family: var(--mono);
     font-size: small;
     text-transform: uppercase;
@@ -671,4 +682,19 @@ button.save-game {
 
 .stats-tea-type {
     width: 25%;
+}
+
+/* teacup icons */
+.teacup-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 4px;
+}
+
+.toast-teacup-icon {
+    display: inline;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
 }

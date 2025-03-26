@@ -1,9 +1,9 @@
 export const DEBUG = {
-  TESTING_MODE: false,
+  TESTING_MODE: true,
   STARTING_POINTS: 10000,
-  UNLOCK_ALL_TEA: false, // Optional: unlock all tea types
-  EXTRA_PLOTS: 3, // Optional: start with extra garden plots
-  EXTRA_TEAPOTS: 1, // Optional: start with extra teapots
+  UNLOCK_ALL_TEA: true, // Optional: unlock all tea types
+  EXTRA_PLOTS: 7, // Optional: start with extra garden plots
+  EXTRA_TEAPOTS: 3, // Optional: start with extra teapots
 };
 
 export const TIMINGS = {
@@ -112,11 +112,11 @@ export const TEA = {
     pointValue: 50,
     cost: 3000,
   },
-  // celestial: {
-  //   name: "Celestial Tea",
-  //   growTime: 10000,
-  //   brewTime: 5000,
-  //   pointValue: 10,
-  //   cost: 2000,
-  // },
+  celestial: {
+    name: "Celestial Tea",
+    growTime: 10000,
+    brewTime: 5000,
+    pointValue: 10,
+    cost: 2000,
+  },
 };

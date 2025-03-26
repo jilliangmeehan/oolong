@@ -12,6 +12,10 @@
     export let isPaused = false;
     export let teapotId;
 
+    const getTeacupIconPath = (teaType) => {
+        return `../../icons/teacups/${teaType}.png`;
+    };
+
     function hasTeaAvailable() {
         return Object.values(harvestedTeas).some((amount) => amount > 0);
     }
@@ -121,6 +125,14 @@
 
     {#if isBrewing}
         <progress value={progress} max="100" />
+    {/if}
+
+    {#if isBrewing && currentTeaType}
+        <img
+            src={getTeacupIconPath(currentTeaType)}
+            alt={`${TEA[currentTeaType].name} icon`}
+            class="teacup-icon"
+        />
     {/if}
 
     <div class="control-buttons">

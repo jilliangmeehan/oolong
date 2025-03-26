@@ -4717,13 +4717,13 @@ https://svelte.dev/e/store_invalid_shape`);
 
   // src/svelte/config.js
   var DEBUG = {
-    TESTING_MODE: false,
+    TESTING_MODE: true,
     STARTING_POINTS: 1e4,
-    UNLOCK_ALL_TEA: false,
+    UNLOCK_ALL_TEA: true,
     // Optional: unlock all tea types
-    EXTRA_PLOTS: 3,
+    EXTRA_PLOTS: 7,
     // Optional: start with extra garden plots
-    EXTRA_TEAPOTS: 1
+    EXTRA_TEAPOTS: 3
     // Optional: start with extra teapots
   };
   var TIMINGS = {
@@ -4829,14 +4829,14 @@ https://svelte.dev/e/store_invalid_shape`);
       brewTime: 15e3,
       pointValue: 50,
       cost: 3e3
+    },
+    celestial: {
+      name: "Celestial Tea",
+      growTime: 1e4,
+      brewTime: 5e3,
+      pointValue: 10,
+      cost: 2e3
     }
-    // celestial: {
-    //   name: "Celestial Tea",
-    //   growTime: 10000,
-    //   brewTime: 5000,
-    //   pointValue: 10,
-    //   cost: 2000,
-    // },
   };
 
   // src/svelte/stores.js
@@ -4847,18 +4847,18 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
   GardenPlot[FILENAME] = "src/svelte/components/GardenPlot.svelte";
-  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[164, 12]]);
-  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[177, 12]]);
-  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[186, 16]]);
-  var root = add_locations(template(`<div><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <select></select> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete garden plot">\u2715</button></div></div>`), GardenPlot[FILENAME], [
+  var root_5 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[168, 12]]);
+  var root_8 = add_locations(template(`<progress max="100"></progress>`), GardenPlot[FILENAME], [[181, 12]]);
+  var root_10 = add_locations(template(`<option> </option>`), GardenPlot[FILENAME], [[197, 20]]);
+  var root = add_locations(template(`<div><div class="garden-box"><button><!></button> <!></div> <div class="harvest-box"><button><!></button> <!></div> <div class="tea-selection"><img class="teacup-icon"> <select></select></div> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete garden plot">\u2715</button></div></div>`), GardenPlot[FILENAME], [
     [
-      147,
+      151,
       0,
       [
-        [148, 4, [[149, 8]]],
-        [168, 4, [[169, 8]]],
-        [180, 4],
-        [191, 4, [[193, 8], [202, 8]]]
+        [152, 4, [[153, 8]]],
+        [172, 4, [[173, 8]]],
+        [185, 4, [[186, 8], [191, 8]]],
+        [203, 4, [[205, 8], [214, 8]]]
       ]
     ]
   ]);
@@ -4876,6 +4876,9 @@ https://svelte.dev/e/store_invalid_shape`);
     let selectedTeaType = prop($$props, "selectedTeaType", 12, "green");
     let isPaused = prop($$props, "isPaused", 12, false);
     let plotId = prop($$props, "plotId", 8);
+    const getTeacupIconPath = (teaType) => {
+      return `../../icons/teacups/${teaType}.png`;
+    };
     let isDay;
     isDaytime.subscribe((value) => isDay = value);
     function getState() {
@@ -5077,7 +5080,9 @@ https://svelte.dev/e/store_invalid_shape`);
       });
     }
     reset(div_2);
-    var select = sibling(div_2, 2);
+    var div_3 = sibling(div_2, 2);
+    var img = child(div_3);
+    var select = sibling(img, 2);
     template_effect(() => {
       selectedTeaType();
       invalidate_inner_signals(() => {
@@ -5117,25 +5122,31 @@ https://svelte.dev/e/store_invalid_shape`);
       append($$anchor2, fragment_3);
     });
     reset(select);
-    var div_3 = sibling(select, 2);
-    var button_2 = child(div_3);
+    reset(div_3);
+    var div_4 = sibling(div_3, 2);
+    var button_2 = child(div_4);
     var text_6 = child(button_2, true);
     reset(button_2);
     var button_3 = sibling(button_2, 2);
-    reset(div_3);
+    reset(div_4);
     reset(div);
     template_effect(
-      ($0) => {
+      ($0, $1) => {
         classes = set_class(div, 1, "garden-plot", null, classes, $0);
         button.disabled = isGrowing() || readyToHarvest() || isHarvesting();
         set_attribute(button, "data-growing", isGrowing());
         set_attribute(button, "data-harvestable", readyToHarvest());
         button_1.disabled = !readyToHarvest() || isHarvesting();
+        set_attribute(img, "src", $1);
+        set_attribute(img, "alt", `${TEA[selectedTeaType()].name} icon`);
         select.disabled = isGrowing() || readyToHarvest() || isHarvesting();
         set_attribute(button_2, "title", isPaused() ? "Enable automation" : "Pause automation");
         set_text(text_6, isPaused() ? "\u23F5" : "\u23F8");
       },
-      [() => ({ paused: isPaused() })],
+      [
+        () => ({ paused: isPaused() }),
+        () => getTeacupIconPath(selectedTeaType())
+      ],
       derived_safe_equal
     );
     event("click", button, plantTea);
@@ -5169,14 +5180,15 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teapot.svelte
   mark_module_start();
   Teapot[FILENAME] = "src/svelte/components/Teapot.svelte";
-  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[123, 8]]);
-  var root2 = add_locations(template(`<div><button><!></button> <!> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete teapot">\u2715</button></div></div>`), Teapot[FILENAME], [
+  var root_52 = add_locations(template(`<progress max="100"></progress>`), Teapot[FILENAME], [[127, 8]]);
+  var root_6 = add_locations(template(`<img class="teacup-icon">`), Teapot[FILENAME], [[131, 8]]);
+  var root2 = add_locations(template(`<div><button><!></button> <!> <!> <div class="control-buttons"><button class="pause-button"> </button> <button class="delete-button" title="Delete teapot">\u2715</button></div></div>`), Teapot[FILENAME], [
     [
-      107,
+      111,
       0,
       [
-        [108, 4],
-        [126, 4, [[128, 8], [137, 8]]]
+        [112, 4],
+        [138, 4, [[140, 8], [149, 8]]]
       ]
     ]
   ]);
@@ -5191,6 +5203,9 @@ https://svelte.dev/e/store_invalid_shape`);
     let brewingInterval;
     let isPaused = prop($$props, "isPaused", 12, false);
     let teapotId = prop($$props, "teapotId", 8);
+    const getTeacupIconPath = (teaType) => {
+      return `../../icons/teacups/${teaType}.png`;
+    };
     function hasTeaAvailable() {
       return Object.values(harvestedTeas()).some((amount) => amount > 0);
     }
@@ -5314,7 +5329,27 @@ https://svelte.dev/e/store_invalid_shape`);
         if (get(isBrewing)) $$render(consequent_2);
       });
     }
-    var div_1 = sibling(node_1, 2);
+    var node_2 = sibling(node_1, 2);
+    {
+      var consequent_3 = ($$anchor2) => {
+        var img = root_6();
+        template_effect(
+          ($0) => {
+            set_attribute(img, "src", $0);
+            set_attribute(img, "alt", `${TEA[get(currentTeaType)].name} icon`);
+          },
+          [
+            () => getTeacupIconPath(get(currentTeaType))
+          ],
+          derived_safe_equal
+        );
+        append($$anchor2, img);
+      };
+      if_block(node_2, ($$render) => {
+        if (get(isBrewing) && get(currentTeaType)) $$render(consequent_3);
+      });
+    }
+    var div_1 = sibling(node_2, 2);
     var button_1 = child(div_1);
     var text_3 = child(button_1, true);
     reset(button_1);
@@ -5723,118 +5758,119 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_1 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1352, 16]]);
+  var root_1 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1367, 16]]);
   var root_3 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
     [
-      1395,
+      1410,
       36,
       [
-        [1396, 40],
-        [1399, 40],
-        [1406, 40],
-        [1413, 40]
+        [1411, 40],
+        [1414, 40],
+        [1421, 40],
+        [1428, 40]
       ]
     ]
   ]);
   var root_54 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
     [
-      1442,
+      1457,
       36,
       [
-        [1443, 40],
-        [1446, 40],
-        [1453, 40],
-        [1460, 40],
-        [1467, 40]
+        [1458, 40],
+        [1461, 40],
+        [1468, 40],
+        [1475, 40],
+        [1482, 40]
       ]
     ]
   ]);
-  var root_12 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1546, 8]]);
+  var root_13 = add_locations(template(`<img class="toast-teacup-icon">`), Teashop[FILENAME], [[1569, 16]]);
+  var root_12 = add_locations(template(`<div><!> </div>`), Teashop[FILENAME], [[1561, 8]]);
   var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div class="stats-tables"><div class="stats-section"><h3>Current</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Can Harvest</th><th>Can Brew</th><th>Can Serve</th></tr></thead><tbody></tbody></table></div> <div class="stats-section"><h3>Lifetime</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Grown</th><th>Harvested</th><th>Brewed</th><th>Served</th></tr></thead><tbody></tbody></table></div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
     [
-      1315,
+      1330,
       0,
       [
-        [1316, 4, [[1323, 8]]],
+        [1331, 4, [[1338, 8]]],
         [
-          1325,
+          1340,
           4,
           [
-            [1326, 8],
-            [1338, 8],
-            [1347, 8, [[1358, 12]]]
+            [1341, 8],
+            [1353, 8],
+            [1362, 8, [[1373, 12]]]
           ]
         ],
         [
-          1377,
+          1392,
           4,
           [
             [
-              1378,
+              1393,
               8,
               [
-                [1379, 12],
+                [1394, 12],
                 [
-                  1380,
+                  1395,
                   12,
                   [
                     [
-                      1381,
+                      1396,
                       16,
                       [
-                        [1382, 20],
+                        [1397, 20],
                         [
-                          1383,
+                          1398,
                           20,
                           [
                             [
-                              1384,
+                              1399,
                               24,
                               [
                                 [
-                                  1385,
+                                  1400,
                                   28,
                                   [
-                                    [1386, 32],
-                                    [1387, 32],
-                                    [1388, 32],
-                                    [1389, 32]
+                                    [1401, 32],
+                                    [1402, 32],
+                                    [1403, 32],
+                                    [1404, 32]
                                   ]
                                 ]
                               ]
                             ],
-                            [1392, 24]
+                            [1407, 24]
                           ]
                         ]
                       ]
                     ],
                     [
-                      1427,
+                      1442,
                       16,
                       [
-                        [1428, 20],
+                        [1443, 20],
                         [
-                          1429,
+                          1444,
                           20,
                           [
                             [
-                              1430,
+                              1445,
                               24,
                               [
                                 [
-                                  1431,
+                                  1446,
                                   28,
                                   [
-                                    [1432, 32],
-                                    [1433, 32],
-                                    [1434, 32],
-                                    [1435, 32],
-                                    [1436, 32]
+                                    [1447, 32],
+                                    [1448, 32],
+                                    [1449, 32],
+                                    [1450, 32],
+                                    [1451, 32]
                                   ]
                                 ]
                               ]
                             ],
-                            [1439, 24]
+                            [1454, 24]
                           ]
                         ]
                       ]
@@ -5845,20 +5881,20 @@ https://svelte.dev/e/store_invalid_shape`);
             ]
           ]
         ],
-        [1484, 4, [[1485, 8], [1486, 8]]],
+        [1499, 4, [[1500, 8], [1501, 8]]],
         [
-          1502,
+          1517,
           4,
           [
-            [1503, 8],
-            [1504, 8, [[1505, 12]]],
-            [1512, 8]
+            [1518, 8],
+            [1519, 8, [[1520, 12]]],
+            [1527, 8]
           ]
         ],
-        [1528, 4, [[1529, 8], [1532, 8]]]
+        [1543, 4, [[1544, 8], [1547, 8]]]
       ]
     ],
-    [1544, 0]
+    [1559, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -5904,6 +5940,9 @@ https://svelte.dev/e/store_invalid_shape`);
         served: { total: 0, byType: {} }
       }
     });
+    const getTeacupIconPath = (teaType) => {
+      return `../../icons/teacups/${teaType}.png`;
+    };
     const QUARTERS = ["sunrise", "day", "sunset", "night"];
     let toasts = mutable_source([]);
     let toastId = 0;
@@ -5921,7 +5960,7 @@ https://svelte.dev/e/store_invalid_shape`);
     };
     let plotRefs = mutable_source([]);
     let teapotRefs = mutable_source([]);
-    function createToast(message = "hiya!", points2 = null, type = "default") {
+    function createToast(message = "hiya!", points2 = null, type = "default", teaType = null) {
       const id = toastId++;
       const x = Math.random() * 40 - 20;
       const toast = {
@@ -5931,7 +5970,8 @@ https://svelte.dev/e/store_invalid_shape`);
         opacity: 1,
         points: points2,
         message,
-        type
+        type,
+        teaType
       };
       set(toasts, [...get(toasts), toast]);
       setTimeout(
@@ -6047,7 +6087,7 @@ https://svelte.dev/e/store_invalid_shape`);
           mutate(teaStats, get(teaStats).lifetime.served.byType[type] = (get(teaStats).lifetime.served.byType[type] || 0) + 1);
           mutate(teaStats, get(teaStats).lifetime.served.total += 1);
           dispatch("teaServed");
-          createToast(`+${pointsEarned} points!`, pointsEarned);
+          createToast(`+${pointsEarned} points!`, pointsEarned, "default", type);
           console.log(...log_if_contains_state("log", `Tea served: ${type}, points: ${pointsEarned}`));
           return;
         }
@@ -6653,21 +6693,6 @@ https://svelte.dev/e/store_invalid_shape`);
           }
         }
       }
-      if (summary.grown > 0 || summary.harvested > 0 || summary.brewed > 0 || summary.served > 0) {
-        createToast(`While you were away, sprites were busy!`, null, "info");
-        if (summary.served > 0) {
-          createToast(`Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`);
-        }
-        if (summary.brewed > 0) {
-          createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
-        }
-        if (summary.harvested > 0) {
-          createToast(`Sprites harvested ${summary.harvested} units of tea.`);
-        }
-        if (summary.grown > 0) {
-          createToast(`Sprites planted and grew ${summary.grown} plots of tea.`);
-        }
-      }
     }
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
@@ -7188,7 +7213,21 @@ https://svelte.dev/e/store_invalid_shape`);
     validate_each_keys(() => get(toasts), (toast) => toast.id);
     each(div_16, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
       var div_17 = root_12();
-      var text_7 = child(div_17, true);
+      var node_24 = child(div_17);
+      {
+        var consequent_5 = ($$anchor3) => {
+          var img = root_13();
+          template_effect(() => {
+            set_attribute(img, "src", `../../icons/teacups/${get(toast).teaType ?? ""}.png`);
+            set_attribute(img, "alt", TEA[get(toast).teaType].name);
+          });
+          append($$anchor3, img);
+        };
+        if_block(node_24, ($$render) => {
+          if (get(toast).teaType && get(toast).teaType in TEA) $$render(consequent_5);
+        });
+      }
+      var text_7 = sibling(node_24);
       reset(div_17);
       template_effect(() => {
         set_class(div_17, 1, `toast ${get(toast).type ?? ""}`);
@@ -7196,7 +7235,7 @@ https://svelte.dev/e/store_invalid_shape`);
                             --x: ${get(toast).x ?? ""}px;
                             --opacity: ${get(toast).opacity ?? ""};
                         `);
-        set_text(text_7, get(toast).message);
+        set_text(text_7, ` ${get(toast).message ?? ""}`);
       });
       append($$anchor2, div_17);
     });

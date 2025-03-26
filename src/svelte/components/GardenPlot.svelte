@@ -16,6 +16,10 @@
     export let isPaused = false;
     export let plotId;
 
+    const getTeacupIconPath = (teaType) => {
+        return `../../icons/teacups/${teaType}.png`;
+    };
+
     let isDay;
     isDaytime.subscribe((value) => (isDay = value));
 
@@ -177,16 +181,24 @@
             <progress value={harvestProgress} max="100"></progress>
         {/if}
     </div>
-    <select
-        bind:value={selectedTeaType}
-        disabled={isGrowing || readyToHarvest || isHarvesting}
-    >
-        {#each Object.entries(TEA) as [type, config]}
-            {#if unlockedTeaTypes[type]}
-                <option value={type}>{config.name}</option>
-            {/if}
-        {/each}
-    </select>
+
+    <div class="tea-selection">
+        <img
+            src={getTeacupIconPath(selectedTeaType)}
+            alt={`${TEA[selectedTeaType].name} icon`}
+            class="teacup-icon"
+        />
+        <select
+            bind:value={selectedTeaType}
+            disabled={isGrowing || readyToHarvest || isHarvesting}
+        >
+            {#each Object.entries(TEA) as [type, config]}
+                {#if unlockedTeaTypes[type]}
+                    <option value={type}>{config.name}</option>
+                {/if}
+            {/each}
+        </select>
+    </div>
 
     <div class="control-buttons">
         <!-- Pause button -->
