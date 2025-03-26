@@ -4783,58 +4783,51 @@ https://svelte.dev/e/store_invalid_shape`);
     },
     black: {
       name: "Black Tea",
-      growTime: 17e3,
+      growTime: 2e4,
       brewTime: 7e3,
       pointValue: 8,
       cost: 120
-    },
-    oolong: {
-      name: "Oolong Tea",
-      growTime: 17e3,
-      brewTime: 5e3,
-      pointValue: 10,
-      cost: 250
     },
     jasmine: {
       name: "Jasmine Tea",
       growTime: 8e3,
       brewTime: 4e3,
       pointValue: 4,
-      cost: 500
+      cost: 200
+    },
+    oolong: {
+      name: "Oolong Tea",
+      growTime: 2e4,
+      brewTime: 4e3,
+      pointValue: 10,
+      cost: 350
     },
     sakura: {
       name: "Sakura Tea",
-      growTime: 2e4,
-      brewTime: 7e3,
+      growTime: 1e4,
+      brewTime: 14e3,
       pointValue: 15,
       cost: 750
     },
-    // herbal: {
-    //   name: "Herbal Tea",
-    //   growTime: 10000,
-    //   brewTime: 12000,
-    //   pointValue: 14,
-    //   cost: 900,
-    // },
     matcha: {
       name: "Matcha Tea",
-      growTime: 25e3,
-      brewTime: 3e3,
+      growTime: 15e3,
+      brewTime: 1e4,
       pointValue: 18,
       cost: 1200
     },
     mystical: {
       name: "Mystical Tea",
-      growTime: 3e4,
+      growTime: 45e3,
       brewTime: 15e3,
       pointValue: 50,
       cost: 3e3
     }
     // celestial: {
     //   name: "Celestial Tea",
-    //   growTime: 10000,
-    //   brewTime: 5000,
-    //   pointValue: 10,
+    //   growTime: 14000,
+    //   brewTime: 6000,
+    //   pointValue: 25,
     //   cost: 2000,
     // },
   };
