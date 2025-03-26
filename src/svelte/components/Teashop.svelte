@@ -1,10 +1,10 @@
 <script>
-    import { TIMINGS, POINTS, TEA } from "../config.js";
+    import { TIMINGS, POINTS, TEA, DEBUG } from "../config.js";
     import GardenPlot from "./GardenPlot.svelte";
     import Teapot from "./Teapot.svelte";
     import Shop from "./Shop.svelte";
     import AnimatedStat from "./AnimatedStat.svelte";
-    import { timeOfDay, isDaytime } from "../stores.js";
+    import { timeOfDay, isDaytime, automationPausedStore } from "../stores.js";
     import { onMount, onDestroy } from "svelte";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
@@ -24,10 +24,18 @@
     let currentTime = "sunrise";
     let cycleInterval;
     let automationIntervals = [];
+    let allAutomationsPaused = false;
     let unlockedTeaTypes = {
         green: true,
     };
-
+    let purchaseCount = {
+        gardenPlot: 0,
+        teapot: 0,
+        garden: 0,
+        harvest: 0,
+        brewmaster: 0,
+        cafe: 0,
+    };
     let teaStats = {
         current: {
             ready: { total: 0, byType: {} },
@@ -182,22 +190,28 @@
 
     function handlePurchase(event) {
         const { item, cost, spriteType, teaType } = event.detail;
+        console.log("Received purchase event:", event.detail);
+        console.log("Cost received:", cost);
 
         if (item === "gardenPlot") {
             gardenPlots += 1;
             points -= cost;
+            purchaseCount.gardenPlot += 1;
         } else if (item === "teapot") {
             teapots += 1;
             points -= cost;
+            purchaseCount.teapot += 1;
         } else if (item === "teaType") {
             unlockedTeaTypes[teaType] = true;
             points -= cost;
         } else if (item === "sprite") {
             sprites[spriteType] += 1;
             points -= cost;
-            console.log("Updated sprites:", sprites);
+            purchaseCount[spriteType] += 1;
+
             startAutomation();
         }
+        purchaseCount = { ...purchaseCount };
     }
 
     function handlePlantReady(event) {
@@ -351,6 +365,10 @@
 
         createToast("Teapot removed", null, "success");
         saveGameState();
+    }
+
+    function handleRecalibrate() {
+        recalibrateTime();
     }
 
     function startAutomation() {
@@ -522,6 +540,49 @@
         }
     }
 
+    function toggleAllAutomations() {
+        allAutomationsPaused = !allAutomationsPaused;
+        automationPausedStore.set(allAutomationsPaused);
+
+        // Apply to all garden plots
+        plotRefs.forEach((plot) => {
+            if (plot) {
+                const state = plot.getState();
+                // Only change pause state if it's different from the global state
+                if (state.isPaused !== allAutomationsPaused) {
+                    // Update plot's pause state
+                    plot.setState({
+                        ...state,
+                        isPaused: allAutomationsPaused,
+                    });
+                }
+            }
+        });
+
+        // Apply to all teapots
+        teapotRefs.forEach((teapot) => {
+            if (teapot) {
+                const state = teapot.getState();
+                // Only change pause state if it's different from the global state
+                if (state.isPaused !== allAutomationsPaused) {
+                    // Update teapot's pause state
+                    teapot.setState({
+                        ...state,
+                        isPaused: allAutomationsPaused,
+                    });
+                }
+            }
+        });
+
+        createToast(
+            allAutomationsPaused
+                ? "All automations paused!"
+                : "All automations resumed!",
+            null,
+            "info",
+        );
+    }
+
     function saveGameState() {
         const gameState = {
             lastSaved: Date.now(),
@@ -540,6 +601,8 @@
             gardenPlots,
             teapots,
             sprites,
+            purchaseCount,
+            allAutomationsPaused,
             plotStates: plotRefs.map((plot) => (plot ? plot.getState() : null)),
             teapotStates: teapotRefs.map((teapot) =>
                 teapot ? teapot.getState() : null,
@@ -558,6 +621,26 @@
     }
 
     function loadGameState() {
+        // Checks for testing mode before loading saved state
+        if (DEBUG.TESTING_MODE) {
+            console.log("Testing mode enabled!");
+            points = DEBUG.STARTING_POINTS;
+
+            // Optional: unlock all tea types
+            if (DEBUG.UNLOCK_ALL_TEA) {
+                Object.keys(TEA).forEach((type) => {
+                    unlockedTeaTypes[type] = true;
+                });
+            }
+
+            // Optional: start with extra plots and teapots
+            gardenPlots = 1 + DEBUG.EXTRA_PLOTS;
+            teapots = 1 + DEBUG.EXTRA_TEAPOTS;
+
+            createToast("Testing mode active! 🧪", null, "success");
+            return;
+        }
+
         const savedState = localStorage.getItem("teashopGameState");
         if (savedState) {
             const gameState = JSON.parse(savedState);
@@ -577,6 +660,16 @@
             currentTime = gameState.currentTime || "sunrise";
             timeOfDay.set(currentTime);
             isDaytime.set(currentTime !== "night");
+            allAutomationsPaused = gameState.allAutomationsPaused || false;
+            automationPausedStore.set(allAutomationsPaused);
+            purchaseCount = gameState.purchaseCount || {
+                gardenPlot: 0,
+                teapot: 0,
+                garden: 0,
+                harvest: 0,
+                brewmaster: 0,
+                cafe: 0,
+            };
             teaStats = gameState.teaStats || {
                 current: {
                     ready: { total: 0, byType: {} },
@@ -687,6 +780,14 @@
                 served: { total: 0, byType: {} },
             },
         };
+        purchaseCount = {
+            gardenPlot: 0,
+            teapot: 0,
+            garden: 0,
+            harvest: 0,
+            brewmaster: 0,
+            cafe: 0,
+        };
 
         // Reset all garden plots
         plotRefs.forEach((plot) => {
@@ -722,7 +823,35 @@
         if (cycleInterval) clearInterval(cycleInterval);
         startDayCycle();
 
-        createToast("A fresh start!");
+        createToast("A fresh start...", null, "info");
+    }
+
+    function recalibrateTime() {
+        // Reset time to sunrise
+        currentTime = "sunrise";
+        timeOfDay.set(currentTime);
+        isDaytime.set(true);
+
+        // Clear any existing intervals
+        if (cycleInterval) clearInterval(cycleInterval);
+        automationIntervals.forEach((interval) => clearInterval(interval));
+        automationIntervals = [];
+
+        // Reset working sprites counter
+        workingSprites = {
+            garden: 0,
+            harvest: 0,
+            brewmaster: 0,
+            cafe: 0,
+        };
+
+        // Restart time cycle
+        startDayCycle();
+
+        // Restart automation
+        startAutomation();
+
+        createToast("Time recalibrated! ⏱️", null, "success");
     }
 
     function simulateTimeAdvancement(elapsedMs) {
@@ -1235,56 +1364,116 @@
     <Shop
         {points}
         {unlockedTeaTypes}
+        {purchaseCount}
         on:purchase={handlePurchase}
         on:reset={resetGame}
+        on:recalibrate={handleRecalibrate}
+        on:toggleAllAutomations={toggleAllAutomations}
     />
 
     <div class="dropdown">
         <details>
             <summary>Detailed stats</summary>
-            <div>
-                {#each Object.entries(TEA) as [type, config]}
-                    {#if unlockedTeaTypes[type]}
-                        <div class="tea-type-inventory">
-                            <h2>{config.name}</h2>
-                            <AnimatedStat
-                                class="stat"
-                                label="Ready to harvest"
-                                value={teaStats.current.ready.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Ready to brew"
-                                value={teaStats.current.harvested.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Ready to serve"
-                                value={teaStats.current.brewed.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Grown"
-                                value={teaStats.lifetime.grown.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Harvested"
-                                value={teaStats.lifetime.harvested.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Brewed"
-                                value={teaStats.lifetime.brewed.byType[type]}
-                            />
-                            <AnimatedStat
-                                class="stat"
-                                label="Served"
-                                value={teaStats.lifetime.served.byType[type]}
-                            />
-                        </div>
-                    {/if}
-                {/each}
+            <div class="stats-tables">
+                <div class="stats-section">
+                    <h3>Current</h3>
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th class="stats-tea-type">Tea Type</th>
+                                <th>Can Harvest</th>
+                                <th>Can Brew</th>
+                                <th>Can Serve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each Object.entries(TEA) as [type, config]}
+                                {#if unlockedTeaTypes[type]}
+                                    <tr>
+                                        <td class="stats-tea-type"
+                                            >{config.name}</td
+                                        >
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.current.ready
+                                                    .byType[type]}
+                                            />
+                                        </td>
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.current
+                                                    .harvested.byType[type]}
+                                            />
+                                        </td>
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.current.brewed
+                                                    .byType[type]}
+                                            />
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/each}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="stats-section">
+                    <h3>Lifetime</h3>
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th class="stats-tea-type">Tea Type</th>
+                                <th>Grown</th>
+                                <th>Harvested</th>
+                                <th>Brewed</th>
+                                <th>Served</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each Object.entries(TEA) as [type, config]}
+                                {#if unlockedTeaTypes[type]}
+                                    <tr>
+                                        <td class="stats-tea-type"
+                                            >{config.name}</td
+                                        >
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.lifetime.grown
+                                                    .byType[type]}
+                                            />
+                                        </td>
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.lifetime
+                                                    .harvested.byType[type]}
+                                            />
+                                        </td>
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.lifetime.brewed
+                                                    .byType[type]}
+                                            />
+                                        </td>
+                                        <td>
+                                            <AnimatedStat
+                                                class="table-stat"
+                                                value={teaStats.lifetime.served
+                                                    .byType[type]}
+                                            />
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/each}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </details>
     </div>
@@ -1322,6 +1511,7 @@
                 <Teapot
                     {harvestedTeas}
                     bind:this={teapotRefs[i]}
+                    bind:allAutomationsPaused
                     on:useTea={handleHarvestedTea}
                     on:teaBrewed={handleBrewedTea}
                     on:pauseStateChanged={handleTeapotPauseChanged}

@@ -36,5 +36,9 @@
 </script>
 
 <p class="label stat-display" class:animating={valueToAdd !== 0}>
-    {label}: {displayValue}
+    {#if label}
+        {label}: {displayValue}
+    {:else}
+        {displayValue}
+    {/if}
 </p>

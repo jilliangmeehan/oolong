@@ -1,3 +1,11 @@
+export const DEBUG = {
+  TESTING_MODE: false,
+  STARTING_POINTS: 10000,
+  UNLOCK_ALL_TEA: false, // Optional: unlock all tea types
+  EXTRA_PLOTS: 3, // Optional: start with extra garden plots
+  EXTRA_TEAPOTS: 1, // Optional: start with extra teapots
+};
+
 export const TIMINGS = {
   // Growing
   GARDEN_COOLDOWN: 3000, // 3 second cooldown for planting
@@ -19,6 +27,32 @@ export const TIMINGS = {
 export const POINTS = {
   BASE: 5,
   CAFE_SPRITE_BONUS: 1,
+};
+
+export const MAX_LIMITS = {
+  GARDEN_PLOTS: 24,
+  TEAPOTS: 12,
+  SPRITES: {
+    garden: 24,
+    harvest: 24,
+    brewmaster: 12,
+    cafe: 10,
+  },
+};
+
+export const PRICES = {
+  BASE: {
+    GARDEN_PLOT: 10,
+    TEAPOT: 40,
+    SPRITE: {
+      GARDEN: 25,
+      HARVEST: 50,
+      BREWMASTER: 75,
+      CAFE: 500,
+    },
+  },
+  // How much prices increase with each purchase (1.2 = 20% increase)
+  MULTIPLIER: 1.2,
 };
 
 export const TEA = {

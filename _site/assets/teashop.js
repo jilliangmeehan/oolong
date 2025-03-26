@@ -968,6 +968,15 @@ https://svelte.dev/e/lifecycle_double_unmount`, bold2, normal2);
       console.warn(`https://svelte.dev/e/lifecycle_double_unmount`);
     }
   }
+  function ownership_invalid_binding(parent, child2, owner) {
+    if (dev_fallback_default) {
+      console.warn(`%c[svelte] ownership_invalid_binding
+%c${parent} passed a value to ${child2} with \`bind:\`, but the value is owned by ${owner}. Consider creating a binding between ${owner} and ${parent}
+https://svelte.dev/e/ownership_invalid_binding`, bold2, normal2);
+    } else {
+      console.warn(`https://svelte.dev/e/ownership_invalid_binding`);
+    }
+  }
   function ownership_invalid_mutation(component2, owner) {
     if (dev_fallback_default) {
       console.warn(`%c[svelte] ownership_invalid_mutation
@@ -2305,6 +2314,24 @@ ${indent}in ${name}`).join("")}
       boundary2.component = component2;
     }
   }
+  function add_owner(object, owner, global = false, skip_warning = false) {
+    if (object && !global) {
+      const component2 = dev_current_component_function;
+      const metadata = object[STATE_SYMBOL_METADATA];
+      if (metadata && !has_owner(metadata, component2)) {
+        let original = get_owner(metadata);
+        if (owner && owner[FILENAME] !== component2[FILENAME] && !skip_warning) {
+          ownership_invalid_binding(component2[FILENAME], owner[FILENAME], original[FILENAME]);
+        }
+      }
+    }
+    add_owner_to_object(object, owner, /* @__PURE__ */ new Set());
+  }
+  function add_owner_effect(get_object, Component, skip_warning = false) {
+    user_pre_effect(() => {
+      add_owner(get_object(), Component, false, skip_warning);
+    });
+  }
   function widen_ownership(from, to) {
     if (to.owners === null) {
       return;
@@ -2318,6 +2345,51 @@ ${indent}in ${name}`).join("")}
         to.owners.add(owner);
       }
       from = from.parent;
+    }
+  }
+  function add_owner_to_object(object, owner, seen) {
+    const metadata = (
+      /** @type {ProxyMetadata} */
+      object?.[STATE_SYMBOL_METADATA]
+    );
+    if (metadata) {
+      if ("owners" in metadata && metadata.owners != null) {
+        if (owner) {
+          metadata.owners.add(owner);
+        } else {
+          metadata.owners = null;
+        }
+      }
+    } else if (object && typeof object === "object") {
+      if (seen.has(object)) return;
+      seen.add(object);
+      if (ADD_OWNER in object && object[ADD_OWNER]) {
+        render_effect(() => {
+          object[ADD_OWNER](owner);
+        });
+      } else {
+        var proto = get_prototype_of(object);
+        if (proto === Object.prototype) {
+          for (const key in object) {
+            if (Object.getOwnPropertyDescriptor(object, key)?.get) {
+              let current = UNINITIALIZED;
+              render_effect(() => {
+                const next2 = object[key];
+                if (current !== next2) {
+                  current = next2;
+                  add_owner_to_object(next2, owner, seen);
+                }
+              });
+            } else {
+              add_owner_to_object(object[key], owner, seen);
+            }
+          }
+        } else if (proto === Array.prototype) {
+          for (let i = 0; i < object.length; i += 1) {
+            add_owner_to_object(object[i], owner, seen);
+          }
+        }
+      }
     }
   }
   function has_owner(metadata, component2) {
@@ -4644,6 +4716,16 @@ https://svelte.dev/e/store_invalid_shape`);
   }
 
   // src/svelte/config.js
+  var DEBUG = {
+    TESTING_MODE: false,
+    STARTING_POINTS: 1e4,
+    UNLOCK_ALL_TEA: false,
+    // Optional: unlock all tea types
+    EXTRA_PLOTS: 3,
+    // Optional: start with extra garden plots
+    EXTRA_TEAPOTS: 1
+    // Optional: start with extra teapots
+  };
   var TIMINGS = {
     // Growing
     GARDEN_COOLDOWN: 3e3,
@@ -4666,6 +4748,30 @@ https://svelte.dev/e/store_invalid_shape`);
   var POINTS = {
     BASE: 5,
     CAFE_SPRITE_BONUS: 1
+  };
+  var MAX_LIMITS = {
+    GARDEN_PLOTS: 24,
+    TEAPOTS: 12,
+    SPRITES: {
+      garden: 24,
+      harvest: 24,
+      brewmaster: 12,
+      cafe: 10
+    }
+  };
+  var PRICES = {
+    BASE: {
+      GARDEN_PLOT: 10,
+      TEAPOT: 40,
+      SPRITE: {
+        GARDEN: 25,
+        HARVEST: 50,
+        BREWMASTER: 75,
+        CAFE: 500
+      }
+    },
+    // How much prices increase with each purchase (1.2 = 20% increase)
+    MULTIPLIER: 1.2
   };
   var TEA = {
     green: {
@@ -4736,6 +4842,7 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/stores.js
   var timeOfDay = writable("sunrise");
   var isDaytime = writable(true);
+  var automationPausedStore = writable(false);
 
   // src/svelte/components/GardenPlot.svelte
   mark_module_start();
@@ -5167,7 +5274,7 @@ https://svelte.dev/e/store_invalid_shape`);
     {
       var consequent = ($$anchor2) => {
         var text2 = text();
-        template_effect(($0) => set_text(text2, `${TEA[get(currentTeaType)].name ?? ""}... (${$0 ?? ""}%)`), [() => Math.floor(get(progress))], derived_safe_equal);
+        template_effect(($0) => set_text(text2, `${TEA[get(currentTeaType)].name ?? ""} (${$0 ?? ""}%)`), [() => Math.floor(get(progress))], derived_safe_equal);
         append($$anchor2, text2);
       };
       var alternate = ($$anchor2, $$elseif) => {
@@ -5257,25 +5364,27 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Shop.svelte
   mark_module_start();
   Shop[FILENAME] = "src/svelte/components/Shop.svelte";
-  var root_1 = add_locations(template(`<button class="secondary hire-sprite"> </button>`), Shop[FILENAME], [[85, 12]]);
-  var root_4 = add_locations(template(`<button class="secondary unlock-tea"> </button>`), Shop[FILENAME], [[98, 20]]);
-  var root3 = add_locations(template(`<div class="dropdown"><details><summary>click here to do stuff</summary> <h3 class="label">buy upgrades</h3> <button class="secondary"></button> <button class="secondary"></button> <h3 class="label">Hire Sprites</h3> <!> <h3 class="label">Unlock New Tea</h3> <!> <h3 class="label">Other stuff</h3> <button class="secondary reset-game">Reset game</button></details></div>`), Shop[FILENAME], [
+  var root_53 = add_locations(template(`<button class="secondary hire-sprite"> <!></button>`), Shop[FILENAME], [[180, 12]]);
+  var root_102 = add_locations(template(`<button class="secondary unlock-tea"> </button>`), Shop[FILENAME], [[199, 20]]);
+  var root3 = add_locations(template(`<div class="dropdown"><details><summary>click here to do stuff</summary> <h3 class="label">buy upgrades</h3> <button class="secondary">+1 Garden Plot <!></button> <button class="secondary">+1 Teapot <!></button> <h3 class="label">Hire Sprites</h3> <!> <h3 class="label">Unlock New Tea</h3> <!> <h3 class="label">Other stuff</h3> <button class="secondary"> </button> <button class="secondary recalibrate-time">Recalibrate Time</button> <button class="secondary reset-game">Reset game</button></details></div>`), Shop[FILENAME], [
     [
-      63,
+      146,
       0,
       [
         [
-          64,
+          147,
           4,
           [
-            [65, 8],
-            [66, 8],
-            [67, 8],
-            [75, 8],
-            [83, 8],
-            [94, 8],
-            [109, 8],
-            [110, 8]
+            [148, 8],
+            [149, 8],
+            [151, 8],
+            [165, 8],
+            [178, 8],
+            [195, 8],
+            [210, 8],
+            [211, 8],
+            [214, 8],
+            [217, 8]
           ]
         ]
       ]
@@ -5284,33 +5393,62 @@ https://svelte.dev/e/store_invalid_shape`);
   function Shop($$anchor, $$props) {
     check_target(new.target);
     push($$props, false, Shop);
+    const gardenPlotCount = mutable_source();
+    const teapotCount = mutable_source();
+    const gardenSpriteCount = mutable_source();
+    const harvestSpriteCount = mutable_source();
+    const brewmasterSpriteCount = mutable_source();
+    const cafeSpriteCount = mutable_source();
+    const GARDEN_PLOT_COST = mutable_source();
+    const TEAPOT_COST = mutable_source();
+    const SPRITE_COSTS = mutable_source();
     const dispatch = createEventDispatcher();
     let points = prop($$props, "points", 8, 0);
     let unlockedTeaTypes = prop($$props, "unlockedTeaTypes", 24, () => ({ green: true }));
-    const GARDEN_PLOT_COST = 10;
-    const TEAPOT_COST = 75;
-    const SPRITE_COSTS = {
-      garden: 25,
-      harvest: 50,
-      brewmaster: 100,
-      cafe: 500
-    };
+    let gardenPlots = prop($$props, "gardenPlots", 8, 1);
+    let teapots = prop($$props, "teapots", 8, 1);
+    let sprites = prop($$props, "sprites", 24, () => ({
+      garden: 0,
+      harvest: 0,
+      brewmaster: 0,
+      cafe: 0
+    }));
+    let allAutomationsPaused = prop($$props, "allAutomationsPaused", 12, false);
+    let pauseStatus = mutable_source();
+    automationPausedStore.subscribe((value) => {
+      set(pauseStatus, value);
+    });
+    let purchaseCount = prop($$props, "purchaseCount", 24, () => ({
+      gardenPlot: 0,
+      teapot: 0,
+      garden: 0,
+      harvest: 0,
+      brewmaster: 0,
+      cafe: 0
+    }));
+    function getCurrentPrice(basePrice, count) {
+      console.log(...log_if_contains_state("log", `Calculating price with base=${basePrice}, count=${count}, multiplier=${PRICES.MULTIPLIER}`));
+      return Math.floor(basePrice * Math.pow(PRICES.MULTIPLIER, count));
+    }
     function buyGardenPlot() {
-      if (points() >= GARDEN_PLOT_COST) {
-        dispatch("purchase", { item: "gardenPlot", cost: GARDEN_PLOT_COST });
+      if (points() >= get(GARDEN_PLOT_COST) && gardenPlots() < MAX_LIMITS.GARDEN_PLOTS) {
+        dispatch("purchase", {
+          item: "gardenPlot",
+          cost: get(GARDEN_PLOT_COST)
+        });
       }
     }
     function buyTeapot() {
-      if (points() >= TEAPOT_COST) {
-        dispatch("purchase", { item: "teapot", cost: TEAPOT_COST });
+      if (points() >= get(TEAPOT_COST) && teapots() < MAX_LIMITS.TEAPOTS) {
+        dispatch("purchase", { item: "teapot", cost: get(TEAPOT_COST) });
       }
     }
     function hireSprite(type) {
-      if (points() >= SPRITE_COSTS[type]) {
+      if (points() >= get(SPRITE_COSTS)[type] && sprites()[type] < MAX_LIMITS.SPRITES[type]) {
         dispatch("purchase", {
           item: "sprite",
           spriteType: type,
-          cost: SPRITE_COSTS[type]
+          cost: get(SPRITE_COSTS)[type]
         });
       }
     }
@@ -5324,79 +5462,182 @@ https://svelte.dev/e/store_invalid_shape`);
       }
     }
     function resetGame() {
-      if (confirm("Are you sure you want to start over?")) {
+      if (confirm("Are you sure you want to start over? This will erase all your progress.")) {
         dispatch("reset");
       }
     }
+    function recalibrateTime() {
+      if (confirm("Recalibrating will start the current day over and restart all your automations. Are you sure?")) {
+        dispatch("recalibrate");
+      }
+    }
+    function toggleAllAutomations() {
+      allAutomationsPaused(!allAutomationsPaused());
+      dispatch("toggleAllAutomations");
+    }
+    onMount(() => {
+      console.log(...log_if_contains_state("log", "Shop component mounted with automation state:", allAutomationsPaused()));
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(gardenPlotCount, purchaseCount().gardenPlot);
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(teapotCount, purchaseCount().teapot);
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(gardenSpriteCount, purchaseCount().garden);
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(harvestSpriteCount, purchaseCount().harvest);
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(brewmasterSpriteCount, purchaseCount().brewmaster);
+    });
+    legacy_pre_effect(() => deep_read_state(purchaseCount()), () => {
+      set(cafeSpriteCount, purchaseCount().cafe);
+    });
+    legacy_pre_effect(() => (PRICES, get(gardenPlotCount)), () => {
+      set(GARDEN_PLOT_COST, getCurrentPrice(PRICES.BASE.GARDEN_PLOT, get(gardenPlotCount)));
+    });
+    legacy_pre_effect(() => (PRICES, get(teapotCount)), () => {
+      set(TEAPOT_COST, getCurrentPrice(PRICES.BASE.TEAPOT, get(teapotCount)));
+    });
+    legacy_pre_effect(
+      () => (PRICES, get(gardenSpriteCount), get(harvestSpriteCount), get(brewmasterSpriteCount), get(cafeSpriteCount)),
+      () => {
+        set(SPRITE_COSTS, {
+          garden: getCurrentPrice(PRICES.BASE.SPRITE.GARDEN, get(gardenSpriteCount)),
+          harvest: getCurrentPrice(PRICES.BASE.SPRITE.HARVEST, get(harvestSpriteCount)),
+          brewmaster: getCurrentPrice(PRICES.BASE.SPRITE.BREWMASTER, get(brewmasterSpriteCount)),
+          cafe: getCurrentPrice(PRICES.BASE.SPRITE.CAFE, get(cafeSpriteCount))
+        });
+      }
+    );
+    legacy_pre_effect_reset();
     init();
     var div = root3();
     var details = child(div);
     var button = sibling(child(details), 4);
-    button.textContent = `+1 Garden Plot (${GARDEN_PLOT_COST ?? ""} points)`;
+    var node = sibling(child(button));
+    {
+      var consequent = ($$anchor2) => {
+        var text2 = text("(Max reached)");
+        append($$anchor2, text2);
+      };
+      var alternate = ($$anchor2) => {
+        var text_1 = text();
+        template_effect(() => set_text(text_1, `(${get(GARDEN_PLOT_COST) ?? ""} points) (${gardenPlots() ?? ""}/${MAX_LIMITS.GARDEN_PLOTS ?? ""})`));
+        append($$anchor2, text_1);
+      };
+      if_block(node, ($$render) => {
+        if (gardenPlots() >= MAX_LIMITS.GARDEN_PLOTS) $$render(consequent);
+        else $$render(alternate, false);
+      });
+    }
+    reset(button);
     var button_1 = sibling(button, 2);
-    button_1.textContent = `+1 Teapot (${TEAPOT_COST ?? ""} points)`;
-    var node = sibling(button_1, 4);
-    each(node, 1, () => Object.entries(SPRITE_COSTS), index, ($$anchor2, $$item) => {
+    var node_1 = sibling(child(button_1));
+    {
+      var consequent_1 = ($$anchor2) => {
+        var text_2 = text("(Max reached)");
+        append($$anchor2, text_2);
+      };
+      var alternate_1 = ($$anchor2) => {
+        var text_3 = text();
+        template_effect(() => set_text(text_3, `(${get(TEAPOT_COST) ?? ""} points) (${teapots() ?? ""}/${MAX_LIMITS.TEAPOTS ?? ""})`));
+        append($$anchor2, text_3);
+      };
+      if_block(node_1, ($$render) => {
+        if (teapots() >= MAX_LIMITS.TEAPOTS) $$render(consequent_1);
+        else $$render(alternate_1, false);
+      });
+    }
+    reset(button_1);
+    var node_2 = sibling(button_1, 4);
+    each(node_2, 1, () => Object.entries(get(SPRITE_COSTS)), index, ($$anchor2, $$item) => {
       let type = () => get($$item)[0];
       type();
       let cost = () => get($$item)[1];
       cost();
-      var button_2 = root_1();
-      var text2 = child(button_2);
+      var button_2 = root_53();
+      var text_4 = child(button_2);
+      var node_3 = sibling(text_4);
+      {
+        var consequent_2 = ($$anchor3) => {
+          var text_5 = text("(Max reached)");
+          append($$anchor3, text_5);
+        };
+        var alternate_2 = ($$anchor3) => {
+          var text_6 = text();
+          template_effect(() => set_text(text_6, `(${cost() ?? ""} points) (${sprites()[type()] ?? ""}/${MAX_LIMITS.SPRITES[type()] ?? ""})`));
+          append($$anchor3, text_6);
+        };
+        if_block(node_3, ($$render) => {
+          if (sprites()[type()] >= MAX_LIMITS.SPRITES[type()]) $$render(consequent_2);
+          else $$render(alternate_2, false);
+        });
+      }
       reset(button_2);
       template_effect(() => {
-        button_2.disabled = points() < cost();
-        set_text(text2, `${type() ?? ""} Sprite (${cost() ?? ""} points)`);
+        button_2.disabled = points() < cost() || sprites()[type()] >= MAX_LIMITS.SPRITES[type()];
+        set_text(text_4, `${type() ?? ""} Sprite `);
       });
       event("click", button_2, () => hireSprite(type()));
       append($$anchor2, button_2);
     });
-    var node_1 = sibling(node, 4);
+    var node_4 = sibling(node_2, 4);
     {
-      var consequent_1 = ($$anchor2) => {
-        var fragment = comment();
-        var node_2 = first_child(fragment);
-        each(node_2, 1, () => Object.entries(TEA), index, ($$anchor3, $$item) => {
+      var consequent_4 = ($$anchor2) => {
+        var fragment_3 = comment();
+        var node_5 = first_child(fragment_3);
+        each(node_5, 1, () => Object.entries(TEA), index, ($$anchor3, $$item) => {
           let type = () => get($$item)[0];
           type();
           let config = () => get($$item)[1];
           config();
-          var fragment_1 = comment();
-          var node_3 = first_child(fragment_1);
+          var fragment_4 = comment();
+          var node_6 = first_child(fragment_4);
           {
-            var consequent = ($$anchor4) => {
-              var button_3 = root_4();
-              var text_1 = child(button_3);
+            var consequent_3 = ($$anchor4) => {
+              var button_3 = root_102();
+              var text_7 = child(button_3);
               reset(button_3);
               template_effect(() => {
                 button_3.disabled = points() < config().cost;
-                set_text(text_1, `${config().name ?? ""} (${config().cost ?? ""} points)`);
+                set_text(text_7, `${config().name ?? ""} (${config().cost ?? ""} points)`);
               });
               event("click", button_3, () => unlockTeaType(type()));
               append($$anchor4, button_3);
             };
-            if_block(node_3, ($$render) => {
-              if (!unlockedTeaTypes()[type()]) $$render(consequent);
+            if_block(node_6, ($$render) => {
+              if (!unlockedTeaTypes()[type()]) $$render(consequent_3);
             });
           }
-          append($$anchor3, fragment_1);
+          append($$anchor3, fragment_4);
         });
-        append($$anchor2, fragment);
+        append($$anchor2, fragment_3);
       };
-      if_block(node_1, ($$render) => {
-        if (unlockedTeaTypes()) $$render(consequent_1);
+      if_block(node_4, ($$render) => {
+        if (unlockedTeaTypes()) $$render(consequent_4);
       });
     }
-    var button_4 = sibling(node_1, 4);
+    var button_4 = sibling(node_4, 4);
+    var text_8 = child(button_4, true);
+    reset(button_4);
+    var button_5 = sibling(button_4, 2);
+    var button_6 = sibling(button_5, 2);
     reset(details);
     reset(div);
     template_effect(() => {
-      button.disabled = points() < GARDEN_PLOT_COST;
-      button_1.disabled = points() < TEAPOT_COST;
+      button.disabled = points() < get(GARDEN_PLOT_COST) || gardenPlots() >= MAX_LIMITS.GARDEN_PLOTS;
+      button_1.disabled = points() < get(TEAPOT_COST) || teapots() >= MAX_LIMITS.TEAPOTS;
+      set_text(text_8, get(pauseStatus) ? "Resume All Automations" : "Pause All Automations");
     });
     event("click", button, buyGardenPlot);
     event("click", button_1, buyTeapot);
-    event("click", button_4, resetGame);
+    event("click", button_4, toggleAllAutomations);
+    event("click", button_5, recalibrateTime);
+    event("click", button_6, resetGame);
     append($$anchor, div);
     return pop({ ...legacy_api() });
   }
@@ -5405,7 +5646,7 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/AnimatedStat.svelte
   mark_module_start();
   AnimatedStat[FILENAME] = "src/svelte/components/AnimatedStat.svelte";
-  var root4 = add_locations(template(`<p> </p>`), AnimatedStat[FILENAME], [[38, 0]]);
+  var root4 = add_locations(template(`<p><!></p>`), AnimatedStat[FILENAME], [[38, 0]]);
   function AnimatedStat($$anchor, $$props) {
     check_target(new.target);
     push($$props, false, AnimatedStat);
@@ -5447,13 +5688,26 @@ https://svelte.dev/e/store_invalid_shape`);
     init();
     var p = root4();
     let classes;
-    var text2 = child(p);
+    var node = child(p);
+    {
+      var consequent = ($$anchor2) => {
+        var text2 = text();
+        template_effect(() => set_text(text2, `${label() ?? ""}: ${get(displayValue) ?? ""}`));
+        append($$anchor2, text2);
+      };
+      var alternate = ($$anchor2) => {
+        var text_1 = text();
+        template_effect(() => set_text(text_1, get(displayValue)));
+        append($$anchor2, text_1);
+      };
+      if_block(node, ($$render) => {
+        if (label()) $$render(consequent);
+        else $$render(alternate, false);
+      });
+    }
     reset(p);
     template_effect(
-      ($0) => {
-        classes = set_class(p, 1, "label stat-display", null, classes, $0);
-        set_text(text2, `${label() ?? ""}: ${get(displayValue) ?? ""}`);
-      },
+      ($0) => classes = set_class(p, 1, "label stat-display", null, classes, $0),
       [
         () => ({
           animating: strict_equals(get(valueToAdd), 0, false)
@@ -5469,49 +5723,142 @@ https://svelte.dev/e/store_invalid_shape`);
   // src/svelte/components/Teashop.svelte
   mark_module_start();
   Teashop[FILENAME] = "src/svelte/components/Teashop.svelte";
-  var root_12 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1223, 16]]);
-  var root_3 = add_locations(template(`<div class="tea-type-inventory"><h2> </h2> <!> <!> <!> <!> <!> <!> <!></div>`), Teashop[FILENAME], [[1248, 24, [[1249, 28]]]]);
-  var root_102 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1353, 8]]);
-  var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
+  var root_1 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1352, 16]]);
+  var root_3 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
     [
-      1186,
+      1392,
+      36,
+      [
+        [1393, 40],
+        [1396, 40],
+        [1403, 40],
+        [1410, 40]
+      ]
+    ]
+  ]);
+  var root_54 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
+    [
+      1439,
+      36,
+      [
+        [1440, 40],
+        [1443, 40],
+        [1450, 40],
+        [1457, 40],
+        [1464, 40]
+      ]
+    ]
+  ]);
+  var root_12 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1543, 8]]);
+  var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div class="stats-tables"><div class="stats-section"><h3>Current</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Can Harvest</th><th>Can Brew</th><th>Can Serve</th></tr></thead><tbody></tbody></table></div> <div class="stats-section"><h3>Lifetime</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Grown</th><th>Harvested</th><th>Brewed</th><th>Served</th></tr></thead><tbody></tbody></table></div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
+    [
+      1315,
       0,
       [
-        [1187, 4, [[1194, 8]]],
+        [1316, 4, [[1323, 8]]],
         [
-          1196,
+          1325,
           4,
           [
-            [1197, 8],
-            [1209, 8],
-            [1218, 8, [[1229, 12]]]
+            [1326, 8],
+            [1338, 8],
+            [1347, 8, [[1358, 12]]]
           ]
         ],
         [
-          1242,
+          1374,
           4,
           [
             [
-              1243,
+              1375,
               8,
-              [[1244, 12], [1245, 12]]
+              [
+                [1376, 12],
+                [
+                  1377,
+                  12,
+                  [
+                    [
+                      1378,
+                      16,
+                      [
+                        [1379, 20],
+                        [
+                          1380,
+                          20,
+                          [
+                            [
+                              1381,
+                              24,
+                              [
+                                [
+                                  1382,
+                                  28,
+                                  [
+                                    [1383, 32],
+                                    [1384, 32],
+                                    [1385, 32],
+                                    [1386, 32]
+                                  ]
+                                ]
+                              ]
+                            ],
+                            [1389, 24]
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      1424,
+                      16,
+                      [
+                        [1425, 20],
+                        [
+                          1426,
+                          20,
+                          [
+                            [
+                              1427,
+                              24,
+                              [
+                                [
+                                  1428,
+                                  28,
+                                  [
+                                    [1429, 32],
+                                    [1430, 32],
+                                    [1431, 32],
+                                    [1432, 32],
+                                    [1433, 32]
+                                  ]
+                                ]
+                              ]
+                            ],
+                            [1436, 24]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
             ]
           ]
         ],
-        [1292, 4, [[1293, 8], [1294, 8]]],
+        [1481, 4, [[1482, 8], [1483, 8]]],
         [
-          1310,
+          1499,
           4,
           [
-            [1311, 8],
-            [1312, 8, [[1313, 12]]],
-            [1320, 8]
+            [1500, 8],
+            [1501, 8, [[1502, 12]]],
+            [1509, 8]
           ]
         ],
-        [1335, 4, [[1336, 8], [1339, 8]]]
+        [1525, 4, [[1526, 8], [1529, 8]]]
       ]
     ],
-    [1351, 0]
+    [1541, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -5534,7 +5881,16 @@ https://svelte.dev/e/store_invalid_shape`);
     let currentTime = mutable_source("sunrise");
     let cycleInterval;
     let automationIntervals = [];
+    let allAutomationsPaused = mutable_source(false);
     let unlockedTeaTypes = mutable_source({ green: true });
+    let purchaseCount = mutable_source({
+      gardenPlot: 0,
+      teapot: 0,
+      garden: 0,
+      harvest: 0,
+      brewmaster: 0,
+      cafe: 0
+    });
     let teaStats = mutable_source({
       current: {
         ready: { total: 0, byType: {} },
@@ -5615,21 +5971,26 @@ https://svelte.dev/e/store_invalid_shape`);
     }
     function handlePurchase(event2) {
       const { item, cost, spriteType, teaType } = event2.detail;
+      console.log(...log_if_contains_state("log", "Received purchase event:", event2.detail));
+      console.log(...log_if_contains_state("log", "Cost received:", cost));
       if (strict_equals(item, "gardenPlot")) {
         set(gardenPlots, get(gardenPlots) + 1);
         set(points, get(points) - cost);
+        mutate(purchaseCount, get(purchaseCount).gardenPlot += 1);
       } else if (strict_equals(item, "teapot")) {
         set(teapots, get(teapots) + 1);
         set(points, get(points) - cost);
+        mutate(purchaseCount, get(purchaseCount).teapot += 1);
       } else if (strict_equals(item, "teaType")) {
         mutate(unlockedTeaTypes, get(unlockedTeaTypes)[teaType] = true);
         set(points, get(points) - cost);
       } else if (strict_equals(item, "sprite")) {
         mutate(sprites, get(sprites)[spriteType] += 1);
         set(points, get(points) - cost);
-        console.log(...log_if_contains_state("log", "Updated sprites:", get(sprites)));
+        mutate(purchaseCount, get(purchaseCount)[spriteType] += 1);
         startAutomation();
       }
+      set(purchaseCount, { ...get(purchaseCount) });
     }
     function handlePlantReady(event2) {
       const { teaType } = event2.detail;
@@ -5723,6 +6084,9 @@ https://svelte.dev/e/store_invalid_shape`);
       set(teapotRefs, [...Array(get(teapots))].map((_, i) => get(teapotRefs)[i] || null));
       createToast("Teapot removed", null, "success");
       saveGameState();
+    }
+    function handleRecalibrate() {
+      recalibrateTime();
     }
     function startAutomation() {
       automationIntervals.forEach((interval) => clearInterval(interval));
@@ -5863,6 +6227,33 @@ https://svelte.dev/e/store_invalid_shape`);
         automationIntervals.push(interval);
       }
     }
+    function toggleAllAutomations() {
+      set(allAutomationsPaused, !get(allAutomationsPaused));
+      automationPausedStore.set(get(allAutomationsPaused));
+      get(plotRefs).forEach((plot) => {
+        if (plot) {
+          const state2 = plot.getState();
+          if (strict_equals(state2.isPaused, get(allAutomationsPaused), false)) {
+            plot.setState({
+              ...state2,
+              isPaused: get(allAutomationsPaused)
+            });
+          }
+        }
+      });
+      get(teapotRefs).forEach((teapot) => {
+        if (teapot) {
+          const state2 = teapot.getState();
+          if (strict_equals(state2.isPaused, get(allAutomationsPaused), false)) {
+            teapot.setState({
+              ...state2,
+              isPaused: get(allAutomationsPaused)
+            });
+          }
+        }
+      });
+      createToast(get(allAutomationsPaused) ? "All automations paused!" : "All automations resumed!", null, "info");
+    }
     function saveGameState() {
       const gameState = {
         lastSaved: Date.now(),
@@ -5881,6 +6272,8 @@ https://svelte.dev/e/store_invalid_shape`);
         gardenPlots: get(gardenPlots),
         teapots: get(teapots),
         sprites: get(sprites),
+        purchaseCount: get(purchaseCount),
+        allAutomationsPaused: get(allAutomationsPaused),
         plotStates: get(plotRefs).map((plot) => plot ? plot.getState() : null),
         teapotStates: get(teapotRefs).map((teapot) => teapot ? teapot.getState() : null)
       };
@@ -5896,6 +6289,19 @@ https://svelte.dev/e/store_invalid_shape`);
       }
     }
     function loadGameState() {
+      if (DEBUG.TESTING_MODE) {
+        console.log("Testing mode enabled!");
+        set(points, DEBUG.STARTING_POINTS);
+        if (DEBUG.UNLOCK_ALL_TEA) {
+          Object.keys(TEA).forEach((type) => {
+            mutate(unlockedTeaTypes, get(unlockedTeaTypes)[type] = true);
+          });
+        }
+        set(gardenPlots, 1 + DEBUG.EXTRA_PLOTS);
+        set(teapots, 1 + DEBUG.EXTRA_TEAPOTS);
+        createToast("Testing mode active! \u{1F9EA}", null, "success");
+        return;
+      }
       const savedState = localStorage.getItem("teashopGameState");
       if (savedState) {
         const gameState = JSON.parse(savedState);
@@ -5915,6 +6321,16 @@ https://svelte.dev/e/store_invalid_shape`);
         set(currentTime, gameState.currentTime || "sunrise");
         timeOfDay.set(get(currentTime));
         isDaytime.set(strict_equals(get(currentTime), "night", false));
+        set(allAutomationsPaused, gameState.allAutomationsPaused || false);
+        automationPausedStore.set(get(allAutomationsPaused));
+        set(purchaseCount, gameState.purchaseCount || {
+          gardenPlot: 0,
+          teapot: 0,
+          garden: 0,
+          harvest: 0,
+          brewmaster: 0,
+          cafe: 0
+        });
         set(teaStats, gameState.teaStats || {
           current: {
             ready: { total: 0, byType: {} },
@@ -6008,6 +6424,14 @@ https://svelte.dev/e/store_invalid_shape`);
           served: { total: 0, byType: {} }
         }
       });
+      set(purchaseCount, {
+        gardenPlot: 0,
+        teapot: 0,
+        garden: 0,
+        harvest: 0,
+        brewmaster: 0,
+        cafe: 0
+      });
       get(plotRefs).forEach((plot) => {
         if (plot) {
           plot.setState({
@@ -6034,7 +6458,24 @@ https://svelte.dev/e/store_invalid_shape`);
       isDaytime.set(true);
       if (cycleInterval) clearInterval(cycleInterval);
       startDayCycle();
-      createToast("A fresh start!");
+      createToast("A fresh start...", null, "info");
+    }
+    function recalibrateTime() {
+      set(currentTime, "sunrise");
+      timeOfDay.set(get(currentTime));
+      isDaytime.set(true);
+      if (cycleInterval) clearInterval(cycleInterval);
+      automationIntervals.forEach((interval) => clearInterval(interval));
+      automationIntervals = [];
+      workingSprites = {
+        garden: 0,
+        harvest: 0,
+        brewmaster: 0,
+        cafe: 0
+      };
+      startDayCycle();
+      startAutomation();
+      createToast("Time recalibrated! \u23F1\uFE0F", null, "success");
     }
     function simulateTimeAdvancement(elapsedMs) {
       if (elapsedMs < 5e3) return;
@@ -6423,7 +6864,7 @@ https://svelte.dev/e/store_invalid_shape`);
     var node_10 = sibling(node_9, 2);
     {
       var consequent = ($$anchor2) => {
-        var p_1 = root_12();
+        var p_1 = root_1();
         var text_1 = child(p_1);
         reset(p_1);
         template_effect(
@@ -6450,12 +6891,23 @@ https://svelte.dev/e/store_invalid_shape`);
       get unlockedTeaTypes() {
         return get(unlockedTeaTypes);
       },
-      $$events: { purchase: handlePurchase, reset: resetGame }
+      get purchaseCount() {
+        return get(purchaseCount);
+      },
+      $$events: {
+        purchase: handlePurchase,
+        reset: resetGame,
+        recalibrate: handleRecalibrate,
+        toggleAllAutomations
+      }
     });
     var div_6 = sibling(node_11, 2);
     var details = child(div_6);
     var div_7 = sibling(child(details), 2);
-    each(div_7, 5, () => Object.entries(TEA), index, ($$anchor2, $$item) => {
+    var div_8 = child(div_7);
+    var table = sibling(child(div_8), 2);
+    var tbody = sibling(child(table));
+    each(tbody, 5, () => Object.entries(TEA), index, ($$anchor2, $$item) => {
       let type = () => get($$item)[0];
       type();
       let config = () => get($$item)[1];
@@ -6464,69 +6916,40 @@ https://svelte.dev/e/store_invalid_shape`);
       var node_12 = first_child(fragment_1);
       {
         var consequent_1 = ($$anchor3) => {
-          var div_8 = root_3();
-          var h2 = child(div_8);
-          var text_2 = child(h2, true);
-          reset(h2);
-          var node_13 = sibling(h2, 2);
+          var tr = root_3();
+          var td = child(tr);
+          var text_2 = child(td, true);
+          reset(td);
+          var td_1 = sibling(td);
+          var node_13 = child(td_1);
           AnimatedStat(node_13, {
-            class: "stat",
-            label: "Ready to harvest",
+            class: "table-stat",
             get value() {
               return get(teaStats).current.ready.byType[type()];
             }
           });
-          var node_14 = sibling(node_13, 2);
+          reset(td_1);
+          var td_2 = sibling(td_1);
+          var node_14 = child(td_2);
           AnimatedStat(node_14, {
-            class: "stat",
-            label: "Ready to brew",
+            class: "table-stat",
             get value() {
               return get(teaStats).current.harvested.byType[type()];
             }
           });
-          var node_15 = sibling(node_14, 2);
+          reset(td_2);
+          var td_3 = sibling(td_2);
+          var node_15 = child(td_3);
           AnimatedStat(node_15, {
-            class: "stat",
-            label: "Ready to serve",
+            class: "table-stat",
             get value() {
               return get(teaStats).current.brewed.byType[type()];
             }
           });
-          var node_16 = sibling(node_15, 2);
-          AnimatedStat(node_16, {
-            class: "stat",
-            label: "Grown",
-            get value() {
-              return get(teaStats).lifetime.grown.byType[type()];
-            }
-          });
-          var node_17 = sibling(node_16, 2);
-          AnimatedStat(node_17, {
-            class: "stat",
-            label: "Harvested",
-            get value() {
-              return get(teaStats).lifetime.harvested.byType[type()];
-            }
-          });
-          var node_18 = sibling(node_17, 2);
-          AnimatedStat(node_18, {
-            class: "stat",
-            label: "Brewed",
-            get value() {
-              return get(teaStats).lifetime.brewed.byType[type()];
-            }
-          });
-          var node_19 = sibling(node_18, 2);
-          AnimatedStat(node_19, {
-            class: "stat",
-            label: "Served",
-            get value() {
-              return get(teaStats).lifetime.served.byType[type()];
-            }
-          });
-          reset(div_8);
+          reset(td_3);
+          reset(tr);
           template_effect(() => set_text(text_2, config().name));
-          append($$anchor3, div_8);
+          append($$anchor3, tr);
         };
         if_block(node_12, ($$render) => {
           if (get(unlockedTeaTypes)[type()]) $$render(consequent_1);
@@ -6534,11 +6957,79 @@ https://svelte.dev/e/store_invalid_shape`);
       }
       append($$anchor2, fragment_1);
     });
+    reset(tbody);
+    reset(table);
+    reset(div_8);
+    var div_9 = sibling(div_8, 2);
+    var table_1 = sibling(child(div_9), 2);
+    var tbody_1 = sibling(child(table_1));
+    each(tbody_1, 5, () => Object.entries(TEA), index, ($$anchor2, $$item) => {
+      let type = () => get($$item)[0];
+      type();
+      let config = () => get($$item)[1];
+      config();
+      var fragment_2 = comment();
+      var node_16 = first_child(fragment_2);
+      {
+        var consequent_2 = ($$anchor3) => {
+          var tr_1 = root_54();
+          var td_4 = child(tr_1);
+          var text_3 = child(td_4, true);
+          reset(td_4);
+          var td_5 = sibling(td_4);
+          var node_17 = child(td_5);
+          AnimatedStat(node_17, {
+            class: "table-stat",
+            get value() {
+              return get(teaStats).lifetime.grown.byType[type()];
+            }
+          });
+          reset(td_5);
+          var td_6 = sibling(td_5);
+          var node_18 = child(td_6);
+          AnimatedStat(node_18, {
+            class: "table-stat",
+            get value() {
+              return get(teaStats).lifetime.harvested.byType[type()];
+            }
+          });
+          reset(td_6);
+          var td_7 = sibling(td_6);
+          var node_19 = child(td_7);
+          AnimatedStat(node_19, {
+            class: "table-stat",
+            get value() {
+              return get(teaStats).lifetime.brewed.byType[type()];
+            }
+          });
+          reset(td_7);
+          var td_8 = sibling(td_7);
+          var node_20 = child(td_8);
+          AnimatedStat(node_20, {
+            class: "table-stat",
+            get value() {
+              return get(teaStats).lifetime.served.byType[type()];
+            }
+          });
+          reset(td_8);
+          reset(tr_1);
+          template_effect(() => set_text(text_3, config().name));
+          append($$anchor3, tr_1);
+        };
+        if_block(node_16, ($$render) => {
+          if (get(unlockedTeaTypes)[type()]) $$render(consequent_2);
+        });
+      }
+      append($$anchor2, fragment_2);
+    });
+    reset(tbody_1);
+    reset(table_1);
+    reset(div_9);
     reset(div_7);
     reset(details);
     reset(div_6);
-    var div_9 = sibling(div_6, 2);
-    var div_10 = sibling(child(div_9), 2);
+    var div_10 = sibling(div_6, 2);
+    var div_11 = sibling(child(div_10), 2);
     validate_each_keys(
       () => [
         ...Array(get(gardenPlots)).keys()
@@ -6546,7 +7037,7 @@ https://svelte.dev/e/store_invalid_shape`);
       (i) => i
     );
     each(
-      div_10,
+      div_11,
       5,
       () => [
         ...Array(get(gardenPlots)).keys()
@@ -6574,48 +7065,57 @@ https://svelte.dev/e/store_invalid_shape`);
         );
       }
     );
+    reset(div_11);
     reset(div_10);
-    reset(div_9);
-    var div_11 = sibling(div_9, 2);
-    var div_12 = sibling(child(div_11), 2);
-    var p_2 = child(div_12);
-    var node_20 = child(p_2);
-    AnimatedStat(node_20, {
+    var div_12 = sibling(div_10, 2);
+    var div_13 = sibling(child(div_12), 2);
+    var p_2 = child(div_13);
+    var node_21 = child(p_2);
+    AnimatedStat(node_21, {
       label: "Ready to brew",
       get value() {
         return get(teaStats).current.harvested.total;
       }
     });
     reset(p_2);
-    reset(div_12);
-    var div_13 = sibling(div_12, 2);
-    validate_each_keys(() => [...Array(get(teapots)).keys()], (i) => i);
-    each(div_13, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
-      bind_this(
-        Teapot($$anchor2, {
-          get harvestedTeas() {
-            return get(harvestedTeas);
-          },
-          class: "teapot",
-          $$events: {
-            useTea: handleHarvestedTea,
-            teaBrewed: handleBrewedTea,
-            pauseStateChanged: handleTeapotPauseChanged,
-            deleteTeapot: handleDeleteTeapot
-          },
-          $$legacy: true
-        }),
-        ($$value, i2) => mutate(teapotRefs, get(teapotRefs)[i2] = $$value),
-        (i2) => get(teapotRefs)?.[i2],
-        () => [get(i)]
-      );
-    });
     reset(div_13);
-    reset(div_11);
-    var div_14 = sibling(div_11, 2);
-    var p_3 = child(div_14);
-    var node_21 = child(p_3);
-    AnimatedStat(node_21, {
+    var div_14 = sibling(div_13, 2);
+    validate_each_keys(() => [...Array(get(teapots)).keys()], (i) => i);
+    each(div_14, 5, () => [...Array(get(teapots)).keys()], (i) => i, ($$anchor2, i) => {
+      {
+        add_owner_effect(() => get(allAutomationsPaused), Teapot);
+        bind_this(
+          Teapot($$anchor2, {
+            get harvestedTeas() {
+              return get(harvestedTeas);
+            },
+            class: "teapot",
+            get allAutomationsPaused() {
+              return get(allAutomationsPaused);
+            },
+            set allAutomationsPaused($$value) {
+              set(allAutomationsPaused, $$value);
+            },
+            $$events: {
+              useTea: handleHarvestedTea,
+              teaBrewed: handleBrewedTea,
+              pauseStateChanged: handleTeapotPauseChanged,
+              deleteTeapot: handleDeleteTeapot
+            },
+            $$legacy: true
+          }),
+          ($$value, i2) => mutate(teapotRefs, get(teapotRefs)[i2] = $$value),
+          (i2) => get(teapotRefs)?.[i2],
+          () => [get(i)]
+        );
+      }
+    });
+    reset(div_14);
+    reset(div_12);
+    var div_15 = sibling(div_12, 2);
+    var p_3 = child(div_15);
+    var node_22 = child(p_3);
+    AnimatedStat(node_22, {
       label: "Ready to serve",
       get value() {
         return get(brewedTea);
@@ -6623,57 +7123,57 @@ https://svelte.dev/e/store_invalid_shape`);
     });
     reset(p_3);
     var button_1 = sibling(p_3, 2);
-    var node_22 = child(button_1);
+    var node_23 = child(button_1);
     {
-      var consequent_2 = ($$anchor2) => {
-        var text_3 = text("Serve Tea");
-        append($$anchor2, text_3);
+      var consequent_3 = ($$anchor2) => {
+        var text_4 = text("Serve Tea");
+        append($$anchor2, text_4);
       };
       var alternate = ($$anchor2, $$elseif) => {
         {
-          var consequent_3 = ($$anchor3) => {
-            var text_4 = text("No Tea Available");
-            append($$anchor3, text_4);
+          var consequent_4 = ($$anchor3) => {
+            var text_5 = text("No Tea Available");
+            append($$anchor3, text_5);
           };
           var alternate_1 = ($$anchor3) => {
-            var text_5 = text("Serve Tea");
-            append($$anchor3, text_5);
+            var text_6 = text("Serve Tea");
+            append($$anchor3, text_6);
           };
           if_block(
             $$anchor2,
             ($$render) => {
-              if (get(brewedTea) < 1) $$render(consequent_3);
+              if (get(brewedTea) < 1) $$render(consequent_4);
               else $$render(alternate_1, false);
             },
             $$elseif
           );
         }
       };
-      if_block(node_22, ($$render) => {
-        if (get(brewedTea) >= 1) $$render(consequent_2);
+      if_block(node_23, ($$render) => {
+        if (get(brewedTea) >= 1) $$render(consequent_3);
         else $$render(alternate, false);
       });
     }
     reset(button_1);
-    reset(div_14);
+    reset(div_15);
     reset(div);
-    var div_15 = sibling(div, 2);
+    var div_16 = sibling(div, 2);
     validate_each_keys(() => get(toasts), (toast) => toast.id);
-    each(div_15, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
-      var div_16 = root_102();
-      var text_6 = child(div_16, true);
-      reset(div_16);
+    each(div_16, 5, () => get(toasts), (toast) => toast.id, ($$anchor2, toast) => {
+      var div_17 = root_12();
+      var text_7 = child(div_17, true);
+      reset(div_17);
       template_effect(() => {
-        set_class(div_16, 1, `toast ${get(toast).type ?? ""}`);
-        set_style(div_16, `
+        set_class(div_17, 1, `toast ${get(toast).type ?? ""}`);
+        set_style(div_17, `
                             --x: ${get(toast).x ?? ""}px;
                             --opacity: ${get(toast).opacity ?? ""};
                         `);
-        set_text(text_6, get(toast).message);
+        set_text(text_7, get(toast).message);
       });
-      append($$anchor2, div_16);
+      append($$anchor2, div_17);
     });
-    reset(div_15);
+    reset(div_16);
     template_effect(
       ($0) => {
         classes = set_class(div_1, 1, "time-indicator", null, classes, $0);

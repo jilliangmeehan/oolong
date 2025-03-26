@@ -407,25 +407,28 @@ button.secondary:disabled:hover {
     font-size: 14px;
     font-family: "Departure Mono";
     color: var(--tea);
-    animation: float-up 2s ease-out forwards;
+    animation: float-up 4s ease-out forwards;
     white-space: nowrap;
 }
 
 .toast.success {
     bottom: 6px;
     color: var(--matcha);
-    animation: float-up 4s ease-out forwards;
 }
 
 .toast.error {
     bottom: 6px;
     color: var(--puff);
-    animation: float-up 4s ease-out forwards;
+}
+
+.toast.info {
+    bottom: 6px;
+    color: var(--comfy);
 }
 
 .toast.sunrise {
     bottom: 3px;
-    color: var(--comfy);
+    color: var(--beam);
     animation: float-up 8s ease-out forwards;
 }
 
@@ -521,6 +524,10 @@ progress[value] {
     border-radius: 3px;
 }
 
+.tea-inventory {
+    margin-bottom: 4px;
+}
+
 /* buttons */
 .garden-plot button,
 .teapot button {
@@ -541,6 +548,7 @@ button.save-game {
 .teashop-serve button:active,
 .teashop-serve button:disabled:active {
     border: 3px solid var(--oat);
+    margin-right: 0;
 }
 
 .teashop-serve button:active {
@@ -617,4 +625,49 @@ button.save-game {
     position: static;
     justify-self: end;
     grid-area: bottom-right;
+}
+
+/* stats table */
+.stats-tables {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.stats-tables * {
+    font-family: var(--mono);
+    color: var(--tea);
+    font-weight: normal;
+    font-size: small;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.stats-table td {
+    border-top: 1px solid var(--chai);
+}
+
+.stats-table th,
+.stats-table td {
+    padding: 6px;
+}
+
+.stats-tables h3 {
+    font-family: var(--pixel);
+    text-transform: lowercase;
+    font-size: 1.4em;
+    margin-bottom: 6px;
+}
+
+.stats-section {
+    margin: 28px 0;
+}
+
+.stats-tea-type {
+    width: 25%;
 }

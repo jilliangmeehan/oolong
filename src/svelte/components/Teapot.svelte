@@ -111,7 +111,7 @@
         class:brewing={isBrewing}
     >
         {#if isBrewing && currentTeaType}
-            {TEA[currentTeaType].name}... ({Math.floor(progress)}%)
+            {TEA[currentTeaType].name} ({Math.floor(progress)}%)
         {:else if !hasTeaAvailable()}
             No Tea Available
         {:else}
