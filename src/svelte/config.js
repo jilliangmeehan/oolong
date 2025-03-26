@@ -1,5 +1,5 @@
 export const DEBUG = {
-  TESTING_MODE: true,
+  TESTING_MODE: false,
   STARTING_POINTS: 10000,
   UNLOCK_ALL_TEA: true, // Optional: unlock all tea types
   EXTRA_PLOTS: 7, // Optional: start with extra garden plots

@@ -4717,7 +4717,7 @@ https://svelte.dev/e/store_invalid_shape`);
 
   // src/svelte/config.js
   var DEBUG = {
-    TESTING_MODE: true,
+    TESTING_MODE: false,
     STARTING_POINTS: 1e4,
     UNLOCK_ALL_TEA: true,
     // Optional: unlock all tea types
