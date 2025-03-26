@@ -5726,30 +5726,30 @@ https://svelte.dev/e/store_invalid_shape`);
   var root_1 = add_locations(template(`<p class="label save-indicator"> </p>`), Teashop[FILENAME], [[1352, 16]]);
   var root_3 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
     [
-      1392,
+      1395,
       36,
       [
-        [1393, 40],
         [1396, 40],
-        [1403, 40],
-        [1410, 40]
+        [1399, 40],
+        [1406, 40],
+        [1413, 40]
       ]
     ]
   ]);
   var root_54 = add_locations(template(`<tr><td class="stats-tea-type"> </td><td><!></td><td><!></td><td><!></td><td><!></td></tr>`), Teashop[FILENAME], [
     [
-      1439,
+      1442,
       36,
       [
-        [1440, 40],
         [1443, 40],
-        [1450, 40],
-        [1457, 40],
-        [1464, 40]
+        [1446, 40],
+        [1453, 40],
+        [1460, 40],
+        [1467, 40]
       ]
     ]
   ]);
-  var root_12 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1543, 8]]);
+  var root_12 = add_locations(template(`<div> </div>`), Teashop[FILENAME], [[1546, 8]]);
   var root5 = add_locations(template(`<div class="teashop"><div><p class="label"> </p></div> <div class="game-data"><div><!> <!> <!> <!></div> <div><!> <!> <!> <!></div> <div><!> <!> <!> <button class="secondary save-game">Save Game</button></div></div> <!> <div class="dropdown"><details><summary>Detailed stats</summary> <div class="stats-tables"><div class="stats-section"><h3>Current</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Can Harvest</th><th>Can Brew</th><th>Can Serve</th></tr></thead><tbody></tbody></table></div> <div class="stats-section"><h3>Lifetime</h3> <table class="stats-table"><thead><tr><th class="stats-tea-type">Tea Type</th><th>Grown</th><th>Harvested</th><th>Brewed</th><th>Served</th></tr></thead><tbody></tbody></table></div></div></details></div> <div class="teashop-garden"><h2>Garden</h2> <div class="teashop-grid"></div></div> <div class="teashop-teapots"><h2>Teapots</h2> <div class="tea-inventory"><p class="label"><!></p></div> <div class="teashop-grid"></div></div> <div class="teashop-serve"><p class="label"><!></p> <button class="secondary"><!></button></div></div> <div class="toast-container"></div>`, 1), Teashop[FILENAME], [
     [
       1315,
@@ -5766,75 +5766,75 @@ https://svelte.dev/e/store_invalid_shape`);
           ]
         ],
         [
-          1374,
+          1377,
           4,
           [
             [
-              1375,
+              1378,
               8,
               [
-                [1376, 12],
+                [1379, 12],
                 [
-                  1377,
+                  1380,
                   12,
                   [
                     [
-                      1378,
+                      1381,
                       16,
                       [
-                        [1379, 20],
+                        [1382, 20],
                         [
-                          1380,
+                          1383,
                           20,
                           [
                             [
-                              1381,
+                              1384,
                               24,
                               [
                                 [
-                                  1382,
+                                  1385,
                                   28,
                                   [
-                                    [1383, 32],
-                                    [1384, 32],
-                                    [1385, 32],
-                                    [1386, 32]
+                                    [1386, 32],
+                                    [1387, 32],
+                                    [1388, 32],
+                                    [1389, 32]
                                   ]
                                 ]
                               ]
                             ],
-                            [1389, 24]
+                            [1392, 24]
                           ]
                         ]
                       ]
                     ],
                     [
-                      1424,
+                      1427,
                       16,
                       [
-                        [1425, 20],
+                        [1428, 20],
                         [
-                          1426,
+                          1429,
                           20,
                           [
                             [
-                              1427,
+                              1430,
                               24,
                               [
                                 [
-                                  1428,
+                                  1431,
                                   28,
                                   [
-                                    [1429, 32],
-                                    [1430, 32],
-                                    [1431, 32],
                                     [1432, 32],
-                                    [1433, 32]
+                                    [1433, 32],
+                                    [1434, 32],
+                                    [1435, 32],
+                                    [1436, 32]
                                   ]
                                 ]
                               ]
                             ],
-                            [1436, 24]
+                            [1439, 24]
                           ]
                         ]
                       ]
@@ -5845,20 +5845,20 @@ https://svelte.dev/e/store_invalid_shape`);
             ]
           ]
         ],
-        [1481, 4, [[1482, 8], [1483, 8]]],
+        [1484, 4, [[1485, 8], [1486, 8]]],
         [
-          1499,
+          1502,
           4,
           [
-            [1500, 8],
-            [1501, 8, [[1502, 12]]],
-            [1509, 8]
+            [1503, 8],
+            [1504, 8, [[1505, 12]]],
+            [1512, 8]
           ]
         ],
-        [1525, 4, [[1526, 8], [1529, 8]]]
+        [1528, 4, [[1529, 8], [1532, 8]]]
       ]
     ],
-    [1541, 0]
+    [1544, 0]
   ]);
   function Teashop($$anchor, $$props) {
     check_target(new.target);
@@ -6496,6 +6496,10 @@ https://svelte.dev/e/store_invalid_shape`);
         timeOfDay.set(get(currentTime));
         isDaytime.set(strict_equals(get(currentTime), "night", false));
       }
+      if (!$isDaytime()) {
+        createToast("The sprites were sleeping while you were away!");
+        return;
+      }
       const availableSprites = { ...get(sprites) };
       if (availableSprites.garden > 0) {
         const availablePlots = get(plotRefs).filter((plot) => {
@@ -6648,6 +6652,21 @@ https://svelte.dev/e/store_invalid_shape`);
             remainingOperations -= typeOperations;
             if (remainingOperations <= 0) break;
           }
+        }
+      }
+      if (summary.grown > 0 || summary.harvested > 0 || summary.brewed > 0 || summary.served > 0) {
+        createToast(`While you were away, sprites were busy!`, null, "info");
+        if (summary.served > 0) {
+          createToast(`Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`);
+        }
+        if (summary.brewed > 0) {
+          createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
+        }
+        if (summary.harvested > 0) {
+          createToast(`Sprites harvested ${summary.harvested} units of tea.`);
+        }
+        if (summary.grown > 0) {
+          createToast(`Sprites planted and grew ${summary.grown} plots of tea.`);
         }
       }
     }
@@ -6893,6 +6912,15 @@ https://svelte.dev/e/store_invalid_shape`);
       },
       get purchaseCount() {
         return get(purchaseCount);
+      },
+      get gardenPlots() {
+        return get(gardenPlots);
+      },
+      get teapots() {
+        return get(teapots);
+      },
+      get sprites() {
+        return get(sprites);
       },
       $$events: {
         purchase: handlePurchase,

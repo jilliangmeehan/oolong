@@ -882,10 +882,10 @@
         }
 
         // Skip simulation if it's night time - sprites don't work at night
-        // if (!$isDaytime) {
-        //     createToast("The sprites were sleeping while you were away!");
-        //     return;
-        // }
+        if (!$isDaytime) {
+            createToast("The sprites were sleeping while you were away!");
+            return;
+        }
 
         // Calculate available sprites (all sprites if daytime)
         const availableSprites = { ...sprites };
@@ -1179,41 +1179,41 @@
             }
         }
 
-        // Create toast messages to summarize what happened
-        // if (
-        //     summary.grown > 0 ||
-        //     summary.harvested > 0 ||
-        //     summary.brewed > 0 ||
-        //     summary.served > 0
-        // ) {
-        //     createToast(
-        //         `While you were away, sprites were busy!`,
-        //         null,
-        //         "success",
-        //     );
+        //  Create toast messages to summarize what happened
+        if (
+            summary.grown > 0 ||
+            summary.harvested > 0 ||
+            summary.brewed > 0 ||
+            summary.served > 0
+        ) {
+            createToast(
+                `While you were away, sprites were busy!`,
+                null,
+                "info",
+            );
 
-        //     if (summary.served > 0) {
-        //         createToast(
-        //             `Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`,
-        //         );
-        //     }
+            if (summary.served > 0) {
+                createToast(
+                    `Sprites served ${summary.served} cups and earned ${summary.pointsEarned} points!`,
+                );
+            }
 
-        //     if (summary.brewed > 0) {
-        //         createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
-        //     }
+            if (summary.brewed > 0) {
+                createToast(`Sprites brewed ${summary.brewed} cups of tea.`);
+            }
 
-        //     if (summary.harvested > 0) {
-        //         createToast(
-        //             `Sprites harvested ${summary.harvested} units of tea.`,
-        //         );
-        //     }
+            if (summary.harvested > 0) {
+                createToast(
+                    `Sprites harvested ${summary.harvested} units of tea.`,
+                );
+            }
 
-        //     if (summary.grown > 0) {
-        //         createToast(
-        //             `Sprites planted and grew ${summary.grown} plots of tea.`,
-        //         );
-        //     }
-        // }
+            if (summary.grown > 0) {
+                createToast(
+                    `Sprites planted and grew ${summary.grown} plots of tea.`,
+                );
+            }
+        }
     }
 
     document.addEventListener("visibilitychange", () => {
@@ -1365,6 +1365,9 @@
         {points}
         {unlockedTeaTypes}
         {purchaseCount}
+        {gardenPlots}
+        {teapots}
+        {sprites}
         on:purchase={handlePurchase}
         on:reset={resetGame}
         on:recalibrate={handleRecalibrate}
