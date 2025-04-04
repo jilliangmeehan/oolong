@@ -25,14 +25,13 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
-  eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
-  eleventyConfig.addPassthroughCopy("**/photos/*.jpeg");
-  eleventyConfig.addPassthroughCopy("**/photos/*.png");
+  eleventyConfig.addPassthroughCopy("./src/**/photos/*.jpeg");
+  eleventyConfig.addPassthroughCopy("./src/**/photos/*.jpg");
+  eleventyConfig.addPassthroughCopy("./src/**/photos/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/teacups/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
   eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy("_site/assets");
 
   // media collection
   eleventyConfig.addCollection("shelfItems", function (collection) {
