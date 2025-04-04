@@ -25,14 +25,116 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
-  //eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
-  //eleventyConfig.addPassthroughCopy("**/photos/*.jpeg");
-  //eleventyConfig.addPassthroughCopy("**/photos/*.png");
+  eleventyConfig.addPassthroughCopy("**/photos/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/photos/*.jpeg");
+  eleventyConfig.addPassthroughCopy("**/photos/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/teacups/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("_site/assets");
+
+  // media collection
+  eleventyConfig.addCollection("shelfItems", function (collection) {
+    const allItems = collection.getFilteredByGlob([
+      "src/games/Genshin/abyss/**/*.md",
+      "src/games/ZZZ/shiyu/**/*.md",
+    ]);
+
+    // spiral abyss posts are special
+    allItems.forEach((page) => {
+      if (
+        page.filePathStem.includes("/games/Genshin/abyss/") &&
+        !page.filePathStem.endsWith("/abyss/index")
+      ) {
+        page.data.eleventyNavigation = {
+          key: page.data.title || page.fileSlug,
+          parent: "Abyss",
+          parentKey: "Abyss",
+        };
+      }
+    });
+
+    const abyssIndex = collection
+      .getAll()
+      .find(
+        (page) =>
+          page.filePathStem.includes("/games/Genshin/abyss/index") ||
+          page.filePathStem === "/games/Genshin/abyss",
+      );
+
+    if (abyssIndex) {
+      abyssIndex.data.eleventyNavigation = {
+        key: "Abyss",
+        parent: "Genshin",
+        parentKey: "Genshin",
+      };
+    }
+
+    const genshinIndex = collection
+      .getAll()
+      .find(
+        (page) =>
+          page.filePathStem.includes("/games/Genshin/index") ||
+          page.filePathStem === "/games/Genshin",
+      );
+
+    if (genshinIndex) {
+      genshinIndex.data.eleventyNavigation = {
+        key: "Genshin",
+        parent: "Shelf",
+        parentKey: "Shelf",
+      };
+    }
+
+    // shiyu defense posts are special
+    allItems.forEach((page) => {
+      if (
+        page.filePathStem.includes("/games/ZZZ/shiyu/") &&
+        !page.filePathStem.endsWith("/shiyu/index")
+      ) {
+        page.data.eleventyNavigation = {
+          key: page.data.title || page.fileSlug,
+          parent: "Shiyu",
+          parentKey: "Shiyu",
+        };
+      }
+    });
+
+    const shiyuIndex = collection
+      .getAll()
+      .find(
+        (page) =>
+          page.filePathStem.includes("/games/ZZZ/shiyu/index") ||
+          page.filePathStem === "/games/ZZZ/shiyu",
+      );
+
+    if (shiyuIndex) {
+      shiyuIndex.data.eleventyNavigation = {
+        key: "Shiyu",
+        parent: "ZZZ",
+        parentKey: "ZZZ",
+      };
+    }
+
+    const zzzIndex = collection
+      .getAll()
+      .find(
+        (page) =>
+          page.filePathStem.includes("/games/ZZZ/index") ||
+          page.filePathStem === "/games/ZZZ",
+      );
+
+    if (zzzIndex) {
+      zzzIndex.data.eleventyNavigation = {
+        key: "ZZZ",
+        parent: "Shelf",
+        parentKey: "Shelf",
+      };
+    }
+
+    return allItems;
+  });
 
   // fix markdown links
   eleventyConfig.addTransform(
@@ -75,7 +177,7 @@ module.exports = (eleventyConfig) => {
           }),
         ],
         sourcemap: true,
-        format: "iife", // Important! This makes it work in the browser
+        format: "iife",
         logLevel: "info",
       });
       console.log("Svelte build complete");
@@ -84,19 +186,17 @@ module.exports = (eleventyConfig) => {
     }
   });
 
-  // Add watch target for Svelte files
   eleventyConfig.addWatchTarget("./src/svelte/");
 
   console.log("Eleventy configuration loaded");
 
-  // Single return statement with all configuration
   return {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dir: {
       input: "src",
-      output: "_site", // Changed from "dist" to "_site" to match your setup
+      output: "_site",
       data: "_data",
     },
   };

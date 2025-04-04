@@ -1,35 +1,49 @@
-{% if eleventyNavigation.key == "Home" %}
-  <h1 class="font-pixel">jillian g. meehan</h1>
+{% if page.url == "/" %}
+<h1 class="font-pixel">jillian g. meehan</h1>
 {% else %}
-
-{% if eleventyNavigation and eleventyNavigation.key != "Home" %}
 <nav aria-label="breadcrumb" class="font-pixel">
-  <a href="/">Home</a>
-  <span class="separator">/</span>
-  
-  {% if eleventyNavigation.parent == "Blog" %}
-	<a href="/blog">Blog</a>
-	<span class="separator">/</span>
-  {% endif %}
-  
-  <span aria-current="page">{{ title }}</span>
+    <a href="/">Home</a>
+    <span class="separator">/</span>
+
+    {% if eleventyNavigation and eleventyNavigation.parent %} {% if
+    eleventyNavigation.parent == "Home" %} {% else %} {% for item in
+    collections.all %} {% if item.data.eleventyNavigation and
+    item.data.eleventyNavigation.key == eleventyNavigation.parent %} {% if
+    item.data.eleventyNavigation.parent and item.data.eleventyNavigation.parent
+    != "Home" %} {% for gp in collections.all %} {% if
+    gp.data.eleventyNavigation and gp.data.eleventyNavigation.key ==
+    item.data.eleventyNavigation.parent %} {% if
+    gp.data.eleventyNavigation.parent and gp.data.eleventyNavigation.parent !=
+    "Home" %} {% for ggp in collections.all %} {% if ggp.data.eleventyNavigation
+    and ggp.data.eleventyNavigation.key == gp.data.eleventyNavigation.parent %}
+    <a href="{{ ggp.url }}">{{ ggp.data.title }}</a>
+    <span class="separator">/</span>
+    {% endif %} {% endfor %} {% endif %}
+
+    <a href="{{ gp.url }}">{{ gp.data.title }}</a>
+    <span class="separator">/</span>
+    {% endif %} {% endfor %} {% endif %}
+
+    <a href="{{ item.url }}">{{ item.data.title }}</a>
+    <span class="separator">/</span>
+    {% endif %} {% endfor %} {% endif %} {% endif %}
+
+    <span aria-current="page">{{ title }}</span>
 </nav>
-{% endif %}
 {% endif %}
 
 <style>
-  nav[aria-label="breadcrumb"] {
-	text-transform: lowercase;
-	display: flex;         
-	gap: 0.5rem;             
-	flex-wrap: wrap;
-	font-size: 1.2rem;
-	margin-top: 8px;
-	line-height: 24px;
-  }
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
 
-  nav[aria-label="breadcrumb"] span.separator {
-	color: #666; 
-  }
-  
+    nav[aria-label="breadcrumb"] span.separator {
+        color: #666;
+    }
 </style>

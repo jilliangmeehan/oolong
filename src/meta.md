@@ -2,6 +2,8 @@
 title: "meta"
 layout: "layouts/page.html"
 date: Last Modified
+eleventyNavigation:
+  key: Meta
 ---
 
 Inspired by [Anh's meta page](https://anhvn.com/meta/).

@@ -1,20 +1,26 @@
-<h2 class="now font-sans">games</h2>
-<ul class="now" role="list">
-  {%- for game in collections.game -%}
-  <div class="item">
-    <h3>
-      <a href="{{ game.url }}">{{ game.data.title }}</a>
-    </h3>
-    <p class="small">Status: {{ game.data.status }}</p>
-    {% if game.data.UID %}
-    <p class="small"><b>UID:</b> {{ game.data.UID }}</p>
-    {% endif %} {% if game.data.special_link %}
-    <p class="small special_link">
-      <a href="{{ game.data.special_link }}"
-        >{{ game.data.special_link_label }} →</a
-      >
-    </p>
-    {% endif %}
-  </div>
-  {%- endfor -%}
-</ul>
+{% set sorted_games = collections.game | sort(attribute="data.status") | reverse
+%} {% set statusColors = { 'playing': '#82b78b', 'paused': '#edd495',
+'finished': '#8b8fc3' } %}
+
+<section>
+    <table>
+        <tr>
+            <th>Games</th>
+            <th>Status</th>
+        </tr>
+        {% for game in sorted_games %}
+        <tr>
+            <td>
+                <a href="{{ game.url }}">{{ game.data.title }}</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: {{ statusColors[game.data.status] }}"
+                ></div>
+                {{ game.data.status }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>

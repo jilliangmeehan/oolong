@@ -1,12 +1,26 @@
-<h2 class="now font-sans">books</h2>
-<ul class="now" role="list">
-  {%- for book in collections.book -%}
-  <div class="item">
-    <h3 class="font-serif">
-      <a href="{{ book.url }}">{{ book.data.title }}</a>
-    </h3>
-    <p class="small">by {{ book.data.author }}</p>
-    <p class="small">Status: {{ book.data.status }}</p>
-  </div>
-  {%- endfor -%}
-</ul>
+{% set sorted_books = collections.book | sort(attribute="data.status") | reverse
+%} {% set statusColors = { 'reading': '#82b78b', 'paused': '#edd495',
+'finished': '#8b8fc3' } %}
+
+<section>
+    <table>
+        <tr>
+            <th>Books</th>
+            <th>Status</th>
+        </tr>
+        {% for book in sorted_books %}
+        <tr>
+            <td>
+                <a href="{{ book.url }}">{{ book.data.title }}</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: {{ statusColors[book.data.status] }}"
+                ></div>
+                {{ book.data.status }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>

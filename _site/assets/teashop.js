@@ -5971,7 +5971,7 @@ https://svelte.dev/e/store_invalid_shape`);
         () => {
           set(toasts, get(toasts).filter((t) => strict_equals(t.id, id, false)));
         },
-        2e3
+        12e3
       );
     }
     function startDayCycle() {

@@ -2,6 +2,9 @@
 title: "style guide"
 layout: "layouts/page.html"
 date: Last Modified
+eleventyNavigation:
+  key: Docs
+  parent: Meta
 ---
 
 ## color swatches

@@ -163,7 +163,7 @@
 
         setTimeout(() => {
             toasts = toasts.filter((t) => t.id !== id);
-        }, 2000);
+        }, 12000);
     }
 
     function startDayCycle() {

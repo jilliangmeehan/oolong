@@ -2,6 +2,8 @@
 title: "changelog"
 layout: "layouts/page.html"
 description: "a lazy captain's log"
+eleventyNavigation:
+  key: Log
 ---
 
 ## dec 18, 2024

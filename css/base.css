@@ -416,37 +416,39 @@ button.secondary:disabled:hover {
 }
 
 .toast.success {
-    bottom: 6px;
+    bottom: 12px;
     color: var(--matcha);
+    animation: float-up 8s ease-out forwards;
 }
 
 .toast.error {
-    bottom: 6px;
+    bottom: 12px;
     color: var(--puff);
+    animation: float-up 8s ease-out forwards;
 }
 
 .toast.info {
-    bottom: 6px;
+    bottom: 12px;
     color: var(--comfy);
-    animation: float-up 10s ease-out forwards;
+    animation: float-up 8s ease-out forwards;
 }
 
 .toast.sunrise {
-    bottom: 3px;
+    bottom: 36px;
     color: var(--beam);
-    animation: float-up 8s ease-out forwards;
+    animation: float-up 12s ease-out forwards;
 }
 
 .toast.sunset {
-    bottom: 3px;
+    bottom: 36px;
     color: var(--beam);
-    animation: float-up 8s ease-out forwards;
+    animation: float-up 12s ease-out forwards;
 }
 
 .toast.night {
-    bottom: 3px;
+    bottom: 36px;
     color: var(--joycon);
-    animation: float-up 8s ease-out forwards;
+    animation: float-up 12s ease-out forwards;
 }
 
 @keyframes float-up {
@@ -455,7 +457,7 @@ button.secondary:disabled:hover {
         opacity: 1;
     }
     100% {
-        transform: translateY(-50px);
+        transform: translateY(-100px);
         opacity: 0;
     }
 }
