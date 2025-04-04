@@ -15,7 +15,7 @@ After my last two days of work for the year, I spent my week ruining my sleep sc
 I'm trying to ignore the classic holiday break anxiety that *I'm not being productive enough with my vacation!* Dylan's coming home from a work trip today, so I'm excited to spend the weekend hanging out with him for a bit before heading home to see my family for Christmas. And then I'll have another week or so to fix my sleep schedule and catch up on YouTube videos I've been meaning to watch.
 
 ## playing
-I'm still playing all the usual stuff (mostly [Zenless Zone Zero](../../../games/playing/Zenless%20Zone%20Zero/index.md), because they just added it to Geforce Now & the latest update has been really good). Having time off means I can dedicate more energy to just *catching up* on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!
+I'm still playing all the usual stuff (mostly [ZZZ](../../../games/ZZZ/index.md), because they just added it to Geforce Now & the latest update has been really good). Having time off means I can dedicate more energy to just *catching up* on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!
 
 ### infinity nikki
 ![screenshot from infinity nikki](./photos/infinitynikki.jpeg)
