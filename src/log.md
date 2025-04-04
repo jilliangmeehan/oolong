@@ -5,6 +5,10 @@ description: "a lazy captain's log"
 eleventyNavigation:
   key: Log
 ---
+## april 4, 2025
+- cleaned up the [shelf](/shelf) page a little by putting everything into tables & adding colored indicators for statuses
+- ditched the old /now page and moved some of my past updates into their own weeknotes blog posts instead
+
 
 ## dec 18, 2024
 
