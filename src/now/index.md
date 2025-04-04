@@ -30,7 +30,7 @@ I downloaded this on my phone and then apparently played 15 hours of it in one w
 Dylan told me about this one, and I love it. It's a racing game for people who like F1 but aren't actually into sim racing, which is exactly me. The vibes are just incredibly sick. I've spent several nights sinking into my couch and playing this on my Steam Deck for hours.
 
 ### The gachas
-I'm having the usual amount of fun keeping up with [Genshin Impact](../games/Genshin%20Impact/index.md), [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md), and [Zenless Zone Zero](../games/playing/Zenless%20Zone%20Zero/index.md)! I always love Lantern Rite this time of year, and I like that ZZZ had a similar event. 
+I'm having the usual amount of fun keeping up with [Genshin Impact](../games/Genshin%20Impact/index.md), [Honkai Star Rail](../games/playing/Honkai%20Star%20Rail/index.md), and [ZZZ](../games/ZZZ/index.md)! I always love Lantern Rite this time of year, and I like that ZZZ had a similar event. 
 
 In Genshin, I pulled for C4 Childe on the Chronicled Wish banner and ended up with a C1 Ganyu and C1 Xiao along the way, which I can't complain about. I also got Mizuki, and now I'm going for her weapon since I assume I won't have many other chances to get it in the future. If there's anything left over, I might try for a Sigewinne constellation before the banner ends — but after that, I think I'm just saving for Skirk.
 
