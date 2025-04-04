@@ -1,0 +1,24 @@
+<div class="screenshot-gallery">
+    {% set gameId = page.inputPath | replace('/index.md', '') |
+    replace('/.*\/games\/', '') %} {% set gamePhotos =
+    collections.gamePhotos[gameId] %} {% if gamePhotos and gamePhotos.length > 0
+    %} {% for photo in gamePhotos %}
+    <div class="screenshot">
+        <img src="{{ photo.url }}" alt="Screenshot from {{ title }}" />
+    </div>
+    {% endfor %} {% else %} {% endif %}
+</div>
+
+<style>
+    .screenshot-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .screenshot img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+</style>

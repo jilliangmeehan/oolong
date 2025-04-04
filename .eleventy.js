@@ -135,6 +135,73 @@ module.exports = (eleventyConfig) => {
     return allItems;
   });
 
+  // game screenshots collection
+  eleventyConfig.addCollection("gamePhotos", function (collection) {
+    let photosByGame = {};
+
+    // We need to use Node.js file system methods instead of collection._files
+    const fs = require("fs");
+    const path = require("path");
+
+    const gamePages = collection.getAll().filter((item) => {
+      return (
+        item.inputPath.includes("/games/") &&
+        item.inputPath.endsWith("index.md")
+      );
+    });
+
+    gamePages.forEach((game) => {
+      const gameDirPath = game.inputPath.replace("/index.md", "");
+      const gameId = gameDirPath.replace(/^.*\/games\//, "");
+
+      // Get the full path to the photos directory
+      const photosDir = path.join(
+        process.cwd(),
+        "src",
+        gameDirPath.replace(/^.*\/src\//, ""),
+        "photos",
+      );
+
+      // Check if the photos directory exists
+      if (fs.existsSync(photosDir)) {
+        try {
+          // Get all image files in the photos directory
+          const photoFiles = fs
+            .readdirSync(photosDir)
+            .filter(
+              (file) =>
+                file.endsWith(".jpg") ||
+                file.endsWith(".png") ||
+                file.endsWith(".jpeg") ||
+                file.endsWith(".gif"),
+            );
+
+          // Add these photos to our object
+          photosByGame[gameId] = photoFiles.map((filename) => {
+            // Create the URL path relative to the input directory
+            const photoPath = path
+              .join(gameDirPath.replace(/^.*\/src\//, ""), "photos", filename)
+              .replace(/\\/g, "/"); // Convert Windows backslashes to forward slashes
+
+            return {
+              url: "/" + photoPath,
+              filename: filename,
+              game: gameId,
+            };
+          });
+        } catch (err) {
+          console.error(`Error reading photos for ${gameId}:`, err);
+          photosByGame[gameId] = [];
+        }
+      } else {
+        // No photos directory exists
+        photosByGame[gameId] = [];
+      }
+    });
+
+    return photosByGame;
+  });
+
   // fix markdown links
   eleventyConfig.addTransform(
     "fixMarkdownLinks",

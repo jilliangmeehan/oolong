@@ -172,7 +172,22 @@
 
     <main tabindex="-1" id="main-content">
       
-<article></article>
+<article><div class="screenshot-gallery">
+</div>
+<style>
+    .screenshot-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .screenshot img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+</style>
+</article>
 
     </main>
   </body>

@@ -5,6 +5,8 @@ status: playing
 tags:
   - game
 publish: true
-summary: 
+summary:
 url: https://infinitynikki.infoldgames.com/en/home
 ---
+
+{% include "partials/screenshots.html" %}
