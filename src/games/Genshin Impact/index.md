@@ -11,5 +11,3 @@ cover: "![genshinimpact.png](genshinimpact.png)"
 special_link: https://jillian.garden/games/genshin/abyss/11-24/
 special_link_label: latest spiral abyss data
 ---
-
-{% include "partials/abyss.html" %}
