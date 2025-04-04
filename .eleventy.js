@@ -25,9 +25,9 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
-  eleventyConfig.addPassthroughCopy("./src/**/photos/*.jpeg");
-  eleventyConfig.addPassthroughCopy("./src/**/photos/*.jpg");
-  eleventyConfig.addPassthroughCopy("./src/**/photos/*.png");
+  eleventyConfig.addPassthroughCopy("./src/**/*.jpg");
+  eleventyConfig.addPassthroughCopy("./src/**/*.jpeg");
+  eleventyConfig.addPassthroughCopy("./src/**/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/teacups/*.png");
   eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
@@ -139,7 +139,6 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addCollection("gamePhotos", function (collection) {
     let photosByGame = {};
 
-    // We need to use Node.js file system methods instead of collection._files
     const fs = require("fs");
     const path = require("path");
 
@@ -152,20 +151,12 @@ module.exports = (eleventyConfig) => {
 
     gamePages.forEach((game) => {
       const gameDirPath = game.inputPath.replace("/index.md", "");
-      const gameId = gameDirPath.replace(/^.*\/games\//, "");
+      const gameId = gameDirPath.replace(/^.*\/src\/games\//, "");
 
-      // Get the full path to the photos directory
-      const photosDir = path.join(
-        process.cwd(),
-        "src",
-        gameDirPath.replace(/^.*\/src\//, ""),
-        "photos",
-      );
+      const photosDir = path.join(process.cwd(), gameDirPath, "photos");
 
-      // Check if the photos directory exists
       if (fs.existsSync(photosDir)) {
         try {
-          // Get all image files in the photos directory
           const photoFiles = fs
             .readdirSync(photosDir)
             .filter(
@@ -176,25 +167,23 @@ module.exports = (eleventyConfig) => {
                 file.endsWith(".gif"),
             );
 
-          // Add these photos to our object
-          photosByGame[gameId] = photoFiles.map((filename) => {
-            // Create the URL path relative to the input directory
-            const photoPath = path
-              .join(gameDirPath.replace(/^.*\/src\//, ""), "photos", filename)
-              .replace(/\\/g, "/"); // Convert Windows backslashes to forward slashes
+          const photos = photoFiles.map((filename) => {
+            const photoUrl = `/games/${gameId}/photos/${filename}`;
 
             return {
-              url: "/" + photoPath,
+              url: photoUrl,
               filename: filename,
               game: gameId,
             };
           });
+
+          photos.sort((a, b) => b.filename.localeCompare(a.filename));
+
+          photosByGame[gameId] = photos;
         } catch (err) {
-          console.error(`Error reading photos for ${gameId}:`, err);
           photosByGame[gameId] = [];
         }
       } else {
-        // No photos directory exists
         photosByGame[gameId] = [];
       }
     });
