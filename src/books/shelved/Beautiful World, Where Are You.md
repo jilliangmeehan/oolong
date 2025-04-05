@@ -7,7 +7,8 @@ status: finished
 tags:
   - book
 publish: true
-cover: "![beautifulworld.jpg](beautifulworld.jpg)"
+cover: https://images-us.bookshop.org/ingram/9781250859044.jpg?v=enc-v1
 currently: false
+date finished: 2024-10-04
 ---
-I finally finished it! It wasn't my favorite Sally Rooney book, but I enjoyed reading it. The last few chapters made me cry.
+Not my favorite Sally Rooney book, but I enjoyed reading it. The last few chapters made me cry.
