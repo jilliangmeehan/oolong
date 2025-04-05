@@ -1,7 +1,7 @@
 ---
 title: Conclave
 layout: layouts/page.html
-status: watching
+status: finished
 tags:
   - movie
 url: https://www.imdb.com/title/tt20215234/
