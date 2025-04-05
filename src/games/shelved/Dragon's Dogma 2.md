@@ -5,5 +5,6 @@ status: paused
 tags:
   - game
 publish: true
+cover: https://cdn2.steamgriddb.com/grid/ce64a3f468e6acc2f43c981af59251c1.png
 ---
-i love this game. i unlocked the mystic spearhand vocation, and have been working on finishing up a bunch of side quests before i advance too much. i accidentally waited too long to save some lady's husband from a headless horseman, and now i have to go back to the city and tell her he was already dead when i got there — i was disappointed in myself at first, but then realized it was kind of fitting, since i named my character parsifal.
+I still haven't finished this game, but I genuinely love it. When I start playing it again, I'd love to write a little game diary here about what I'm doing.
