@@ -4,11 +4,9 @@ layout: layouts/page.html
 status: playing
 tags:
   - game
-url: https://enka.network/u/jillian/
+url: 
 publish: true
 cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
+permalink: playing/zzz/
 ---
-
-## shiyu defense
-{% include "partials/shiyu.html" %}
