@@ -1,7 +1,7 @@
 ---
 title: Severance
 layout: layouts/page.html
-status: watching
+status: finished
 tags:
   - tv
 url: https://www.imdb.com/title/tt11280740/
