@@ -8,5 +8,5 @@ tags:
 url: https://enka.network/u/jillian/
 publish: true
 cover: "![genshinimpact.png](genshinimpact.png)"
-permalink: playing/genshin/
+permalink: shelf/{{ title | slugify }}/
 ---

@@ -8,5 +8,5 @@ url:
 publish: true
 cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
-permalink: playing/zzz/
+permalink: shelf/{{ title | slugify }}/
 ---
