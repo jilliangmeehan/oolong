@@ -8,5 +8,6 @@ tags:
   - book
 cover: https://images-us.bookshop.org/ingram/9780316461337.jpg?v=enc-v1
 publish: true
+permalink: '"reading/{{ title | slugify }}/"'
 ---
 Borrowed from my Dad, who borrowed it from my brother. Always a fun time to read about insane founders and their downfall.
