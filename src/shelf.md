@@ -8,6 +8,7 @@ eleventyNavigation:
 ---
 
 {% include "partials/shelf/books.html" %}
+{% include "partials/shelf/watching.html" %}
 {% include "partials/shelf/games.html" %}
 
 <style>
