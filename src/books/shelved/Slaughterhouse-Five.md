@@ -9,6 +9,7 @@ tags:
 date finished: 2025-03-15
 cover: https://images-us.bookshop.org/ingram/9780440180296.jpg?v=enc-v1
 publish: true
+permalink: '"reading/{{ title | slugify }}/"'
 ---
 First Vonnegut book I ever read. Made me want to laugh and cry so much.
 
