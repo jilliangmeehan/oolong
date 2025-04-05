@@ -5,9 +5,7 @@ status: playing
 tags:
   - game
 publish: true
-summary:
+summary: 
 url: https://infinitynikki.infoldgames.com/en/home
+cover: https://cdn2.steamgriddb.com/grid/4b78fb192fa0674f553eaf144f4de21c.jpg
 ---
-
-## screenshots
-{% include "partials/screenshots.html" %}
