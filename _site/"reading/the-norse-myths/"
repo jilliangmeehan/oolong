@@ -28,7 +28,7 @@
         <meta name="msapplication-TileColor" content="#e5d9d4" />
         <meta name="theme-color" content="#e5d9d4" />
         <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
-        <title>Shiyu Defense</title>
+        <title>The Norse Myths</title>
     </head>
     <body>
         <header role="banner" class="head">
@@ -42,17 +42,9 @@
     <a href="/">Home</a>
     <span class="separator">/</span>
 
-                                                                                                                                                                   
+       
 
-    <a href="/shelf/">shelf</a>
-    <span class="separator">/</span>
-                      
-
-    <a href="/games/ZZZ/">Zenless Zone Zero</a>
-    <span class="separator">/</span>
-                                                               
-
-    <span aria-current="page">Shiyu Defense</span>
+    <span aria-current="page">The Norse Myths</span>
 </nav>
 
 
@@ -74,8 +66,8 @@
  
      <p class="small">
   <span class="color-beam">last updated:</span>
-  <time datetime="2025-04-04T17:06:29.251Z"
-    >4th of April 2025</time
+  <time datetime="2025-04-05T15:51:42.061Z"
+    >5th of April 2025</time
   >
 </p>
  
@@ -175,10 +167,7 @@
 
         <main tabindex="-1" id="main-content">
             
-<article><ul role="list"><h2><a href="/games/ZZZ/shiyu/03-25/">March 2025</a></h2>
-    <time datetime="2025-04-04T00:00:00.000Z" class="small"
-        >3rd of April 2025</time
-    ></ul>
+<article><p>I’ve been reading through <a href="https://50wattsbooks.com/products/the-norse-myths-the-pantheon-fairy-tale-and-folklore-library">Kevin Crossley-Holland’s retelling</a> of a bunch of classic Norse myths, most of which are brand new to me. The stories themselves are interesting, but I mostly enjoy flipping to the notes about each story in the back to learn more about the context surrounding them and how much we know (or don’t know) about where they came from.</p>
 </article>
 
         </main>

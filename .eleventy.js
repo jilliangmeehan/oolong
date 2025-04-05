@@ -16,6 +16,8 @@ module.exports = (eleventyConfig) => {
     enableLiveReload: true,
   });
 
+  eleventyConfig.configureErrorReporting({ allowMissingExtensions: true });
+
   // add filters
   eleventyConfig.addFilter("dateFilter", dateFilter);
   eleventyConfig.addFilter("w3DateFilter", w3DateFilter);
