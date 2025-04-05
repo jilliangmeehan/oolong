@@ -2,32 +2,14 @@
 <h1 class="font-pixel">jillian g. meehan</h1>
 {% else %}
 <nav aria-label="breadcrumb" class="font-pixel">
+    {% set navPages = collections.all |
+    eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
     <a href="/">Home</a>
     <span class="separator">/</span>
-
-    {% if eleventyNavigation and eleventyNavigation.parent %} {% if
-    eleventyNavigation.parent == "Home" %} {% else %} {% for item in
-    collections.all %} {% if item.data.eleventyNavigation and
-    item.data.eleventyNavigation.key == eleventyNavigation.parent %} {% if
-    item.data.eleventyNavigation.parent and item.data.eleventyNavigation.parent
-    != "Home" %} {% for gp in collections.all %} {% if
-    gp.data.eleventyNavigation and gp.data.eleventyNavigation.key ==
-    item.data.eleventyNavigation.parent %} {% if
-    gp.data.eleventyNavigation.parent and gp.data.eleventyNavigation.parent !=
-    "Home" %} {% for ggp in collections.all %} {% if ggp.data.eleventyNavigation
-    and ggp.data.eleventyNavigation.key == gp.data.eleventyNavigation.parent %}
-    <a href="{{ ggp.url }}">{{ ggp.data.title }}</a>
+    {% for item in navPages %} {% if item.title | lower != 'home' %}
+    <a href="{{ item.url }}">{{ item.title }}</a>
     <span class="separator">/</span>
-    {% endif %} {% endfor %} {% endif %}
-
-    <a href="{{ gp.url }}">{{ gp.data.title }}</a>
-    <span class="separator">/</span>
-    {% endif %} {% endfor %} {% endif %}
-
-    <a href="{{ item.url }}">{{ item.data.title }}</a>
-    <span class="separator">/</span>
-    {% endif %} {% endfor %} {% endif %} {% endif %}
-
+    {% endif %} {% endfor %}
     <span aria-current="page">{{ title }}</span>
 </nav>
 {% endif %}

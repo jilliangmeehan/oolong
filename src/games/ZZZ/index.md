@@ -4,9 +4,11 @@ layout: layouts/page.html
 status: playing
 tags:
   - game
-url: 
+url:
 publish: true
 cover: "![zzz.png](zzz.png)"
 UID: "1001418143"
 permalink: shelf/{{ title | slugify }}/
 ---
+
+{% include "partials/shiyu.html" %}

@@ -4,6 +4,7 @@ const w3DateFilter = require("./src/filters/w3-date-filter.js");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const esbuild = require("esbuild");
 const esbuildSvelte = require("esbuild-svelte");
+const navigationHelper = require("./src/utils/navigationHelper.js");
 
 module.exports = (eleventyConfig) => {
   // Add a callback to log navigation data during build
@@ -23,6 +24,18 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addFilter("w3DateFilter", w3DateFilter);
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
+  //slugify filter
+  eleventyConfig.addFilter("slugify", function (input) {
+    if (!input) return "";
+    return String(input)
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\-]+/g, "")
+      .replace(/\-\-+/g, "-")
+      .replace(/^-+/, "")
+      .replace(/-+$/, "");
+  });
+
   // set directories to pass through to the _site folder
   eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
@@ -40,99 +53,59 @@ module.exports = (eleventyConfig) => {
     const allItems = collection.getFilteredByGlob([
       "src/games/Genshin/abyss/**/*.md",
       "src/games/ZZZ/shiyu/**/*.md",
+      "src/games/playing/**/*.md",
+      "src/games/shelved/**/*.md",
+      "src/books/reading/**/*.md",
+      "src/books/shelved/**/*.md",
+      "src/watching/shelved/**/*.md",
     ]);
 
-    // spiral abyss posts are special
+    navigationHelper.setupShelfNavigation(collection);
+
     allItems.forEach((page) => {
-      if (
-        page.filePathStem.includes("/games/Genshin/abyss/") &&
-        !page.filePathStem.endsWith("/abyss/index")
-      ) {
-        page.data.eleventyNavigation = {
-          key: page.data.title || page.fileSlug,
-          parent: "Abyss",
-          parentKey: "Abyss",
-        };
-      }
+      // Try each navigation handler in turn
+      page.data.eleventyNavigation =
+        navigationHelper.handleAbyssNavigation(page) ||
+        navigationHelper.handleShiyuNavigation(page) ||
+        navigationHelper.handleShelfNavigation(page) ||
+        page.data.eleventyNavigation;
     });
 
-    const abyssIndex = collection
-      .getAll()
-      .find(
-        (page) =>
-          page.filePathStem.includes("/games/Genshin/abyss/index") ||
-          page.filePathStem === "/games/Genshin/abyss",
+    // Setup index pages
+    navigationHelper.setupIndexNavigation(
+      collection,
+      "/games/Genshin/abyss",
+      "Abyss",
+      "Genshin",
+    );
+    navigationHelper.setupIndexNavigation(
+      collection,
+      "/games/Genshin",
+      "Genshin",
+      "Shelf",
+    );
+    navigationHelper.setupIndexNavigation(
+      collection,
+      "/games/ZZZ/shiyu",
+      "Shiyu",
+      "ZZZ",
+    );
+    navigationHelper.setupIndexNavigation(
+      collection,
+      "/games/ZZZ",
+      "ZZZ",
+      "Shelf",
+    );
+
+    // Setup section indices
+    ["games", "books", "watching"].forEach((section) => {
+      navigationHelper.setupIndexNavigation(
+        collection,
+        `/${section}`,
+        section.charAt(0).toUpperCase() + section.slice(1),
+        "Shelf",
       );
-
-    if (abyssIndex) {
-      abyssIndex.data.eleventyNavigation = {
-        key: "Abyss",
-        parent: "Genshin",
-        parentKey: "Genshin",
-      };
-    }
-
-    const genshinIndex = collection
-      .getAll()
-      .find(
-        (page) =>
-          page.filePathStem.includes("/games/Genshin/index") ||
-          page.filePathStem === "/games/Genshin",
-      );
-
-    if (genshinIndex) {
-      genshinIndex.data.eleventyNavigation = {
-        key: "Genshin",
-        parent: "Shelf",
-        parentKey: "Shelf",
-      };
-    }
-
-    // shiyu defense posts are special
-    allItems.forEach((page) => {
-      if (
-        page.filePathStem.includes("/games/ZZZ/shiyu/") &&
-        !page.filePathStem.endsWith("/shiyu/index")
-      ) {
-        page.data.eleventyNavigation = {
-          key: page.data.title || page.fileSlug,
-          parent: "Shiyu",
-          parentKey: "Shiyu",
-        };
-      }
     });
-
-    const shiyuIndex = collection
-      .getAll()
-      .find(
-        (page) =>
-          page.filePathStem.includes("/games/ZZZ/shiyu/index") ||
-          page.filePathStem === "/games/ZZZ/shiyu",
-      );
-
-    if (shiyuIndex) {
-      shiyuIndex.data.eleventyNavigation = {
-        key: "Shiyu",
-        parent: "ZZZ",
-        parentKey: "ZZZ",
-      };
-    }
-
-    const zzzIndex = collection
-      .getAll()
-      .find(
-        (page) =>
-          page.filePathStem.includes("/games/ZZZ/index") ||
-          page.filePathStem === "/games/ZZZ",
-      );
-
-    if (zzzIndex) {
-      zzzIndex.data.eleventyNavigation = {
-        key: "ZZZ",
-        parent: "Shelf",
-        parentKey: "Shelf",
-      };
-    }
 
     return allItems;
   });

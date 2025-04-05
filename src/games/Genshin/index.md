@@ -10,3 +10,5 @@ publish: true
 cover: "![genshinimpact.png](genshinimpact.png)"
 permalink: shelf/{{ title | slugify }}/
 ---
+
+{% include "partials/abyss.html" %}
