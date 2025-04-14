@@ -4,7 +4,8 @@ function handleAbyssNavigation(page) {
     !page.filePathStem.endsWith("/abyss/index")
   ) {
     return {
-      key: page.data.title || page.fileSlug,
+      key: `abyss-${page.fileSlug}`,
+      title: page.data.title || page.fileSlug,
       parent: "Abyss",
       parentKey: "Abyss",
     };
@@ -18,9 +19,25 @@ function handleShiyuNavigation(page) {
     !page.filePathStem.endsWith("/shiyu/index")
   ) {
     return {
-      key: page.data.title || page.fileSlug,
+      key: `shiyu-${page.fileSlug}`,
+      title: page.data.title || page.fileSlug,
       parent: "Shiyu",
       parentKey: "Shiyu",
+    };
+  }
+  return null;
+}
+
+function handleDeadassNavigation(page) {
+  if (
+    page.filePathStem.includes("/games/ZZZ/deadass/") &&
+    !page.filePathStem.endsWith("/deadass/index")
+  ) {
+    return {
+      key: `deadass-${page.fileSlug}`,
+      title: page.data.title || page.fileSlug,
+      parent: "Deadly Assault",
+      parentKey: "Deadly Assault",
     };
   }
   return null;
@@ -43,7 +60,7 @@ function handleShelfNavigation(page) {
 
   if (
     ["games", "books", "watching"].includes(section) &&
-    ["playing", "shelved", "reading"].includes(shelfType)
+    ["playing", "shelved", "reading", "watching"].includes(shelfType)
   ) {
     return {
       key: page.data.title || page.fileSlug,
@@ -91,6 +108,7 @@ function setupIndexNavigation(collection, path, key, parent) {
 module.exports = {
   handleAbyssNavigation,
   handleShiyuNavigation,
+  handleDeadassNavigation,
   handleShelfNavigation,
   setupIndexNavigation,
   setupShelfNavigation,

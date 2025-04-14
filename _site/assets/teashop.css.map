@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["AnimatedStat.svelte"],
-  "sourcesContent": ["<script>\n    export let value = 0;\n    export let label = \"\";\n\n    let displayValue = value;\n    let valueToAdd = 0;\n    let countInterval;\n\n    $: if (value !== displayValue + valueToAdd) {\n        const difference = value - (displayValue + valueToAdd);\n        valueToAdd += difference;\n        if (!countInterval) {\n            countInterval = setInterval(updateValue, 50);\n        }\n    }\n\n    function updateValue() {\n        if (valueToAdd > 0) {\n            let increment = Math.max(1, Math.floor(valueToAdd / 10));\n            displayValue += increment;\n            valueToAdd -= increment;\n        } else if (valueToAdd < 0) {\n            let decrement = Math.min(-1, Math.floor(valueToAdd / 10));\n            displayValue += decrement;\n            valueToAdd -= decrement;\n        } else {\n            clearInterval(countInterval);\n            countInterval = null;\n        }\n    }\n\n    import { onDestroy } from \"svelte\";\n    onDestroy(() => {\n        if (countInterval) clearInterval(countInterval);\n    });\n</script>\n\n<p class=\"label stat-display\" class:animating={valueToAdd !== 0}>\n    {label}: {displayValue}\n</p>\n\n<style>\n    .stat-display {\n        transition: color 0.1s;\n    }\n\n    .stat-display.animating {\n        color: #4caf50;\n    }\n</style>\n"],
-  "mappings": ";AA0CI,CAAA,YAAA,CAAA;AACI,cAAA,MAAA;AACR;AAEI,CAJA,YAIa,CAAA,SAAA,CAJb;AAKI,SAAA;AACR;",
-  "names": []
-}

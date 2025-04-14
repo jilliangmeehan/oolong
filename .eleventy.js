@@ -53,23 +53,16 @@ module.exports = (eleventyConfig) => {
     const allItems = collection.getFilteredByGlob([
       "src/games/Genshin/abyss/**/*.md",
       "src/games/ZZZ/shiyu/**/*.md",
+      "src/games/ZZZ/deadass/**/*.md",
       "src/games/playing/**/*.md",
       "src/games/shelved/**/*.md",
       "src/books/reading/**/*.md",
       "src/books/shelved/**/*.md",
+      "src/watching/current/**/*.md",
       "src/watching/shelved/**/*.md",
     ]);
 
     navigationHelper.setupShelfNavigation(collection);
-
-    allItems.forEach((page) => {
-      // Try each navigation handler in turn
-      page.data.eleventyNavigation =
-        navigationHelper.handleAbyssNavigation(page) ||
-        navigationHelper.handleShiyuNavigation(page) ||
-        navigationHelper.handleShelfNavigation(page) ||
-        page.data.eleventyNavigation;
-    });
 
     // Setup index pages
     navigationHelper.setupIndexNavigation(
@@ -92,6 +85,12 @@ module.exports = (eleventyConfig) => {
     );
     navigationHelper.setupIndexNavigation(
       collection,
+      "/games/ZZZ/deadass",
+      "Deadly Assault",
+      "ZZZ",
+    );
+    navigationHelper.setupIndexNavigation(
+      collection,
       "/games/ZZZ",
       "ZZZ",
       "Shelf",
@@ -105,6 +104,16 @@ module.exports = (eleventyConfig) => {
         section.charAt(0).toUpperCase() + section.slice(1),
         "Shelf",
       );
+    });
+
+    allItems.forEach((page) => {
+      // Try each navigation handler in turn
+      page.data.eleventyNavigation =
+        navigationHelper.handleAbyssNavigation(page) ||
+        navigationHelper.handleShiyuNavigation(page) ||
+        navigationHelper.handleDeadassNavigation(page) ||
+        navigationHelper.handleShelfNavigation(page) ||
+        page.data.eleventyNavigation;
     });
 
     return allItems;
