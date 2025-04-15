@@ -11,6 +11,7 @@ publish: true
 permalink: shelf/{{ title | slugify }}/
 ---
 ## April 15, 2025
+![A screenshot from the Kingdom Two Crowns Norse Lands DLC](./photos/norselands_1.jpeg)
 I finished Norse Lands! It took me three deaths because of my proclivity to take everything really slowly and build up each island as much as possible before moving onto the next one — I learned my lesson. 
 
 I cleared the greed on all six islands, but I didn't do *everything*. There are a few mounts on earlier islands that I didn't get the chance to unlock because I didn't have enough diamonds, and by the time I did have enough, I didn't feel like going back to get them. The water horse carried me most of the game until I got the blue wolf.
