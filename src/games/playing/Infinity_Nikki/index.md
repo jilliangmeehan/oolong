@@ -1,6 +1,6 @@
 ---
 title: Infinity Nikki
-layout: layouts/page.html
+layout: layouts/game.html
 status: playing
 tags:
   - game
@@ -11,5 +11,3 @@ cover: https://cdn2.steamgriddb.com/grid/4b78fb192fa0674f553eaf144f4de21c.jpg
 permalink: shelf/{{ title | slugify }}/
 ---
 
-## screenshots
-{% include "partials/screenshots.html" %}

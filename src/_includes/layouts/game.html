@@ -1,0 +1,6 @@
+{% extends "layouts/base.html" %} {% block content %}
+<article>
+    {{ content | safe }} {% include "partials/screenshots.html" %} {% include
+    "partials/notes/game-notes.html" %}
+</article>
+{% endblock %}

@@ -11,8 +11,6 @@ UID: "1001418143"
 permalink: shelf/{{ title | slugify }}/
 ---
 
-## deadly assault
 {% include "partials/deadass.html" %}
 
-## shiyu defense
 {% include "partials/shiyu.html" %}

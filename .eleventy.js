@@ -60,6 +60,7 @@ module.exports = (eleventyConfig) => {
       "src/books/shelved/**/*.md",
       "src/watching/current/**/*.md",
       "src/watching/shelved/**/*.md",
+      "src/games/playing/**/notes/*.md",
     ]);
 
     navigationHelper.setupShelfNavigation(collection);
@@ -109,6 +110,7 @@ module.exports = (eleventyConfig) => {
     allItems.forEach((page) => {
       // Try each navigation handler in turn
       page.data.eleventyNavigation =
+        navigationHelper.handleNotesNavigation(page, collection) ||
         navigationHelper.handleAbyssNavigation(page) ||
         navigationHelper.handleShiyuNavigation(page) ||
         navigationHelper.handleDeadassNavigation(page) ||

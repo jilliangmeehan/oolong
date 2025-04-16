@@ -1,3 +1,34 @@
+function handleNotesNavigation(page, collection) {
+  if (page.filePathStem.includes("/notes/")) {
+    const pathParts = page.filePathStem.split("/");
+    const mediaIndex = pathParts.findIndex(
+      (part) => part === "playing" || part === "shelved",
+    );
+
+    if (mediaIndex !== -1 && mediaIndex + 1 < pathParts.length) {
+      const mediaTitle = pathParts[mediaIndex + 1];
+
+      const mediaPage = collection
+        .getAll()
+        .find(
+          (p) =>
+            p.filePathStem.endsWith(`/${mediaTitle}/index`) ||
+            p.filePathStem.endsWith(`/${mediaTitle}`),
+        );
+
+      const parentTitle = mediaPage ? mediaPage.data.title : mediaTitle;
+
+      return {
+        key: `note-${page.fileSlug}`,
+        title: page.data.title || page.fileSlug,
+        parent: parentTitle,
+        parentKey: parentTitle,
+      };
+    }
+  }
+  return null;
+}
+
 function handleAbyssNavigation(page) {
   if (
     page.filePathStem.includes("/games/Genshin/abyss/") &&
@@ -106,6 +137,7 @@ function setupIndexNavigation(collection, path, key, parent) {
 }
 
 module.exports = {
+  handleNotesNavigation,
   handleAbyssNavigation,
   handleShiyuNavigation,
   handleDeadassNavigation,

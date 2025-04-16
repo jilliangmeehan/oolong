@@ -11,5 +11,4 @@ cover: "![genshinimpact.png](genshinimpact.png)"
 permalink: shelf/{{ title | slugify }}/
 ---
 
-## spiral abyss
 {% include "partials/abyss.html" %}

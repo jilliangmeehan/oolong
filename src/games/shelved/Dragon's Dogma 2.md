@@ -1,6 +1,6 @@
 ---
 title: Dragon's Dogma 2
-layout: layouts/page.html
+layout: layouts/game.html
 status: paused
 tags:
   - game

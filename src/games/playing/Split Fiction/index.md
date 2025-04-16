@@ -1,6 +1,6 @@
 ---
 title: Split Fiction
-layout: layouts/page.html
+layout: layouts/game.html
 tags:
   - game
 publish: true

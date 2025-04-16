@@ -1,6 +1,6 @@
 ---
 title: Fields of Mistria
-layout: layouts/page.html
+layout: layouts/game.html
 status: playing
 tags:
   - game

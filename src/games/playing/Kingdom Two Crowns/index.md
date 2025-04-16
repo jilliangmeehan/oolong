@@ -1,6 +1,6 @@
 ---
 title: Kingdom Two Crowns
-layout: layouts/page.html
+layout: layouts/game.html
 status: playing
 tags:
   - game
@@ -10,9 +10,6 @@ date finished:
 publish: true
 permalink: shelf/{{ title | slugify }}/
 ---
-## screenshots
-{% include "partials/screenshots.html" %}
-
 ## April 15, 2025
 I finished Norse Lands! It took me three deaths because of my proclivity to take everything really slowly and build up each island as much as possible before moving onto the next one — I learned my lesson.
 

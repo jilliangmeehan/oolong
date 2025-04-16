@@ -1,6 +1,6 @@
 ---
 title: Minami Lane
-layout: layouts/page.html
+layout: layouts/game.html
 status: finished
 tags:
   - game
