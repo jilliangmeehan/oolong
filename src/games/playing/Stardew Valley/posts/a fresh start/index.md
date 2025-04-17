@@ -7,6 +7,7 @@ tags:
 date: 2025-04-17
 publish: true
 summary: Anh told me to play Stardew Valley, so I'm playing Stardew Valley.
+permalink: /shelf/stardew-valley/a-fresh-start
 ---
 [Anh](https://anhvn.com/) told me to play Stardew Valley, so I'm playing Stardew Valley. I haven't properly touched the game in a while, and I know there's been a lot of new stuff added that I haven't seen yet, so coming back to it with a fresh save feels both familiar and new.
 
@@ -21,4 +22,4 @@ I wasn't *going* to play with mods, because I'm mostly playing on my Steam Deck 
 
 It ended up not really being that annoying to install the mods. I downloaded all the ones I wanted on my laptop first, zipped them up into a folder, and emailed it to myself (lol classic) to download on my Steam Deck. Dragging a bunch folders around with the little trackpad is probably the most fiddly part of the whole process.
 
-I made a list of the [mods](../../notes/mods.md) I'm currently using, and some that I'm not using but want to remember to try at some point. I'll try to remember to keep it updated. 🫡
+I made a list of the [mods](https://jillian.garden/shelf/stardew-valley/mods) I'm currently using, and some that I'm not using but want to remember to try at some point. I'll try to remember to keep it updated. 🫡
