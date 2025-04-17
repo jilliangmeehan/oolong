@@ -168,7 +168,8 @@ article > p {
     font-family: var(--serif);
 }
 
-article > h2 {
+article > h2,
+.photo-gallery > h2 {
     font-family: "Departure Mono";
     font-size: small;
     font-weight: 400;

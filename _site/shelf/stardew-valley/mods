@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>stardew mods</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+<nav aria-label="breadcrumb" class="font-pixel">
+    
+    <a href="/">Home</a>
+    <span class="separator">/</span>
+     
+    <a href="/shelf/">Shelf</a>
+    <span class="separator">/</span>
+      
+    <a href="/shelf/stardew-valley/">Stardew Valley</a>
+    <span class="separator">/</span>
+     
+    <span aria-current="page">stardew mods</span>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    nav[aria-label="breadcrumb"] span.separator {
+        color: #666;
+    }
+</style>
+ 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-04-17T00:00:00.000Z"
+    >16th of April 2025</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><h1>currently using</h1>
+<h2>ui changes</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/7416">Custom Menu Background</a>: I love keeping this on the random setting and getting a totally different menu background every time I boot up the game.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/11040">Script Font</a>: Pretty font! Probably harder to read, but pretty!</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/8853">Dialogue Box Redesign</a>: Removes the dialogue box in favor of floating dialogue text &amp; character portraits, so you can see more of the screen while talking to someone. I find this especially useful when playing on my Steam Deck, because the dialogue box normally covers up a lot of the already-small screen.</li>
+</ul>
+<h2>qol features</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/5098">Generic Mod Config Menu</a>: Really useful if you play with any mods that have configuration options.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/239">NPC Map Locations</a>: I can’t be bothered to remember all the NPC schedules, so it’s nice to be able to see where they are on the minimap if I need to find someone.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/11436">Deluxe Journal</a>: I love to-do lists in video games. It’s a little annoying using this on a Steam Deck, but a nice mod regardless. You can write down tasks and notes to show on the screen with an overlay (which you can quickly toggle on/off), but the best part to me is the “smart” tasks — for example, you can make a task to “gather 500 wood” and it’ll keep track of how much wood you’ve gathered automatically to check the task off when you’ve completed it.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/4779">Daily screenshot</a>: Saves automatic screenshots of your farm at configurable intervals — I’m not sure how well this will work when I play on my Steam Deck, but I’d like to try setting it up to take weekly or monthly screenshots so I can look back and see the progression of my farm.</li>
+</ul>
+<h2>recolors &amp; retextures</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/6367">Vibrant Pastoral Redrawn</a>: I have nothing against the look of vanilla Stardew, but this is a lot easier on the eyes to me. This recolor also covers interiors and minimaps, and adds some seasonal holiday decor to a few buildings as a nice bonus touch.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/13658">DaisyNiko’s Earthy Interface</a>: I really like the DaisyNiko mods too, but since I’m using Vibrant Pastoral right now I figured I’d just go for the interface recolor.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/8164">Simple Foliage</a> + <a href="https://www.nexusmods.com/stardewvalley/mods/20972">1.6 update</a>: Just some retextures that I like for trees and bushes and stuff. It supports a bunch of recolors, including the one I’m using now.</li>
+</ul>
+<h2>buildings</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/28220">Some Building Edits - Seasonal</a>: Slightly different versions of all the farm buildings, with some cute seasonal decorations.</li>
+</ul>
+<h2>animals</h2>
+<p>I’ve always liked Elle’s animal sprites and how many different options there are so you can get the <em>exact</em> kind of cat or horse or duck or whatever you want. These seem to be new versions of the old mods that have something to do with a 1.6 “skins” feature that I don’t know anything about, so I guess I’ll try them out and see what happens.</p>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/20044">Elle’s Cuter Barn Animals</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/20043">Elle’s Cuter Coop Animals</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/20042">Elle’s Cuter Horses</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/20041">Elle’s Cuter Cats</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/27305">Elle’s Cuter Trinkets</a></li>
+</ul>
+<h2>characters</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/5450">Seasonal Outfits</a>: This mod gives all the NPCs a bunch of new outfits so they can wear seasonally-appropriate or festival-specific clothes, in both the sprites and portraits.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/11491">Nyapu’s Portraits</a> + <a href="https://www.nexusmods.com/stardewvalley/mods/22938">Seasonal Outfits</a>: Some very cute character portraits that I like, plus some additions that work with the seasonal outfits mod above.</li>
+</ul>
+<h2>clothes</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/9969">Fashion Sense</a>: Usually required to install if you’re gonna use any clothing or farmer appearance mods.
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/24746">Luny’s Hair Salon</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/23925">Luny’s Farm Dresses</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/28218">Luny’s Cozy Simple Shawl</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/31673">Luny’s Simple Head Scarf</a></li>
+</ul>
+</li>
+</ul>
+<h1>might use</h1>
+<h2>ui changes</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/23337">Portraited Changing Skies</a>: Obviously incomptabile with the dialogue box redesign above — I’ve never used this, but adding the current weather conditions to the character portraits is such a cute idea! I’ll probably try this at some point later.</li>
+</ul>
+<h2>recolors &amp; retextures</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/5255">DaisyNiko’s Earthy Recolor</a>: There are a lot of pretty nice-looking map recolors, but this is the one I tend to go for because it’s been extended to the interiors, minimaps, and game UI so everything feels nice and cohesive.
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/14790">DaisyNiko’s Earthy Interiors</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/30063">DaisyNiko’s Earthy Maps</a></li>
+</ul>
+</li>
+</ul>
+<h2>characters</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/1839">Ohodavi’s Anime Portraits</a> + <a href="https://www.nexusmods.com/stardewvalley/mods/22876">Seasonal Outfits</a>: This is another portrait option I like — less cutesy than the Nyapu one.</li>
+</ul>
+<h2>item sprites</h2>
+<ul>
+<li><a href="https://next.nexusmods.com/profile/birDfiSHi/mods?gameId=1303">DSHi Item Retextures</a>: Stardew’s item sprites are already fine imo, but these ones look pretty nice too — and I appreciate that they’ve done just about every item in the game, because I think if you’re gonna use mods like this you might as well be as consistent as possible. It’s kinda weird when some items look way different from others.</li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/10035">Lux’s Sprites</a>: These food sprites are gorgeous 😭</li>
+</ul>
+<h2>clothes</h2>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/10294">Shardust’s Animated Hairstyles</a>: So unnecessary but also so fun.</li>
+<li><a href="https://next.nexusmods.com/profile/LooneyLuny/mods?gameId=1303&amp;page=1">LooneyLuny Mods</a>: Lots of other very cute fashion mods that I haven’t tried yet but might take a look at.
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/31864">Animated Cozy Scarf</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/31994">Basic Cape and Oversized Hood</a></li>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/31933">FFXIV Paladin Cape</a>: <em>“I created this for my friend so his Paladin oath could be extended to Stardew Valley.”</em> (cute lol)</li>
+</ul>
+</li>
+</ul>
+<h1>curious about</h1>
+<ul>
+<li><a href="https://www.nexusmods.com/stardewvalley/mods/649">Longevity</a></li>
+<li><a href="https://stardewmodding.wiki.gg/wiki/Recommendations:_Creative_Difficulty_Mods">Creative Difficulty Mods</a></li>
+<li><a href="https://stardewmodding.wiki.gg/wiki/Recommendations:_Permaculture_Farming">Permaculture Farming Mods</a></li>
+</ul>
+</article>
+
+        </main>
+    </body>
+    <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li><a href="/teashop">teashop</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>
