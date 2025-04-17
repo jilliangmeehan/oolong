@@ -7,7 +7,7 @@ tags:
 date: 2025-04-17
 publish: true
 summary:
-permalink: /shelf/stardew-valley/mods
+permalink: /shelf/stardew-valley/mods/
 ---
 # currently using
 ## ui changes
