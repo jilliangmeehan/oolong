@@ -6,7 +6,7 @@ tags:
   - game
 url: https://store.steampowered.com/app/1946970/Isle_of_Arrows/
 cover: https://cdn.cloudflare.steamstatic.com/steam/apps/1946970/library_600x900_2x.jpg?t=1670047175
-date finished:
+date finished: 
 publish: true
 permalink: shelf/{{ title | slugify }}/
 ---
