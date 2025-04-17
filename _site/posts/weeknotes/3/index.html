@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>weeknotes three</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+<nav aria-label="breadcrumb" class="font-pixel">
+    
+    <a href="/">Home</a>
+    <span class="separator">/</span>
+     
+    <a href="/blog/">Blog</a>
+    <span class="separator">/</span>
+     
+    <span aria-current="page">weeknotes three</span>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    nav[aria-label="breadcrumb"] span.separator {
+        color: #666;
+    }
+</style>
+ 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2024-12-21T00:00:00.000Z"
+    >20th of December 2024</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><p>It’s been a while. Excuse me while I clear away the digital cobwebs.</p>
+<h2>what i’ve been up to</h2>
+<p>After my last two days of work for the year, I spent my week ruining my sleep schedule and playing video games on my couch with Junie sleeping next to me on a cozy blanket. I also kinda blacked out for a day and made a bunch of changes around here — <a href="/log">changelog</a> if you’re interested. The tl;dr is: the website is still kind of a mess, but at least the things piled up in the corner are stacked <em>neatly.</em> The baseboards are dusty but the dishes are done, etc.</p>
+<p>I’m trying to ignore the classic holiday break anxiety that <em>I’m not being productive enough with my vacation!</em> Dylan’s coming home from a work trip today, so I’m excited to spend the weekend hanging out with him for a bit before heading home to see my family for Christmas. And then I’ll have another week or so to fix my sleep schedule and catch up on YouTube videos I’ve been meaning to watch.</p>
+<h2>playing</h2>
+<p>I’m still playing all the usual stuff (mostly <a href="../../../games/ZZZ/index.html">ZZZ</a>, because they just added it to Geforce Now &amp; the latest update has been really good). Having time off means I can dedicate more energy to just <em>catching up</em> on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!</p>
+<h3>infinity nikki</h3>
+<p><img src="./photos/infinitynikki.jpeg" alt="screenshot from infinity nikki"></p>
+<p>I wasn’t going to play Infinity Nikki, but I caved and downloaded it onto my Steam Deck to check it out this week. My favorite part of any RPG is finding &amp; upgrading armor — and this is basically a game about exactly that, but the armor is cute clothes.</p>
+<p>I had fun playing it for a day and satisfying my curiosity, but I’m probably not going to play much more of it for now. I’m glad it’s there if I’m in the mood, but I’m not super interested in playing it on a regular basis right now.</p>
+<h3>inbento</h3>
+<p><img src="./photos/inbento.jpeg" alt="screenshot from inbento"></p>
+<p>My friend told me about <a href="https://store.steampowered.com/app/1567440/inbento/">this puzzle game</a> recently — it’s cute, satisfying, and not too complicated! I’ve gotten to the ninth level so far, and I like that I can just pick it up and play a little bit of it quickly &amp; casually. I want to play more games like this.</p>
+<p>(Looks like they also have a <a href="https://apps.apple.com/us/app/crunchyroll-inbento/id6457262278">mobile version</a>, btw!)</p>
+<h3>kingdom two crowns: call of olympus</h3>
+<p><img src="./photos/twocrowns.jpeg" alt="screenshot from kingdom two crowns call of olympus">
+I played a bit of <a href="https://store.steampowered.com/app/496300/Kingdom_New_Lands/">Kingdom: New Lands</a> over the summer and liked it a lot, but haven’t touched it in a while. I remembered seeing at the time that they had another version of the game, <a href="https://store.steampowered.com/app/701160/Kingdom_Two_Crowns/">Kingdom: Two Crowns</a>, so I picked it up — and then let it sit on the shelf for a bit.</p>
+<p>I don’t really know what the difference between the two games is, but Two Crowns has a bunch of DLCs that are basically reskins of the game in different settings (“Norse Lands,” “Shogun,” etc). All this to say: I stayed up <em>way too late</em> last night working my way through the Artemis island in the Call of Olympus version. And now I’m going to stop writing this so I can go play some more of it.</p>
+</article>
+
+        </main>
+    </body>
+    <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li><a href="/teashop">teashop</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>

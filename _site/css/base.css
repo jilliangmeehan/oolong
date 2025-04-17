@@ -1,0 +1,703 @@
+:root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--sans-serif);
+    background-color: var(--cloud);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+article,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    color: var(--tea);
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+a:not([class]),
+.special_link {
+    text-decoration-skip-ink: auto;
+    color: var(--joycon);
+}
+
+a:not([class]):hover,
+.special_link:hover {
+    color: var(--matcha);
+}
+
+a:hover {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+    margin: 8px 0;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+h1,
+h2 {
+    font-family: "Argent Pixel CF";
+    font-weight: normal;
+}
+
+h2 {
+    margin-top: 1.5em;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Departure Mono";
+    font-size: small;
+    font-weight: 400;
+}
+
+p {
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+article,
+.font-serif {
+    font-family: var(--serif);
+}
+
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+    padding: 0;
+}
+
+ul {
+    list-style-type: " • ";
+    list-style-position: outside;
+}
+
+strong {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--comfy);
+}
+
+code {
+    font-family: "Departure Mono", monospace;
+    font-size: small;
+    background-color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: var(--puff);
+}
+
+blockquote {
+    font-style: italic;
+    margin-left: 40px;
+}
+
+html,
+body {
+    height: 100%;
+}
+header {
+    padding: 24px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+    margin: 10% auto;
+    width: 600px;
+    max-width: 90%;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 24px;
+    margin-top: 64px;
+    background-color: var(--oat);
+}
+
+article > p {
+    font-family: var(--serif);
+}
+
+article > h2,
+.photo-gallery > h2 {
+    font-family: "Departure Mono";
+    font-size: small;
+    font-weight: 400;
+    background-color: var(--oat);
+    color: var(--tea);
+    margin: 32px 0 8px -4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: max-content;
+}
+
+.small {
+    font-family: var(--serif);
+    font-size: small;
+    color: gray;
+}
+
+/* blog */
+.blog_post {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* shelf */
+.shelf_now * {
+    display: inline;
+    padding: 0;
+    font-family: "Departure Mono";
+    font-size: 0.9em;
+}
+
+.shelf_now > ul {
+    padding-left: 4px;
+}
+
+/* home page */
+.overview {
+    display: flex;
+    flex-flow: wrap-reverse;
+}
+
+.overview > .illustration {
+    margin: 0 -30px;
+    max-width: 300px;
+    z-index: -100;
+}
+
+.overview > .illustration > img {
+    margin: -48px auto;
+}
+
+/* latest posts */
+
+.latest_posts > h2 {
+    color: var(--joycon);
+}
+
+.latest_posts > ul {
+    margin: 0;
+}
+
+.latest_posts > ul > li:before {
+    content: "→ ";
+    font-family: var(--sans-serif);
+}
+
+.latest_posts > ul > li > a {
+    color: var(--tea);
+    text-decoration: none;
+}
+
+.latest_posts > ul > p {
+    padding: 0;
+    margin: 0;
+}
+
+/* buttons */
+
+button {
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+    background-color: var(--oat);
+    color: var(--tea);
+    padding: 4px 8px;
+    margin: 6px;
+    border: none;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: var(--chai);
+    color: var(--tea);
+    cursor: pointer;
+}
+
+button:active,
+button:active:hover {
+    background-color: var(--oat);
+}
+
+button:disabled {
+    opacity: 0.7;
+}
+
+button:disabled:hover {
+    background-color: var(--oat);
+}
+
+button.secondary {
+    background-color: var(--tea);
+    color: var(--oat);
+}
+
+button.secondary:hover {
+    background-color: var(--tea);
+    color: var(--oat);
+    opacity: 0.8;
+}
+
+button.secondary:active,
+button.secondary:active:hover {
+    opacity: 1;
+}
+
+button.secondary:disabled,
+button.secondary:disabled:hover {
+    background-color: var(--tea);
+    color: var(--oat);
+    opacity: 0.7;
+}
+
+.see_more {
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+    margin-top: 16px;
+}
+
+.see_more > a {
+    background-color: var(--oat);
+    color: var(--tea);
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.see_more > a:hover {
+    background-color: var(--chai);
+    color: var(--tea);
+}
+
+.label {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+}
+
+/* teashop */
+.game-data {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px 8px;
+    justify-content: space-around;
+    justify-items: stretch;
+    margin-bottom: 36px;
+}
+
+.teashop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 8px 8px;
+}
+
+.dropdown {
+    margin-top: 14px;
+    display: block;
+}
+
+.dropdown details {
+    background-color: var(--oat);
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.dropdown summary {
+    list-style: none;
+    font-family: "Departure Mono", sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+}
+
+.dropdown summary:hover {
+    cursor: pointer;
+}
+
+.dropdown .label {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+
+.dropdown h2 {
+    margin-top: 6px;
+}
+
+.dropdown p.stat-display {
+    margin: 0;
+    padding: 0;
+}
+
+.teashop-serve {
+    margin-top: 36px;
+    text-align: right;
+}
+
+/* toasts */
+.toast-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+.toast {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    padding: 8px;
+    font-size: 14px;
+    font-family: "Departure Mono";
+    color: var(--tea);
+    animation: float-up 4s ease-out forwards;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.toast.success {
+    bottom: 12px;
+    color: var(--matcha);
+    animation: float-up 8s ease-out forwards;
+}
+
+.toast.error {
+    bottom: 12px;
+    color: var(--puff);
+    animation: float-up 8s ease-out forwards;
+}
+
+.toast.info {
+    bottom: 12px;
+    color: var(--comfy);
+    animation: float-up 8s ease-out forwards;
+}
+
+.toast.sunrise {
+    bottom: 36px;
+    color: var(--beam);
+    animation: float-up 12s ease-out forwards;
+}
+
+.toast.sunset {
+    bottom: 36px;
+    color: var(--beam);
+    animation: float-up 12s ease-out forwards;
+}
+
+.toast.night {
+    bottom: 36px;
+    color: var(--joycon);
+    animation: float-up 12s ease-out forwards;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}
+
+/* time indicators */
+.time-indicator {
+    margin-bottom: 1em;
+}
+
+.time-indicator.sunrise > p {
+    color: var(--beam);
+}
+
+.time-indicator.day > p {
+    color: var(--comfy);
+}
+
+.time-indicator.sunset > p {
+    color: var(--beam);
+}
+
+.time-indicator.night > p {
+    color: var(--joycon);
+}
+
+/* gardens & teapots */
+.garden-plot,
+.teapot {
+    background-color: white;
+    border: 2px dashed var(--oat);
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+}
+
+.garden-box,
+.harvest-box {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    justify-items: start;
+}
+
+.teapot {
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        ". progress progress"
+        ". . bottom-right";
+    align-items: center;
+    justify-items: start;
+}
+
+progress[value] {
+    width: 90%;
+}
+
+.teapot progress[value] {
+    grid-area: progress;
+}
+
+.tea-selection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.garden-plot select {
+    font-family: var(--mono);
+    font-size: small;
+    text-transform: uppercase;
+    margin: 4px;
+    background-color: var(--cloud);
+    border-color: var(--oat);
+    border-radius: 3px;
+}
+
+.tea-inventory {
+    margin-bottom: 4px;
+}
+
+/* buttons */
+.garden-plot button,
+.teapot button {
+    margin: 4px;
+}
+
+.dropdown button {
+    margin-left: 0;
+    margin-top: 0;
+}
+
+button.save-game {
+    margin: 0;
+    padding: 3px 6px;
+}
+
+.teashop-serve button,
+.teashop-serve button:active,
+.teashop-serve button:disabled:active {
+    border: 3px solid var(--oat);
+    margin-right: 0;
+}
+
+.teashop-serve button:active {
+    border: 3px solid var(--matcha);
+    opacity: 1;
+}
+
+/* paused state */
+.garden-plot.paused {
+    border: 2px dashed #999;
+    opacity: 0.8;
+}
+
+.garden-plot,
+.teapot {
+    position: relative;
+}
+
+.teapot.paused {
+    border: 2px dashed #999;
+    opacity: 0.8;
+}
+
+.control-buttons {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    display: flex;
+    gap: 4px;
+}
+
+.teapot .control-buttons {
+    position: static;
+    grid-area: bottom-right;
+    justify-self: end;
+}
+
+.delete-button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: var(--cloud);
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.pause-button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: var(--cloud);
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: background-color 0.2s;
+}
+
+.pause-button:hover,
+.delete-button:hover {
+    background-color: var(--chai);
+}
+
+.teapot .pause-button {
+    position: static;
+    justify-self: end;
+    grid-area: bottom-right;
+}
+
+/* stats table */
+.stats-tables {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.stats-tables * {
+    font-family: var(--mono);
+    color: var(--tea);
+    font-weight: normal;
+    font-size: small;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.stats-table td {
+    border-top: 1px solid var(--chai);
+}
+
+.stats-table th,
+.stats-table td {
+    padding: 6px;
+}
+
+.stats-tables h3 {
+    font-family: var(--pixel);
+    text-transform: lowercase;
+    font-size: 1.4em;
+    margin-bottom: 6px;
+}
+
+.stats-section {
+    margin: 28px 0;
+}
+
+.stats-tea-type {
+    width: 25%;
+}
+
+/* teacup icons */
+.teacup-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 4px;
+}
+
+.toast-teacup-icon {
+    display: inline;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+}

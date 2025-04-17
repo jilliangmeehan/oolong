@@ -235,6 +235,11 @@ module.exports = (eleventyConfig) => {
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
+    pathPrefix: "/",
+    htmlOutputSuffix: ".html",
+    permalinkFormats: {
+      "*": "/{{slug}}/index.html",
+    },
     dir: {
       input: "src",
       output: "_site",
