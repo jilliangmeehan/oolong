@@ -6,7 +6,7 @@ tags:
   - note
 date: 2025-04-17
 publish: true
-summary:
+summary: 
 permalink: /shelf/stardew-valley/mods/
 ---
 # currently using
@@ -27,7 +27,7 @@ permalink: /shelf/stardew-valley/mods/
 - [Simple Foliage](https://www.nexusmods.com/stardewvalley/mods/8164) + [1.6 update](https://www.nexusmods.com/stardewvalley/mods/20972): Just some retextures that I like for trees and bushes and stuff. It supports a bunch of recolors, including the one I'm using now.
 
 ## buildings
-- [Some Building Edits - Seasonal](https://www.nexusmods.com/stardewvalley/mods/28220): Slightly different versions of all the farm buildings, with some cute seasonal decorations.
+- [Some Building Edits - Seasonal](https://www.nexusmods.com/stardewvalley/mods/28220): Slightly different versions of all the farm buildings, with some cute seasonal decorations. 
 
 ## animals
 I've always liked Elle's animal sprites and how many different options there are so you can get the *exact* kind of cat or horse or duck or whatever you want. These seem to be new versions of the old mods that have something to do with a 1.6 "skins" feature that I don't know anything about, so I guess I'll try them out and see what happens.
@@ -38,11 +38,11 @@ I've always liked Elle's animal sprites and how many different options there are
 - [Elle's Cuter Trinkets](https://www.nexusmods.com/stardewvalley/mods/27305)
 
 ## characters
-- [Seasonal Outfits](https://www.nexusmods.com/stardewvalley/mods/5450): This mod gives all the NPCs a bunch of new outfits so they can wear seasonally-appropriate or festival-specific clothes, in both the sprites and portraits.
-- [Nyapu's Portraits](https://www.nexusmods.com/stardewvalley/mods/11491) + [Seasonal Outfits](https://www.nexusmods.com/stardewvalley/mods/22938): Some very cute character portraits that I like, plus some additions that work with the seasonal outfits mod above.
+- [Seasonal Outfits](https://www.nexusmods.com/stardewvalley/mods/5450): This mod gives all the NPCs a bunch of new outfits so they can wear seasonally-appropriate or festival-specific clothes, in both the sprites and portraits. 
+- [Nyapu's Portraits](https://www.nexusmods.com/stardewvalley/mods/11491) + [Seasonal Outfits](https://www.nexusmods.com/stardewvalley/mods/22938): Some very cute character portraits that I like, plus some additions that work with the seasonal outfits mod above. 
 
 ## clothes
-- [Fashion Sense](https://www.nexusmods.com/stardewvalley/mods/9969): Usually required to install if you're gonna use any clothing or farmer appearance mods.
+- [Fashion Sense](https://www.nexusmods.com/stardewvalley/mods/9969): Usually required to install if you're gonna use any clothing or farmer appearance mods. 
 	- [Luny's Hair Salon](https://www.nexusmods.com/stardewvalley/mods/24746)
 	- [Luny's Farm Dresses](https://www.nexusmods.com/stardewvalley/mods/23925)
 	- [Luny's Cozy Simple Shawl](https://www.nexusmods.com/stardewvalley/mods/28218)
@@ -53,7 +53,7 @@ I've always liked Elle's animal sprites and how many different options there are
 - [Portraited Changing Skies](https://www.nexusmods.com/stardewvalley/mods/23337): Obviously incomptabile with the dialogue box redesign above — I've never used this, but adding the current weather conditions to the character portraits is such a cute idea! I'll probably try this at some point later.
 
 ## recolors & retextures
-- [DaisyNiko's Earthy Recolor](https://www.nexusmods.com/stardewvalley/mods/5255): There are a lot of pretty nice-looking map recolors, but this is the one I tend to go for because it's been extended to the interiors, minimaps, and game UI so everything feels nice and cohesive.
+- [DaisyNiko's Earthy Recolor](https://www.nexusmods.com/stardewvalley/mods/5255): There are a lot of pretty nice-looking map recolors, but this is the one I tend to go for because it's been extended to the interiors, minimaps, and game UI so everything feels nice and cohesive. 
 	- [DaisyNiko's Earthy Interiors](https://www.nexusmods.com/stardewvalley/mods/14790)
 	- [DaisyNiko's Earthy Maps](https://www.nexusmods.com/stardewvalley/mods/30063)
 
