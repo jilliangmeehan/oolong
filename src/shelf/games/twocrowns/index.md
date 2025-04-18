@@ -1,14 +1,11 @@
 ---
 title: Kingdom Two Crowns
-layout: layouts/game.html
-status: playing
-tags:
-  - game
+status: finished
 url: https://store.steampowered.com/app/701160/Kingdom_Two_Crowns/
 cover: https://cdn.cloudflare.steamstatic.com/steam/apps/701160/library_600x900_2x.jpg?t=1742904811
-date finished:
-publish: true
+date finished: 
 shortcode: twocrowns
+publish: true
 ---
 ## April 15, 2025
 I finished Norse Lands! It took me three deaths because of my proclivity to take everything really slowly and build up each island as much as possible before moving onto the next one — I learned my lesson.
