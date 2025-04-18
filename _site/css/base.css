@@ -335,14 +335,14 @@ button.secondary:disabled:hover {
     opacity: 0.7;
 }
 
-.see_more {
+.button_style {
     font-family: "Departure Mono", sans-serif;
     text-transform: uppercase;
     font-size: small;
     margin-top: 16px;
 }
 
-.see_more > a {
+.button_style > a {
     background-color: var(--oat);
     color: var(--tea);
     padding: 4px 8px;
@@ -350,7 +350,7 @@ button.secondary:disabled:hover {
     text-decoration: none;
 }
 
-.see_more > a:hover {
+.button_style > a:hover {
     background-color: var(--chai);
     color: var(--tea);
 }

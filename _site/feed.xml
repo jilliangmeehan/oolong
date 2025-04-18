@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>jillian g. meehan</title>
+  <subtitle>sporadically updated blog</subtitle>
+  <link href="https://jillian.garden/feed.xml" rel="self" />
+  <link href="https://jillian.garden/blog/" />
+  <updated>2025-04-18T16:29:48Z</updated>
+  <id>https://jillian.garden/blog/</id>
+  <author>
+    <name>jillian g. meehan</name>
+  </author>
+</feed>

@@ -32,12 +32,17 @@
     </head>
     <body>
         <header role="banner" class="head">
-  <div class="header_icon tea_container">
-    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
-    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
-  </div>
-  <div class="header_text">
-    
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
 <nav aria-label="breadcrumb">
     <ul class="breadcrumb-list font-pixel">
         
@@ -88,106 +93,107 @@
         color: #666;
     }
 </style>
- 
-     <p class="small">
+  <p class="small">
   <span class="color-beam">last updated:</span>
   <time datetime="2023-12-29T00:00:00.000Z"
     >28th of December 2023</time
   >
 </p>
  
-  </div>
+    </div>
 </header>
 
 <style>
-  .head {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    grid-template-rows: 1fr;
-    gap: 0px 24px;
-    justify-items: start;
-  }
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
 
-  .head > div > h1 {
-    margin-bottom: -6px;
-  }
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
 
-  .tea_container {
-    position: relative;
-    display: inline-block;
-  }
-  .tea_cup {
-    width: 48px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  .tea_cup:hover {
-    transform: scale(1.1);
-  }
-  @keyframes wiggle {
-    0% {
-      transform: rotate(0deg);
+    .tea_container {
+        position: relative;
+        display: inline-block;
     }
-    25% {
-      transform: rotate(-10deg);
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
     }
-    50% {
-      transform: rotate(10deg);
+    .tea_cup:hover {
+        transform: scale(1.1);
     }
-    75% {
-      transform: rotate(-10deg);
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
     }
-    100% {
-      transform: rotate(0deg);
+    .wiggle {
+        animation: wiggle 0.5s ease;
     }
-  }
-  .wiggle {
-    animation: wiggle 0.5s ease;
-  }
-  .speech_bubble {
-    position: absolute;
-    top: 80px;
-    width: 180px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(10px);
-    font-family: "Departure Mono";
-  }
-  .speech_bubble.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <script>
-  const teaCup = document.getElementById("teaCup");
-  const speechBubble = document.getElementById("speechBubble");
-  const teaCups = [
-    "/icons/tea.png",
-    "/icons/tea_2.png",
-    "/icons/tea_3.png",
-    "/icons/tea_4.png",
-  ];
-  let currentCup = 0;
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
 
-  teaCup.addEventListener("click", () => {
-    // Change tea cup
-    currentCup = (currentCup + 1) % teaCups.length;
-    teaCup.src = teaCups[currentCup];
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
 
-    // Wiggle animation
-    teaCup.classList.add("wiggle");
-    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
 
-    // Show speech bubble
-    speechBubble.classList.add("show");
-    setTimeout(() => speechBubble.classList.remove("show"), 2000);
-  });
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
 </script>
 
         <main tabindex="-1" id="main-content">

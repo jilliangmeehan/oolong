@@ -4,6 +4,7 @@ const w3DateFilter = require("./src/filters/w3-date-filter.js");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const esbuild = require("esbuild");
 const esbuildSvelte = require("esbuild-svelte");
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
@@ -191,6 +192,25 @@ module.exports = (eleventyConfig) => {
 
   let markdownLibrary = markdownIt(options);
   eleventyConfig.setLibrary("md", markdownLibrary);
+
+  // rss feed
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: "atom",
+    outputPath: "/feed.xml",
+    collection: {
+      name: "posts", // `collections.posts`
+      limit: 0, // 0 means no limit
+    },
+    metadata: {
+      language: "en",
+      title: "jillian g. meehan",
+      subtitle: "sporadically updated blog",
+      base: "https://jillian.garden/blog/",
+      author: {
+        name: "jillian g. meehan",
+      },
+    },
+  });
 
   // teashop stuff
   eleventyConfig.on("eleventy.before", async () => {
