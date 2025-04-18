@@ -38,6 +38,7 @@ module.exports = (eleventyConfig) => {
   // set directories to pass through to the _site folder
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
+  eleventyConfig.addPassthroughCopy({ "./src/favicon/": "/favicon/" });
   eleventyConfig.addPassthroughCopy("**/*.jpg");
   eleventyConfig.addPassthroughCopy("**/*.jpeg");
   eleventyConfig.addPassthroughCopy("**/*.png");
