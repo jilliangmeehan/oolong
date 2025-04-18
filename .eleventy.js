@@ -4,18 +4,9 @@ const w3DateFilter = require("./src/filters/w3-date-filter.js");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const esbuild = require("esbuild");
 const esbuildSvelte = require("esbuild-svelte");
-const navigationHelper = require("./src/utils/navigationHelper.js");
 
 module.exports = (eleventyConfig) => {
-  // Add a callback to log navigation data during build
-  eleventyConfig.on("eleventy.after", () => {
-    console.log("Building navigation structure...");
-  });
-
-  // Add the navigation plugin with explicit config
-  eleventyConfig.addPlugin(eleventyNavigationPlugin, {
-    enableLiveReload: true,
-  });
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
   eleventyConfig.configureErrorReporting({ allowMissingExtensions: true });
 
@@ -37,144 +28,75 @@ module.exports = (eleventyConfig) => {
   });
 
   // set directories to pass through to the _site folder
-  eleventyConfig.addPassthroughCopy("./src/favicon/");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
-  eleventyConfig.addPassthroughCopy("./src/**/*.jpg");
-  eleventyConfig.addPassthroughCopy("./src/**/*.jpeg");
-  eleventyConfig.addPassthroughCopy("./src/**/*.png");
-  eleventyConfig.addPassthroughCopy("./src/icons/*.png");
-  eleventyConfig.addPassthroughCopy("./src/icons/teacups/*.png");
-  eleventyConfig.addPassthroughCopy("./src/icons/*.gif");
-  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("**/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/*.jpeg");
+  eleventyConfig.addPassthroughCopy("**/*.png");
+  eleventyConfig.addPassthroughCopy("**/*.gif");
 
-  // media collection
-  eleventyConfig.addCollection("shelfItems", function (collection) {
-    const allItems = collection.getFilteredByGlob([
-      "src/games/Genshin/abyss/**/*.md",
-      "src/games/ZZZ/shiyu/**/*.md",
-      "src/games/ZZZ/deadass/**/*.md",
-      "src/games/playing/**/*.md",
-      "src/games/shelved/**/*.md",
-      "src/books/reading/**/*.md",
-      "src/books/shelved/**/*.md",
-      "src/watching/current/**/*.md",
-      "src/watching/shelved/**/*.md",
-      "src/games/playing/**/notes/*.md",
-    ]);
-
-    navigationHelper.setupShelfNavigation(collection);
-
-    // Setup index pages
-    navigationHelper.setupIndexNavigation(
-      collection,
-      "/games/Genshin/abyss",
-      "Abyss",
-      "Genshin",
-    );
-    navigationHelper.setupIndexNavigation(
-      collection,
-      "/games/Genshin",
-      "Genshin",
-      "Shelf",
-    );
-    navigationHelper.setupIndexNavigation(
-      collection,
-      "/games/ZZZ/shiyu",
-      "Shiyu",
-      "ZZZ",
-    );
-    navigationHelper.setupIndexNavigation(
-      collection,
-      "/games/ZZZ/deadass",
-      "Deadly Assault",
-      "ZZZ",
-    );
-    navigationHelper.setupIndexNavigation(
-      collection,
-      "/games/ZZZ",
-      "ZZZ",
-      "Shelf",
-    );
-
-    // Setup section indices
-    ["games", "books", "watching"].forEach((section) => {
-      navigationHelper.setupIndexNavigation(
-        collection,
-        `/${section}`,
-        section.charAt(0).toUpperCase() + section.slice(1),
-        "Shelf",
-      );
-    });
-
-    allItems.forEach((page) => {
-      // Try each navigation handler in turn
-      page.data.eleventyNavigation =
-        navigationHelper.handleNotesNavigation(page, collection) ||
-        navigationHelper.handleAbyssNavigation(page) ||
-        navigationHelper.handleShiyuNavigation(page) ||
-        navigationHelper.handleDeadassNavigation(page) ||
-        navigationHelper.handleShelfNavigation(page) ||
-        page.data.eleventyNavigation;
-    });
-
-    return allItems;
-  });
-
-  // game screenshots collection
-  eleventyConfig.addCollection("gamePhotos", function (collection) {
-    let photosByGame = {};
-
+  // transform to make sure my image files end up in the right folders
+  eleventyConfig.on("afterBuild", () => {
     const fs = require("fs");
     const path = require("path");
+    const glob = require("glob");
 
-    const gamePages = collection.getAll().filter((item) => {
-      return (
-        item.inputPath.includes("/games/") &&
-        item.inputPath.endsWith("index.md")
-      );
-    });
+    // find all image files in _site
+    const imageFiles = glob.sync("_site/**/*.{jpg,jpeg,png,gif}");
 
-    gamePages.forEach((game) => {
-      const gameDirPath = game.inputPath.replace("/index.md", "");
-      const gameId = gameDirPath.replace(/^.*\/src\/games\//, "");
+    imageFiles.forEach((oldPath) => {
+      // create new slugified path
+      const newPath = oldPath
+        .split(path.sep)
+        .map((part) => {
+          if (part.includes(".")) return part; // Don't modify filenames
+          return part.replace(/\s+/g, "-");
+        })
+        .join(path.sep);
 
-      const photosDir = path.join(process.cwd(), gameDirPath, "photos");
-
-      if (fs.existsSync(photosDir)) {
-        try {
-          const photoFiles = fs
-            .readdirSync(photosDir)
-            .filter(
-              (file) =>
-                file.endsWith(".jpg") ||
-                file.endsWith(".png") ||
-                file.endsWith(".jpeg") ||
-                file.endsWith(".gif"),
-            );
-
-          const photos = photoFiles.map((filename) => {
-            const photoUrl = `/games/${gameId}/photos/${filename}`;
-
-            return {
-              url: photoUrl,
-              filename: filename,
-              game: gameId,
-            };
-          });
-
-          photos.sort((a, b) => b.filename.localeCompare(a.filename));
-
-          photosByGame[gameId] = photos;
-        } catch (err) {
-          photosByGame[gameId] = [];
+      // Only move if paths are different
+      if (oldPath !== newPath) {
+        // create directory if it doesn't exist
+        const dir = path.dirname(newPath);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
         }
-      } else {
-        photosByGame[gameId] = [];
+
+        // Move file to new location
+        fs.renameSync(oldPath, newPath);
+
+        console.log(`Moved ${oldPath} to ${newPath}`);
       }
     });
+  });
 
-    return photosByGame;
+  // game collection
+  eleventyConfig.addCollection("game", function (collection) {
+    return collection.getFilteredByGlob("src/shelf/games/*/index.md");
+  });
+
+  // book collection
+  eleventyConfig.addCollection("book", function (collection) {
+    return collection.getFilteredByGlob("src/shelf/books/*/index.md");
+  });
+
+  // watching collection
+  eleventyConfig.addCollection("watching", function (collection) {
+    return collection.getFilteredByGlob("src/shelf/watching/*/index.md");
+  });
+
+  // tv collection
+  eleventyConfig.addCollection("tv", function (collection) {
+    return collection
+      .getFilteredByGlob("src/shelf/watching/*/index.md")
+      .filter((page) => page.data.type === "tv");
+  });
+
+  // movie collection
+  eleventyConfig.addCollection("movie", function (collection) {
+    return collection
+      .getFilteredByGlob("src/shelf/watching/*/index.md")
+      .filter((page) => page.data.type === "movie");
   });
 
   // fix markdown links
@@ -198,13 +120,9 @@ module.exports = (eleventyConfig) => {
   let markdownLibrary = markdownIt(options);
   eleventyConfig.setLibrary("md", markdownLibrary);
 
-  eleventyConfig.addCollection("navigationData", (collection) => {
-    console.log("Navigation collection being built");
-    return collection.getAll();
-  });
-
+  // teashop stuff
   eleventyConfig.on("eleventy.before", async () => {
-    console.log("Building Svelte app...");
+    console.log("Building Teashop...");
     try {
       await esbuild.build({
         entryPoints: ["src/svelte/main.js"],
@@ -237,9 +155,6 @@ module.exports = (eleventyConfig) => {
     htmlTemplateEngine: "njk",
     pathPrefix: "/",
     htmlOutputSuffix: ".html",
-    permalinkFormats: {
-      "*": "/{{slug}}/index.html",
-    },
     dir: {
       input: "src",
       output: "_site",

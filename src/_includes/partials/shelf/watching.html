@@ -1,38 +1,24 @@
-{% set sorted_tv = collections.tv | sort(attribute="data.status") | reverse %}
-{% set sorted_movies = collections.movie | sort(attribute="data.status") |
+{% set sorted_watching = collections.watching | sort(attribute="data.status") |
 reverse %} {% set statusColors = { 'watching': '#82b78b', 'paused': '#edd495',
 'finished': '#8b8fc3' } %}
 
-<section>
+<section class="shelf-table">
     <table>
         <tr>
             <th>Watching</th>
             <th>Status</th>
         </tr>
-        {% for tv in sorted_tv %}
+        {% for item in sorted_watching %}
         <tr>
             <td>
-                <a href="{{ tv.url }}">{{ tv.data.title }}</a>
+                <a href="{{ item.url }}">{{ item.data.title }}</a>
             </td>
             <td>
                 <div
                     class="swatch"
-                    style="background-color: {{ statusColors[tv.data.status] }}"
+                    style="background-color: {{ statusColors[item.data.status] }}"
                 ></div>
-                {{ tv.data.status }}
-            </td>
-        </tr>
-        {% endfor %} {% for movie in sorted_movies %}
-        <tr>
-            <td>
-                <a href="{{ movie.url }}">{{ movie.data.title }}</a>
-            </td>
-            <td>
-                <div
-                    class="swatch"
-                    style="background-color: {{ statusColors[movie.data.status] }}"
-                ></div>
-                {{ movie.data.status }}
+                {{ item.data.status }}
             </td>
         </tr>
         {% endfor %}

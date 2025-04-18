@@ -2,7 +2,7 @@
 %} {% set statusColors = { 'playing': '#82b78b', 'paused': '#edd495',
 'finished': '#8b8fc3' } %}
 
-<section>
+<section class="shelf-table">
     <table>
         <tr>
             <th>Playing</th>
@@ -16,9 +16,9 @@
             <td>
                 <div
                     class="swatch"
-                    style="background-color: {{ statusColors[game.data.status] }}"
+                    style="background-color: {{ statusColors[game.data.status] or '#999999' }}"
                 ></div>
-                {{ game.data.status }}
+                {{ game.data.status or 'unknown' }}
             </td>
         </tr>
         {% endfor %}

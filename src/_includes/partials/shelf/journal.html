@@ -1,0 +1,14 @@
+{% set hasJournals = false %} {% for post in collections.post %} {% if
+post.data.tags and shortcode in post.data.tags %} {% set hasJournals = true %}
+{% endif %} {% endfor %} {% if hasJournals %}
+<h2>journal entries</h2>
+<ul role="list">
+    {% for post in collections.post | reverse %} {% if post.data.tags and
+    shortcode in post.data.tags %}
+    <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+    <time datetime="{{ post.date | w3DateFilter }}" class="small"
+        >{{ post.date | dateFilter }}</time
+    >
+    {% endif %} {% endfor %}
+</ul>
+{% endif %}

@@ -205,6 +205,35 @@ article > h2,
     padding-left: 4px;
 }
 
+.shelf-table table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.shelf-table th {
+    padding: 8px;
+    text-align: left;
+    font-family: var(--mono);
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.shelf-table td {
+    padding: 8px;
+    line-height: 16px;
+    text-transform: capitalize;
+}
+
+.shelf-table .swatch {
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin: 2px 8px 0 0px;
+    border-radius: 100%;
+    border: 1px solid var(--oat);
+}
+
 /* home page */
 .overview {
     display: flex;

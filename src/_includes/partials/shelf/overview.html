@@ -1,15 +1,15 @@
 <section class="overview">
-  <div class="illustration">
-    <img src="/icons/jill.gif" />
-  </div>
-  <div class="latest_posts">
-    <h2>latest posts</h2>
-    <ul role="list">
-      {%- for post in collections.post | reverse -%} {% if (loop.index <= 5) and
-      (3 <= loop.length) %}
-      <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
-      {% endif %} {%- endfor -%}
-    </ul>
-    <p class="see_more"><a href="/blog">see more</a></p>
-  </div>
+    <div class="illustration">
+        <img src="/icons/jill.gif" />
+    </div>
+    <div class="latest_posts">
+        <h2>latest posts</h2>
+        <ul role="list">
+            {%- for post in collections.post | reverse -%} {% if loop.index <= 5
+            %}
+            <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+            {% endif %} {%- endfor -%}
+        </ul>
+        <p class="see_more"><a href="/blog">see more</a></p>
+    </div>
 </section>
