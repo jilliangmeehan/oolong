@@ -8,6 +8,14 @@ const esbuildSvelte = require("esbuild-svelte");
 module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
+  eleventyConfig.addCollection("debug", function (collectionApi) {
+    console.log(
+      "All pages:",
+      collectionApi.getAll().map((item) => item.url),
+    );
+    return collectionApi.getAll();
+  });
+
   eleventyConfig.configureErrorReporting({ allowMissingExtensions: true });
 
   // add filters
