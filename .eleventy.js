@@ -62,7 +62,7 @@ module.exports = (eleventyConfig) => {
         })
         .join(path.sep);
 
-      // Only move if paths are different
+      // only move if paths are different
       if (oldPath !== newPath) {
         // create directory if it doesn't exist
         const dir = path.dirname(newPath);
@@ -70,7 +70,7 @@ module.exports = (eleventyConfig) => {
           fs.mkdirSync(dir, { recursive: true });
         }
 
-        // Move file to new location
+        // move file to new location
         fs.renameSync(oldPath, newPath);
 
         console.log(`Moved ${oldPath} to ${newPath}`);

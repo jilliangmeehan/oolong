@@ -1,3 +1,6 @@
+// credit to https://www.ovl.design/text/permalink-driven-breadcrumbs-in-eleventy/
+// i spent so long trying to figure out how to do this before i found this blog post that solved all my problems
+
 module.exports = {
   eleventyComputed: {
     breadcrumb: function ({ permalink, title = "", hideBreadcrumb }) {
@@ -14,7 +17,7 @@ module.exports = {
       for (const segment of segments) {
         accumulatedPath += "/" + segment;
 
-        // Replace hyphens with spaces
+        // replace hyphens with spaces
         const formattedName = segment.replace(/-/g, " ");
 
         breadcrumb.push({
