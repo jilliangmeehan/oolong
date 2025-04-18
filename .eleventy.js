@@ -43,6 +43,18 @@ module.exports = (eleventyConfig) => {
     return matches;
   });
 
+  // get first image on a page to use as opengraph image
+  eleventyConfig.addFilter("getFirstImagePath", function (content) {
+    if (!content) return null;
+
+    const imgMatch = content.match('<p><img[^>]*src="([^"]+)"[^>]*>');
+    if (imgMatch && imgMatch[1]) {
+      return imgMatch[1];
+    }
+
+    return null;
+  });
+
   // filter by tag
   eleventyConfig.addFilter("filterByTag", function (collection, tag) {
     if (!collection || !tag) return [];

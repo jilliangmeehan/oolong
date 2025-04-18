@@ -4,9 +4,36 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="{{ title }}" />
+        {% if description %}
+        <meta property="og:description" content="{{ description }}" />
+        {% endif %}
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden{{ page.url }}"
+        />
+        {% if hero %}
+        <meta property="og:image" content="https://jillian.garden{{ hero }}" />
+        {% else %} {% set firstImage = content | getFirstImagePath %} {% if
+        firstImage %}
+        <meta
+            property="og:image"
+            content="https://jillian.garden{{ page.url }}{{ firstImage | replace('./', '') }}"
+        />
+        {% else %}
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+        {% endif %} {% endif %}
+        <!-- css -->
         <link rel="stylesheet" href="/css/fonts.css" />
         <link rel="stylesheet" href="/css/variables.css" />
         <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
         <link
             rel="icon"
             type="image/png"
@@ -27,6 +54,14 @@
         />
         <meta name="msapplication-TileColor" content="#e5d9d4" />
         <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
         <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
         <title>{{ title }}</title>
     </head>
