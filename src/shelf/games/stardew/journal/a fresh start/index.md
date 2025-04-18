@@ -1,5 +1,8 @@
 ---
-title: a fresh start
+title: A Fresh Start
+layout: layouts/page.html
+tags:
+  - post
 date: 2025-04-17
 publish: true
 summary: Anh told me to play Stardew Valley, so I'm playing Stardew Valley.
