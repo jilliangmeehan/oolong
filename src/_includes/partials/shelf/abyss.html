@@ -1,9 +1,2 @@
 <h2>spiral abyss</h2>
-<ul role="list">
-    {%- for post in collections.abyss | reverse -%}
-    <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-    <time datetime="{{ post.date | w3DateFilter }}" class="small"
-        >{{ post.date | dateFilter }}</time
-    >
-    {%- endfor -%}
-</ul>
+{% set collection = collections.abyss %} {% include "partials/grid.html" %}

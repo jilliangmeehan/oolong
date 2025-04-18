@@ -36,6 +36,21 @@ module.exports = (eleventyConfig) => {
       .replace(/-+$/, "");
   });
 
+  // match filter
+  eleventyConfig.addFilter("match", function (content, regex) {
+    if (!content) return null;
+    const matches = content.match(new RegExp(regex));
+    return matches;
+  });
+
+  // filter by tag
+  eleventyConfig.addFilter("filterByTag", function (collection, tag) {
+    if (!collection || !tag) return [];
+    return collection.filter((item) => {
+      return item.data.tags && item.data.tags.includes(tag);
+    });
+  });
+
   // set directories to pass through to the _site folder
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });

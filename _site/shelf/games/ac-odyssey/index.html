@@ -209,8 +209,150 @@
 <article>
     <p>I started playing this when AC: Shadows came out, because everyone was talking about the <em>new</em> game and I wanted to play it but figured I should start by playing one of the AC games I already have for free. This seemed like a good one to start with, and I’m already having a lot of fun.</p>
 <p>I obviously knew it was going to be a good game because this is a very successful franchise, but…it really is a good game! Crazy! I just like it a lot!</p>
-     
-                         
+ 
+<h2>sticky notes</h2>
+<ul role="list" class="post-list"></ul>
+
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        display: flex;
+        align-items: stretch;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px dashed var(--oat);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .post-thumbnail {
+        flex-shrink: 0;
+        width: 160px;
+        overflow: hidden;
+    }
+
+    .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+    }
+
+    .post-details {
+        flex-grow: 1;
+        margin: 1rem;
+    }
+
+    .post-details h2 {
+        margin: 0;
+    }
+
+    .post-details time {
+        display: block;
+        margin: 0.25rem 0;
+    }
+
+    .post-details p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+        }
+
+        .post-details {
+            margin: 1rem;
+        }
+    }
+</style>
+
+ 
+<h2>journal entries</h2>
+<ul role="list" class="post-list"></ul>
+
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        display: flex;
+        align-items: stretch;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px dashed var(--oat);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .post-thumbnail {
+        flex-shrink: 0;
+        width: 160px;
+        overflow: hidden;
+    }
+
+    .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+    }
+
+    .post-details {
+        flex-grow: 1;
+        margin: 1rem;
+    }
+
+    .post-details h2 {
+        margin: 0;
+    }
+
+    .post-details time {
+        display: block;
+        margin: 0.25rem 0;
+    }
+
+    .post-details p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+        }
+
+        .post-details {
+            margin: 1rem;
+        }
+    }
+</style>
+
 
 </article>
 

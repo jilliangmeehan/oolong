@@ -207,28 +207,179 @@
         <main tabindex="-1" id="main-content">
             
 <article>
-           
+     
 <h2>sticky notes</h2>
-<ul role="list">
-     
-    <h2><a href="/shelf/games/stardew/notes/mods/">Stardew Mods</a></h2>
-    <time datetime="2025-04-17T00:00:00.000Z" class="small"
-        >16th of April 2025</time
-    >
-     
-</ul>
+<ul role="list" class="post-list"><li class="post-item">
+           
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/shelf/games/stardew/notes/mods/">Stardew Mods</a>
+            </h2>
+            <time datetime="2025-04-17T00:00:00.000Z" class="small">
+                16th of April 2025
+            </time>
+            <p class="font-serif"></p>
+        </div>
+    </li></ul>
 
-                        
-  
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        display: flex;
+        align-items: stretch;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px dashed var(--oat);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .post-thumbnail {
+        flex-shrink: 0;
+        width: 160px;
+        overflow: hidden;
+    }
+
+    .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+    }
+
+    .post-details {
+        flex-grow: 1;
+        margin: 1rem;
+    }
+
+    .post-details h2 {
+        margin: 0;
+    }
+
+    .post-details time {
+        display: block;
+        margin: 0.25rem 0;
+    }
+
+    .post-details p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+        }
+
+        .post-details {
+            margin: 1rem;
+        }
+    }
+</style>
+
+ 
 <h2>journal entries</h2>
-<ul role="list">
-     
-    <h2><a href="/shelf/games/stardew/journal/a-fresh-start/">A Fresh Start</a></h2>
-    <time datetime="2025-04-17T00:00:00.000Z" class="small"
-        >16th of April 2025</time
-    >
-                         
-</ul>
+<ul role="list" class="post-list"><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/shelf/games/stardew/journal/a-fresh-start/photos/sdv-a-fresh-start-3.jpeg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/shelf/games/stardew/journal/a-fresh-start/">A Fresh Start</a>
+            </h2>
+            <time datetime="2025-04-17T00:00:00.000Z" class="small">
+                16th of April 2025
+            </time>
+            <p class="font-serif">Anh told me to play Stardew Valley, so I&#39;m playing Stardew Valley.</p>
+        </div>
+    </li></ul>
+
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        display: flex;
+        align-items: stretch;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px dashed var(--oat);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .post-thumbnail {
+        flex-shrink: 0;
+        width: 160px;
+        overflow: hidden;
+    }
+
+    .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+    }
+
+    .post-details {
+        flex-grow: 1;
+        margin: 1rem;
+    }
+
+    .post-details h2 {
+        margin: 0;
+    }
+
+    .post-details time {
+        display: block;
+        margin: 0.25rem 0;
+    }
+
+    .post-details p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+        }
+
+        .post-details {
+            margin: 1rem;
+        }
+    }
+</style>
 
 
 </article>
