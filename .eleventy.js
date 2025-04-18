@@ -198,7 +198,7 @@ module.exports = (eleventyConfig) => {
     type: "atom",
     outputPath: "/feed.xml",
     collection: {
-      name: "posts", // `collections.posts`
+      name: "post", // `collections.post`
       limit: 0, // 0 means no limit
     },
     metadata: {
