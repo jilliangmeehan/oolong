@@ -7,3 +7,5 @@ date finished:
 shortcode: genshin
 publish: true
 ---
+
+{% include "partials/shelf/abyss.html" %}

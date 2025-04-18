@@ -1,4 +1,3 @@
 {
-  "layout": "layouts/game.html",
-  "tags": ["games", "genshin"]
+  "tags": ["game", "genshin"]
 }

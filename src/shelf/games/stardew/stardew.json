@@ -1,4 +1,4 @@
 {
-  "layout": "layouts/game.html",
-  "tags": ["games", "stardew"]
+  "tags": ["game", "stardew"],
+  "shortcode": "stardew"
 }

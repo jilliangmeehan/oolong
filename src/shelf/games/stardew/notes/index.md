@@ -1,9 +1,6 @@
 ---
-title: stardew notes
+title: Notes
 layout: layouts/page.html
-date: 2025-04-17
-publish: true
-shortcode: stardew
 eleventyExcludeFromCollections: true
 ---
 

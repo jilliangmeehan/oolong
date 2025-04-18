@@ -39,10 +39,11 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
   eleventyConfig.addPassthroughCopy({ "./src/favicon/": "/favicon/" });
-  //eleventyConfig.addPassthroughCopy("**/*.jpg");
-  //eleventyConfig.addPassthroughCopy("**/*.jpeg");
-  //eleventyConfig.addPassthroughCopy("**/*.png");
-  //eleventyConfig.addPassthroughCopy("**/*.gif");
+  eleventyConfig.addPassthroughCopy({ "./src/icons/": "/icons/" });
+  eleventyConfig.addPassthroughCopy("**/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/*.jpeg");
+  eleventyConfig.addPassthroughCopy("**/*.png");
+  eleventyConfig.addPassthroughCopy("**/*.gif");
 
   // transform to make sure my image files end up in the right folders
   eleventyConfig.on("afterBuild", () => {
@@ -50,33 +51,95 @@ module.exports = (eleventyConfig) => {
     const path = require("path");
     const glob = require("glob");
 
-    // find all image files in _site
-    const imageFiles = glob.sync("_site/**/*.{jpg,jpeg,png,gif}");
+    const slugify = (text) => {
+      return text
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w\-]+/g, "")
+        .replace(/\-\-+/g, "-")
+        .replace(/^-+/, "")
+        .replace(/-+$/, "");
+    };
 
-    imageFiles.forEach((oldPath) => {
-      // create new slugified path
-      const newPath = oldPath
-        .split(path.sep)
-        .map((part) => {
-          if (part.includes(".")) return part; // Don't modify filenames
-          return part.replace(/\s+/g, "-");
-        })
-        .join(path.sep);
+    // handle blog images
+    const blogImageFiles = glob.sync(
+      "_site/posts/**/photos/**/*.{jpg,jpeg,png,gif}",
+    );
 
-      // only move if paths are different
+    blogImageFiles.forEach((oldPath) => {
+      const pathParts = oldPath.split(path.sep);
+      const photosIndex = pathParts.indexOf("photos");
+      const postNameIndex = photosIndex - 1;
+      const postName = pathParts[postNameIndex];
+      const slugifiedPostName = slugify(postName);
+
+      const newPath = oldPath.replace(
+        /\_site\/posts\/.*?\/photos\//,
+        `_site/blog/${slugifiedPostName}/photos/`,
+      );
+
       if (oldPath !== newPath) {
-        // create directory if it doesn't exist
         const dir = path.dirname(newPath);
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir, { recursive: true });
         }
-
-        // move file to new location
         fs.renameSync(oldPath, newPath);
-
-        console.log(`Moved ${oldPath} to ${newPath}`);
+        console.log(`Moved blog image from ${oldPath} to ${newPath}`);
       }
     });
+
+    // handle shelf images
+    const shelfImageFiles = glob.sync(
+      "_site/shelf/**/photos/**/*.{jpg,jpeg,png,gif}",
+    );
+
+    shelfImageFiles.forEach((oldPath) => {
+      const newPath = oldPath
+        .split(path.sep)
+        .map((part) => {
+          if (part.includes(".")) return part; // Don't modify filenames
+          return slugify(part); // Use the same slugify function
+        })
+        .join(path.sep);
+
+      if (oldPath !== newPath) {
+        const dir = path.dirname(newPath);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+        fs.renameSync(oldPath, newPath);
+        console.log(`Moved shelf image from ${oldPath} to ${newPath}`);
+      }
+    });
+
+    // clean up empty directories
+    function removeEmptyDirectories(directory) {
+      const fs = require("fs");
+      const path = require("path");
+
+      if (!fs.existsSync(directory)) return;
+
+      const files = fs.readdirSync(directory);
+
+      if (files.length > 0) {
+        files.forEach((file) => {
+          const fullPath = path.join(directory, file);
+          if (fs.statSync(fullPath).isDirectory()) {
+            removeEmptyDirectories(fullPath);
+          }
+        });
+
+        // check again after processing subdirectories
+        if (fs.readdirSync(directory).length === 0) {
+          fs.rmdirSync(directory);
+        }
+      } else {
+        fs.rmdirSync(directory);
+      }
+    }
+
+    removeEmptyDirectories("_site/posts");
+    removeEmptyDirectories("_site/shelf");
   });
 
   // game collection

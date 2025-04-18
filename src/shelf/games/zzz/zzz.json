@@ -1,4 +1,3 @@
 {
-  "layout": "layouts/game.html",
-  "tags": ["games", "zzz"]
+  "tags": ["game", "zzz"]
 }

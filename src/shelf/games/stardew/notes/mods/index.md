@@ -2,9 +2,7 @@
 title: Stardew Mods
 layout: layouts/page.html
 tags:
-  - notes
-  - games
-  - stardew
+  - note
 date: 2025-04-17
 publish: true
 summary: 

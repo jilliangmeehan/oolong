@@ -1,7 +1,6 @@
 ---
 title: Deadly Assault
-layout: layouts/page.html
-eleventyExcludeFromCollections: true
+publish: true
 ---
 
 {% include "partials/shelf/deadass.html" %}
