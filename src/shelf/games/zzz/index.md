@@ -1,16 +1,9 @@
 ---
 title: ZZZ
-layout: layouts/game.html
 status: playing
-tags:
-  - game
-url:
-publish: true
-cover: "![zzz.png](zzz.png)"
-UID: "1001418143"
+url: https://enka.network/u/jillian/
+cover: 
+date finished: 
 shortcode: zzz
+publish: true
 ---
-
-{% include "partials/shelf/deadass.html" %}
-
-{% include "partials/shelf/shiyu.html" %}
