@@ -17,4 +17,4 @@ I wasn't *going* to play with mods, because I'm mostly playing on my Steam Deck 
 
 It ended up not really being that annoying to install the mods. I downloaded all the ones I wanted on my laptop first, zipped them up into a folder, and emailed it to myself (lol classic) to download on my Steam Deck. Dragging a bunch folders around with the little trackpad is probably the most fiddly part of the whole process.
 
-I made a list of the [mods](https://jillian.garden/shelf/stardew-valley/mods) I'm currently using, and some that I'm not using but want to remember to try at some point. I'll try to remember to keep it updated. 🫡
+I made a list of the [mods](/shelf/games/stardew/notes/mods) I'm currently using, and some that I'm not using but want to remember to try at some point. I'll try to remember to keep it updated. 🫡

@@ -2,6 +2,7 @@
 title: "changelog"
 layout: "layouts/page.html"
 description: "a lazy captain's log"
+permalink: /log/
 eleventyNavigation:
   key: Log
 ---

@@ -38,24 +38,40 @@
   </div>
   <div class="header_text">
     
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    
-    <span class="separator">/</span>
-    
-    <a href="/shelf/">Shelf</a>
-
-       
-    <span class="separator">/</span>
-    <a href="/shelf/books/">Books</a>
-
-    
-    <span class="separator">/</span>
-
-     
-    <span aria-current="page">All that You&#39;ve Seen Here is God</span>
-          
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/" class="color-joycon">shelf</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/books/" class="color-joycon">books</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">all that you&#39;ve seen here is god</span>
+            
+        </li>
+         
+    </ul>
 </nav>
 
 
@@ -70,7 +86,13 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>
@@ -183,46 +205,46 @@
 
         </main>
     </body>
-    <footer><nav>
-  <h2>index</h2>
-  <ul role="list">
-    
-    <li><a href="/">home</a>•</li>
-    
-    <li><a href="/blog">blog</a>•</li>
-    
-    <li><a href="/shelf">shelf</a>•</li>
-    
-    <li><a href="/meta">meta</a>•</li>
-    
-    <li><a href="/teashop">teashop</a>•</li>
-    
-    <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
-    </li>
-  </ul>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
 </nav>
 
 <style>
-  nav ul {
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    margin: 0;
-  }
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
 
-  nav ul li a {
-    margin-right: 8px;
-  }
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
 
-  nav ul li {
-    font-family: var(--serif);
-  }
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
 
-  nav ul li a {
-    text-decoration: underline;
-    color: var(--tea) !important;
-  }
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
 </style>
 </footer>
 

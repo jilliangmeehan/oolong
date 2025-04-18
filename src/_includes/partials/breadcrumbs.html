@@ -1,70 +1,20 @@
 {% if page.url == "/" %}
 <h1 class="font-pixel">jillian g. meehan</h1>
 {% else %}
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    {% if page.url.startsWith('/shelf/') %}
-    <span class="separator">/</span>
-    {% if page.url == "/shelf/" %}
-    <span aria-current="page">Shelf</span>
-    {% else %}
-    <a href="/shelf/">Shelf</a>
-
-    {# Handle shelf/games paths #} {% if page.url.startsWith('/shelf/games/') %}
-    <span class="separator">/</span>
-    <a href="/shelf/games/">Games</a>
-
-    {% if not page.url.endsWith('/games/') %}
-    <span class="separator">/</span>
-
-    {# This is a game page or subpage #} {% if page.data.isSubpage %}
-    <a href="{{ page.data.parentUrl }}">{{ page.data.parentTitle }}</a>
-    <span class="separator">/</span>
-    <span aria-current="page">{{ title }}</span>
-    {% else %}
-    <span aria-current="page">{{ title }}</span>
-    {% endif %} {% endif %} {% endif %} {# Handle shelf/books paths #} {% if
-    page.url.startsWith('/shelf/books/') %}
-    <span class="separator">/</span>
-    <a href="/shelf/books/">Books</a>
-
-    {% if not page.url.endsWith('/books/') %}
-    <span class="separator">/</span>
-
-    {# This is a book page or subpage #} {% if page.data.isSubpage %}
-    <a href="{{ page.data.parentUrl }}">{{ page.data.parentTitle }}</a>
-    <span class="separator">/</span>
-    <span aria-current="page">{{ title }}</span>
-    {% else %}
-    <span aria-current="page">{{ title }}</span>
-    {% endif %} {% endif %} {% endif %} {# Handle shelf/watching paths #} {% if
-    page.url.startsWith('/shelf/watching/') %}
-    <span class="separator">/</span>
-    <a href="/shelf/watching/">Watching</a>
-
-    {% if not page.url.endsWith('/watching/') %}
-    <span class="separator">/</span>
-
-    {# This is a watching page or subpage #} {% if page.data.isSubpage %}
-    <a href="{{ page.data.parentUrl }}">{{ page.data.parentTitle }}</a>
-    <span class="separator">/</span>
-    <span aria-current="page">{{ title }}</span>
-    {% else %}
-    <span aria-current="page">{{ title }}</span>
-    {% endif %} {% endif %} {% endif %} {% endif %} {% elif
-    page.url.startsWith('/posts/') or page.url.startsWith('/blog/') %}
-    <span class="separator">/</span>
-    {% if page.url == "/blog/" %}
-    <span aria-current="page">Blog</span>
-    {% else %}
-    <a href="/blog/">Blog</a>
-    <span class="separator">/</span>
-    <span aria-current="page">{{ title }}</span>
-    {% endif %} {% else %}
-    <span class="separator">/</span>
-    <span aria-current="page">{{ title }}</span>
-    {% endif %}
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        {% for crumb in breadcrumb %}
+        <li class="font-pixel">
+            {% if loop.last %}
+            <span aria-current="page">{{crumb.name}}</span>
+            {% else %}
+            <a href="{{crumb.url}}" class="color-joycon">{{crumb.name}}</a>
+            {% endif %}
+        </li>
+        {% if loop.last == false %}
+        <span class="separator">/</span>
+        {% endif %} {% endfor %}
+    </ul>
 </nav>
 {% endif %}
 
@@ -79,7 +29,13 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>

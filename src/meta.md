@@ -2,6 +2,7 @@
 title: "meta"
 layout: "layouts/page.html"
 date: Last Modified
+permalink: /meta/
 eleventyNavigation:
   key: Meta
 ---

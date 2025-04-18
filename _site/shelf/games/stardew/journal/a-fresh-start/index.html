@@ -38,24 +38,56 @@
   </div>
   <div class="header_text">
     
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    
-    <span class="separator">/</span>
-    
-    <a href="/shelf/">Shelf</a>
-
-     
-    <span class="separator">/</span>
-    <a href="/shelf/games/">Games</a>
-
-    
-    <span class="separator">/</span>
-
-     
-    <span aria-current="page">a fresh start</span>
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
             
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/" class="color-joycon">shelf</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/" class="color-joycon">games</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/stardew/" class="color-joycon">stardew</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/stardew/journal/" class="color-joycon">journal</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">a fresh start</span>
+            
+        </li>
+         
+    </ul>
 </nav>
 
 
@@ -70,7 +102,13 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>
@@ -186,7 +224,7 @@
 <h2>mods</h2>
 <p>I wasn’t <em>going</em> to play with mods, because I’m mostly playing on my Steam Deck where they’re a little more annoying to install, and because I thought it’d be nice to have the “vanilla” experience since there’s a bunch of new stuff. But I couldn’t help myself.</p>
 <p>It ended up not really being that annoying to install the mods. I downloaded all the ones I wanted on my laptop first, zipped them up into a folder, and emailed it to myself (lol classic) to download on my Steam Deck. Dragging a bunch folders around with the little trackpad is probably the most fiddly part of the whole process.</p>
-<p>I made a list of the <a href="https://jillian.garden/shelf/stardew-valley/mods">mods</a> I’m currently using, and some that I’m not using but want to remember to try at some point. I’ll try to remember to keep it updated. 🫡</p>
+<p>I made a list of the <a href="/shelf/games/stardew/notes/mods">mods</a> I’m currently using, and some that I’m not using but want to remember to try at some point. I’ll try to remember to keep it updated. 🫡</p>
      
                              
 
@@ -194,46 +232,46 @@
 
         </main>
     </body>
-    <footer><nav>
-  <h2>index</h2>
-  <ul role="list">
-    
-    <li><a href="/">home</a>•</li>
-    
-    <li><a href="/blog">blog</a>•</li>
-    
-    <li><a href="/shelf">shelf</a>•</li>
-    
-    <li><a href="/meta">meta</a>•</li>
-    
-    <li><a href="/teashop">teashop</a>•</li>
-    
-    <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
-    </li>
-  </ul>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
 </nav>
 
 <style>
-  nav ul {
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    margin: 0;
-  }
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
 
-  nav ul li a {
-    margin-right: 8px;
-  }
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
 
-  nav ul li {
-    font-family: var(--serif);
-  }
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
 
-  nav ul li a {
-    text-decoration: underline;
-    color: var(--tea) !important;
-  }
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
 </style>
 </footer>
 

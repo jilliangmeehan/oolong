@@ -38,16 +38,32 @@
   </div>
   <div class="header_text">
     
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    
-    <span class="separator">/</span>
-    
-    <a href="/blog/">Blog</a>
-    <span class="separator">/</span>
-    <span aria-current="page">weeknotes five</span>
-     
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/blog/" class="color-joycon">blog</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">weeknotes five</span>
+            
+        </li>
+         
+    </ul>
 </nav>
 
 
@@ -62,7 +78,13 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>
@@ -175,57 +197,57 @@
 <h2>learning greek</h2>
 <p>I just finished Section 1: Unit 9 of the <a href="https://www.duolingo.com/profile/jilliangmeehan">Duolingo</a> Greek course this morning! Onto the next. I’ve also been practicing my Greek handwriting this week on pages in the back of my Hobonichi journal — it’s like educational doodling.</p>
 <h2>playing</h2>
-<h3><a href="../../../games/playing/Honkai%20Star%20Rail/index.html">Honkai Star Rail</a></h3>
+<h3><a href="/shelf/games/hsr/">Honkai Star Rail</a></h3>
 <p><em>Very</em> into the 3.0 update. The Herta is great &amp; very fun to play, Amphoreus is lovely, and I’m really excited about this chapter of the story so far. Penacony was great, but I can already tell this will be better.</p>
 <p>I’ve also been spending a lot of time grinding through the past Simulated Universe expansions, since I never really finished them. I unlocked all the secrets in Swarm Disaster and Unknowable Domain, and now I’m working on Gold &amp; Gears.</p>
 <h2>balatro</h2>
 <p>Have been getting back into Balatro a bit this week, since it’s a really good Steam Deck game. I am <em>not</em> very good at it, but it’s such a fun way to lose a few hours on the couch.</p>
 <h2>The other gachas</h2>
-<p>I’ve really just been playing a <em>lot</em> of HSR this week, so my other games — <a href="../../../games/Genshin/index.html">Genshin</a>, <a href="../../../games/ZZZ/index.html">ZZZ</a>, and <a href="../../../games/playing/Wuthering%20Waves/index.html">Wuthering Waves</a> — have taken a bit of a backseat. But there’s a new ZZZ update coming up soon that I’m excited about, and it’s almost time for Lantern Rite in Genshin!</p>
+<p>I’ve really just been playing a <em>lot</em> of HSR this week, so my other games — <a href="/shelf/games/genshin">Genshin</a>, <a href="/shelf/games/zzz">ZZZ</a>, and <a href="/shelf/games/wuwa">Wuthering Waves</a> — have taken a bit of a backseat. But there’s a new ZZZ update coming up soon that I’m excited about, and it’s almost time for Lantern Rite in Genshin!</p>
 </article>
 
         </main>
     </body>
-    <footer><nav>
-  <h2>index</h2>
-  <ul role="list">
-    
-    <li><a href="/">home</a>•</li>
-    
-    <li><a href="/blog">blog</a>•</li>
-    
-    <li><a href="/shelf">shelf</a>•</li>
-    
-    <li><a href="/meta">meta</a>•</li>
-    
-    <li><a href="/teashop">teashop</a>•</li>
-    
-    <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
-    </li>
-  </ul>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
 </nav>
 
 <style>
-  nav ul {
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    margin: 0;
-  }
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
 
-  nav ul li a {
-    margin-right: 8px;
-  }
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
 
-  nav ul li {
-    font-family: var(--serif);
-  }
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
 
-  nav ul li a {
-    text-decoration: underline;
-    color: var(--tea) !important;
-  }
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
 </style>
 </footer>
 

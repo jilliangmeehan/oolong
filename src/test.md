@@ -4,6 +4,7 @@ layout: layouts/page.html
 tags: 
 date: 
 publish: true
+permalink: /test/
 summary: 
 ---
 # Header 1

@@ -2,6 +2,7 @@
 title: "style guide"
 layout: "layouts/page.html"
 date: Last Modified
+permalink: /docs/
 eleventyNavigation:
   key: Docs
   parent: Meta

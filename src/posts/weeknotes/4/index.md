@@ -23,7 +23,7 @@ I didn't watch any Christmas movies this year! I always kinda forget to when I'm
 My family and I usually like to watch comedy specials on Netflix when I'm home. This year we went for the newest Nate Bargatze one, and a couple of Tom Papa's. And when I got back to New York, Dylan and I started watching the new season of Squid Game, which we're a few episodes into so far.
 
 ## playing
-Both [Genshin](../../../games/Genshin/index.md) and [Wuthering Waves](../../../games/playing/Wuthering%20Waves/index.md) had updates this week, and [Honkai Star Rail](../../../games/playing/Honkai%20Star%20Rail/index.md) has a big update coming up soon, so I've naturally been playing a lot of those. I'm also still playing a lot of [Kingdom: Two Crowns](../3/index.md) — I finished the Call of Olympus DLC and started Norse Lands, to go along with the book I'm reading.
+Both [Genshin](/shelf/games/genshin/) and [Wuthering Waves](/shelf/games/wuwa/) had updates this week, and [Honkai Star Rail](/shelf/games/hsr/) has a big update coming up soon, so I've naturally been playing a lot of those. I'm also still playing a lot of [Kingdom: Two Crowns](/shelf/games/twocrowns/) — I finished the Call of Olympus DLC and started Norse Lands, to go along with the book I'm reading.
 
 The big news is I just realized I can play Dragon's Dogma 2 again, after not being able to get it to open for months. It's not really a great time to sink my teeth back into a game like that, because I've got plenty of other things I wanted to do, but I can't help myself. I'm going to try to remember how the controls work today so I can pick up where I left off with the main story. 
 

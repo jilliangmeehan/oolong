@@ -38,16 +38,32 @@
   </div>
   <div class="header_text">
     
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    
-    <span class="separator">/</span>
-    
-    <a href="/blog/">Blog</a>
-    <span class="separator">/</span>
-    <span aria-current="page">weeknotes three</span>
-     
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/blog/" class="color-joycon">blog</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">weeknotes three</span>
+            
+        </li>
+         
+    </ul>
 </nav>
 
 
@@ -62,7 +78,13 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>
@@ -175,10 +197,10 @@
 <p>After my last two days of work for the year, I spent my week ruining my sleep schedule and playing video games on my couch with Junie sleeping next to me on a cozy blanket. I also kinda blacked out for a day and made a bunch of changes around here — <a href="/log">changelog</a> if you’re interested. The tl;dr is: the website is still kind of a mess, but at least the things piled up in the corner are stacked <em>neatly.</em> The baseboards are dusty but the dishes are done, etc.</p>
 <p>I’m trying to ignore the classic holiday break anxiety that <em>I’m not being productive enough with my vacation!</em> Dylan’s coming home from a work trip today, so I’m excited to spend the weekend hanging out with him for a bit before heading home to see my family for Christmas. And then I’ll have another week or so to fix my sleep schedule and catch up on YouTube videos I’ve been meaning to watch.</p>
 <h2>playing</h2>
-<p>I’m still playing all the usual stuff (mostly <a href="../../../games/ZZZ/index.html">ZZZ</a>, because they just added it to Geforce Now &amp; the latest update has been really good). Having time off means I can dedicate more energy to just <em>catching up</em> on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!</p>
+<p>I’m still playing all the usual stuff (mostly <a href="/shelf/games/zzz/">ZZZ</a>, because they just added it to Geforce Now &amp; the latest update has been really good). Having time off means I can dedicate more energy to just <em>catching up</em> on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!</p>
 <h3>infinity nikki</h3>
 <p><img src="./photos/infinitynikki.jpeg" alt="screenshot from infinity nikki"></p>
-<p>I wasn’t going to play Infinity Nikki, but I caved and downloaded it onto my Steam Deck to check it out this week. My favorite part of any RPG is finding &amp; upgrading armor — and this is basically a game about exactly that, but the armor is cute clothes.</p>
+<p>I wasn’t going to play <a href="/shelf/games/infinity-nikki">Infinity Nikki</a>, but I caved and downloaded it onto my Steam Deck to check it out this week. My favorite part of any RPG is finding &amp; upgrading armor — and this is basically a game about exactly that, but the armor is cute clothes.</p>
 <p>I had fun playing it for a day and satisfying my curiosity, but I’m probably not going to play much more of it for now. I’m glad it’s there if I’m in the mood, but I’m not super interested in playing it on a regular basis right now.</p>
 <h3>inbento</h3>
 <p><img src="./photos/inbento.jpeg" alt="screenshot from inbento"></p>
@@ -192,46 +214,46 @@ I played a bit of <a href="https://store.steampowered.com/app/496300/Kingdom_New
 
         </main>
     </body>
-    <footer><nav>
-  <h2>index</h2>
-  <ul role="list">
-    
-    <li><a href="/">home</a>•</li>
-    
-    <li><a href="/blog">blog</a>•</li>
-    
-    <li><a href="/shelf">shelf</a>•</li>
-    
-    <li><a href="/meta">meta</a>•</li>
-    
-    <li><a href="/teashop">teashop</a>•</li>
-    
-    <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
-    </li>
-  </ul>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
 </nav>
 
 <style>
-  nav ul {
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    margin: 0;
-  }
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
 
-  nav ul li a {
-    margin-right: 8px;
-  }
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
 
-  nav ul li {
-    font-family: var(--serif);
-  }
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
 
-  nav ul li a {
-    text-decoration: underline;
-    color: var(--tea) !important;
-  }
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
 </style>
 </footer>
 

@@ -28,7 +28,7 @@
         <meta name="msapplication-TileColor" content="#e5d9d4" />
         <meta name="theme-color" content="#e5d9d4" />
         <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
-        <title>good morning</title>
+        <title>i bought some fonts</title>
     </head>
     <body>
         <header role="banner" class="head">
@@ -38,16 +38,32 @@
   </div>
   <div class="header_text">
     
-<nav aria-label="breadcrumb" class="font-pixel">
-    <a href="/">Home</a>
-
-    
-    <span class="separator">/</span>
-    
-    <a href="/blog/">Blog</a>
-    <span class="separator">/</span>
-    <span aria-current="page">good morning</span>
-     
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/blog/" class="color-joycon">blog</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">i bought some fonts</span>
+            
+        </li>
+         
+    </ul>
 </nav>
 
 
@@ -62,15 +78,21 @@
         line-height: 24px;
     }
 
-    nav[aria-label="breadcrumb"] span.separator {
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
         color: #666;
     }
 </style>
  
      <p class="small">
   <span class="color-beam">last updated:</span>
-  <time datetime="2022-11-18T00:00:00.000Z"
-    >17th of November 2022</time
+  <time datetime="2024-03-16T00:00:00.000Z"
+    >15th of March 2024</time
   >
 </p>
  
@@ -170,55 +192,57 @@
 
         <main tabindex="-1" id="main-content">
             
-<article><p>hi i guess. it’s been a while since i did any kind of blogging—i don’t really know how to begin.</p>
-<p>i started reading the iliad last night &amp; got very worked up at nearly 3 a.m. about the fact that i was reading a story that people were enjoying ~2700 years ago. so many things feel ephemeral—how many people are downloading their twitter archive right now for fear of their tweets being lost? (and will they ever even look at it?)—but somehow i can read a story on my ipad that’s so old we barely know anything about the origin of it. what? ok.</p>
-<p>i don’t think i ever want to make something that lasts that long. i don’t think that i could, anyway. i’m content to tinker away at my little ideas &amp; projects without the threat of longevity.</p>
-<p>when i was a kid using the family computer in the basement, i used to have bookmark folders of blogs &amp; websites i liked, and i’d check them every so often to see what was new. it’s hilarious to me to think of a time where i didn’t rely on feeds. <strong>anyway:</strong> if you want, you can keep up with my posts here via <a href="https://jillian.garden/feed.rss">rss</a>. if you’re more of a newsletter person, there are a bunch of rss-to-email services out there—<a href="https://feedrabbit.com">feedrabbit</a> is one with a decent free tier.</p>
-<p>🫡</p>
+<article><p>I did some other stuff too, but the fonts are the fun part. As mentioned in the <a href="/log">changelog</a>, I finally got around to sprucing up the place a little bit — I was getting tired of looking at a css-less website.</p>
+<p><img src="./photos/before.png" alt="the before shot"></p>
+<p>As the first step of that process, I treated myself to two Connary Fagen fonts that I’ve had stashed away in a folder for a while: <a href="https://connary.com/argentpixel.html">Argent Pixel</a> &amp; <a href="https://connary.com/addington.html">Addington</a>. Once I got those all set up, I stole Andy Bell’s <a href="https://piccalil.li/blog/a-more-modern-css-reset/">css reset</a> to get me started. And then I wrote some very lazy, scuffed css just to quickly get everything looking a <em>little</em> nicer.</p>
+<p><img src="./photos/after.png" alt="the after shot"></p>
+<p>I do have aspirations of really nice, clean, efficient scss files that are organized and easy to read. But I decided when I started this project that it wasn’t worth getting into the weeds with all that before I’ve had the chance to play around and actually figure out what I want the website to be. I’m still in the messy, experimental phase.</p>
+<p>Oh — I also (as mentioned in <a href="https://ooolong.netlify.app/posts/2024/03/using%20obsidian%20as%20a%20cms/">the last post</a>) got some more collections set up in Obsidian. So now I can make really quick updates to the <a href="/now">/now</a> page by adding &amp; editing Obsidian files for books I’m reading, games I’m playing, and other things I’m doing.</p>
+<p>Next, I think I want to set up individual pages for each item in those collections — each book, each game. And maybe a “shelf,” so I can also list the things I’ve already finished or haven’t started yet. And then maybe after that I’ll get around to writing better css.</p>
 </article>
 
         </main>
     </body>
-    <footer><nav>
-  <h2>index</h2>
-  <ul role="list">
-    
-    <li><a href="/">home</a>•</li>
-    
-    <li><a href="/blog">blog</a>•</li>
-    
-    <li><a href="/shelf">shelf</a>•</li>
-    
-    <li><a href="/meta">meta</a>•</li>
-    
-    <li><a href="/teashop">teashop</a>•</li>
-    
-    <li>
-      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
-    </li>
-  </ul>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
 </nav>
 
 <style>
-  nav ul {
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    margin: 0;
-  }
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
 
-  nav ul li a {
-    margin-right: 8px;
-  }
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
 
-  nav ul li {
-    font-family: var(--serif);
-  }
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
 
-  nav ul li a {
-    text-decoration: underline;
-    color: var(--tea) !important;
-  }
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
 </style>
 </footer>
 

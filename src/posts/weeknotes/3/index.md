@@ -15,12 +15,12 @@ After my last two days of work for the year, I spent my week ruining my sleep sc
 I'm trying to ignore the classic holiday break anxiety that *I'm not being productive enough with my vacation!* Dylan's coming home from a work trip today, so I'm excited to spend the weekend hanging out with him for a bit before heading home to see my family for Christmas. And then I'll have another week or so to fix my sleep schedule and catch up on YouTube videos I've been meaning to watch.
 
 ## playing
-I'm still playing all the usual stuff (mostly [ZZZ](../../../games/ZZZ/index.md), because they just added it to Geforce Now & the latest update has been really good). Having time off means I can dedicate more energy to just *catching up* on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!
+I'm still playing all the usual stuff (mostly [ZZZ](/shelf/games/zzz/), because they just added it to Geforce Now & the latest update has been really good). Having time off means I can dedicate more energy to just *catching up* on stuff — playing a bunch of live games at the same time is hard, lol. Unfortunately, I love them!
 
 ### infinity nikki
 ![screenshot from infinity nikki](./photos/infinitynikki.jpeg)
 
-I wasn't going to play Infinity Nikki, but I caved and downloaded it onto my Steam Deck to check it out this week. My favorite part of any RPG is finding & upgrading armor — and this is basically a game about exactly that, but the armor is cute clothes. 
+I wasn't going to play [Infinity Nikki](/shelf/games/infinity-nikki), but I caved and downloaded it onto my Steam Deck to check it out this week. My favorite part of any RPG is finding & upgrading armor — and this is basically a game about exactly that, but the armor is cute clothes. 
 
 I had fun playing it for a day and satisfying my curiosity, but I'm probably not going to play much more of it for now. I'm glad it's there if I'm in the mood, but I'm not super interested in playing it on a regular basis right now.
 
