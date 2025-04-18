@@ -1,13 +1,11 @@
 ---
 title: The Studio
-layout: layouts/page.html
+layout: layouts/watching.html
 status: watching
-tags:
-  - tv
-url:
-cover:
-date finished:
+url: 
+cover: 
+date finished: 
 shortcode: the-studio
 publish: true
 ---
-Watched the first episode and really enjoyed it!
+Watched the first few episodes of this, and I really enjoy it so far! 
