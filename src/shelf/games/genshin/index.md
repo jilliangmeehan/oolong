@@ -1,14 +1,9 @@
 ---
 title: Genshin Impact
-layout: layouts/game.html
-UID: "605796152"
 status: playing
-tags:
-  - game
 url: https://enka.network/u/jillian/
-publish: true
-cover: "![genshinimpact.png](genshinimpact.png)"
+cover: 
+date finished: 
 shortcode: genshin
+publish: true
 ---
-
-{% include "partials/shelf/abyss.html" %}
