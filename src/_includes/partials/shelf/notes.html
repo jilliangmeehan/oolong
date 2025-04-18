@@ -1,3 +1,6 @@
-{% set collection = collections.note | filterByTag(shortcode) %}
+{% set hasNotes = false %} {% for post in collections.note %} {% if
+post.data.tags and shortcode in post.data.tags %} {% set hasNotes = true %} {%
+endif %} {% endfor %} {% if hasNotes %} {% set collection = collections.note |
+filterByTag(shortcode) %}
 <h2>sticky notes</h2>
-{% include "partials/thumbnails.html" %}
+{% include "partials/thumbnails.html" %} {% endif %}

@@ -1,3 +1,6 @@
-{% set collection = collections.post | filterByTag(shortcode) %}
+{% set hasJournals = false %} {% for post in collections.post %} {% if
+post.data.tags and shortcode in post.data.tags %} {% set hasJournals = true %}
+{% endif %} {% endfor %} {% if hasJournals %} {% set collection =
+collections.post | filterByTag(shortcode) %}
 <h2>journal entries</h2>
-{% include "partials/thumbnails.html" %}
+{% include "partials/thumbnails.html" %} {% endif %}
