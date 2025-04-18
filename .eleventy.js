@@ -41,10 +41,10 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
   eleventyConfig.addPassthroughCopy({ "./src/favicon/": "/favicon/" });
   eleventyConfig.addPassthroughCopy({ "./src/icons/": "/icons/" });
-  eleventyConfig.addPassthroughCopy("**/*.jpg");
-  eleventyConfig.addPassthroughCopy("**/*.jpeg");
-  eleventyConfig.addPassthroughCopy("**/*.png");
-  eleventyConfig.addPassthroughCopy("**/*.gif");
+  //eleventyConfig.addPassthroughCopy("**/*.jpg");
+  //eleventyConfig.addPassthroughCopy("**/*.jpeg");
+  //eleventyConfig.addPassthroughCopy("**/*.png");
+  //eleventyConfig.addPassthroughCopy("**/*.gif");
 
   // transform to make sure my image files end up in the right folders
   eleventyConfig.on("afterBuild", () => {
