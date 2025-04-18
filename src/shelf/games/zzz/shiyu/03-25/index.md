@@ -1,12 +1,12 @@
 ---
-title: "March 2025"
+title: March 2025
 layout: layouts/page.html
 tags:
   - shiyu
   - games/zzz
 date: 2025-04-04
 publish: true
-summary:
+summary: 
 ---
 ## overview
 ![Shiyu Defense Overview](./photos/03-25_shiyu.png)

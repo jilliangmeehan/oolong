@@ -1,12 +1,12 @@
 ---
-title: "December 2024"
+title: December 2024
 layout: layouts/page.html
 tags:
   - abyss
   - games/genshin
 date: 2025-01-04
 publish: true
-summary:
+summary: 
 ---
 ## overview
 ![Abyss Overview](./photos/12-24_abyss.png)

@@ -1,13 +1,13 @@
 ---
-title: stardew mods
+title: Stardew Mods
 layout: layouts/page.html
 tags:
-  - note
+  - notes
   - games
   - stardew
 date: 2025-04-17
 publish: true
-summary:
+summary: 
 ---
 # currently using
 ## ui changes
