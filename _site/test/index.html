@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>test page</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+  <div class="header_icon tea_container">
+    <img src="/icons/tea.png" alt="Cup of Tea" class="tea_cup" id="teaCup" />
+    <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+  </div>
+  <div class="header_text">
+    
+<nav aria-label="breadcrumb" class="font-pixel">
+    <a href="/">Home</a>
+
+    
+    <span class="separator">/</span>
+    <span aria-current="page">test page</span>
+    
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    nav[aria-label="breadcrumb"] span.separator {
+        color: #666;
+    }
+</style>
+ 
+     <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2024-10-25T15:55:17.997Z"
+    >25th of October 2024</time
+  >
+</p>
+ 
+  </div>
+</header>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 24px;
+    justify-items: start;
+  }
+
+  .head > div > h1 {
+    margin-bottom: -6px;
+  }
+
+  .tea_container {
+    position: relative;
+    display: inline-block;
+  }
+  .tea_cup {
+    width: 48px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .tea_cup:hover {
+    transform: scale(1.1);
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .wiggle {
+    animation: wiggle 0.5s ease;
+  }
+  .speech_bubble {
+    position: absolute;
+    top: 80px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    font-family: "Departure Mono";
+  }
+  .speech_bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const teaCup = document.getElementById("teaCup");
+  const speechBubble = document.getElementById("speechBubble");
+  const teaCups = [
+    "/icons/tea.png",
+    "/icons/tea_2.png",
+    "/icons/tea_3.png",
+    "/icons/tea_4.png",
+  ];
+  let currentCup = 0;
+
+  teaCup.addEventListener("click", () => {
+    // Change tea cup
+    currentCup = (currentCup + 1) % teaCups.length;
+    teaCup.src = teaCups[currentCup];
+
+    // Wiggle animation
+    teaCup.classList.add("wiggle");
+    setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+    // Show speech bubble
+    speechBubble.classList.add("show");
+    setTimeout(() => speechBubble.classList.remove("show"), 2000);
+  });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><h1>Header 1</h1>
+<p>Reprehenderit sit magna pariatur esse esse aliquip Lorem. Mollit commodo consectetur tempor ipsum deserunt nulla esse irure enim cillum qui et do. Aliquip magna id do tempor fugiat. <strong>Sunt quis ex enim quis</strong> amet proident sint excepteur fugiat minim mollit ipsum. Sit minim ipsum ipsum. Et commodo ad tempor sunt occaecat amet nulla fugiat sunt adipisicing magna magna dolor. <em>Sunt esse laborum amet.</em></p>
+<h2>Header 2</h2>
+<p>Amet non et irure occaecat. Quis ullamco laborum non deserunt exercitation quis in labore nisi. <strong>Sit ex laboris ut eu nostrud ullamco cupidatat eiusmod tempor officia minim sit.</strong> In ut labore nisi ad et nulla officia reprehenderit sint amet veniam reprehenderit deserunt magna. ==Mollit quis qui sint qui veniam cupidatat duis in consectetur laborum do.== Eiusmod velit magna officia sint cupidatat aliquip esse officia consequat laborum in eu do ea.</p>
+<h3>Header 3</h3>
+<p>Excepteur minim fugiat sunt mollit esse aliqua voluptate exercitation aute mollit eu officia. Laborum ea dolore nisi aliquip occaecat non esse veniam enim velit labore. Adipisicing tempor cillum ipsum voluptate. Culpa commodo adipisicing enim consequat sunt laboris magna sit eiusmod <em>Lorem aute excepteur velit ex</em>. Fugiat labore ea commodo laborum qui ullamco veniam velit anim tempor id duis labore amet officia. Pariatur irure sunt sit amet duis. Excepteur do nisi labore.</p>
+<h3>Header 4</h3>
+<blockquote>
+<p>Sit sint ea cillum sint in amet reprehenderit consequat consectetur ut. Dolor do aliquip elit nostrud anim ullamco occaecat ea dolor elit cillum. Id ullamco tempor veniam cupidatat non ipsum Lorem eiusmod anim duis minim cupidatat excepteur. Exercitation aliqua ex esse sit quis est veniam ex nisi ex quis cupidatat. Sit amet veniam non ad. Eiusmod eu cupidatat labore fugiat ea non adipisicing qui ad dolore.</p>
+</blockquote>
+<h3>Header 5</h3>
+<p>Ad non laborum consequat veniam. Dolor consectetur eiusmod duis nisi et occaecat nostrud. <strong>Nisi anim labore</strong> in ea nulla consectetur sunt voluptate laboris non nostrud cupidatat. Irure excepteur incididunt duis elit pariatur occaecat sint commodo pariatur laboris eiusmod magna duis deserunt. Dolor irure in enim cupidatat. In dolore duis non nostrud occaecat magna in deserunt Lorem dolore fugiat dolore. ==Consectetur non aliqua ea eiusmod ea elit reprehenderit et minim nulla laboris labore velit culpa nulla.==</p>
+<hr>
+<h3>Header 6</h3>
+<p>Nisi velit anim dolor pariatur velit. <code>Cupidatat</code> aute laborum consectetur dolore sit. Pariatur ex sit deserunt proident pariatur exercitation reprehenderit elit velit ut irure deserunt. Nulla aliqua aute fugiat do mollit magna. Aute ea tempor laboris pariatur nisi. Pariatur nisi consequat ea fugiat aute. <strong>Ex et tempor non cillum</strong> commodo voluptate cupidatat labore labore ea ex duis. Cupidatat fugiat esse reprehenderit cillum ullamco incididunt.</p>
+<pre><code>Eiusmod nostrud Lorem adipisicing non ex mollit. Mollit velit ullamco et amet incididunt aliquip cillum officia fugiat sit exercitation Lorem. Ea occaecat laborum sint laborum officia ex ad laborum dolor pariatur. Et cupidatat pariatur dolor aute sit id ipsum. Pariatur officia aute Lorem. Do laboris ad quis non sunt.
+</code></pre>
+</article>
+
+        </main>
+    </body>
+    <footer><nav>
+  <h2>index</h2>
+  <ul role="list">
+    
+    <li><a href="/">home</a>•</li>
+    
+    <li><a href="/blog">blog</a>•</li>
+    
+    <li><a href="/shelf">shelf</a>•</li>
+    
+    <li><a href="/meta">meta</a>•</li>
+    
+    <li><a href="/teashop">teashop</a>•</li>
+    
+    <li>
+      <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  nav ul li a {
+    margin-right: 8px;
+  }
+
+  nav ul li {
+    font-family: var(--serif);
+  }
+
+  nav ul li a {
+    text-decoration: underline;
+    color: var(--tea) !important;
+  }
+</style>
+</footer>
+
+</html>
