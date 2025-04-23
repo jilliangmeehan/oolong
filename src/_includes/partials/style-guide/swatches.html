@@ -1,0 +1,50 @@
+<section>
+  <table class="swatch-list">
+    <tr>
+      <th>Color</th>
+      <th>Hex code</th>
+    </tr>
+    {% for swatch in swatches %}
+    <tr>
+      <td>
+        <div class="swatch" style="background-color: {{swatch.hex}}"></div>
+        {{ swatch.name }}
+      </td>
+      <td class="hex-code">{{ swatch.hex }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<style>
+  .swatch {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0px;
+    border-radius: 100%;
+    border: 1px solid var(--oat);
+  }
+
+  table.swatch-list {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 8px;
+    text-align: left;
+  }
+
+  td {
+    padding: 8px;
+    border-top: 1px solid var(--oat);
+    line-height: 16px;
+  }
+
+  .hex-code {
+    font-family: "Departure Mono";
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+</style>

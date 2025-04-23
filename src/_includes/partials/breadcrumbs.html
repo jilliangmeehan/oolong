@@ -1,0 +1,41 @@
+{% if page.url == "/" %}
+<h1 class="font-pixel">jillian g. meehan</h1>
+{% else %}
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        {% for crumb in breadcrumb %}
+        <li class="font-pixel">
+            {% if loop.last %}
+            <span aria-current="page">{{crumb.name}}</span>
+            {% else %}
+            <a href="{{crumb.url}}" class="color-joycon">{{crumb.name}}</a>
+            {% endif %}
+        </li>
+        {% if loop.last == false %}
+        <span class="separator">/</span>
+        {% endif %} {% endfor %}
+    </ul>
+</nav>
+{% endif %}
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>

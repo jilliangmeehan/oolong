@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="weeknotes four" />
+        
+        <meta property="og:description" content="Two days until work starts up again — at this point I&#39;m grateful for it, because I think I really need to just get back into my normal routines." />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/blog/weeknotes-four/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>weeknotes four</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/blog/" class="color-joycon">blog</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">weeknotes four</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-01-04T00:00:00.000Z"
+    >3rd of January 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><p>Two days until work starts up again — at this point I’m grateful for it, because I think I really need to just get back into my normal routines. And to remember that time flows normally even after vacation ends, because my brain keeps tricking me into thinking that I need to do <em>everything</em> I’ve <em>ever</em> wanted to do before Monday or I will run out of time and lose the chance to do any of it ever again. Silly!</p>
+<h2>what i’ve been up to</h2>
+<p>I went home to see my family for Christmas; had a good time hanging out there for the week eating cookies and playing Uno. I came back to Brooklyn to see friends and make New Year’s Even plans — which turned out to be very chill. Dylan and I hung out with a small group of friends and drank wine while we played video games until midnight.</p>
+<h2>reading</h2>
+<p>I spent an entire day reading <a href="https://readonlymemory.com/shop/book/500-years-2nd-edition/">500 Years Later: An Oral History of Final Fantasy VII</a>, which was pretty cool. It was less about the game itself and more about the business &amp; management stuff happening at Square at the time, told through interviews with a bunch of the people involved before, during, and after the game launched. Really made me want to go back and play more of it!</p>
+<p>I also just got a copy of <a href="https://50wattsbooks.com/products/the-norse-myths-the-pantheon-fairy-tale-and-folklore-library">The Norse Myths</a> retold by Kevin Crossley-Holland, and I’ve been making my way through it. I like having a bunch of these stories in a collection together that I can flip through, and there’s a lot of extra context in the introduction &amp; the footnotes for each story, so I’m learning a lot. 50 Watts has a bunch of other collections in the same <a href="https://50wattsbooks.com/search?q=pantheon+folk">“Pantheon Fairy Tale and Folklore Library”</a> series, and I’d like to pick up more of them once I finish this one.</p>
+<h2>watching</h2>
+<p>I didn’t watch any Christmas movies this year! I always kinda forget to when I’m not with my family, and they watch them all early anyway. I’m in the mood for a Phantom Thread rewatch soon, though — it’s a holiday movie in my heart if not in reality.</p>
+<p>My family and I usually like to watch comedy specials on Netflix when I’m home. This year we went for the newest Nate Bargatze one, and a couple of Tom Papa’s. And when I got back to New York, Dylan and I started watching the new season of Squid Game, which we’re a few episodes into so far.</p>
+<h2>playing</h2>
+<p>Both <a href="/shelf/games/genshin/">Genshin</a> and <a href="/shelf/games/wuwa/">Wuthering Waves</a> had updates this week, and <a href="/shelf/games/hsr/">Honkai Star Rail</a> has a big update coming up soon, so I’ve naturally been playing a lot of those. I’m also still playing a lot of <a href="/shelf/games/twocrowns/">Kingdom: Two Crowns</a> — I finished the Call of Olympus DLC and started Norse Lands, to go along with the book I’m reading.</p>
+<p>The big news is I just realized I can play Dragon’s Dogma 2 again, after not being able to get it to open for months. It’s not really a great time to sink my teeth back into a game like that, because I’ve got plenty of other things I wanted to do, but I can’t help myself. I’m going to try to remember how the controls work today so I can pick up where I left off with the main story.</p>
+<h2>footnote</h2>
+<p>I’m happy with the changes I made to my<a href="/now"> /now</a> page recently, and I’m happy to actually be updating it &amp; writing weeknotes more often, but it does feel a little silly to me that I’m essentially writing the same thing in two places at the same time. They’re not <em>exactly</em> the same, but there’s a good amount of overlap. I don’t know what I wanna do about that…or if I really care to do anything about it at all. Maybe it’s fine! Whatever!</p>
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

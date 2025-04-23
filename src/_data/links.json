@@ -1,0 +1,22 @@
+[
+  {
+    "title": "home",
+    "url": "/"
+  },
+  {
+    "title": "blog",
+    "url": "/blog"
+  },
+  {
+    "title": "shelf",
+    "url": "/shelf"
+  },
+  {
+    "title": "meta",
+    "url": "/meta"
+  },
+  {
+    "title": "teashop",
+    "url": "/teashop"
+  }
+]

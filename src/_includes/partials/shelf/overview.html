@@ -1,0 +1,17 @@
+<section class="overview">
+    <div class="illustration">
+        <img src="/icons/jill.gif" />
+    </div>
+    <div class="latest_posts">
+        <h2 class="lowercase">latest posts</h2>
+        <ul role="list">
+            {%- for post in collections.post | reverse -%} {% if loop.index <= 5
+            %}
+            <li class="lowercase">
+                <a href="{{ post.url }}">{{ post.data.title }}</a>
+            </li>
+            {% endif %} {%- endfor -%}
+        </ul>
+        <p class="button_style"><a href="/blog">see more</a></p>
+    </div>
+</section>

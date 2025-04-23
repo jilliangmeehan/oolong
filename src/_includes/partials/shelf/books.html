@@ -1,0 +1,26 @@
+{% set sorted_books = collections.book | sort(attribute="data.status") | reverse
+%} {% set statusColors = { 'reading': '#82b78b', 'paused': '#edd495',
+'finished': '#8b8fc3' } %}
+
+<section class="shelf-table">
+    <table>
+        <tr>
+            <th>Reading</th>
+            <th>Status</th>
+        </tr>
+        {% for book in sorted_books %}
+        <tr>
+            <td>
+                <a href="{{ book.url }}">{{ book.data.title }}</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: {{ statusColors[book.data.status] }}"
+                ></div>
+                {{ book.data.status }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>

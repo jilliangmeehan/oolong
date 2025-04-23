@@ -1,0 +1,4 @@
+{% extends "layouts/base.html" %} {% block content %}
+<article class="blog_post">{{ content | safe }}</article>
+<p class="button_style"><a href="/feed.xml">Subscribe via Rss</a></p>
+{% include "partials/posts.html" %} {% endblock %}

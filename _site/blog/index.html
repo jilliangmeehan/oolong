@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="Blog" />
+         
+        <meta property="og:description" content="sporadically updated." />
+        
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/blog/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>Blog</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">blog</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+ 
+        <p class="page_description small">sporadically updated.</p>
+        
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article class="blog_post"></article>
+<p class="button_style"><a href="/feed.xml">Subscribe via Rss</a></p>
+ <ul role="list" class="post-list"><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/shelf/games/stardew/journal/a-fresh-start/photos/sdv-a-fresh-start-3.jpeg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/shelf/games/stardew/journal/a-fresh-start/">A Fresh Start</a>
+            </h2>
+            <time datetime="2025-04-17T00:00:00.000Z" class="small">
+                16th of April 2025
+            </time>
+            <p class="font-serif">Anh told me to play Stardew Valley, so I&#39;m playing Stardew Valley.</p>
+        </div>
+    </li><li class="post-item">
+           
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-six/">weeknotes six</a>
+            </h2>
+            <time datetime="2025-02-16T00:00:00.000Z" class="small">
+                15th of February 2025
+            </time>
+            <p class="font-serif">The weather is gloomy this week — rainy and snowy and dark, but at least the sun is setting a little bit later every day.</p>
+        </div>
+    </li><li class="post-item">
+           
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-five/">weeknotes five</a>
+            </h2>
+            <time datetime="2025-01-18T00:00:00.000Z" class="small">
+                17th of January 2025
+            </time>
+            <p class="font-serif">A two-week sleepover, learning Greek, and playing lots of HSR.</p>
+        </div>
+    </li><li class="post-item">
+           
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-four/">weeknotes four</a>
+            </h2>
+            <time datetime="2025-01-04T00:00:00.000Z" class="small">
+                3rd of January 2025
+            </time>
+            <p class="font-serif">Two days until work starts up again — at this point I&#39;m grateful for it, because I think I really need to just get back into my normal routines.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/weeknotes-three/photos/infinitynikki.jpeg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-three/">weeknotes three</a>
+            </h2>
+            <time datetime="2024-12-21T00:00:00.000Z" class="small">
+                20th of December 2024
+            </time>
+            <p class="font-serif">It&#39;s been a while. Excuse me while I clear away the digital cobwebs.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/i-bought-some-fonts/photos/before.png"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/i-bought-some-fonts/">i bought some fonts</a>
+            </h2>
+            <time datetime="2024-03-16T00:00:00.000Z" class="small">
+                15th of March 2024
+            </time>
+            <p class="font-serif">I did some other stuff too, but the fonts are the fun part.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/using-obsidian-as-a-cms/photos/obsidian_screenshot.png"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/using-obsidian-as-a-cms/">using obsidian as a cms</a>
+            </h2>
+            <time datetime="2024-03-09T00:00:00.000Z" class="small">
+                8th of March 2024
+            </time>
+            <p class="font-serif">It took me a while to decide what I wanted to do about the dreaded content management over here. Mostly because I didn&#39;t think my ideal solution was a real option.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/weeknotes-two/photos/_29-ajax.jpg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-two/">weeknotes two</a>
+            </h2>
+            <time datetime="2023-12-29T00:00:00.000Z" class="small">
+                28th of December 2023
+            </time>
+            <p class="font-serif">Happy dead week.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/weeknotes-one/photos/_10-sketches.jpg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/weeknotes-one/">weeknotes one</a>
+            </h2>
+            <time datetime="2023-11-10T00:00:00.000Z" class="small">
+                9th of November 2023
+            </time>
+            <p class="font-serif">I&#39;m going to copy Anh — I&#39;ve been thinking about weeknotes lately, and about why I don&#39;t write here very often, and about how I could change that.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/opening-mail/photos/_06-desk.jpg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/opening-mail/">opening mail</a>
+            </h2>
+            <time datetime="2023-01-06T00:00:00.000Z" class="small">
+                5th of January 2023
+            </time>
+            <p class="font-serif">i really like saving up a bunch of mail for a bit to open all at once — not like, bills or other time-sensitive things, but fun mail.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/back-at-work/photos/_05-desk.jpg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/back-at-work/">back at work</a>
+            </h2>
+            <time datetime="2023-01-05T00:00:00.000Z" class="small">
+                4th of January 2023
+            </time>
+            <p class="font-serif">it&#39;s a thursday, but it feels like a monday. i&#39;ve got a full slack inbox &amp; and an empty new hobonichi, ready to scribble in with my also-new pens.</p>
+        </div>
+    </li><li class="post-item">
+          
+        <div class="post-thumbnail">
+            <img
+                src="/blog/i-got-some-new-pens/photos/_27-matcha.jpg"
+                alt="Post thumbnail"
+                loading="lazy"
+            />
+        </div>
+         
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/i-got-some-new-pens/">i got some new pens</a>
+            </h2>
+            <time datetime="2022-11-27T00:00:00.000Z" class="small">
+                26th of November 2022
+            </time>
+            <p class="font-serif">happy sunday. i got some new toys :)</p>
+        </div>
+    </li><li class="post-item">
+           
+        <div class="post-details">
+            <h2 class="lowercase">
+                <a href="/blog/good-morning/">good morning</a>
+            </h2>
+            <time datetime="2022-11-18T00:00:00.000Z" class="small">
+                17th of November 2022
+            </time>
+            <p class="font-serif">hi i guess. it&#39;s been a while since i did any kind of blogging—i don&#39;t really know how to begin.</p>
+        </div>
+    </li></ul>
+
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .post-item {
+        display: flex;
+        align-items: stretch;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px dashed var(--oat);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .post-thumbnail {
+        flex-shrink: 0;
+        width: 160px;
+        overflow: hidden;
+    }
+
+    .post-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+    }
+
+    .post-details {
+        flex-grow: 1;
+        margin: 1rem;
+    }
+
+    .post-details h2 {
+        margin: 0;
+    }
+
+    .post-details time {
+        display: block;
+        margin: 0.25rem 0;
+    }
+
+    .post-details p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .post-item {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+        }
+
+        .post-details {
+            margin: 1rem;
+        }
+    }
+</style>
+
+ 
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>
