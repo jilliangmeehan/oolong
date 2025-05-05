@@ -70,7 +70,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy({ "./src/icons/": "/icons/" });
   //eleventyConfig.addPassthroughCopy("**/*.jpg");
   //eleventyConfig.addPassthroughCopy("**/*.jpeg");
-  //eleventyConfig.addPassthroughCopy("**/*.png");
+  eleventyConfig.addPassthroughCopy("**/*.png");
   //eleventyConfig.addPassthroughCopy("**/*.gif");
 
   // transform to make sure my image files end up in the right folders
