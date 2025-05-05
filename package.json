@@ -5,7 +5,8 @@
   "main": ".eleventy.js",
   "scripts": {
     "start": "npx eleventy --serve --quiet --incremental",
-    "build": "npx eleventy"
+    "build": "npx eleventy",
+    "build:netlify": "mkdir -p _site/favicon _site/icons && eleventy"
   },
   "repository": {
     "type": "git",
