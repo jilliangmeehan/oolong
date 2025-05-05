@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx eleventy --serve --quiet --incremental",
     "build": "npx eleventy",
-    "build:netlify": "mkdir -p _site/favicon _site/icons && eleventy"
+    "build:netlify": "mkdir -p _site/favicon _site/icons _site/images && find src -type d -name \"photos\" -exec mkdir -p _site/{} \\; && eleventy"
   },
   "repository": {
     "type": "git",
