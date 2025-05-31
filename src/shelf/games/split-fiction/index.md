@@ -1,9 +1,9 @@
 ---
 title: Split Fiction
-status: playing
-url: 
+status: paused
+url:
 cover: https://cdn2.steamgriddb.com/grid/d188fed77bfeb03b0257f219e9bf10b7.png
-date finished: 
+date finished:
 shortcode: split-fiction
 publish: true
 ---

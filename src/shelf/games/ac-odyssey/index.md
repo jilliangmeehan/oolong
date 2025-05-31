@@ -1,9 +1,9 @@
 ---
 title: Assassin's Creed Odyssey
-status: playing
-url: 
+status: paused
+url:
 cover: https://cdn2.steamgriddb.com/grid/69a809648e1c089158696a612de44bcd.jpg
-date finished: 
+date finished:
 shortcode: ac-odyssey
 publish: true
 ---
