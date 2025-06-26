@@ -33,6 +33,11 @@ html:focus-within {
 body {
     min-height: 100vh;
     line-height: 1.5;
+    text-decoration-skip-ink: auto;
+    font-optical-sizing: auto;
+    font-variant-ligatures: common-ligatures no-discretionary-ligatures
+        no-historical-ligatures contextual;
+    font-kerning: normal;
 }
 
 a:not([class]),
@@ -106,6 +111,7 @@ p {
 article,
 .font-serif {
     font-family: var(--serif);
+    text-wrap: pretty;
 }
 
 ul[role="list"],
@@ -135,8 +141,30 @@ code {
 }
 
 blockquote {
-    font-style: italic;
-    margin-left: 40px;
+    margin: 24px;
+    position: relative;
+    max-width: 540px;
+}
+
+blockquote > p {
+    padding: 0 18px;
+    border-left: 3px solid var(--oat);
+}
+
+blockquote cite {
+    color: var(--matcha);
+    display: block;
+    width: 200px;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+@media screen and (min-width: 860px) {
+    blockquote cite {
+        position: absolute;
+        top: -6px;
+        left: 560px;
+    }
 }
 
 html,
@@ -189,6 +217,73 @@ article > h2,
 
 .lowercase {
     text-transform: lowercase;
+}
+
+/* callouts */
+.callout {
+    border-radius: 6px;
+    padding: 24px 36px 36px 26px;
+    background-color: #f2ebe8;
+}
+
+.callout-title {
+    font-family: var(--pixel);
+    color: var(--chai);
+    text-transform: lowercase;
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+.callout-title-icon {
+    display: none;
+}
+
+.callout-title-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.callout-content > p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* footnotes */
+hr {
+    margin: 48px 0 24px 0;
+    border: none;
+    border-top: 2px dashed var(--oat);
+    color: var(--oat);
+}
+
+.footnotes ol {
+    padding-inline-start: 24px;
+}
+
+.footnotes ol li::marker {
+    content: counter(list-item) " ";
+    font-family: "Departure Mono";
+    color: var(--chai);
+}
+
+.footnote-item {
+    font-size: 0.8rem;
+}
+
+sup.footnote-ref {
+    font-feature-settings: "sups";
+    line-height: 0;
+}
+
+.footnote-ref a {
+    text-decoration: none;
+}
+
+.footnote-backref {
+    text-decoration: none;
+    font-family: "Departure Mono";
+    color: var(--joycon);
+    font-size: 1rem;
 }
 
 /* blog */

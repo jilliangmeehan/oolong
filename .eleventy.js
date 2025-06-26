@@ -211,8 +211,13 @@ module.exports = (eleventyConfig) => {
     },
   );
 
-  // fix smartquotes
+  // markdown-it plugins
   const markdownIt = require("markdown-it");
+  // footnotes
+  const markdownItFootnote = require("markdown-it-footnote");
+  // obsidian callouts
+  const markdownItCallouts = require("markdown-it-obsidian-callouts");
+  // fix smartquotes
   let options = {
     html: true,
     typographer: true,
@@ -220,6 +225,29 @@ module.exports = (eleventyConfig) => {
 
   let markdownLibrary = markdownIt(options);
   eleventyConfig.setLibrary("md", markdownLibrary);
+  eleventyConfig.amendLibrary("md", (markdownLibrary) =>
+    markdownLibrary.use(markdownItFootnote),
+  );
+  eleventyConfig.amendLibrary("md", (markdownLibrary) =>
+    markdownLibrary.use(markdownItCallouts),
+  );
+
+  // customizes footnote rendering to remove brackets
+  eleventyConfig.amendLibrary("md", (markdownLibrary) => {
+    const defaultRender = markdownLibrary.renderer.rules.footnote_ref;
+    markdownLibrary.renderer.rules.footnote_ref = (
+      tokens,
+      idx,
+      options,
+      env,
+      self,
+    ) => {
+      return defaultRender(tokens, idx, options, env, self).replace(
+        /\[(\d+)\]/g,
+        "$1",
+      );
+    };
+  });
 
   // rss feed
   eleventyConfig.addPlugin(feedPlugin, {
