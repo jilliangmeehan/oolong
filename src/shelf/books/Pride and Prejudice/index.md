@@ -10,4 +10,4 @@ publish: true
 ---
 I love how funny Jane Austen's writing is. I read this in high school, and have since watched the 2005 movie dozens of times, so reading it again with that attachment to it was fun.
 
-> I am happier even than Jane; she only smiles, I laugh. (Page 246)
+> I am happier even than Jane; she only smiles, I laugh. <cite>Page 246</cite>
