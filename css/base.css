@@ -222,7 +222,7 @@ article > h2,
 /* callouts */
 .callout {
     border-radius: 6px;
-    padding: 24px 36px 36px 26px;
+    padding: 24px 36px;
     background-color: #f2ebe8;
 }
 
@@ -244,7 +244,6 @@ article > h2,
 }
 
 .callout-content > p {
-    margin: 0;
     font-size: 1rem;
 }
 
