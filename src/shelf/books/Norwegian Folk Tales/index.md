@@ -2,7 +2,7 @@
 title: Norwegian Folk Tales
 author: Asbjornsen and Moe
 url: https://50wattsbooks.com/products/norwegian-folk-tales-the-pantheon-fairy-tale-and-folklore-library
-cover: https://50wattsbooks.com/cdn/shop/products/Norwegian-Folk-Tales-Pantheon_700x.jpg?v=1669766558
+cover: https://images1.penguinrandomhouse.com/cover/9780394710549
 status: finished
 date finished: 2025-06-17
 shortcode:
