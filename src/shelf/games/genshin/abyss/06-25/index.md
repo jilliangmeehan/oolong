@@ -10,7 +10,7 @@ publish: true
 ## overview
 ![Abyss Overview](./photos/06-25_abyss.png)
 
-I struggled most with the first half here — *especially* with Kongamato. That guy is a real sponge. I originally tried using Navia instead of Mavuika there, but I just couldn't get three stars in 12-2. I guess the "When characters have 0 Energy, DMG + 75%" ley line disorder really made a difference (🙄).
+I struggled most with the first half here — *especially* with Kongamato. That guy is a real sponge. I originally tried using Navia instead of Mavuika there, but I just couldn't get three stars in 12-2. I guess the "**When characters have 0 Energy, DMG + 75%**" ley line disorder really made a difference (🙄).
 
 Second half, I actually meant to use Furina instead of Sigewinne in the last slot, but I misclicked and decided to just commit to it. Close enough! My preferred Skirk team is actually Escoffier/Sigewinne/Furina, but I used Rosaria here for some extra cryo + the crit rate buff.[^1]
 
