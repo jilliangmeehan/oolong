@@ -323,13 +323,50 @@ sup.footnote-ref {
     text-transform: capitalize;
 }
 
-.shelf-table .swatch {
+.shelf-table .swatch,
+.shelf-info .swatch {
     float: left;
     width: 12px;
     height: 12px;
     margin: 2px 8px 0 0px;
     border-radius: 100%;
     border: 1px solid var(--oat);
+}
+
+.shelf-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 36px;
+    font-family: "Departure Mono";
+}
+
+.shelf-info .meta {
+    padding-bottom: 4px;
+}
+
+.shelf-info p,
+.shelf-info a {
+    margin: 2px;
+    font-size: 0.9rem;
+}
+
+.shelf-cover-img {
+    max-height: 180px;
+}
+
+.shelf-info-status .swatch {
+    margin: 0 0 0 2px;
+}
+
+.shelf-info-status {
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 4px;
 }
 
 /* home page */

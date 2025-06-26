@@ -1,3 +1,21 @@
-{% extends "layouts/base.html" %} {% block content %}
-<article>{{ content | safe }}</article>
+{% extends "layouts/base.html" %} {% set statusColors = { 'reading': '#82b78b',
+'paused': '#edd495', 'finished': '#8b8fc3' } %} {% block content %}
+<article>
+    <div class="shelf-info">
+        <img class="shelf-cover-img" src="{{cover}}" />
+        <div class="meta">
+            <a href="{{url}}">{{title}}</a>
+            <p>{{author}}</p>
+            <div class="shelf-info-status">
+                <div
+                    class="swatch"
+                    style="background-color: {{ statusColors[status] }}"
+                ></div>
+                <p>{{ status }}</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    {{ content | safe }}
+</article>
 {% endblock %}
