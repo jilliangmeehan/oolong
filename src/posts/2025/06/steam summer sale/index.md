@@ -24,6 +24,7 @@ You can play this at the normal difficulty, which gives you a certain number of 
 > [!note] 
 > This one is not the *best* for Steam Deck, because the text is a bit small and you do have to use the trackpads. It's doable, and I certainly did it, but I enjoyed it more on my laptop. 
 
+
 # [Potion Craft](https://store.steampowered.com/app/1210320/Potion_Craft_Alchemist_Simulator/)
 **$4.99, 75% off**
 
