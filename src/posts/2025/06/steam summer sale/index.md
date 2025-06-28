@@ -5,7 +5,7 @@ tags:
   - post
 date: 2025-06-28
 publish: true
-summary:
+summary: I am supposed to be packing for a two-week vacation right now, but instead I am sitting at my computer because I realized it's Steam Summer Sale time and I have some recommendations that I would like to share.
 ---
 I am supposed to be packing for a two-week vacation right now, but instead I am sitting at my computer because I realized it's Steam Summer Sale time and I have some recommendations that I would like to share beyond my small Discord server.
 
