@@ -1,10 +1,10 @@
 ---
 title: The Studio
 layout: layouts/watching.html
-status: watching
-url: 
-cover: 
-date finished: 
+status: finished
+url:
+cover:
+date finished: 2025-08-10
 shortcode: the-studio
 publish: true
 ---
