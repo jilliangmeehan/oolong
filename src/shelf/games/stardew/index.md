@@ -1,9 +1,9 @@
 ---
 title: Stardew Valley
-status: playing
-url: 
-cover: 
-date finished: 
+status: paused
+url:
+cover:
+date finished:
 shortcode: stardew
 publish: true
 ---
