@@ -13,17 +13,17 @@ publish: true
 
 > Collum chopped the heads off cow parsely with his sword. He chewed clover and sorrel to stop his stomach rumbling and picked at the peeling calluses on the palm of his sword hand. He stopped and prayed by the roadside. He snapped a thin branch off a tree and shoved it down the back of his armor in a desperate attempt to scratch his back. Gradually his horror at the events of the day began to give way to the boredom of the road. <cite>Book I: Chapter 2</cite>
 
+I really enjoy detailed descriptions of mundanity like this. 
+
 > "Can't have an owl running around in a knight's body." Collum agreed that one absolutely could not have owls running around in knights' bodies. <cite>Book I: Chapter 2</cite>
+
+I like the dry sense of humor in this book a lot.
 
 > Beith-luis-nin meant Ogham, the old writing of the druids. More pagan stuff. Each letter was supposed to be a tree: beith was a birch, luis was a rowan, nin was an ash, or something like that. <cite>Book I: Chapter 2</cite>
 
 > Fairies liked a bit of fun, but they played rough and didn't care if their toys got broken. They'd been gods once, who'd shrunk and faded with the coming of Christ, and now they lurked in hollow hills and at the borders and edges of things, places even God seemed to forget about or else why wouldn't He just get rid of them? <cite>Book I: Chapter 2</cite>
 
-> "I suppose," Arthur said, "that from the deer's point of view this is a great victory. It must think of itself as a mighty hero."
-> 
-> "You don't really think God bothered to give deer a point of view?
-> 
-> "Of course He did, He's a fiend for details." <cite>Book I: Chapter 5</cite>
+Lots of interesting stuff about Celtic paganism etc. I feel like I learned a lot — would like to read more books like this.
 
 > Arthur was only middling competent with a sword but the ritual complexity and deep seasonal lore of the chase appealed to his hungry intellect, and he was a past master at it. <cite>Book I: Chapter 5</cite>
 
@@ -33,6 +33,8 @@ publish: true
 
 > Bedivere loved God, but he loved Arthur more, and he felt nostalgic for the days when the great game of knighthood was just a game. He would have given his life to protect Arthur, but he couldn't protect him from God. <cite>Book I: Chapter 6</cite>
 
+Bedivere was probably my favorite character in this.
+
 > Once the divine machinery of an adventure was in motion Arthur liked to draw it out, study it, and savor its every last wrinkle. <cite>Book I: Chapter 8</cite>
 
 Arthur is a gamer.
@@ -41,15 +43,21 @@ Arthur is a gamer.
 
 > Too much had happened, he needed the sorting angel of dreams to come down and sift it all into piles for him, make it into stories and tell him what it all meant and which bits he could safely forget. <cite>Book II: Chapter 16</cite>
 
+I like the idea of a sorting angel of dreams.
+
 > What a great and awful power God had given to men, the power to revoke His divine gift of life, to unlock one another's chests with the blunt key of a sword and roughly evict the ghost within. <cite>Book II: Chapter 18</cite>
 
 > What a thing it was to be married to a king, to be the only other person who knew his secret, though it lay right out in the open, every day, for all to see, which was that he was just a man and nothing more. <cite>Book III: Chapter 26</cite>
 
 > A laundress had to be a bit of an alchemist too. <cite>Book III: Chapter 28</cite>
 
+Laundry as alchemy!!! 
+
 > The druids wrote nothing down, they had always passed their knowledge from one to the next by spoken word only, so when they died all that they knew vanished. The lore and culture and memory of Old Britain went out like a candle. <cite>Book III: Chapter 28</cite>
 
 > The preparations wound up taking some hours and included the messy slaughter of two lams outside the tent as well as much lighting of candles and drawing of chalk glyphs and singing in languages Collum didn't recognize. <cite>Book IV: Chapter 34</cite>
+
+*Big* fan of stories that actually show you any amount of work going into "magic." *[Circe](https://jillian.garden/shelf/books/circe/)* did this really well, too. 
 
 > There was something deeply comforting about being near the Grail but not feeling like you had to actually go and get it. It's all right, he was fine where he was. Divine perfection is over there, and I, imperfect and fallible being that I am, am over here. <cite>Book IV: Chapter 36</cite>
 
@@ -58,6 +66,9 @@ Arthur is a gamer.
 > But Britain didn't need a miracle, or a perfect knight, or even God. It would heal all on its own, slowly, the hard way. It would always be a scarred land, a complicated land, but complicated was not the same as broken. It would never be pure or perfect, but it might still one day be whole. <cite>Book IV: Chapter 36</cite>
 
 > Why would the future be simpler than the past? Stories never really ended, they just rolled one into the next. The past was never wholly lost, and the future was never quite found. We wander forever in a pathless forest, dropping with weariness, as home draws us back, and the grail draws us on, and we never arrive, and the quest never ends. <cite>Book IV: Chapter 39</cite>
+
+### historical notes
+Putting these in their own section — at the end of the story, there's a section from the author giving some more historical context that I really liked.
 
 > The poet didn't have to say which Arthur he was talking about. Everybody already knew. Since then Arthur's story has been told and retold for 1,400 years, and it's never been told quite the same way twice. Every age and every teller leaves their traces on the story, and as it passes from one hand to the next it evolves and changes and flows like water. <cite>Historical Note</cite>
 
