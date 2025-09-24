@@ -67,7 +67,7 @@ Laundry as alchemy!!!
 
 > Why would the future be simpler than the past? Stories never really ended, they just rolled one into the next. The past was never wholly lost, and the future was never quite found. We wander forever in a pathless forest, dropping with weariness, as home draws us back, and the grail draws us on, and we never arrive, and the quest never ends. <cite>Book IV: Chapter 39</cite>
 
-### historical notes
+## historical notes
 Putting these in their own section — at the end of the story, there's a section from the author giving some more historical context that I really liked.
 
 > The poet didn't have to say which Arthur he was talking about. Everybody already knew. Since then Arthur's story has been told and retold for 1,400 years, and it's never been told quite the same way twice. Every age and every teller leaves their traces on the story, and as it passes from one hand to the next it evolves and changes and flows like water. <cite>Historical Note</cite>
