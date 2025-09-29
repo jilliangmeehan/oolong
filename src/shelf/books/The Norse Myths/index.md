@@ -3,7 +3,7 @@ title: The Norse Myths
 author: Kevin Crossley-Holland
 url: https://50wattsbooks.com/products/the-norse-myths-the-pantheon-fairy-tale-and-folklore-library
 cover: https://images1.penguinrandomhouse.com/cover/9780394748467
-status: finisfinished
+status: finished
 date finished: 2025-06-17
 shortcode: the-norse-myths
 publish: true
