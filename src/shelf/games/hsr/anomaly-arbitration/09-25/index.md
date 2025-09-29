@@ -1,5 +1,5 @@
 ---
-title: 09-25
+title: September 2025
 layout: layouts/page.html
 tags:
   - games/hsr
