@@ -12,5 +12,5 @@ publish: true
 {% set limit = 4 %}
 {% include "partials/shelf/abyss.html" %}
 {% set collection = collections.stygian %}
-{% set limit = 4 %}
+{% set limit = 2 %}
 {% include "partials/shelf/stygian.html" %}
