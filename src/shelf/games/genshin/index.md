@@ -8,4 +8,9 @@ shortcode: genshin
 publish: true
 ---
 
+{% set collection = collections.abyss %}
+{% set limit = 4 %}
 {% include "partials/shelf/abyss.html" %}
+{% set collection = collections.stygian %}
+{% set limit = 4 %}
+{% include "partials/shelf/stygian.html" %}

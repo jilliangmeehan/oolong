@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="steam summer sale" />
+        
+        <meta property="og:description" content="I am supposed to be packing for a two-week vacation right now, but instead I am sitting at my computer because I realized it&#39;s Steam Summer Sale time and I have some recommendations that I would like to share." />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/blog/steam-summer-sale/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>steam summer sale</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/blog/" class="color-joycon">blog</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">steam summer sale</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-06-28T00:00:00.000Z"
+    >27th of June 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><p>I am supposed to be packing for a two-week vacation right now, but instead I am sitting at my computer because I realized it’s Steam Summer Sale time and I have some recommendations that I would like to share beyond my small Discord server.</p>
+<h1><a href="https://store.steampowered.com/app/701160/Kingdom_Two_Crowns/">Kingdom Two Crowns</a></h1>
+<p><strong>$4.99, 75% off</strong></p>
+<p>I have played <a href="https://jillian.garden/shelf/games/twocrowns/">so many hours of this</a>. Half tower defense, half very chill base builder, and has different difficulty levels for different types of players. You can take it easy and enjoy the vibes, or you can challenge yourself, and you’ll probably die a few times either way but it’ll be fine. Also has a bunch of DLCs — Norse Lands and Call of Olympus are the best versions of the game, imo, but the base game is great to start with.</p>
+<h1><a href="https://store.steampowered.com/app/1155970/Roadwarden/">Roadwarden</a></h1>
+<p><strong>$3.84, 65% off</strong></p>
+<p>I usually describe this as a very chill text-based version of the Witcher without the cool Witcher powers. All vibes.</p>
+<p>You can play this at the normal difficulty, which gives you a certain number of in-game days to complete your chosen quest, and then each time you play you can explore different things. Or you can do what I did and play story mode, explore every little thing in one 30-hour run, and then put it down and wish you could erase it from your brain to play again for the first time. I still think about this game all the time.</p>
+
+<div class="callout" data-callout="note">
+<div class="callout-title">
+<div class="callout-title-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+</div>
+<div class="callout-title-inner">Note</div>
+</div>
+<div class="callout-content"><p>This one is not the <em>best</em> for Steam Deck, because the text is a bit small and you do have to use the trackpads. It’s doable, and I certainly did it, but I enjoyed it more on my laptop.</p>
+</div></div><h1><a href="https://store.steampowered.com/app/1210320/Potion_Craft_Alchemist_Simulator/">Potion Craft</a></h1>
+<p><strong>$4.99, 75% off</strong></p>
+<p>An alchemy game where you grow mushrooms and herbs, figure out different potion recipes, sell them to people, level up, etc. I know I keep calling all these games chill, but it’s very chill. Less of a game that I would play for hours and hours and hours straight, but perfect to pick up for a bit when I’m in the mood for it.</p>
+<h1><a href="https://store.steampowered.com/app/1567440/inbento/">Inbento</a></h1>
+<p><strong>$0.99, 80% off</strong></p>
+<p>Just a very nice little puzzle game with a bunch of levels. Really easy Steam Deck gaming. Good vibes. Not super difficult, but it’ll make you use your brain.</p>
+<h1><a href="https://store.steampowered.com/app/1145360/Hades/">Hades</a></h1>
+<p><strong>$8.49, 66% off</strong></p>
+<p>If you haven’t played Hades yet, now is the time to pick it up. It’s a great game, everyone knows this — I don’t think there’s anything more for me to say.</p>
+<h1><a href="https://store.steampowered.com/app/1455840/Dorfromantik/">Dorfromantik</a></h1>
+<p><strong>$8.49, 40% off</strong></p>
+<p>Another extremely chill game that you can lose hours and hours to. It’s sort of a world-building puzzle game, I guess? You place hexagonal tiles down on a grid to continue expanding your world, meeting certain requirements that pop up until you eventually run out of tiles and have to start over. There is no final sense of accomplishment, just many little accomplishments along the way until the game is over — ad infinitum.</p>
+<h1><a href="https://store.steampowered.com/app/2217580/New_Star_GP/">New Star GP</a></h1>
+<p><strong>$4.99, 50% off</strong></p>
+<p>This is such a fun racing game, lol. If you like F1 but racing sims are too hardcore for you (me), this game is the solution. It’s just good, vibey fun. Not too difficult, but enough of a challenge that it feels good to keep trying and improving on each track. Perfect for Steam Deck.</p>
+<h1><a href="https://store.steampowered.com/app/2678990/Minami_Lane/">Minami Lane</a></h1>
+<p><strong>$3.49, 30% off</strong></p>
+<p>A very cute game about building and managing one city street. It only took me a few hours to beat everything, but it was a very nice and relaxing few hours. There is something to be said for very short, well-made games that just know what they’re about.</p>
+<h1><a href="https://store.steampowered.com/app/1055540/A_Short_Hike/">A Short Hike</a></h1>
+<p><strong>$4.39, 45% off</strong></p>
+<p>Speaking of short, well-made games that just know what they’re about: I haven’t played this game in many years, but it left such a lasting impression on me. It is so good. Meant to be played in one afternoon and then digested forever.</p>
+<h1><a href="https://store.steampowered.com/app/2308630/Dawnfolk/">Dawnfolk</a></h1>
+<p><strong>$11.99, 20% off</strong></p>
+<p>This is a newer game for me, but I’ve been playing a lot of it lately. It’s a tile-laying city-builder kinda thing with a story campaign to get you into it, followed up with lots of additional levels &amp; daily puzzles to keep you going if you want more.</p>
+<h1><a href="https://store.steampowered.com/app/2142790/Fields_of_Mistria">Fields of Mistria</a></h1>
+<p><strong>$11.19, 20% off</strong></p>
+<p>God, this is such a good game. If you like Stardew Valley at all, you will love this. It’s still in “early access,” but there’s already so much stuff in the game that I’ve played nearly 40 hours of it and am definitely nowhere close to running out of things to do.</p>
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

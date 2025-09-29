@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="The Odyssey" />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/shelf/books/the-odyssey/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>The Odyssey</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/" class="color-joycon">shelf</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/books/" class="color-joycon">books</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">the odyssey</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-09-10T15:25:29.000Z"
+    >10th of September 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article>
+    <div class="shelf-info">
+        <img class="shelf-cover-img" src="https://images-us.bookshop.org/ingram/9780393356250.jpg?v=enc-v1" />
+        <div class="meta">
+            <a href="https://bookshop.org/p/books/the-odyssey-francis-caulfeild/18217775?ean=9780393356250&amp;next=t">The Odyssey</a>
+            <p>Emily Wilson</p>
+            <div class="shelf-info-status">
+                <div
+                    class="swatch"
+                    style="background-color: #82b78b"
+                ></div>
+                <p>reading</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h2>highlights</h2>
+<blockquote>
+<p>The Greek word <em>epos</em> means simply “word” or “story” or “song.” It is related to a verb meaning “to say” or “to tell,” which is used (in a form with a prefix) in the first line of the poem. The narrator commands the Muse. “Tell me”: <em>enn-epe.</em> An epic poem is, at its root, simply a tale that is told. <cite>Page 1</cite></p>
+</blockquote>
+<blockquote>
+<p>Different things will happen every day, but Dawn always appears, always with rosy fingers, always early. <cite>Page 4</cite></p>
+</blockquote>
+<blockquote>
+<p>There was no holy scripture in the classical world, but everyone knew the stories of Achilles and Odysseus as told in the Homeric poems. <cite>Page 16</cite></p>
+</blockquote>
+<blockquote>
+<p>Eating is important in The Odyssey, and eating the wrong things or eating in the wrong way results in violence or death. <cite>Page 28</cite></p>
+</blockquote>
+<blockquote>
+<p>His intelligences sets him apart from other adulterers and murderers. <cite>Page 31</cite></p>
+</blockquote>
+<blockquote>
+<p>There is a stranger outside your house. He is old, ragged, and dirty. He is tired. He has been wandering, homeless, for a long time, perhaps many years. Invite him inside. You do not know his name. He may be a thief. He may be a murderer. He may be a god. He may reminds you of your husband, your father, or yourself. Do not ask questions. Wait. Let him sit on a comfortable chair and warm himself beside your fire. Bring him some food, the best you have, and a cup of wine. Let him eat and drink until he is satisfied. Be patient. When he is finished, he will tell his story. Listen carefully. It may not be as you expect. <cite>Page 91</cite></p>
+</blockquote>
+<blockquote>
+<p>The belly is just like a whining dog:
+it begs and forces one to notice it,
+despite exhaustion or the depths of sorrow.
+My heart is full of sorrow, but my stomach
+is always telling me to eat and drink.
+It tells me to forget what I have suffered,
+and fill it up.
+<cite>Page 215</cite></p>
+</blockquote>
+<blockquote>
+<p>Early the Dawn appeared, pink fingers blooming,
+and then he lit his fire and milked his ewes
+in turn, and set a lamb by everyone one.
+When he had diligently done his chores,
+he grabbed two men and made a meal of them.
+<cite>Page 249</cite></p>
+</blockquote>
+<blockquote>
+<p>After many years of agony and absence from one’s home, a person can begin enjoying grief. <cite>Page 363</cite></p>
+</blockquote>
+<blockquote>
+<p>Of all the creatures that live and breathe and creep on earth, we humans are the weakest. When the gods bestow on us good fortune, and our legs are spry and limber, we think that nothing can ever go wrong; but when the gods bring misery and pain, we have to bear our suffering with calm. Our mood depends on what Zeus sends each day. <cite>Page 413</cite></p>
+</blockquote>
+
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

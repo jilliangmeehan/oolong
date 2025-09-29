@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="July 2025" />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/shelf/games/genshin/abyss/07-25/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/shelf/games/genshin/abyss/07-25/photos/07-25_abyss.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>July 2025</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/" class="color-joycon">shelf</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/" class="color-joycon">games</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/genshin/" class="color-joycon">genshin</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/games/genshin/abyss/" class="color-joycon">abyss</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">07 25</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-07-24T00:00:00.000Z"
+    >23rd of July 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><h2>overview</h2>
+<p><img src="./photos/07-25_abyss.png" alt="Abyss Overview"></p>
+<p>Everyone’s been saying this Abyss is really easy, and it is — I basically breezed through it. I wonder if they just wanted to give us an easy one to accompany the release of Stygian Onslaught or something.</p>
+<p>I did originally try to go through Floor 12 with Arlecchino instead of Mavuika, and it was fine until I got to Chamber 3 and was just a few seconds short of three stars. She probably could have done it with a vape or melt team, but I wanted to use my new Emilie, so I just gave in and brought Mavuika. Hitting almost 400k without even doing a reaction is crazy.</p>
+<h2>future thoughts</h2>
+<p>I’m excited about Ineffa, and curious to see what the rest of the Nod-Krai cast’s lunar reactions are like. I’m also hopeful that this next year will feel a little more balanced — in the sense that they might not build <em>everything</em> around lunar reactions like they did with Nightsoul, because we’ll also have so many new characters who aren’t from Nod-Krai.</p>
+<p>If they give us a free four-star character who can enable lunar reactions, or give the Traveler some new lunar abilities (I hope so!), that should theoretically open it up to the entire existing roster in a way that is more effective than just giving us one free character like Kachina who can do a bit of her own Nightsoul damage. I also hope that, if Lunar Traveler is a thing, we don’t have to wait until halfway through the nation to unlock them.</p>
+<p>As for what Lunar Traveler might look like — I would love for them to get some kind of element-agnostic buff where all of their reactions are lunar reactions, but I wouldn’t be surprised if it’s specific to Hydro Traveler. We got a whole second set of constellations for Pyro Traveler that only work in a specific situation, so maybe Nod-Krai will give us a second set of Hydro constellations related to lunar reactions.</p>
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

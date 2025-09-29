@@ -1,10 +1,11 @@
 <ul role="list" class="post-grid">
     {%- for post in collection | reverse -%}
+    {%- if not (limit and loop.index > limit) -%}
     <li class="grid-card">
         <div class="grid-image">
-            {% if post.templateContent %} {% set imgMatch = post.templateContent
-            | match('src="(./photos/[^"]+)"') %} {% if imgMatch and imgMatch[1]
-            %}
+            {% if post.templateContent %}
+            {% set imgMatch = post.templateContent | match('src="(./photos/[^"]+)"') %}
+            {% if imgMatch and imgMatch[1] %}
             <img
                 src="{{ post.url }}{{ imgMatch[1] | replace('./', '') }}"
                 alt="Post image"
@@ -19,6 +20,7 @@
             </time>
         </div>
     </li>
+    {%- endif -%}
     {%- endfor -%}
 </ul>
 

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="The Bright Sword" />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/shelf/books/the-bright-sword/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/icons/heros/tea-hero.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>The Bright Sword</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/" class="color-joycon">shelf</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <a href="/shelf/books/" class="color-joycon">books</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">the bright sword</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-09-28T16:01:12.823Z"
+    >28th of September 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article>
+    <div class="shelf-info">
+        <img class="shelf-cover-img" src="https://images-us.bookshop.org/ingram/9780735224063.jpg?v=2792a946dfe9c1b9635fa009b9f49a9d" />
+        <div class="meta">
+            <a href="https://bookshop.org/p/books/the-bright-sword-a-novel-of-king-arthur-lev-grossman/c71fcb928a4fdfb8?ean=9780735224063&amp;next=t">The Bright Sword</a>
+            <p>Lev Grossman</p>
+            <div class="shelf-info-status">
+                <div
+                    class="swatch"
+                    style="background-color: #8b8fc3"
+                ></div>
+                <p>finished</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h2>highlights</h2>
+<blockquote>
+<p>He circumnavigated more lochs than he could imagine a rational Creator creating. <cite>Book I: Chapter 2</cite></p>
+</blockquote>
+<blockquote>
+<p>Collum chopped the heads off cow parsely with his sword. He chewed clover and sorrel to stop his stomach rumbling and picked at the peeling calluses on the palm of his sword hand. He stopped and prayed by the roadside. He snapped a thin branch off a tree and shoved it down the back of his armor in a desperate attempt to scratch his back. Gradually his horror at the events of the day began to give way to the boredom of the road. <cite>Book I: Chapter 2</cite></p>
+</blockquote>
+<p>I really enjoy detailed descriptions of mundanity like this.</p>
+<blockquote>
+<p>“Can’t have an owl running around in a knight’s body.” Collum agreed that one absolutely could not have owls running around in knights’ bodies. <cite>Book I: Chapter 2</cite></p>
+</blockquote>
+<p>I like the dry sense of humor in this book a lot.</p>
+<blockquote>
+<p>Beith-luis-nin meant Ogham, the old writing of the druids. More pagan stuff. Each letter was supposed to be a tree: beith was a birch, luis was a rowan, nin was an ash, or something like that. <cite>Book I: Chapter 2</cite></p>
+</blockquote>
+<blockquote>
+<p>Fairies liked a bit of fun, but they played rough and didn’t care if their toys got broken. They’d been gods once, who’d shrunk and faded with the coming of Christ, and now they lurked in hollow hills and at the borders and edges of things, places even God seemed to forget about or else why wouldn’t He just get rid of them? <cite>Book I: Chapter 2</cite></p>
+</blockquote>
+<p>Lots of interesting stuff about Celtic paganism etc. I feel like I learned a lot — would like to read more books like this.</p>
+<blockquote>
+<p>Arthur was only middling competent with a sword but the ritual complexity and deep seasonal lore of the chase appealed to his hungry intellect, and he was a past master at it. <cite>Book I: Chapter 5</cite></p>
+</blockquote>
+<blockquote>
+<p>This Arthur had in him a spark, a guttering flame, and Bedivere would feed it and protect it till it lit up the whole world. His life meant little to him, but he could make of it a gift for a king, and that was something. <cite>Book I: Chapter 5</cite></p>
+</blockquote>
+<blockquote>
+<p>He made it his business to be the only person in Britain who asked nothing from Arthur other than that he stay alive and on the throne. <cite>Book I: Chapter 6</cite></p>
+</blockquote>
+<blockquote>
+<p>Bedivere loved God, but he loved Arthur more, and he felt nostalgic for the days when the great game of knighthood was just a game. He would have given his life to protect Arthur, but he couldn’t protect him from God. <cite>Book I: Chapter 6</cite></p>
+</blockquote>
+<p>Bedivere was probably my favorite character in this.</p>
+<blockquote>
+<p>Once the divine machinery of an adventure was in motion Arthur liked to draw it out, study it, and savor its every last wrinkle. <cite>Book I: Chapter 8</cite></p>
+</blockquote>
+<p>Arthur is a gamer.</p>
+<blockquote>
+<p>“Do you know what happens when you make a child pretend to love? Oh, they’ll do it — you can make children do anything — but it has a cost, and the cost is that everything else becomes pretend.” <cite>Book II: Chapter 15</cite></p>
+</blockquote>
+<blockquote>
+<p>Too much had happened, he needed the sorting angel of dreams to come down and sift it all into piles for him, make it into stories and tell him what it all meant and which bits he could safely forget. <cite>Book II: Chapter 16</cite></p>
+</blockquote>
+<p>I like the idea of a sorting angel of dreams.</p>
+<blockquote>
+<p>What a great and awful power God had given to men, the power to revoke His divine gift of life, to unlock one another’s chests with the blunt key of a sword and roughly evict the ghost within. <cite>Book II: Chapter 18</cite></p>
+</blockquote>
+<blockquote>
+<p>What a thing it was to be married to a king, to be the only other person who knew his secret, though it lay right out in the open, every day, for all to see, which was that he was just a man and nothing more. <cite>Book III: Chapter 26</cite></p>
+</blockquote>
+<blockquote>
+<p>A laundress had to be a bit of an alchemist too. <cite>Book III: Chapter 28</cite></p>
+</blockquote>
+<p>Laundry as alchemy!!!</p>
+<blockquote>
+<p>The druids wrote nothing down, they had always passed their knowledge from one to the next by spoken word only, so when they died all that they knew vanished. The lore and culture and memory of Old Britain went out like a candle. <cite>Book III: Chapter 28</cite></p>
+</blockquote>
+<blockquote>
+<p>The preparations wound up taking some hours and included the messy slaughter of two lams outside the tent as well as much lighting of candles and drawing of chalk glyphs and singing in languages Collum didn’t recognize. <cite>Book IV: Chapter 34</cite></p>
+</blockquote>
+<p><em>Big</em> fan of stories that actually show you any amount of work going into “magic.” <em><a href="https://jillian.garden/shelf/books/circe/">Circe</a></em> did this really well, too.</p>
+<blockquote>
+<p>There was something deeply comforting about being near the Grail but not feeling like you had to actually go and get it. It’s all right, he was fine where he was. Divine perfection is over there, and I, imperfect and fallible being that I am, am over here. <cite>Book IV: Chapter 36</cite></p>
+</blockquote>
+<blockquote>
+<p>How do you live in a waste land? Is there really any such thing? You look for the buried seeds and deep springs. You watch the animals, the lizards and the foxes, and see how they do it. You wait. <cite>Book IV: Chapter 36</cite></p>
+</blockquote>
+<blockquote>
+<p>But Britain didn’t need a miracle, or a perfect knight, or even God. It would heal all on its own, slowly, the hard way. It would always be a scarred land, a complicated land, but complicated was not the same as broken. It would never be pure or perfect, but it might still one day be whole. <cite>Book IV: Chapter 36</cite></p>
+</blockquote>
+<blockquote>
+<p>Why would the future be simpler than the past? Stories never really ended, they just rolled one into the next. The past was never wholly lost, and the future was never quite found. We wander forever in a pathless forest, dropping with weariness, as home draws us back, and the grail draws us on, and we never arrive, and the quest never ends. <cite>Book IV: Chapter 39</cite></p>
+</blockquote>
+<h2>historical notes</h2>
+<p>Putting these in their own section — at the end of the story, there’s a section from the author giving some more historical context that I really liked.</p>
+<blockquote>
+<p>The poet didn’t have to say which Arthur he was talking about. Everybody already knew. Since then Arthur’s story has been told and retold for 1,400 years, and it’s never been told quite the same way twice. Every age and every teller leaves their traces on the story, and as it passes from one hand to the next it evolves and changes and flows like water. <cite>Historical Note</cite></p>
+</blockquote>
+<blockquote>
+<p>Arthur didn’t spring to life fully formed, he was deposited in layers, slowly, over centuries, like the geological strata of a landscape. It’s one of the things that makes him so rich and compelling. It also makes him, from a historical point of view, a complete mess. <cite>Historical Note</cite></p>
+</blockquote>
+<blockquote>
+<p>The Bright Sword is a dream of medieval Britan, where disparate elements from different periods mingle and fuse in ways they never did in the real world, and that dreaminess, that woven texture, has always been characteristic of Arthur’s world. His ability to pick up bright shiny bits and pieces along the way as he goes cantering through history is one of the secrets of his eternal youth. He’s always transforming, but somehow we always recognize him for who he is. Nations come and go, and centuries, and traditions, and kings, and writers, but King Arthur always returns. <cite>Historical Note</cite></p>
+</blockquote>
+
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

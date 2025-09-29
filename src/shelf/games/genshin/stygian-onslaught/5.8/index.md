@@ -3,7 +3,7 @@ title: 5.8 Stygian Onslaught
 layout: layouts/page.html
 tags:
   - games/genshin
-  - stygian-onslaught
+  - stygian
 date: 2025-07-12
 publish: true
 ---
