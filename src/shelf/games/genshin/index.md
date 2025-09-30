@@ -2,15 +2,8 @@
 title: Genshin Impact
 status: playing
 url: https://enka.network/u/jillian/
-cover: 
-date finished: 
+cover: https://cdn2.steamgriddb.com/thumb/27a60babb8279b5d2a973d1d96c41321.webm
+date finished:
 shortcode: genshin
 publish: true
 ---
-
-{% set collection = collections.abyss %}
-{% set limit = 4 %}
-{% include "partials/shelf/abyss.html" %}
-{% set collection = collections.stygian %}
-{% set limit = 2 %}
-{% include "partials/shelf/stygian.html" %}
