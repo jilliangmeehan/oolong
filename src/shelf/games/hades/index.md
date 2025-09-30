@@ -4,6 +4,6 @@ status: playing
 url:
 cover:
 date finished:
-shortcode: hadesii
+shortcode: hades
 publish: true
 ---
