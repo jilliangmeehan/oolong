@@ -8,3 +8,19 @@ shortcode: hsr
 publish: true
 UID: "601324529"
 ---
+
+{% set collection = collections.moc %}
+{% set limit = 4 %}
+{% include "partials/shelf/moc.html" %}
+
+{% set collection = collections.pf %}
+{% set limit = 4 %}
+{% include "partials/shelf/pf.html" %}
+
+{% set collection = collections.apocalypticshadow %}
+{% set limit = 4 %}
+{% include "partials/shelf/apocalyptic-shadow.html" %}
+
+{% set collection = collections.anomalyarbitration %}
+{% set limit = 2 %}
+{% include "partials/shelf/anomaly-arbitration.html" %}
