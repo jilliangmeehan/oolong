@@ -12,6 +12,7 @@ summary: My first 20 hours of Hades II.
 > [!NOTE]
 > I haven't figured out how to add spoiler tags to my website yet! Read at your own risk.
 
+## game diary
 I started playing Hades II this week! I know it's been in early access for a while, but I wanted to wait until it was out for real. I *loved* the first game, and so far I love this one just as much, if not more.
 
 ![A screenshot of the entrace to Olympus after my first clear of the surface.](./photos/surface_landscape.jpeg)
