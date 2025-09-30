@@ -2,7 +2,7 @@
 title: Daily games
 status: playing
 url:
-cover: https://mwcm.nyt.com/dam/mkt_assets/img/games/hub.png
+cover:
 date finished:
 shortcode: dailygames
 publish: true
