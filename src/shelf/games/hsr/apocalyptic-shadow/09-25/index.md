@@ -9,3 +9,5 @@ publish: true
 ---
 ## overview
 ![Apocalyptic Shadow](./photos/09-25_shadow.png)
+
+This was the easiest time I've ever had with Apocalyptic Shadow. Phainon + DoT teams go brrr.
