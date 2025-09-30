@@ -3,6 +3,7 @@ title: At the Crossroads
 layout: layouts/page.html
 tags:
   - post
+  - hadesii
 date: 2025-09-30
 publish: true
 summary: My first 20 hours of Hades II.
