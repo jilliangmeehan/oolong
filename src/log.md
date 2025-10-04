@@ -6,7 +6,34 @@ permalink: /log/
 eleventyNavigation:
   key: Log
 ---
+## oct 4, 2025
+
+- slightly tweaked styles for callouts and h3 
+
+## sept 30, 2025
+
+- added headers to game pages on the [shelf](/shelf) with cover art, links, statuses, and UIDs
+- added collections for [hsr](https://jillian.garden/shelf/games/hsr/) endgame modes
+
+## sept 29, 2025
+
+- added a limit to how many of the most recent posts in a collection are displayed on a [shelf](/shelf) page (i still need to add a "see more" link or something, but you can get to the full collection pages via breadcrumbs for now if you click through)
+
+## june 25, 2025
+
+- added headers to book pages on the [shelf](/shelf) with cover art, authors, and statuses
+- added styles for footnotes and callout blocks
+- new style for blockquotes + citations
+
+## april 18, 2025
+
+- finally added rss!
+- updated the default opengraph image + opengraph tags
+- updated styles for posts in lists
+- added new post types for [shelf](/shelf) stuff (mostly games): journal & sticky notes
+
 ## april 4, 2025
+
 - cleaned up the [shelf](/shelf) page a little by putting everything into tables & adding colored indicators for statuses
 - ditched the old /now page and moved some of my past updates into their own weeknotes blog posts instead
 
