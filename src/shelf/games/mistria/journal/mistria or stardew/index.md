@@ -1,11 +1,11 @@
 ---
-title: Fields of Mistria or Stardew?
+title: Fields of Mistria vs. Stardew Valley
 layout: layouts/page.html
 tags:
   - post
 date: 2025-10-07
 publish: true
-summary: "The short answer: it depends!"
+summary: "The short answer: both good"
 ---
 ## the short version
 I got to talking about Fields of Mistria over on Mastodon today, and [Marcel](https://marcel.io/) asked if it's worth playing over Stardew Valley. Here's [my short answer](https://sleepy.cool/@jillian/115333682500570172).
