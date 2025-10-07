@@ -29,7 +29,9 @@ Aside from that, there are a few reasons that I prefer Fields of Mistria:
 - **The art:** This is completely a personal preference, but I like the pixel art in Fields of Mistria more than Stardew Valley. I usually end up using a lot of mods to change how things look in Stardew, but I think Fields of Mistria is very nice to look at already.
 - **The character customization:** You can change how your character looks whenever you want. I would have to double-check, but I'm pretty sure you can also change your character's name and pronouns whenever you want. It is very easy to get new hairstyles and clothing items and accessories and stuff. The hair is animated! You can wear a cape! 
 - **The QoL:** Look, nothing is perfect, but I do think there are things in this game that just feel easier and better to do. You walk faster, you can jump over things, you can see where characters are on the map, you can buy things from shops whenever you want, crafting benches can pull items from any of your chests so you don't really have to worry about where you put things, etc.
-	- In turn, there are some things that I would say are harder than in Stardew: it takes longer to start automating your farm, unlocking lower levels of the mines requires items that can be difficult to get, there's more RNG involved to complete the museum, and those quests sometimes require a lot of resources that you may have wanted to save for something else. But none of these difficulties have felt annoying or unnecessary to me — just a way to space things out so I always have something to do.
+
+> [!NOTE]
+> In turn, there are some things that I would say are harder than in Stardew: it takes longer to start automating your farm, unlocking lower levels of the mines requires items that can be difficult to get, there's more RNG involved to complete the museum, and those quests sometimes require a lot of resources that you may have wanted to save for something else. But none of these difficulties have felt annoying or unnecessary to me — just a way to space things out so I always have something to do.
 
 ---
 
