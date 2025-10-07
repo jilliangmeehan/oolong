@@ -8,18 +8,7 @@ publish: true
 summary: "The short answer: it depends!"
 ---
 ## the short version
-I got to talking about Fields of Mistria over on Mastodon today, and [Marcel](https://marcel.io/) asked if it's worth playing over Stardew Valley. Here's [my short answer](https://sleepy.cool/@jillian/115333682500570172):
-
-> it depends! i like both games, but i prefer mistria to stardew for a few reasons:
-> ‎ 
->‎  - the interactions with characters feel a lot richer & more interesting to me
->‎  - there's kind of....lore....? which is cool
->‎  - i like the pixel art in mistria better, but that's a personal preference
->‎  - mistria has a bit more qol stuff that you'd typically have to get from mods in stardew
->   ‎ 
->  i have also just played many many hours of stardew, so i think a new game feels refreshing.
-> ‎ 
->  that said, if you really enjoy the stardew farm minmaxing experience and don't care as much about the stuff happening around it then i think mistria probably won't feel like it's bringing much more to the table for you.
+I got to talking about Fields of Mistria over on Mastodon today, and [Marcel](https://marcel.io/) asked if it's worth playing over Stardew Valley. Here's [my short answer](https://sleepy.cool/@jillian/115333682500570172).
 
 ---
 ## the long version
