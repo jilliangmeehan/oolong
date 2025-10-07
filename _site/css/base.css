@@ -57,7 +57,8 @@ a:hover {
 }
 
 img,
-picture {
+picture,
+.callout {
     max-width: 100%;
     display: block;
     margin: 8px 0;
@@ -90,7 +91,8 @@ h2 {
     font-weight: normal;
 }
 
-h2 {
+h2,
+h3 {
     margin-top: 1.5em;
 }
 
@@ -101,6 +103,7 @@ h6 {
     font-family: "Departure Mono";
     font-size: small;
     font-weight: 400;
+    color: var(--latte);
 }
 
 p {
