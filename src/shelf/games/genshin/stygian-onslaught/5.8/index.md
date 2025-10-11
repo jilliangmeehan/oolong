@@ -7,6 +7,13 @@ tags:
 date: 2025-07-12
 publish: true
 ---
+## update
+![Sygian Onslaught Overview](./photos/5-8-updated_so.jpeg)
+
+I did it! My first Fearless clear. I'm very proud of it.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6ZSZ2_RNQag?si=7ELcVm9QLTlA1JuM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## overview
 ![Sygian Onslaught Overview](./photos/5-8_so.jpeg)
 

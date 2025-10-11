@@ -3,6 +3,8 @@ title: Fields of Mistria vs. Stardew Valley
 layout: layouts/page.html
 tags:
   - post
+  - mistria
+  - stardew
 date: 2025-10-07
 publish: true
 summary: "The short answer: both good!"
