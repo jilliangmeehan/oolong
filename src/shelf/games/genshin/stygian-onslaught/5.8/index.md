@@ -8,7 +8,7 @@ date: 2025-07-12
 publish: true
 ---
 ## update
-![Sygian Onslaught Overview](./photos/5-8-updated_so.jpeg)
+![Stygian Onslaught Overview](./photos/5-8-updated_so.jpeg)
 
 I did it! My first Fearless clear. I'm very proud of it.
 
