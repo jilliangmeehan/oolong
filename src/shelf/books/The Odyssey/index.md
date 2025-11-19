@@ -3,8 +3,9 @@ title: The Odyssey
 author: Emily Wilson
 url: https://bookshop.org/p/books/the-odyssey-francis-caulfeild/18217775?ean=9780393356250&next=t
 cover: https://images-us.bookshop.org/ingram/9780393356250.jpg?v=enc-v1
-status: reading
-date finished:
+status:
+  - finished
+date finished: 2025-07-11
 shortcode:
 publish: true
 ---
