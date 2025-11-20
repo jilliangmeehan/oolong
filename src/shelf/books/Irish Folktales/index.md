@@ -33,3 +33,5 @@ Follow-up reading:
 > 'All art,' John Synge said, 'is a collaboration.' No mere association between like-minded artists, the collaboration that powered his movement unified the artist with the national tradition. This is the structure of collaboration: in order to locate deep truths and to gain wide appeal, to avoid the trivializing constraints of academic endeavor, the artist roots his work in the folk culture and then accepts two responsibilities: to preserve the old tradition intact for the future; to do battle with the tradition so as to answer the needs of the self while creating new works for new worlds. <cite>Page 18</cite>
 
 > Child after child abandons the comforts of home and takes the strange road, learning to form proper alliances and act with courage in order to enter through marriage a new state of being. Now mature, they are left with their faith, which bids them to endure, and with their wit, out of which they learn to turn fear into laughter and life into a story. <cite>Page 29</cite>
+
+> The fox is the cunningest beast in the world, barring the wren. <cite>Page 106</cite>
