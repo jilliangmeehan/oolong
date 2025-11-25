@@ -1,5 +1,5 @@
 ---
-title: September 2025
+title: Intellitron Endgame
 layout: layouts/page.html
 tags:
   - games/hsr
