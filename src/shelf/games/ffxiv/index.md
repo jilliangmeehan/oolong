@@ -10,7 +10,7 @@ publish: true
 ---
 A few quests into Heavensward so far, trying to remember how to play this game with a controller. I will forever have a Returner badge.
 
-## Priorities
+## priorities
 - Level one tank, ranged DPS, melee DPS, and healer to 50+
 	- **Tank:** Paladin is my highest job so far (57), sort of leveling Dark Knight (40) on the side but not too concerned with it yet
 	- **Ranged DPS:** Red Mage (55)
