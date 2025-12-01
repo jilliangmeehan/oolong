@@ -7,6 +7,7 @@ publish: true
 summary:
 permalink: /decadv/
 ---
+# December Adventure
 > The December Adventure is **low key**. <cite><a href="https://eli.li/december-adventure">eli_oat</a></cite>  
 
 ## 01
