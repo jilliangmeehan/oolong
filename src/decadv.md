@@ -5,6 +5,7 @@ tags:
 date: 2025-12-01
 publish: true
 summary:
+permalink: /decadv/
 ---
 > The December Adventure is **low key**. <cite><a href="https://eli.li/december-adventure">eli_oat</a></cite>  
 
