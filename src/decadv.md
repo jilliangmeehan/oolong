@@ -14,3 +14,6 @@ permalink: /decadv/
 I've never ~~successfully~~ done any kind of monthly challenge. I like the idea of them, but intentional consistency is not my strong suit. The December Adventure feels more my speed — inching along with some kind of creative practice in whatever way feels meaningful to you each day. 
 
 Today's goals: heat up some water and browse past [adventure logs](https://eli.li/december-adventure) for inspiration.
+
+## 02
+Cleaned my apartment in the hopes of feeling more productive tomorrow. 
