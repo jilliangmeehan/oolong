@@ -26,3 +26,6 @@ I got back into a little project I've been working on here and there for a few m
 I've had most of it sort of working for a while, but today I finally added some variable interpolation — so now you can do a liiiittle more than just jump between text passages based on player choices.
 
 I'll probably end up working on this for most of December Adventure, although I do have a few other projects in mind that I could pick up.
+
+## 04
+Had a headache.
