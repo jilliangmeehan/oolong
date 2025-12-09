@@ -29,3 +29,9 @@ I'll probably end up working on this for most of December Adventure, although I 
 
 ## 04
 Had a headache.
+
+## 05
+Fridays are for chores!
+
+## 06–08
+I had a very sleepy weekend and a slow start to the week, so I didn't feel like doing anything.
