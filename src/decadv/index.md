@@ -35,3 +35,25 @@ Fridays are for chores!
 
 ## 06–08
 I had a very sleepy weekend and a slow start to the week, so I didn't feel like doing anything.
+
+## 09
+Back to work on the interactive fiction tool! I added some conditional operator stuff to the code interpolation, so now you can do something like this:
+
+```
+You currently have { items.bread.count } bread.
+
+{ if items.bread.count > 0 }
+You have some bread! Good.
+{ endif }
+
+{ if items.bread.count >= 2 }
+You have plenty of bread.
+{ endif }
+
+{ if items.bread.count == 1 }
+You have exactly one piece of bread.
+{ endif }
+```
+
+And if you have 2 pieces of bread in your inventory, for example, you'd see:
+> You current have 2 bread. You have some bread! Good. 
