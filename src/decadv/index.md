@@ -15,8 +15,12 @@ I've never ~~successfully~~ done any kind of monthly challenge. I like the idea 
 
 Today's goals: heat up some water and browse past [adventure logs](https://eli.li/december-adventure) for inspiration.
 
+---
+
 ## 02
 Cleaned my apartment in the hopes of feeling more productive tomorrow. 
+
+---
 
 ## 03
 ![Screenshot of code editor](./photos/decadv_03.png)
@@ -27,14 +31,22 @@ I've had most of it sort of working for a while, but today I finally added some 
 
 I'll probably end up working on this for most of December Adventure, although I do have a few other projects in mind that I could pick up.
 
+---
+
 ## 04
 Had a headache.
+
+---
 
 ## 05
 Fridays are for chores!
 
+---
+
 ## 06–08
 I had a very sleepy weekend and a slow start to the week, so I didn't feel like doing anything.
+
+---
 
 ## 09
 Back to work on the interactive fiction tool! I added some conditional operator stuff to the code interpolation, so now you can do something like this:
@@ -58,11 +70,17 @@ You have exactly one piece of bread.
 And if you have 2 pieces of bread in your inventory, for example, you'd see:
 > You current have 2 bread. You have some bread! Good. 
 
+---
+
 ## 10
 Spent some time today writing a story to use with the interactive fiction tool. Probably not something I will ever share, but it's fun to do a bit of creative writing every once in a while.
 
+---
+
 ## 11–13
 Played a lot of [Islanders: New Shores](https://jillian.garden/shelf/games/islanders-new-shores/).
+
+---
 
 ## 14
 I finally got around to a few website chores I've been putting off forever:
@@ -103,7 +121,6 @@ It just wraps whatever's in the grid in a `<div>` with the `image-grid` class, w
 ```
 
 Ez pz. And as proof, here are two photos of Junie:
-
 {% grid %}
 ![test_1](./photos/test_1.jpg)
 ![test_2](./photos/test_2.jpg)
