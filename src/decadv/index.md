@@ -57,3 +57,6 @@ You have exactly one piece of bread.
 
 And if you have 2 pieces of bread in your inventory, for example, you'd see:
 > You current have 2 bread. You have some bread! Good. 
+
+## 10
+Spent some time today writing a story to use with the interactive fiction tool. Probably not something I will ever share, but it's fun to do a bit of creative writing every once in a while.
