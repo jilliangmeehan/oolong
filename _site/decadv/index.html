@@ -258,6 +258,41 @@ You have exactly one piece <span class="token keyword">of</span> bread<span clas
 </blockquote>
 <h2>10</h2>
 <p>Spent some time today writing a story to use with the interactive fiction tool. Probably not something I will ever share, but it’s fun to do a bit of creative writing every once in a while.</p>
+<h2>11–13</h2>
+<p>Played a lot of <a href="https://jillian.garden/shelf/games/islanders-new-shores/">Islanders: New Shores</a>.</p>
+<h2>14</h2>
+<p>I finally got around to a few website chores I’ve been putting off forever:</p>
+<ul>
+<li>Added proper syntax highlighting to my site, using the <a href="https://www.11ty.dev/docs/plugins/syntaxhighlight/">Eleventy plugin</a> + <a href="https://github.com/rose-pine/prism/tree/main">Rose Pine Moon</a> theme</li>
+<li>Added a shortcode for image grids</li>
+</ul>
+<p>The image grid thing is pretty simple. Here’s what it looks like in Markdown:</p>
+<pre class="language-md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image-grid<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./photos/A.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Photo A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./photos/B.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Photo B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>And then here’s what’s going on in my <code>.eleventy.js</code> file:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> markdownIt <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'markdown-it'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> md <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">markdownIt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPairedShortcode</span><span class="token punctuation">(</span><span class="token string">"grid"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> renderedContent <span class="token operator">=</span> md<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;div class="image-grid"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>renderedContent<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/div></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>It just wraps whatever’s in the grid in a <code>&lt;div&gt;</code> with the <code>image-grid</code> class, which then does the rest of the work:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.image-grid</span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+    <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fit<span class="token punctuation">,</span> <span class="token function">minmax</span><span class="token punctuation">(</span>200px<span class="token punctuation">,</span> 1fr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.image-grid img</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+    <span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Ez pz. And as proof, here are two photos of Junie:</p>
+<div class="image-grid"><p><img src="./photos/test_1.jpg" alt="test_1">
+<img src="./photos/test_2.jpg" alt="test_2"></p>
+</div>
 </article>
 
         </main>

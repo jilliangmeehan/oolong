@@ -128,6 +128,15 @@ ul {
     list-style-position: outside;
 }
 
+li::marker {
+    color: var(--beam);
+    font-size: 1.4rem;
+}
+
+li {
+    font-size: 1.1rem;
+}
+
 strong {
     font-weight: 400;
     font-style: italic;
@@ -139,11 +148,9 @@ pre {
 }
 
 p code {
-    color: #e0def4;
-    background: #232136;
+    color: var(--puff);
     font-family: "Cartograph CF", ui-monospace, SFMono-Regular, monospace;
-    padding: 0 4px;
-    border-radius: 6px;
+    font-style: italic;
 }
 
 blockquote {

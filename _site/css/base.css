@@ -215,7 +215,7 @@ article > h2,
     width: max-content;
 }
 
-.image-grid {
+.image-grid p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
