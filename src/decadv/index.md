@@ -79,12 +79,12 @@ The image grid thing is pretty simple. Here's what it looks like in Markdown:
 
 And then here's what's going on in my `.eleventy.js` file:
 ```js
-  const markdownIt = require('markdown-it');
-  const md = new markdownIt();
-  eleventyConfig.addPairedShortcode("grid", function (content) {
-    const renderedContent = md.render(content);
+const markdownIt = require('markdown-it');
+const md = new markdownIt();
+eleventyConfig.addPairedShortcode("grid", function (content) {
+	const renderedContent = md.render(content);
     return `<div class="image-grid">${renderedContent}</div>`;
-  });
+});
 ```
 
 It just wraps whatever's in the grid in a `<div>` with the `image-grid` class, which then does the rest of the work:
