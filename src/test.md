@@ -1,11 +1,10 @@
 ---
 title: test page
 layout: layouts/page.html
-tags: 
-date: 
+tags:
+date:
 publish: true
-permalink: /test/
-summary: 
+summary:
 ---
 # Header 1
 Reprehenderit sit magna pariatur esse esse aliquip Lorem. Mollit commodo consectetur tempor ipsum deserunt nulla esse irure enim cillum qui et do. Aliquip magna id do tempor fugiat. **Sunt quis ex enim quis** amet proident sint excepteur fugiat minim mollit ipsum. Sit minim ipsum ipsum. Et commodo ad tempor sunt occaecat amet nulla fugiat sunt adipisicing magna magna dolor. *Sunt esse laborum amet.*
@@ -25,3 +24,5 @@ Nisi velit anim dolor pariatur velit. `Cupidatat` aute laborum consectetur dolor
 ```
 Eiusmod nostrud Lorem adipisicing non ex mollit. Mollit velit ullamco et amet incididunt aliquip cillum officia fugiat sit exercitation Lorem. Ea occaecat laborum sint laborum officia ex ad laborum dolor pariatur. Et cupidatat pariatur dolor aute sit id ipsum. Pariatur officia aute Lorem. Do laboris ad quis non sunt.
 ```
+
+![test_1.jpg](./test_1.jpg) ![test_2.jpg](./test_2.jpg)
