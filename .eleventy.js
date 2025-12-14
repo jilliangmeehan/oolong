@@ -2,12 +2,14 @@
 const dateFilter = require("./src/filters/date-filter.js");
 const w3DateFilter = require("./src/filters/w3-date-filter.js");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const esbuild = require("esbuild");
 const esbuildSvelte = require("esbuild-svelte");
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   eleventyConfig.addCollection("debug", function (collectionApi) {
     console.log(
@@ -65,6 +67,7 @@ module.exports = (eleventyConfig) => {
 
   // set directories to pass through to the _site folder
   eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy("themes");
   eleventyConfig.addPassthroughCopy({ "./src/fonts/": "/fonts/" });
   eleventyConfig.addPassthroughCopy({ "./src/favicon/": "/favicon/" });
   eleventyConfig.addPassthroughCopy({ "./src/icons/": "/icons/" });
@@ -266,6 +269,13 @@ module.exports = (eleventyConfig) => {
         name: "jillian g. meehan",
       },
     },
+  });
+
+  // image grid shortcode
+  const md = new markdownIt();
+  eleventyConfig.addPairedShortcode("grid", function (content) {
+    const renderedContent = md.render(content);
+    return `<div class="image-grid">${renderedContent}</div>`;
   });
 
   // teashop stuff

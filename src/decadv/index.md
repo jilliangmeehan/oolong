@@ -39,7 +39,7 @@ I had a very sleepy weekend and a slow start to the week, so I didn't feel like 
 ## 09
 Back to work on the interactive fiction tool! I added some conditional operator stuff to the code interpolation, so now you can do something like this:
 
-```
+```js
 You currently have { items.bread.count } bread.
 
 { if items.bread.count > 0 }
