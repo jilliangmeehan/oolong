@@ -60,3 +60,51 @@ And if you have 2 pieces of bread in your inventory, for example, you'd see:
 
 ## 10
 Spent some time today writing a story to use with the interactive fiction tool. Probably not something I will ever share, but it's fun to do a bit of creative writing every once in a while.
+
+## 11–13
+Played a lot of [Islanders: New Shores](https://jillian.garden/shelf/games/islanders-new-shores/).
+
+## 14
+I finally got around to a few website chores I've been putting off forever:
+- Added proper syntax highlighting to my site, using the [Eleventy plugin](https://www.11ty.dev/docs/plugins/syntaxhighlight/) + [Rose Pine Moon](https://github.com/rose-pine/prism/tree/main) theme
+- Added a shortcode for image grids
+
+The image grid thing is pretty simple. Here's what it looks like in Markdown:
+```md
+{% grid %}
+![Photo A](./photos/A.jpg)
+![Photo B](./photos/B.jpg)
+{% endgrid %}
+```
+
+And then here's what's going on in my `.eleventy.js` file:
+```js
+  const markdownIt = require('markdown-it');
+  const md = new markdownIt();
+  eleventyConfig.addPairedShortcode("grid", function (content) {
+    const renderedContent = md.render(content);
+    return `<div class="image-grid">${renderedContent}</div>`;
+  });
+```
+
+It just wraps whatever's in the grid in a `<div>` with the `image-grid` class, which then does the rest of the work:
+```css
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+```
+
+Ez pz. And as proof, here are two photos of Junie:
+
+{% grid %}
+![test_1](./photos/test_1.jpg)
+![test_2](./photos/test_2.jpg)
+{% endgrid %}
