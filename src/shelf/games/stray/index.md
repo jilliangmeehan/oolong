@@ -1,6 +1,7 @@
 ---
 title: Stray
-status: playing
+status:
+  - paused
 url: https://store.steampowered.com/app/1332010/Stray/
 cover: https://cdn2.steamgriddb.com/thumb/0f80528cf7f241930d15c0900c5ab8ad.jpg
 date finished:

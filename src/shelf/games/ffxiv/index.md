@@ -1,7 +1,7 @@
 ---
 title: FFXIV
 status:
-  - playing
+  - paused
 url: https://na.finalfantasyxiv.com/lodestone/character/46218413/
 cover: https://cdn2.steamgriddb.com/grid/e3354b083f03a9ceb5e01813104be277.png
 date finished:
