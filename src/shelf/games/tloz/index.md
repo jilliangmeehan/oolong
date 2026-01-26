@@ -1,6 +1,7 @@
 ---
 title: The Legend of Zelda
-status: playing
+status:
+  - paused
 url:
 cover: https://cdn2.steamgriddb.com/thumb/e49cc7c344acaf1160fd6c2a0190f056.jpg
 date finished:
