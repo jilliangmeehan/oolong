@@ -1,9 +1,10 @@
 ---
 title: Pluribus
-status: watching
+status:
+  - finished
 url:
 cover:
-date finished:
+date finished: 2026-01-11
 shortcode:
 publish: true
 ---
