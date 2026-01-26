@@ -7,4 +7,5 @@ cover: https://media.themoviedb.org/t/p/w440_and_h660_face/nrM2xFUfKJJEmZzd5d7ko
 date finished: 2026-01-11
 shortcode:
 publish: true
+layout: layouts/watching.html
 ---
