@@ -1,0 +1,30 @@
+{% set active_watching = collections.watching | sort(attribute="data.status") |
+reverse %} {% set statusColors = { 'watching': '#82b78b', 'paused': '#edd495',
+'finished': '#8b8fc3' } %}
+
+<section class="shelf-table">
+    <table>
+        <tr>
+            <th>Watching</th>
+            <th>Status</th>
+        </tr>
+        {%- for item in active_watching %}{%- if item.data.status == 'watching'
+        %}
+        <tr>
+            <td>
+                <a href="{{ item.url }}">{{ item.data.title }}</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: {{ statusColors[item.data.status] }}"
+                ></div>
+                {{ item.data.status }}
+            </td>
+        </tr>
+        {%- endif %}{%- endfor %}
+    </table>
+    <div class="see-more small">
+        <a href="/shelf/watching/">see more →</a>
+    </div>
+</section>

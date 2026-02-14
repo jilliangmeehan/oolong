@@ -8,8 +8,9 @@
             <th>Playing</th>
             <th>Status</th>
         </tr>
-        {% for game in sorted_games %}
-        <tr>
+        {%- for game in sorted_games %}
+        {%- set normalizedStatus = 'active' if game.data.status == 'playing' else game.data.status %}
+        <tr data-status="{{ normalizedStatus }}">
             <td>
                 <a href="{{ game.url }}">{{ game.data.title }}</a>
             </td>
@@ -21,6 +22,7 @@
                 {{ game.data.status or 'unknown' }}
             </td>
         </tr>
-        {% endfor %}
+        {%- endfor %}
     </table>
+    <p class="shelf-empty" style="display: none;">Nothing here!</p>
 </section>

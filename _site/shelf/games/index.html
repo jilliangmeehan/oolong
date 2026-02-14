@@ -225,229 +225,344 @@
 
         <main tabindex="-1" id="main-content">
             
-<article><section class="shelf-table">
+<article><div class="shelf-filters">
+    <button class="shelf-filter active" data-filter="all">All</button>
+    <button class="shelf-filter" data-filter="active">In progress</button>
+    <button class="shelf-filter" data-filter="paused">Paused</button>
+    <button class="shelf-filter" data-filter="finished">Finished</button>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".shelf-filter");
+        var tables = document.querySelectorAll(".shelf-table");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var filter = this.getAttribute("data-filter");
+
+                buttons.forEach(function (b) {
+                    b.classList.remove("active");
+                });
+                this.classList.add("active");
+
+                tables.forEach(function (section) {
+                    var rows = section.querySelectorAll("tr[data-status]");
+                    var visibleCount = 0;
+
+                    rows.forEach(function (row) {
+                        if (filter === "all" || row.getAttribute("data-status") === filter) {
+                            row.style.display = "";
+                            visibleCount++;
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+
+                    var emptyMsg = section.querySelector(".shelf-empty");
+                    if (emptyMsg) {
+                        emptyMsg.style.display = visibleCount === 0 ? "" : "none";
+                    }
+                });
+            });
+        });
+    });
+</script>
+<section class="shelf-table">
     <table>
         <tr>
             <th>Playing</th>
             <th>Status</th>
         </tr>
-<p><tr>
-<td>
-<a href="/shelf/games/islanders-new-shores/">Islanders: New Shores</a>
-</td>
-<td>
-<div
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/rivals/">Marvel Rivals</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/ffxiv/">FFXIV</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/r1999/">Reverse: 1999</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/tloz/">The Legend of Zelda</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/fsn/">Fate/stay night</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/stray/">Stray</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/endfield/">Arknights: Endfield</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/hades/">Hades II</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/daily-games/">Daily games</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/mistria/">Fields of Mistria</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/brante/">The Life and Suffering of Sir Brante</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/daily-games/">Daily games</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/wuwa/">Wuthering Waves</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/infinity-nikki/">Infinity Nikki</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/zzz/">ZZZ</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/hsr/">Honkai: Star Rail</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/mistria/">Fields of Mistria</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/genshin/">Genshin Impact</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/hsr/">Honkai: Star Rail</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-playing
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/zzz/">ZZZ</a>
-</td>
-<td>
-<div
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/genshin/">Genshin Impact</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #82b78b"
+                ></div>
+                playing
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/tloz/">The Legend of Zelda</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/wuwa/">Wuthering Waves</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/stray/">Stray</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/clair-obscur/">Clair Obscur: Expedition 33</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/islanders-new-shores/">Islanders: New Shores</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/stardew/">Stardew Valley</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/infinity-nikki/">Infinity Nikki</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/split-fiction/">Split Fiction</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/hades/">Hades II</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/isle-of-arrows/">Isle of Arrows</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/ffxiv/">FFXIV</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/ac-odyssey/">Assassin's Creed Odyssey</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/acgc/">Animal Crossing</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #edd495"
                 ></div>
-paused
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/games/twocrowns/">Kingdom Two Crowns</a>
-</td>
-<td>
-<div
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/clair-obscur/">Clair Obscur: Expedition 33</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #edd495"
+                ></div>
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/stardew/">Stardew Valley</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #edd495"
+                ></div>
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/split-fiction/">Split Fiction</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #edd495"
+                ></div>
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/isle-of-arrows/">Isle of Arrows</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #edd495"
+                ></div>
+                paused
+            </td>
+        </tr>
+        <tr data-status="paused">
+            <td>
+                <a href="/shelf/games/ac-odyssey/">Assassin&#39;s Creed Odyssey</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #edd495"
+                ></div>
+                paused
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/games/twocrowns/">Kingdom Two Crowns</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #8b8fc3"
                 ></div>
-finished
-</td>
-</tr></p>
-<p></table></p>
+                finished
+            </td>
+        </tr>
+    </table>
+    <p class="shelf-empty" style="display: none;">Nothing here!</p>
 </section>
 </article>
 

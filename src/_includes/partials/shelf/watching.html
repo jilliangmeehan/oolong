@@ -8,8 +8,9 @@ reverse %} {% set statusColors = { 'watching': '#82b78b', 'paused': '#edd495',
             <th>Watching</th>
             <th>Status</th>
         </tr>
-        {% for item in sorted_watching %}
-        <tr>
+        {%- for item in sorted_watching %}
+        {%- set normalizedStatus = 'active' if item.data.status == 'watching' else item.data.status %}
+        <tr data-status="{{ normalizedStatus }}">
             <td>
                 <a href="{{ item.url }}">{{ item.data.title }}</a>
             </td>
@@ -21,6 +22,7 @@ reverse %} {% set statusColors = { 'watching': '#82b78b', 'paused': '#edd495',
                 {{ item.data.status }}
             </td>
         </tr>
-        {% endfor %}
+        {%- endfor %}
     </table>
+    <p class="shelf-empty" style="display: none;">Nothing here!</p>
 </section>

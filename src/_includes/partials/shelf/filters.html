@@ -1,0 +1,43 @@
+<div class="shelf-filters">
+    <button class="shelf-filter active" data-filter="all">All</button>
+    <button class="shelf-filter" data-filter="active">In progress</button>
+    <button class="shelf-filter" data-filter="paused">Paused</button>
+    <button class="shelf-filter" data-filter="finished">Finished</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".shelf-filter");
+        var tables = document.querySelectorAll(".shelf-table");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var filter = this.getAttribute("data-filter");
+
+                buttons.forEach(function (b) {
+                    b.classList.remove("active");
+                });
+                this.classList.add("active");
+
+                tables.forEach(function (section) {
+                    var rows = section.querySelectorAll("tr[data-status]");
+                    var visibleCount = 0;
+
+                    rows.forEach(function (row) {
+                        if (filter === "all" || row.getAttribute("data-status") === filter) {
+                            row.style.display = "";
+                            visibleCount++;
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+
+                    var emptyMsg = section.querySelector(".shelf-empty");
+                    if (emptyMsg) {
+                        emptyMsg.style.display = visibleCount === 0 ? "" : "none";
+                    }
+                });
+            });
+        });
+    });
+</script>

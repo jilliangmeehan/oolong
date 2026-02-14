@@ -225,73 +225,140 @@
 
         <main tabindex="-1" id="main-content">
             
-<article><section class="shelf-table">
+<article><div class="shelf-filters">
+    <button class="shelf-filter active" data-filter="all">All</button>
+    <button class="shelf-filter" data-filter="active">In progress</button>
+    <button class="shelf-filter" data-filter="paused">Paused</button>
+    <button class="shelf-filter" data-filter="finished">Finished</button>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".shelf-filter");
+        var tables = document.querySelectorAll(".shelf-table");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var filter = this.getAttribute("data-filter");
+
+                buttons.forEach(function (b) {
+                    b.classList.remove("active");
+                });
+                this.classList.add("active");
+
+                tables.forEach(function (section) {
+                    var rows = section.querySelectorAll("tr[data-status]");
+                    var visibleCount = 0;
+
+                    rows.forEach(function (row) {
+                        if (filter === "all" || row.getAttribute("data-status") === filter) {
+                            row.style.display = "";
+                            visibleCount++;
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+
+                    var emptyMsg = section.querySelector(".shelf-empty");
+                    if (emptyMsg) {
+                        emptyMsg.style.display = visibleCount === 0 ? "" : "none";
+                    }
+                });
+            });
+        });
+    });
+</script>
+<section class="shelf-table">
     <table>
         <tr>
             <th>Watching</th>
             <th>Status</th>
         </tr>
-<p><tr>
-<td>
-<a href="/shelf/watching/pluribus/">Pluribus</a>
-</td>
-<td>
-<div
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/watching/fallout/">Fallout</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #82b78b"
                 ></div>
-watching
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/watching/one-battle-after-another/">One Battle After Another</a>
-</td>
-<td>
-<div
+                watching
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/the-studio/">The Studio</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #8b8fc3"
                 ></div>
-finished
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/watching/the-studio/">The Studio</a>
-</td>
-<td>
-<div
+                finished
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/pluribus/">Pluribus</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #8b8fc3"
                 ></div>
-finished
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/watching/severance/">Severance</a>
-</td>
-<td>
-<div
+                finished
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/one-battle-after-another/">One Battle After Another</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #8b8fc3"
                 ></div>
-finished
-</td>
-</tr></p>
-<p><tr>
-<td>
-<a href="/shelf/watching/conclave/">Conclave</a>
-</td>
-<td>
-<div
+                finished
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/marty-supreme/">Marty Supreme</a>
+            </td>
+            <td>
+                <div
                     class="swatch"
                     style="background-color: #8b8fc3"
                 ></div>
-finished
-</td>
-</tr></p>
-<p></table></p>
+                finished
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/severance/">Severance</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #8b8fc3"
+                ></div>
+                finished
+            </td>
+        </tr>
+        <tr data-status="finished">
+            <td>
+                <a href="/shelf/watching/conclave/">Conclave</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #8b8fc3"
+                ></div>
+                finished
+            </td>
+        </tr>
+    </table>
+    <p class="shelf-empty" style="display: none;">Nothing here!</p>
 </section>
 </article>
 

@@ -8,8 +8,9 @@
             <th>Reading</th>
             <th>Status</th>
         </tr>
-        {% for book in sorted_books %}
-        <tr>
+        {%- for book in sorted_books %} {%- set normalizedStatus = 'active' if
+        book.data.status == 'reading' else book.data.status %}
+        <tr data-status="{{ normalizedStatus }}">
             <td>
                 <a href="{{ book.url }}">{{ book.data.title }}</a>
             </td>
@@ -21,6 +22,7 @@
                 {{ book.data.status }}
             </td>
         </tr>
-        {% endfor %}
+        {%- endfor %}
     </table>
+    <p class="shelf-empty" style="display: none">Nothing here!</p>
 </section>

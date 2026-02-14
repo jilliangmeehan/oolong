@@ -128,6 +128,15 @@ ul {
     list-style-position: outside;
 }
 
+li::marker {
+    color: var(--beam);
+    font-size: 1.4rem;
+}
+
+li {
+    font-size: 1.1rem;
+}
+
 strong {
     font-weight: 400;
     font-style: italic;
@@ -139,11 +148,9 @@ pre {
 }
 
 p code {
-    color: #e0def4;
-    background: #232136;
+    color: var(--puff);
     font-family: "Cartograph CF", ui-monospace, SFMono-Regular, monospace;
-    padding: 0 4px;
-    border-radius: 6px;
+    font-style: italic;
 }
 
 blockquote {
@@ -309,6 +316,27 @@ sup.footnote-ref {
     margin: 0 auto;
 }
 
+/* shelf filters */
+.shelf-filters {
+    margin-bottom: 24px;
+}
+
+.shelf-filter {
+    margin-left: 0;
+}
+
+.shelf-filter.active {
+    background-color: var(--tea);
+    color: var(--cloud);
+}
+
+.shelf-empty {
+    color: var(--chai);
+    font-family: var(--mono);
+    font-size: small;
+    padding: 8px 0;
+}
+
 /* shelf */
 .shelf_now * {
     display: inline;
@@ -321,6 +349,10 @@ sup.footnote-ref {
     padding-left: 4px;
 }
 
+.shelf-table {
+    margin-bottom: 24px;
+}
+
 .shelf-table table {
     width: 100%;
     table-layout: fixed;
@@ -328,15 +360,16 @@ sup.footnote-ref {
 }
 
 .shelf-table th {
-    padding: 8px;
+    padding: 8px 0;
     text-align: left;
     font-family: var(--mono);
     font-weight: 300;
+    border-bottom: 2px dashed var(--oat);
     text-transform: uppercase;
 }
 
 .shelf-table td {
-    padding: 8px;
+    padding: 8px 0;
     line-height: 16px;
     text-transform: capitalize;
 }

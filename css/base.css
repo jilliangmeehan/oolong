@@ -316,6 +316,27 @@ sup.footnote-ref {
     margin: 0 auto;
 }
 
+/* shelf filters */
+.shelf-filters {
+    margin-bottom: 24px;
+}
+
+.shelf-filter {
+    margin-left: 0;
+}
+
+.shelf-filter.active {
+    background-color: var(--tea);
+    color: var(--cloud);
+}
+
+.shelf-empty {
+    color: var(--chai);
+    font-family: var(--mono);
+    font-size: small;
+    padding: 8px 0;
+}
+
 /* shelf */
 .shelf_now * {
     display: inline;
@@ -328,6 +349,10 @@ sup.footnote-ref {
     padding-left: 4px;
 }
 
+.shelf-table {
+    margin-bottom: 24px;
+}
+
 .shelf-table table {
     width: 100%;
     table-layout: fixed;
@@ -335,15 +360,16 @@ sup.footnote-ref {
 }
 
 .shelf-table th {
-    padding: 8px;
+    padding: 8px 0;
     text-align: left;
     font-family: var(--mono);
     font-weight: 300;
+    border-bottom: 2px dashed var(--oat);
     text-transform: uppercase;
 }
 
 .shelf-table td {
-    padding: 8px;
+    padding: 8px 0;
     line-height: 16px;
     text-transform: capitalize;
 }
@@ -356,6 +382,22 @@ sup.footnote-ref {
     margin: 2px 8px 0 0px;
     border-radius: 100%;
     border: 1px solid var(--oat);
+}
+
+.shelf-table .see-more {
+    margin-top: 8px;
+}
+
+.shelf-table .see-more a {
+    font-family: "Departure Mono";
+    color: var(--chai);
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.shelf-table .see-more a:hover {
+    color: var(--beam);
 }
 
 .shelf-info {
