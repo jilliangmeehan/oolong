@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="december adventure" />
+         
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:url"
+            content="https://jillian.garden/decadv/"
+        />
+          
+        <meta
+            property="og:image"
+            content="https://jillian.garden/decadv/photos/decadv_03.png"
+        />
+         
+        <!-- css -->
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/variables.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <!-- syntax highlighting -->
+        <link href="/themes/rosepinemoon.css" rel="stylesheet" />
+        <!-- favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#e5d9d4" />
+        <meta name="theme-color" content="#e5d9d4" />
+        <!-- rss feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="blog"
+            href="https://jillian.garden/feed.xml"
+        />
+        <!-- mastodon attribution -->
+        <meta name="fediverse:creator" content="@jillian@sleepy.cool" />
+        <title>december adventure</title>
+    </head>
+    <body>
+        <header role="banner" class="head">
+    <div class="header_icon tea_container">
+        <img
+            src="/icons/tea.png"
+            alt="Cup of Tea"
+            class="tea_cup"
+            id="teaCup"
+        />
+        <div class="speech_bubble" id="speechBubble">enjoy your tea! :)</div>
+    </div>
+    <div class="header_text">
+        
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb-list font-pixel">
+        
+        <li class="font-pixel">
+            
+            <a href="/" class="color-joycon">Home</a>
+            
+        </li>
+        
+        <span class="separator">/</span>
+         
+        <li class="font-pixel">
+            
+            <span aria-current="page">decadv</span>
+            
+        </li>
+         
+    </ul>
+</nav>
+
+
+<style>
+    nav[aria-label="breadcrumb"] {
+        text-transform: lowercase;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 8px;
+        line-height: 24px;
+    }
+
+    ul.breadcrumb-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.breadcrumb-list > span.separator {
+        color: #666;
+    }
+</style>
+  <p class="small">
+  <span class="color-beam">last updated:</span>
+  <time datetime="2025-12-01T00:00:00.000Z"
+    >30th of November 2025</time
+  >
+</p>
+ 
+    </div>
+</header>
+
+<style>
+    .head {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 24px;
+        justify-items: start;
+    }
+
+    .head > div > h1 {
+        margin-bottom: -6px;
+    }
+
+    .tea_container {
+        position: relative;
+        display: inline-block;
+    }
+    .tea_cup {
+        width: 48px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .tea_cup:hover {
+        transform: scale(1.1);
+    }
+    @keyframes wiggle {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        75% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s ease;
+    }
+    .speech_bubble {
+        position: absolute;
+        top: 80px;
+        width: 180px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        opacity: 0;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        transform: translateY(10px);
+        font-family: "Departure Mono";
+    }
+    .speech_bubble.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const teaCup = document.getElementById("teaCup");
+    const speechBubble = document.getElementById("speechBubble");
+    const teaCups = [
+        "/icons/tea.png",
+        "/icons/tea_2.png",
+        "/icons/tea_3.png",
+        "/icons/tea_4.png",
+    ];
+    let currentCup = 0;
+
+    teaCup.addEventListener("click", () => {
+        // Change tea cup
+        currentCup = (currentCup + 1) % teaCups.length;
+        teaCup.src = teaCups[currentCup];
+
+        // Wiggle animation
+        teaCup.classList.add("wiggle");
+        setTimeout(() => teaCup.classList.remove("wiggle"), 500);
+
+        // Show speech bubble
+        speechBubble.classList.add("show");
+        setTimeout(() => speechBubble.classList.remove("show"), 2000);
+    });
+</script>
+
+        <main tabindex="-1" id="main-content">
+            
+<article><h1>December Adventure</h1>
+<blockquote>
+<p>The December Adventure is <strong>low key</strong>. <cite><a href="https://eli.li/december-adventure">eli_oat</a></cite></p>
+</blockquote>
+<h2>01</h2>
+<p>I’ve never <s>successfully</s> done any kind of monthly challenge. I like the idea of them, but intentional consistency is not my strong suit. The December Adventure feels more my speed — inching along with some kind of creative practice in whatever way feels meaningful to you each day.</p>
+<p>Today’s goals: heat up some water and browse past <a href="https://eli.li/december-adventure">adventure logs</a> for inspiration.</p>
+<hr>
+<h2>02</h2>
+<p>Cleaned my apartment in the hopes of feeling more productive tomorrow.</p>
+<hr>
+<h2>03</h2>
+<p><img src="./photos/decadv_03.png" alt="Screenshot of code editor"></p>
+<p>I got back into a little project I’ve been working on here and there for a few months, born out of my want for something <a href="https://twinery.org/">Twine</a>-y but simpler. What I’ve ended up making is a tool that turns a markdown file into interactive fiction.</p>
+<p>I’ve had most of it sort of working for a while, but today I finally added some variable interpolation — so now you can do a liiiittle more than just jump between text passages based on player choices.</p>
+<p>I’ll probably end up working on this for most of December Adventure, although I do have a few other projects in mind that I could pick up.</p>
+<hr>
+<h2>04</h2>
+<p>Had a headache.</p>
+<hr>
+<h2>05</h2>
+<p>Fridays are for chores!</p>
+<hr>
+<h2>06–08</h2>
+<p>I had a very sleepy weekend and a slow start to the week, so I didn’t feel like doing anything.</p>
+<hr>
+<h2>09</h2>
+<p>Back to work on the interactive fiction tool! I added some conditional operator stuff to the code interpolation, so now you can do something like this:</p>
+<pre class="language-js"><code class="language-js">You currently have <span class="token punctuation">{</span> items<span class="token punctuation">.</span>bread<span class="token punctuation">.</span>count <span class="token punctuation">}</span> bread<span class="token punctuation">.</span>
+
+<span class="token punctuation">{</span> <span class="token keyword">if</span> items<span class="token punctuation">.</span>bread<span class="token punctuation">.</span>count <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">}</span>
+You have some bread<span class="token operator">!</span> Good<span class="token punctuation">.</span>
+<span class="token punctuation">{</span> endif <span class="token punctuation">}</span>
+
+<span class="token punctuation">{</span> <span class="token keyword">if</span> items<span class="token punctuation">.</span>bread<span class="token punctuation">.</span>count <span class="token operator">>=</span> <span class="token number">2</span> <span class="token punctuation">}</span>
+You have plenty <span class="token keyword">of</span> bread<span class="token punctuation">.</span>
+<span class="token punctuation">{</span> endif <span class="token punctuation">}</span>
+
+<span class="token punctuation">{</span> <span class="token keyword">if</span> items<span class="token punctuation">.</span>bread<span class="token punctuation">.</span>count <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+You have exactly one piece <span class="token keyword">of</span> bread<span class="token punctuation">.</span>
+<span class="token punctuation">{</span> endif <span class="token punctuation">}</span></code></pre>
+<p>And if you have 2 pieces of bread in your inventory, for example, you’d see:</p>
+<blockquote>
+<p>You current have 2 bread. You have some bread! Good.</p>
+</blockquote>
+<hr>
+<h2>10</h2>
+<p>Spent some time today writing a story to use with the interactive fiction tool. Probably not something I will ever share, but it’s fun to do a bit of creative writing every once in a while.</p>
+<hr>
+<h2>11–13</h2>
+<p>Played a lot of <a href="https://jillian.garden/shelf/games/islanders-new-shores/">Islanders: New Shores</a>.</p>
+<hr>
+<h2>14</h2>
+<p>I finally got around to a few website chores I’ve been putting off forever:</p>
+<ul>
+<li>Added proper syntax highlighting to my site, using the <a href="https://www.11ty.dev/docs/plugins/syntaxhighlight/">Eleventy plugin</a> + <a href="https://github.com/rose-pine/prism/tree/main">Rose Pine Moon</a> theme</li>
+<li>Added a shortcode for image grids</li>
+</ul>
+<p>The image grid thing is pretty simple. Here’s what it looks like in Markdown:</p>
+<pre class="language-md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image-grid<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./photos/A.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Photo A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./photos/B.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Photo B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>And then here’s what’s going on in my <code>.eleventy.js</code> file:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> markdownIt <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'markdown-it'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> md <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">markdownIt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPairedShortcode</span><span class="token punctuation">(</span><span class="token string">"grid"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> renderedContent <span class="token operator">=</span> md<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;div class="image-grid"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>renderedContent<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/div></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>It just wraps whatever’s in the grid in a <code>&lt;div&gt;</code> with the <code>image-grid</code> class, which then does the rest of the work:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.image-grid</span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+    <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fit<span class="token punctuation">,</span> <span class="token function">minmax</span><span class="token punctuation">(</span>200px<span class="token punctuation">,</span> 1fr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.image-grid img</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+    <span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Ez pz. And as proof, here are two photos of Junie:</p>
+<div class="image-grid"><p><img src="./photos/test_1.jpg" alt="test_1">
+<img src="./photos/test_2.jpg" alt="test_2"></p>
+</div>
+</article>
+
+        </main>
+    </body>
+    <footer><nav class="footer-nav">
+    <h2>index</h2>
+    <ul role="list">
+        
+        <li><a href="/">home</a>•</li>
+        
+        <li><a href="/blog">blog</a>•</li>
+        
+        <li><a href="/shelf">shelf</a>•</li>
+        
+        <li><a href="/meta">meta</a>•</li>
+        
+        <li><a href="/teashop">teashop</a>•</li>
+        
+        <li>
+            <a rel="me" href="https://sleepy.cool/@jillian">mastodon</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        display: flex;
+        flex-flow: wrap;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .footer-nav ul li a {
+        margin-right: 8px;
+    }
+
+    .footer-nav ul li {
+        font-family: var(--serif);
+    }
+
+    .footer-nav ul li a {
+        text-decoration: underline;
+        color: var(--tea) !important;
+    }
+</style>
+</footer>
+
+</html>

@@ -1,0 +1,13 @@
+{
+    "name": "oolong",
+    "short_name": "oolong",
+    "icons": [
+        {
+            "src": "/android-chrome-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#e5d9d4",
+    "background_color": "#e5d9d4"
+}

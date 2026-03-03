@@ -162,6 +162,7 @@ blockquote {
 blockquote > p {
     padding: 0 18px;
     border-left: 3px solid var(--oat);
+    font-size: 0.95rem;
 }
 
 blockquote cite {

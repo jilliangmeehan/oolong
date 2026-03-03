@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Argent Pixel CF";
+  src: url("/fonts/argentpixelcf-italic-webfont.woff2") format("woff2"),
+    url("/fonts/argentpixelcf-italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Departure Mono";
+  src: url("/fonts/Departure-Mono-Regular.woff2") format("woff2"),
+    url("/fonts/Departure-Mono-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Addington CF";
+  src: url("/fonts/addingtoncf-thin-webfont.woff2") format("woff2"),
+    url("/fonts/addingtoncf-thin-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Addington CF";
+  src: url("/fonts/addingtoncf-thinitalic-webfont.woff2") format("woff2"),
+    url("/fonts/addingtoncf-thinitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Artifex";
+  src: url("/fonts/artifex-regular.woff2") format("woff2"),
+    url("/fonts/artifex-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Artifex";
+  src: url("/fonts/artifex-regularitalic.woff2") format("woff2"),
+    url("/fonts/artifex-regularitalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+.font-sans {
+  font-family: var(--sans-serif);
+}
+
+.font-serif {
+  font-family: var(--serif);
+}
+
+.font-pixel {
+  font-family: var(--pixel);
+}
+
+.font-mono {
+  font-family: var(--mono);
+}
