@@ -3,8 +3,9 @@ title: Irish Folktales
 author: Henry Glassie
 url: https://50wattsbooks.com/products/irish-folktales-the-pantheon-fairy-tale-and-folklore-library
 cover: https://images3.penguinrandomhouse.com/cover/9780679774129
-status: reading
-date finished:
+status:
+  - finished
+date finished: 2026-02-25
 shortcode:
 publish: true
 ---
