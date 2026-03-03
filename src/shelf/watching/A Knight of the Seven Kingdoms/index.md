@@ -7,5 +7,6 @@ cover: https://media.themoviedb.org/t/p/w440_and_h660_face/k8yARbD9iYn2nRX2Hvsop
 date finished: 2026-03-02
 shortcode:
 publish: true
+layout: layouts/watching.html
 ---
 I *loved* this. What's better than a big, sad guy who is nice to his horses? I need another season, please.
