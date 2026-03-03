@@ -384,6 +384,22 @@ sup.footnote-ref {
     border: 1px solid var(--oat);
 }
 
+.shelf-table .see-more {
+    margin-top: 8px;
+}
+
+.shelf-table .see-more a {
+    font-family: "Departure Mono";
+    color: var(--chai);
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.shelf-table .see-more a:hover {
+    color: var(--beam);
+}
+
 .shelf-info {
     display: flex;
     flex-wrap: wrap;
