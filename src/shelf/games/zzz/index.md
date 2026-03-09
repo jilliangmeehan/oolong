@@ -9,3 +9,11 @@ shortcode: zzz
 publish: true
 UID: "1001418143"
 ---
+
+{% set collection = collections.shiyu %}
+{% set limit = 4 %}
+{% include "partials/shelf/shiyu.html" %}
+
+{% set collection = collections.deadass %}
+{% set limit = 2 %}
+{% include "partials/shelf/deadass.html" %}
