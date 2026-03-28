@@ -7,6 +7,6 @@ date finished:
 shortcode: rivals
 publish: true
 ---
-I avoided this game for a long time, but it finally happened to me. I'm still avoiding ranked for now, because I'm a little baby about it, but having a lot of fun in quick play. 
+**Current rank:** Platinum III
 
-Mostly playing Strategist — Mantis, Invis, and Luna are my favs. Also trying to learn a couple Vanguards so I can be a little more flexible.
+I would still call myself a Strategist main, because I mostly play Invis, Mantis, and now White Fox. But I've gotten a lot more comfortable with flexing to other roles! I'm trying to branch out as much as possible, because it's fun to be able to fill for what the team needs.
