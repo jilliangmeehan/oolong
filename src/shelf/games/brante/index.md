@@ -1,6 +1,7 @@
 ---
 title: The Life and Suffering of Sir Brante
-status: playing
+status:
+  - paused
 url:
 cover: https://cdn2.steamgriddb.com/thumb/8b0a212e35adadb702cd8c9d6b6c40d1.jpg
 date finished:
