@@ -58,7 +58,8 @@
         <title>shelf</title>
     </head>
     <body>
-        <header role="banner" class="head">
+        <div class="container">
+            <header role="banner" class="head">
     <div class="header_icon tea_container">
         <img
             src="/icons/tea.png"
@@ -215,8 +216,8 @@
     });
 </script>
 
-        <main tabindex="-1" id="main-content">
-            
+            <main tabindex="-1" id="main-content">
+                
 <article><section class="shelf-table">
     <table>
         <tr>
@@ -256,18 +257,6 @@
         <tr>
             <th>Playing</th>
             <th>Status</th>
-        </tr>
-        <tr>
-            <td>
-                <a href="/shelf/games/genshin/">Genshin Impact</a>
-            </td>
-            <td>
-                <div
-                    class="swatch"
-                    style="background-color: #82b78b"
-                ></div>
-                playing
-            </td>
         </tr>
         <tr>
             <td>
@@ -365,6 +354,18 @@
                 playing
             </td>
         </tr>
+        <tr>
+            <td>
+                <a href="/shelf/games/genshin/">Genshin Impact</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #82b78b"
+                ></div>
+                playing
+            </td>
+        </tr>
     </table>
     <div class="see-more small">
         <a href="/shelf/games/">see more →</a>
@@ -372,7 +373,8 @@
 </section>
 </article>
 
-        </main>
+            </main>
+        </div>
     </body>
     <footer><nav class="footer-nav">
     <h2>index</h2>

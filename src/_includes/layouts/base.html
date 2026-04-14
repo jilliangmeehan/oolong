@@ -70,10 +70,12 @@
         <title>{{ title }}</title>
     </head>
     <body>
-        {% include "partials/head.html" %}
-        <main tabindex="-1" id="main-content">
-            {% block content %}{% endblock %}
-        </main>
+        <div class="container">
+            {% include "partials/head.html" %}
+            <main tabindex="-1" id="main-content">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
     </body>
     {% include "partials/footer.html" %}
 </html>

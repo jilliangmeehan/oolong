@@ -60,7 +60,8 @@
         <title>using obsidian as a cms</title>
     </head>
     <body>
-        <header role="banner" class="head">
+        <div class="container">
+            <header role="banner" class="head">
     <div class="header_icon tea_container">
         <img
             src="/icons/tea.png"
@@ -225,8 +226,8 @@
     });
 </script>
 
-        <main tabindex="-1" id="main-content">
-            
+            <main tabindex="-1" id="main-content">
+                
 <article><p>It took me a while to decide what I wanted to do about the dreaded content management over here. Mostly because I didn’t think my ideal solution — writing stuff directly in the obsidian vault that I use for everything else all the time &amp; then being able to put what I’ve written online without needing to actually push anything to GitHub myself — was a real option. Turns out it kinda is.</p>
 <p>I’m using the <a href="https://github.com/ObsidianPublisher/obsidian-github-publisher">GitHub Publisher plugin</a> for Obsidian, which has a bunch of configuration options that I am pretending to understand how to use. I added a folder to my Obsidian vault — alongside all my other folders full of notes that already exist — and moved all my <a href="https://jillian.garden">old blog posts</a> into it. I also set up an Obsidian template for new blog posts, with all the front matter properties I need. Now, all I need to do to publish a blog post is hit the little “publish” checkbox in the file properties, and the plugin will push it to the repo &amp; merge it automatically.</p>
 <p><img src="./photos/obsidian_screenshot.png" alt="a screenshot of this post within my obsidian setup"></p>
@@ -243,7 +244,8 @@
 <p>So that’s what i’ve been tinkering with this weekend. Right now, it’s just set up for blog posts, but I want to try using this method for other types of collections — books I’m reading, games i’m playing, etc.</p>
 </article>
 
-        </main>
+            </main>
+        </div>
     </body>
     <footer><nav class="footer-nav">
     <h2>index</h2>

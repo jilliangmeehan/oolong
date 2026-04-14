@@ -58,7 +58,8 @@
         <title>Games</title>
     </head>
     <body>
-        <header role="banner" class="head">
+        <div class="container">
+            <header role="banner" class="head">
     <div class="header_icon tea_container">
         <img
             src="/icons/tea.png"
@@ -223,8 +224,8 @@
     });
 </script>
 
-        <main tabindex="-1" id="main-content">
-            
+            <main tabindex="-1" id="main-content">
+                
 <article><div class="shelf-filters">
     <button class="shelf-filter active" data-filter="all">All</button>
     <button class="shelf-filter" data-filter="active">In progress</button>
@@ -272,18 +273,6 @@
         <tr>
             <th>Playing</th>
             <th>Status</th>
-        </tr>
-        <tr data-status="active">
-            <td>
-                <a href="/shelf/games/genshin/">Genshin Impact</a>
-            </td>
-            <td>
-                <div
-                    class="swatch"
-                    style="background-color: #82b78b"
-                ></div>
-                playing
-            </td>
         </tr>
         <tr data-status="active">
             <td>
@@ -372,6 +361,18 @@
         <tr data-status="active">
             <td>
                 <a href="/shelf/games/hsr/">Honkai: Star Rail</a>
+            </td>
+            <td>
+                <div
+                    class="swatch"
+                    style="background-color: #82b78b"
+                ></div>
+                playing
+            </td>
+        </tr>
+        <tr data-status="active">
+            <td>
+                <a href="/shelf/games/genshin/">Genshin Impact</a>
             </td>
             <td>
                 <div
@@ -566,7 +567,8 @@
 </section>
 </article>
 
-        </main>
+            </main>
+        </div>
     </body>
     <footer><nav class="footer-nav">
     <h2>index</h2>
