@@ -1,5 +1,5 @@
 ---
-title: APril 2026
+title: April 2026
 layout: layouts/page.html
 tags:
   - abyss
