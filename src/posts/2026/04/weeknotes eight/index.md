@@ -24,4 +24,4 @@ Also went to the RevenueCat event in New York to hear [mb's](https://mbbischoff.
 ### things i'm doing
 - Going to Chicago soon for [Deep Dish Swift](https://deepdishswift.com/) with mb!
 - Still playing an awful lot of [Reverse: 1999](https://jillian.garden/shelf/games/r1999/). I've been trying to catch up to the story by playing through some of the old events, and I'm finally going to start Chapter 9 soon. Hoping I can pull a quick Willow from the next Reveries banner so I can start building a Poison team.
-- Saw Project Hail Mary last week — I loved it. Thought the soundtrack was really nice, too. Amaze amaze amaze :)
+- Saw [Project Hail Mary](https://jillian.garden/shelf/watching/project-hail-mary/) last week — I loved it. Thought the soundtrack was really nice, too. Amaze amaze amaze :)
