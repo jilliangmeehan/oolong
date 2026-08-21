@@ -1,7 +1,7 @@
 ---
 title: Fate/stay night
 status:
-  - playing
+  - paused
 url: https://store.steampowered.com/app/2396980/Fatestay_night_REMASTERED/
 cover: https://cdn2.steamgriddb.com/thumb/b4fc37a87d27d4f315845a8e9c99706f.jpg
 date finished:
